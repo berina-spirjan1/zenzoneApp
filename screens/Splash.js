@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View} from "react-native";
 import LottieView from 'lottie-react-native';
 import {Image, Text} from "react-native";
+import ZenZoneTitle from "../components/ZenZoneTitle";
 
 export default class Splash extends Component{
     constructor(props) {
@@ -16,9 +17,7 @@ export default class Splash extends Component{
                     source={require("../assets/men.json")}
                     autoPlay
                     loop={true}/>
-                <Image
-                    style={styles.zenzone}
-                    source={require('../assets/Splash_screen_title.png')}/>
+                <ZenZoneTitle style={styles.title}/>
             </View>
         )
     }
@@ -29,7 +28,7 @@ const styles={
         width: 300,
         height: 300
     },
-    zenzone: {
+    title: {
         marginTop: 500,
         marginLeft: 25
     }
