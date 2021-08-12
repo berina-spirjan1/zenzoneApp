@@ -29,15 +29,15 @@ export default class Splash extends Component{
 const styles={
     lottie:{
         flex:1,
-        width: 300,
-        height: 300,
+        width: 200,
+        height: 200,
         marginLeft:25,
         alignItems: 'center',
         justifyContent: 'center',
     },
     title: {
-        marginTop: 500,
-        marginLeft: 25
+        marginTop: 460,
+        marginLeft: 50
     }
 }
 
