@@ -6,12 +6,14 @@ import {
   View,
 } from 'react-native';
 import Splash from "./screens/Splash";
+import BackgroundThemeSplashScreen from "./components/BackgroundThemeSplashScreen";
 
 export default function App() {
-  return (
+  return (<>
+
       <View style={styles.container}>
         <Splash/>
-      </View>
+      </View></>
 
   );
 }
@@ -20,7 +22,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#CBDBF2',
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   }
 });

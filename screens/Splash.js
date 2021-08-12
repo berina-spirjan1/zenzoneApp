@@ -3,6 +3,7 @@ import {View} from "react-native";
 import LottieView from 'lottie-react-native';
 import {Image, Text} from "react-native";
 import ZenZoneTitle from "../components/ZenZoneTitle";
+import BackgroundThemeSplashScreen from "../components/BackgroundThemeSplashScreen";
 
 export default class Splash extends Component{
     constructor(props) {
@@ -11,13 +12,16 @@ export default class Splash extends Component{
     render() {
         return(
 
-            <View style={styles.lottie}>
-                <LottieView
+           <View>
+                <LottieView style={styles.lottie}
                     style={{flex: 1}}
                     source={require("../assets/men.json")}
                     autoPlay
                     loop={true}/>
+               {/*todo change template for background in adobe xd*/}
+               {/*<BackgroundThemeSplashScreen/>*/}
                 <ZenZoneTitle style={styles.title}/>
+
             </View>
         )
     }
@@ -26,7 +30,10 @@ const styles={
     lottie:{
         flex:1,
         width: 300,
-        height: 300
+        height: 300,
+        marginLeft:25,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     title: {
         marginTop: 500,
