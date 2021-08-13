@@ -14,7 +14,7 @@ export default function App() {
   return (<>
 
       <View style={styles.container}>
-        <ErrorPageDarkMode/>
+        <ErrorPageLightMode/>
       </View></>
 
   );
@@ -23,7 +23,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#71728D',
+    backgroundColor: '#CBDBF1',
     justifyContent: 'center'
   }
 });

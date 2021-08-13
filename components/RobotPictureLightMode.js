@@ -5,9 +5,9 @@ function RobotPictureLightMode(props) {
     return (
         <Svg
             xmlns="http://www.w3.org/2000/svg"
-            width={356.199}
-            height={393.696}
-            viewBox="0 0 356.199 393.696"
+            width={340}
+            height={370}
+            viewBox="0 0 350 370"
             {...props}
         >
             <Defs></Defs>
