@@ -1,29 +1,27 @@
 import React, {Component} from "react";
 import {View, Text, Button, Alert} from "react-native";
 import RobotPictureLightMode from "../../components/RobotPictureLightMode";
-import AppLoading from 'expo-app-loading';
-import { useFonts, Inter_600SemiBold } from '@expo-google-fonts/inter';
 
 export default class ErrorPageLightMode extends Component{
     constructor(props) {
         super();
     }
     render() {
-    return(
-        <View>
-            <RobotPictureLightMode style={styles.robotPicture}/>
-            <Text style={styles.title}>Something went wrong</Text>
-            <Text style={styles.text}>Sorry, we can't find the page you're looking for.</Text>
-            <View style={styles.button}>
-                <Button
-                    title="go back"
-                    color="#93b4e5"
-                    width={120}
-                    //onPress={() => this.props.navigation.navigate('')}
-                />
+        return(
+            <View>
+                <RobotPictureLightMode style={styles.robotPicture}/>
+                <Text style={styles.title}>Something went wrong</Text>
+                <Text style={styles.text}>Sorry, we can't find the page you're looking for.</Text>
+                <View style={styles.button}>
+                    <Button
+                        title="go back"
+                        color="#93b4e5"
+                        width={120}
+                        //onPress={() => this.props.navigation.navigate('')}
+                    />
+                </View>
             </View>
-        </View>
-    )
+        )
 }
 }
 

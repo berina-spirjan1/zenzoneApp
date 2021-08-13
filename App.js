@@ -9,12 +9,13 @@ import Splash from "./screens/Splash";
 import BackgroundThemeSplashScreen from "./components/BackgroundThemeSplashScreen";
 import ErrorPageLightMode from "./screens/lightMode/ErrorPageLightMode";
 import ErrorPageDarkMode from "./screens/darkMode/ErrorPageDarkMode";
+import Login from "./screens/lightMode/Login";
 
 export default function App() {
   return (<>
 
-      <View style={styles.container}>
-        <ErrorPageLightMode/>
+      <View>
+        <Login/>
       </View></>
 
   );
@@ -23,7 +24,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#CBDBF1',
+    backgroundColor: '#93B4E5',
     justifyContent: 'center'
   }
 });
