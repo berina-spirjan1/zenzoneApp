@@ -1,7 +1,7 @@
 import * as React from "react"
 import Svg, { Defs, G, Path, Ellipse } from "react-native-svg"
 
-function RobotPicture(props) {
+function RobotPictureLightMode(props) {
     return (
         <Svg
             xmlns="http://www.w3.org/2000/svg"
@@ -1080,4 +1080,4 @@ function RobotPicture(props) {
     )
 }
 
-export default RobotPicture
+export default RobotPictureLightMode

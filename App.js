@@ -7,12 +7,14 @@ import {
 } from 'react-native';
 import Splash from "./screens/Splash";
 import BackgroundThemeSplashScreen from "./components/BackgroundThemeSplashScreen";
+import ErrorPageLightMode from "./screens/lightMode/ErrorPageLightMode";
+import ErrorPageDarkMode from "./screens/darkMode/ErrorPageDarkMode";
 
 export default function App() {
   return (<>
 
       <View style={styles.container}>
-        <Splash/>
+        <ErrorPageDarkMode/>
       </View></>
 
   );
@@ -21,7 +23,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#CBDBF2',
+    backgroundColor: '#71728D',
     justifyContent: 'center'
   }
 });

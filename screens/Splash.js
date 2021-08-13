@@ -15,7 +15,7 @@ export default class Splash extends Component{
            <View>
                 <LottieView style={styles.lottie}
                     style={{flex: 1}}
-                    source={require("../assets/men.json")}
+                    source={require("../assets/images/men.json")}
                     autoPlay
                     loop={true}/>
                {/*todo change template for background in adobe xd*/}
