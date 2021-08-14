@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import {Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {LinearGradient} from "expo-linear-gradient";
-import LoginIconLightMode from "../components/LoginIconLightMode";
-import LoginIconDarkMode from "../components/LoginIconDarkMode";
+import ZenIconLightMode from "../components/ZenIconLightMode";
+import ZenIconDarkMode from "../components/ZenIconDarkMode";
 
 export default class Login extends Component {
     constructor(props) {
@@ -36,10 +36,10 @@ export default class Login extends Component {
                         </LinearGradient>
                     </TouchableOpacity>
                 </View>
-                <LoginIconDarkMode style={stylesLightMode.icon}/>
+                <ZenIconDarkMode style={stylesLightMode.icon}/>
                 {/*}*/}
                 {/*else{*/}
-                {/*    //<LoginIconDarkMode style={stylesLightMode.icon}/>*/}
+                {/*    //<ZenIconDarkMode style={stylesLightMode.icon}/>*/}
                 {/*}*/}
 
             </View>

@@ -1,7 +1,7 @@
 import * as React from "react"
 import Svg, { Defs, RadialGradient, Stop, G, Path } from "react-native-svg"
 
-function LoginIconDarkMode(props) {
+function ZenIconLightMode(props) {
     return (
         <Svg
             xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@ function LoginIconDarkMode(props) {
             </Defs>
             <G data-name="Group 2">
                 <Path
-                    fill="#6594DA"
+                    fill="#55719A"
                     d="M12.755 212.611C-10.346 121.693 3.13 32.988 12.755 0H150v435.013H1.666c13.322-36.252 34.19-131.483 11.089-222.402z"
                     data-name="Path 1"
                     transform="rotate(90 174.243 260.77)"
@@ -243,7 +243,7 @@ function LoginIconDarkMode(props) {
                         data-name="Path 43"
                     />
                     <Path
-                        fill="#000000"
+                        fill="#2f2e41"
                         d="M222.813 58.381c.036-.036.074-.069.11-.106 2.3-2.39 2.765-5.781 1.041-7.573-1.63-1.694-4.631-1.352-6.9.707-1.943-1.922-4.548-2.458-6.233-1.131-1.944 1.53-1.929 4.955.034 7.649.135.185.276.359.421.527a13.653 13.653 0 00-6.461 5.168 14.5 14.5 0 00-2.448 8.083v13.43a3.1 3.1 0 00.22 1.148 3.009 3.009 0 00.625.973 2.877 2.877 0 00.936.65 2.784 2.784 0 001.1.228h23.879a2.735 2.735 0 001.971-.849 2.958 2.958 0 00.817-2.049v-13.53a14.494 14.494 0 00-2.513-8.176 13.631 13.631 0 00-6.599-5.149z"
                         data-name="Path 44"
                     />
@@ -253,7 +253,7 @@ function LoginIconDarkMode(props) {
                         data-name="Path 45"
                     />
                     <Path
-                        fill="#000000"
+                        fill="#2f2e41"
                         d="M205.629 67.607a15 15 0 008.807 2.829 9.245 9.245 0 01-3.743 1.6 29.921 29.921 0 0012.694.074 8.007 8.007 0 002.657-.948 3.4 3.4 0 001.054-.959 3.555 3.555 0 00.587-1.321c.279-1.654-.961-3.156-2.249-4.169a16.294 16.294 0 00-6.659-3.079 15.978 15.978 0 00-7.286.183 7.57 7.57 0 00-4.13 2.425 4.033 4.033 0 00-.348 4.644z"
                         data-name="Path 46"
                     />
@@ -263,4 +263,4 @@ function LoginIconDarkMode(props) {
     )
 }
 
-export default LoginIconDarkMode
+export default ZenIconLightMode
