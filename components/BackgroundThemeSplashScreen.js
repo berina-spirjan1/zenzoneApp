@@ -1,6 +1,6 @@
 import * as React from "react"
-import Svg, { Defs, G, Ellipse, Path } from "react-native-svg"
-/* SVGR has dropped some elements not supported by react-native-svg: filter */
+import Svg, {Ellipse, G, Path} from "react-native-svg"
+
 
 function BackgroundThemeSplashScreen(props) {
     return (

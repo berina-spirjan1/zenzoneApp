@@ -1,7 +1,7 @@
 import * as React from "react"
 import Svg, { Defs, RadialGradient, Stop, G, Path } from "react-native-svg"
 
-function LoginIcon(props) {
+function LoginIconLightMode(props) {
     return (
         <Svg
             xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@ function LoginIcon(props) {
             </Defs>
             <G data-name="Group 2">
                 <Path
-                    fill="#54719C"
+                    fill="#55719A"
                     d="M12.755 212.611C-10.346 121.693 3.13 32.988 12.755 0H150v435.013H1.666c13.322-36.252 34.19-131.483 11.089-222.402z"
                     data-name="Path 1"
                     transform="rotate(90 174.243 260.77)"
@@ -263,4 +263,4 @@ function LoginIcon(props) {
     )
 }
 
-export default LoginIcon
+export default LoginIconLightMode
