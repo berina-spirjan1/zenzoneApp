@@ -37,11 +37,7 @@ export default class Login extends Component {
                     </TouchableOpacity>
                 </View>
                 <ZenIconDarkMode style={stylesLightMode.icon}/>
-                {/*}*/}
-                {/*else{*/}
                 {/*    //<ZenIconDarkMode style={stylesLightMode.icon}/>*/}
-                {/*}*/}
-
             </View>
 
         )
