@@ -27,7 +27,7 @@ export default class Login extends Component {
                         {/*<LinearGradient
                             colors={["#93B4E5", "#334A6D"]}
                             style={stylesDarkMode.buttonLogin}>
-                            <Text style={stylesDarkMode.loginText}>LOGIN</Text>
+                            <Text style={stylesDarkMode.buttonText}>LOGIN</Text>
                         </LinearGradient>*/}
                         <LinearGradient
                             colors={["#6594DA", "#334A6D"]}
@@ -92,6 +92,7 @@ const stylesLightMode = StyleSheet.create({
         shadowRadius: 10,
 
     },
+
     password: {
         margin: 17,
         marginLeft: 20,
