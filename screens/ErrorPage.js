@@ -29,6 +29,7 @@ export default class ErrorPage extends Component{
     }
 }
 
+
 const stylesDarkMode={
     robotPicture:{
         margin:10,
