@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import {View} from "react-native";
 import LottieView from 'lottie-react-native';
-import {Image, Text} from "react-native";
 import ZenZoneTitle from "../components/ZenZoneTitle";
 import BackgroundThemeSplashScreen from "../components/BackgroundThemeSplashScreen";
 
@@ -13,8 +12,8 @@ export default class Splash extends Component{
         return(
 
            <View>
-                <LottieView style={styles.lottie}
-                    style={{flex: 1}}
+                <LottieView
+                    style={styles.lottie}
                     source={require("../assets/images/men.json")}
                     autoPlay
                     loop={true}/>
