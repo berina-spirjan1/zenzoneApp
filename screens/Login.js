@@ -47,6 +47,8 @@ export default class Login extends Component {
         )
     }
 }
+
+
 const stylesLightMode = StyleSheet.create({
     backgroundStyle: {
         backgroundColor: "#93B4E5"
