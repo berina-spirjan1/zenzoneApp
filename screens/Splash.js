@@ -26,6 +26,8 @@ export default class Splash extends Component{
         )
     }
 }
+
+
 const styles={
     lottie:{
         flex:1,
