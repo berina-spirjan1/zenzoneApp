@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {View,Text,Button} from "react-native";
+import {View, Text, Button, StyleSheet} from "react-native";
 import RobotPictureDarkMode from "../components/RobotPictureDarkMode";
 import {Alert} from "react-native";
 
@@ -30,7 +30,7 @@ export default class ErrorPage extends Component{
 }
 
 
-const stylesDarkMode={
+const stylesDarkMode=StyleSheet.create({
     robotPicture:{
         margin:10,
     },
@@ -68,9 +68,9 @@ const stylesDarkMode={
         shadowRadius: 5,
         elevation: 5
     }
-}
+})
 
-const stylesLightMode={
+const stylesLightMode=StyleSheet.create({
     robotPicture:{
         margin:10
     },
@@ -107,4 +107,4 @@ const stylesLightMode={
         shadowRadius: 5,
         elevation: 5
     }
-}
+})
