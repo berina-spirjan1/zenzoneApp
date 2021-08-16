@@ -1,5 +1,5 @@
-import * as React from "react"
-import Svg, {Ellipse, G, Path} from "react-native-svg"
+import * as React from "react";
+import Svg, {Ellipse, G, Path} from "react-native-svg";
 
 
 function BackgroundThemeSplashScreen(props) {
@@ -36,4 +36,4 @@ function BackgroundThemeSplashScreen(props) {
     )
 }
 
-export default BackgroundThemeSplashScreen
+export default BackgroundThemeSplashScreen;

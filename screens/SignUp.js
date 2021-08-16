@@ -17,7 +17,7 @@ export default class SignUp extends Component{
             <View style={stylesLightMode.backgroundStyle}>
                 <Text style={stylesLightMode.welcomeTitle}>WELCOME TO </Text>
                 <Text style={stylesLightMode.zenzoneTitle}>ZENZONE</Text>
-                <SafeAreaView style={stylesLightMode.container} style={{height: screenHeight}}>
+                <SafeAreaView style={stylesLightMode.container}>
                     <ScrollView vertical={true} style={stylesLightMode.scrollView}>
                         <Text style={stylesLightMode.hintText}>Username</Text>
                         <TextInput style={stylesLightMode.inputLabel}/>
@@ -80,7 +80,8 @@ const stylesLightMode=StyleSheet.create({
     container:{
         flex: 1,
         paddingTop: StatusBar.currentHeight,
-        paddingVertical: 20
+        paddingVertical: 20,
+        height: screenHeight
     },
     scrollView:{
         alignSelf: 'stretch',

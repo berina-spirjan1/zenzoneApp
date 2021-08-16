@@ -1,5 +1,5 @@
-import * as React from "react"
-import Svg, { Defs, RadialGradient, Stop, G, Path } from "react-native-svg"
+import * as React from "react";
+import Svg, { Defs, RadialGradient, Stop, G, Path } from "react-native-svg";
 
 function ZenIconLightMode(props) {
     return (
@@ -263,4 +263,4 @@ function ZenIconLightMode(props) {
     )
 }
 
-export default ZenIconLightMode
+export default ZenIconLightMode;

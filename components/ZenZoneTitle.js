@@ -1,5 +1,5 @@
-import * as React from "react"
-import Svg, { Defs, G, Path } from "react-native-svg"
+import * as React from "react";
+import Svg, { Defs, G, Path } from "react-native-svg";
 
 function ZenZoneTitle(props) {
     return (
@@ -56,4 +56,4 @@ function ZenZoneTitle(props) {
     )
 }
 
-export default ZenZoneTitle
+export default ZenZoneTitle;
