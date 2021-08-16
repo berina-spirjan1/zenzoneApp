@@ -17,7 +17,7 @@ export default class SignUp extends Component{
             <View style={stylesLightMode.backgroundStyle}>
                 <Text style={stylesLightMode.welcomeTitle}>WELCOME TO </Text>
                 <Text style={stylesLightMode.zenzoneTitle}>ZENZONE</Text>
-                <SafeAreaView style={stylesLightMode.container}>
+                <SafeAreaView style={stylesLightMode.container} style={{height: screenHeight}}>
                     <ScrollView vertical={true} style={stylesLightMode.scrollView}>
                         <Text style={stylesLightMode.hintText}>Username</Text>
                         <TextInput style={stylesLightMode.inputLabel}/>
@@ -34,12 +34,13 @@ export default class SignUp extends Component{
                         <Text style={stylesLightMode.hintText}>Confirm password</Text>
                         <TextInput style={stylesLightMode.inputLabel}/>
                         <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
-                            <Text style={{color: "#334A6D", fontWeight: 'bold'}}> Login</Text></Text>
+                            <Text style={{color: "#334A6D", fontWeight: 'bold'}}> Sign up</Text></Text>
                         <TouchableOpacity onPress={() => Alert.alert('Go back')}>
                         <LinearGradient
                             colors={["#93B4E5", "#334A6D"]}
                             style={stylesDarkMode.buttonLogin}>
-                            <Text style={stylesDarkMode.buttonText}>LOGIN</Text>
+                            <Text style={stylesDarkMode.buttonText}>
+                                LOGIN</Text>
                         </LinearGradient>
                         {/*<LinearGradient
                             colors={["#6594DA", "#334A6D"]}
@@ -48,7 +49,7 @@ export default class SignUp extends Component{
                         </LinearGradient>*/}
                     </TouchableOpacity>
                         {/*<ZenIconLightMode style={stylesLightMode.icon}/>*/}
-                        <ZenIconDarkMode style={stylesLightMode.icon}/>
+                        <ZenIconLightMode style={stylesLightMode.icon}/>
                     </ScrollView>
                 </SafeAreaView>
             </View>
@@ -80,8 +81,7 @@ const stylesLightMode=StyleSheet.create({
     container:{
         flex: 1,
         paddingTop: StatusBar.currentHeight,
-        paddingVertical: 20,
-        height: screenHeight
+        paddingVertical: 20
     },
     scrollView:{
         alignSelf: 'stretch',
