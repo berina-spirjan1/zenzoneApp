@@ -10,20 +10,6 @@ function Icon(props) {
             viewBox="0 0 435.013 236.527"
             {...props}
         >
-            <Defs>
-                <RadialGradient
-                    id="prefix__a"
-                    cx={0.533}
-                    cy={0.487}
-                    r={0.5}
-                    gradientUnits="objectBoundingBox"
-                >
-                    <Stop offset={0} color="#6594da"/>
-                    <Stop offset={0.097} color="#608dcf"/>
-                    <Stop offset={0.137} color="#5a84c2"/>
-                    <Stop offset={1} color="#334a6d" stop-opacity="0.639"/>
-                </RadialGradient>
-            </Defs>
             <G data-name="Group 2">
                 <Path
                     fill="#6594DA"
