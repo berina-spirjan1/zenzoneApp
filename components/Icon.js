@@ -1,7 +1,7 @@
 import * as React from "react";
 import Svg, { Defs, RadialGradient, Stop, G, Path } from "react-native-svg";
 
-function ZenIcon(props) {
+function Icon(props) {
     return (
         <Svg
             xmlns="http://www.w3.org/2000/svg"
@@ -263,4 +263,4 @@ function ZenIcon(props) {
     )
 }
 
-export default ZenIcon;
+export default Icon;
