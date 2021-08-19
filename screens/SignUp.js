@@ -1,24 +1,37 @@
 import React, {Component} from "react";
-import {StyleSheet, Text, TextInput, View, ScrollView, TouchableOpacity, Alert, SafeAreaView,StatusBar} from "react-native";
-import ZenIconDarkMode from "../components/ZenIconDarkMode";
-import {LinearGradient} from "expo-linear-gradient";
-import ZenIconLightMode from "../components/ZenIconLightMode";
-import {Dimensions} from "react-native";
+import {
+    Dimensions,
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from "react-native";
+import Icon from "../components/icons/Icon";
+import Cload from "../components/icons/Cload";
 
-export default class SignUp extends Component{
+
+export default class SignUp extends Component {
     constructor(props) {
         super();
     }
+
     render() {
 
         const screenHeight = Dimensions.get('window').height
 
         return (
             <View style={stylesLightMode.backgroundStyle}>
+                <Cload style={stylesLightMode.cloads}/>
                 <Text style={stylesLightMode.welcomeTitle}>WELCOME TO </Text>
                 <Text style={stylesLightMode.zenzoneTitle}>ZENZONE</Text>
-                <SafeAreaView style={stylesLightMode.container} style={{height: screenHeight}}>
-                    <ScrollView vertical={true} style={stylesLightMode.scrollView}>
+                <SafeAreaView style={stylesLightMode.container}
+                              style={{height: screenHeight}}>
+                    <ScrollView vertical={true}
+                                style={stylesLightMode.scrollView}>
                         <Text style={stylesLightMode.hintText}>Username</Text>
                         <TextInput style={stylesLightMode.inputLabel}/>
                         <Text style={stylesLightMode.hintText}>Full name</Text>
@@ -34,22 +47,13 @@ export default class SignUp extends Component{
                         <Text style={stylesLightMode.hintText}>Confirm password</Text>
                         <TextInput style={stylesLightMode.inputLabel}/>
                         <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
-                            <Text style={{color: "#334A6D", fontWeight: 'bold'}}> Sign up</Text></Text>
-                        <TouchableOpacity onPress={() => Alert.alert('Go back')}>
-                        <LinearGradient
-                            colors={["#93B4E5", "#334A6D"]}
-                            style={stylesDarkMode.buttonLogin}>
+                            <Text style={{color: "#334A6D", fontWeight: 'bold'}}> Login</Text></Text>
+                        <TouchableOpacity style={stylesLightMode.button}
+                                        onPress>
                             <Text style={stylesDarkMode.buttonText}>
-                                LOGIN</Text>
-                        </LinearGradient>
-                        {/*<LinearGradient
-                            colors={["#6594DA", "#334A6D"]}
-                            style={stylesLightMode.buttonLogin}>
-                            <Text style={stylesLightMode.buttonText}>SIGN UP</Text>
-                        </LinearGradient>*/}
-                    </TouchableOpacity>
-                        {/*<ZenIconLightMode style={stylesLightMode.icon}/>*/}
-                        <ZenIconLightMode style={stylesLightMode.icon}/>
+                                SIGN UP</Text>
+                        </TouchableOpacity>
+                        <Icon style={stylesLightMode.icon}/>
                     </ScrollView>
                 </SafeAreaView>
             </View>
@@ -58,9 +62,13 @@ export default class SignUp extends Component{
 }
 
 
-const stylesLightMode=StyleSheet.create({
+const stylesLightMode = StyleSheet.create({
     backgroundStyle: {
         backgroundColor: "#93B4E5"
+    },
+    cloads:{
+        top:210,
+        left:0
     },
     welcomeTitle: {
         fontSize: 28,
@@ -78,15 +86,15 @@ const stylesLightMode=StyleSheet.create({
         justifyContent: 'center',
         top: 60
     },
-    container:{
+    container: {
         flex: 1,
         paddingTop: StatusBar.currentHeight,
         paddingVertical: 20
     },
-    scrollView:{
+    scrollView: {
         alignSelf: 'stretch',
-        marginTop:70,
-        marginBottom:50
+        marginTop: 70,
+        marginBottom: 50
     },
     hintText: {
         margin: 17,
@@ -101,7 +109,7 @@ const stylesLightMode=StyleSheet.create({
         marginRight: 30,
         borderRadius: 27,
         backgroundColor: 'white',
-        marginTop:0,
+        marginTop: 0,
         opacity: 0.40,
         color: '#000000',
         borderWidth: 0,
@@ -119,34 +127,43 @@ const stylesLightMode=StyleSheet.create({
         height: 45,
         borderRadius: 26,
         opacity: 0.8,
-        marginBottom:50
+        marginBottom: 50
+    },
+    button:{
+        backgroundColor:"#6C63FF",
+        color:"#000000",
+        width: 100,
+        left:227,
+        borderRadius:26,
+        padding:1,
+        height:40,
+        paddingTop:0
     },
     buttonText: {
         textAlign: 'center',
-        marginTop: 12,
+        justifyContent: 'center',
         color: "#083960",
         fontSize: 16,
         fontWeight: 'bold'
     },
-    loginHelp:{
-        textAlign: 'left',
-        color: "#000000",
-        marginBottom:20,
+    loginHelp: {
         marginLeft:20,
-        marginTop:10
+        color: "#000000",
+        marginBottom: 20,
+        marginTop: 10
     },
     icon: {
         flex: 1,
-        marginTop: -90,
-        marginBottom:0,
+        marginTop: 0,
+        marginBottom: 70,
         justifyContent: 'center'
     }
 })
 
 
-const stylesDarkMode=StyleSheet.create({
+const stylesDarkMode = StyleSheet.create({
     backgroundStyle: {
-        backgroundColor: "#2D284B"
+        backgroundColor: "#1C1F23"
     },
     welcomeTitle: {
         fontSize: 28,
@@ -158,27 +175,27 @@ const stylesDarkMode=StyleSheet.create({
     },
     zenzoneTitle: {
         fontSize: 28,
-        color: '#1C70B3',
+        color: '#FFFFFF',
         fontWeight: 'bold',
         textAlign: 'center',
         justifyContent: 'center',
         top: 60
     },
-    container:{
+    container: {
         flex: 1,
         paddingTop: StatusBar.currentHeight,
         paddingVertical: 20
     },
-    scrollView:{
+    scrollView: {
         alignSelf: 'stretch',
-        marginTop:70,
-        marginBottom:50
+        marginTop: 70,
+        marginBottom: 50
     },
     hintText: {
         margin: 17,
         marginLeft: 20,
         fontWeight: 'bold',
-        color:"#FFFFFF"
+        color: "#FFFFFF"
     },
     inputLabel: {
         height: 50,
@@ -188,7 +205,7 @@ const stylesDarkMode=StyleSheet.create({
         marginRight: 30,
         borderRadius: 27,
         backgroundColor: 'white',
-        marginTop:0,
+        marginTop: 0,
         opacity: 0.40,
         color: '#FFFFFF',
         borderWidth: 0,
@@ -197,17 +214,8 @@ const stylesDarkMode=StyleSheet.create({
         shadowOffset: {width: 20, height: 2},
         shadowOpacity: 1,
         shadowRadius: 10,
+    },
 
-    },
-    buttonLogin: {
-        top: 5,
-        left: 240,
-        width: 100,
-        height: 45,
-        borderRadius: 26,
-        opacity: 0.8,
-        marginBottom:50
-    },
     buttonText: {
         textAlign: 'center',
         marginTop: 12,
@@ -215,17 +223,17 @@ const stylesDarkMode=StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold'
     },
-    loginHelp:{
+    loginHelp: {
         textAlign: 'left',
         color: "#FFFFFF",
-        marginBottom:20,
-        marginLeft:20,
-        marginTop:10
+        marginBottom: 20,
+        marginLeft: 20,
+        marginTop: 10
     },
     icon: {
         flex: 1,
-        marginTop: -90,
-        marginBottom:0,
+        marginTop: 0,
+        marginBottom: 70,
         justifyContent: 'center'
     }
 })
