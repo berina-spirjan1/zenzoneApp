@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import Icon from "../components/icons/Icon";
 import Cload from "../components/icons/Cload";
+import {Alert} from "react-native-web";
 
 
 export default class SignUp extends Component {
@@ -49,7 +50,7 @@ export default class SignUp extends Component {
                         <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
                             <Text style={{color: "#334A6D", fontWeight: 'bold'}}> Login</Text></Text>
                         <TouchableOpacity style={stylesLightMode.button}
-                                        onPress>
+                                        onPress={() => Alert.dialog("Button pressed")}>
                             <Text style={stylesDarkMode.buttonText}>
                                 SIGN UP</Text>
                         </TouchableOpacity>
