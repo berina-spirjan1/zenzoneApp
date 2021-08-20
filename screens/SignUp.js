@@ -8,11 +8,12 @@ import {
     Text,
     TextInput,
     TouchableOpacity,
-    View
+    View,
+    Alert
 } from "react-native";
+
 import Icon from "../components/icons/Icon";
 import Cload from "../components/icons/Cload";
-import {Alert} from "react-native-web";
 
 
 export default class SignUp extends Component {
@@ -48,7 +49,8 @@ export default class SignUp extends Component {
                         <Text style={stylesLightMode.hintText}>Confirm password</Text>
                         <TextInput style={stylesLightMode.inputLabel}/>
                         <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
-                            <Text style={{color: "#334A6D", fontWeight: 'bold'}}> Login</Text></Text>
+                            <Text style={{color: "#334A6D", fontWeight: 'bold'}}
+                                  onPress={(e) => this.onTextPress(e, 'Login clicked')}> Login</Text></Text>
                         <TouchableOpacity style={stylesLightMode.button}
                                         onPress={() => Alert.dialog("Button pressed")}>
                             <Text style={stylesDarkMode.buttonText}>
