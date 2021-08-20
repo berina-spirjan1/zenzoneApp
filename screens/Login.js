@@ -1,16 +1,25 @@
 import React, {Component} from "react";
 import {Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
-import {LinearGradient} from "expo-linear-gradient";
-import ZenIconLightMode from "../components/ZenIconLightMode";
-import ZenIconDarkMode from "../components/ZenIconDarkMode";
+import Icon from "../components/icons/Icon";
+import LottieView from "lottie-react-native";
 
 export default class Login extends Component {
     constructor(props) {
         super();
     }
+
+    //todo add handler for event that you can go to forgot password page, this only shows in terminal
+    onTextPress(event, text) {
+        console.log(text);
+    }
+
     render() {
         return (
             <View style={stylesDarkMode.backgroundStyle}>
+                <LottieView style={stylesDarkMode.lottie}
+                            source={require("../assets/images/stars.json")}
+                            autoPlay
+                            loop={true}/>
                 <Text style={stylesDarkMode.welcomeTitle}>WELCOME TO </Text>
                 <Text style={stylesDarkMode.zenzoneTitle}>ZENZONE</Text>
                 <SafeAreaView>
@@ -20,24 +29,17 @@ export default class Login extends Component {
                     <TextInput style={stylesDarkMode.inputPassword}/>
                 </SafeAreaView>
                 <Text style={stylesDarkMode.forgotLoginDetails}>Forgot your login details?
-                    <Text style={stylesDarkMode.helpLogin}> Get help logging in</Text>
+                    <Text style={stylesDarkMode.helpLogin}
+                          onPress={(e) => this.onTextPress(e, 'Get help logging in')}> Get help logging in</Text>
                 </Text>
                 <View>
-                    <TouchableOpacity onPress={() => Alert.alert('Go back')}>
-                        {/*<LinearGradient
-                            colors={["#93B4E5", "#334A6D"]}
-                            style={stylesDarkMode.buttonLogin}>
-                            <Text style={stylesDarkMode.buttonText}>LOGIN</Text>
-                        </LinearGradient>*/}
-                        <LinearGradient
-                            colors={["#6594DA", "#334A6D"]}
-                            style={stylesDarkMode.buttonLogin}>
-                            <Text style={stylesDarkMode.loginText}>LOGIN</Text>
-                        </LinearGradient>
+                    <TouchableOpacity
+                        style={stylesDarkMode.button}
+                        onPress={() => Alert.alert('Go back')}>
+                        <Text style={stylesDarkMode.loginText}>LOGIN</Text>
                     </TouchableOpacity>
                 </View>
-                <ZenIconDarkMode style={stylesLightMode.icon}/>
-                {/*    //<ZenIconDarkMode style={stylesLightMode.icon}/>*/}
+                <Icon style={stylesLightMode.icon}/>
             </View>
 
         )
@@ -48,6 +50,14 @@ export default class Login extends Component {
 const stylesLightMode = StyleSheet.create({
     backgroundStyle: {
         backgroundColor: "#93B4E5"
+    },
+    lottie:{
+        flex:1,
+        marginLeft:40,
+        width: 100,
+        height: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     welcomeTitle: {
         fontSize: 28,
@@ -130,7 +140,7 @@ const stylesLightMode = StyleSheet.create({
         width: 100,
         height: 45,
         borderRadius: 26,
-        opacity: 0.8
+        opacity: 1,
     },
     loginText: {
         textAlign: 'center',
@@ -149,7 +159,11 @@ const stylesLightMode = StyleSheet.create({
 
 const stylesDarkMode = StyleSheet.create({
     backgroundStyle: {
-        backgroundColor: "#2D284B"
+        backgroundColor: "#1C1F23"
+    },
+    stars:{
+        top:-100,
+        left:0
     },
     welcomeTitle: {
         fontSize: 28,
@@ -161,7 +175,7 @@ const stylesDarkMode = StyleSheet.create({
     },
     zenzoneTitle: {
         fontSize: 28,
-        color: '#1C70B3',
+        color: '#FFFFFF',
         fontWeight: 'bold',
         textAlign: 'center',
         justifyContent: 'center',
@@ -235,6 +249,17 @@ const stylesDarkMode = StyleSheet.create({
         borderRadius: 26,
         opacity: 0.8
     },
+    button:{
+        backgroundColor:"#6C63FF",
+        color:"#000000",
+        width: 100,
+        left:227,
+        borderRadius:26,
+        padding:1,
+        height:40,
+        paddingTop:0,
+        marginBottom:20
+    },
     loginText: {
         textAlign: 'center',
         marginTop: 12,
@@ -244,7 +269,8 @@ const stylesDarkMode = StyleSheet.create({
     },
     icon: {
         flex: 1,
-        marginTop: -50,
+        marginTop: 0,
+        marginBottom:-10,
         justifyContent: 'center'
     }
 });
