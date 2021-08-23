@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {View, Image, Text, StyleSheet, Dimensions, StatusBar, ScrollView, TouchableOpacity} from "react-native";
+import {Dimensions, Image, ScrollView, StatusBar, StyleSheet, Text, View} from "react-native";
 import {SafeAreaView} from "react-navigation";
 
 export default class DailyChallengeDetails extends Component{
@@ -33,9 +33,10 @@ export default class DailyChallengeDetails extends Component{
                 <Image style={stylesLightMode.image}
                        source={require('../assets/images/img_1.png')}/>
                 <Text style={stylesLightMode.title}>daily challenge</Text>
-                {/*<Text style={stylesLightMode.text}>{this.state.data}</Text>*/}
+
                 <SafeAreaView style={stylesLightMode.safeArea} style={{height: screenHeight}}>
                     <ScrollView vertical={true} style={stylesLightMode.scrollView}>
+                        {/*<Text style={stylesLightMode.text}>{this.state.data}</Text>*/}
                         <Text style={stylesLightMode.text}>
                             Lorem ipsum dolor sit amet,
                             consectetur adipiscing elit.
@@ -54,7 +55,6 @@ export default class DailyChallengeDetails extends Component{
                         {/*</TouchableOpacity>*/}
                     </ScrollView>
                 </SafeAreaView>
-
             </View>
         )
     }

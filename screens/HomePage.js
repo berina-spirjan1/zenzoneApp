@@ -2,12 +2,6 @@ import React, {Component} from "react";
 import {View} from "react-native";
 import {createAppContainer} from "react-navigation";
 import {createDrawerNavigator} from "react-navigation-drawer";
-import {Dimensions} from "react-native";
-import {Feather} from "@expo/vector-icons";
-
-import Login from "./Login";
-import SignUp from "./SignUp";
-import SideBar from "../components/SideBar";
 
 export default class HomePage extends Component{
     constructor(props) {
@@ -34,7 +28,12 @@ const DrawerNavigation=createDrawerNavigator({
 const styleLightMode=StyleSheet.create({
     container:{
 
-    }
+    },
+    bottomNavigationBar:{
+        flex:1,
+        backgroundColor:"",
+        justifyContent:'flex-end'
+    },
 })
 
 const styleDarkMode=StyleSheet.create({
