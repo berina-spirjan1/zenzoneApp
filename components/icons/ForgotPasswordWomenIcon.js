@@ -7,7 +7,7 @@ function ForgotPasswordWomenIcon(props) {
             xmlns="http://www.w3.org/2000/svg"
             width={438.907}
             height={362.481}
-            viewBox="0 0 438.907 362.481"
+            viewBox="-100 60 650 200"
             {...props}
         >
             <G data-name="Forgot password-bro">
