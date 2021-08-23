@@ -83,7 +83,7 @@ export default class AddButtonOnNavigationBar extends Component{
                         <Feather name="user" size={25} color={"#FFFFFF"}/>
                     </View>
                 </Animated.View>
-                <Animated.View style={{ position: 'absolute', left: registerX, top: registerY}}>
+                <Animated.View style={{ position: 'absolute', left: forgotPasswordX, top: forgotPasswordY}}>
                     <View style={styles.secondaryButton}>
                         <Feather name="key" size={25} color={"#FFFFFF"}/>
                     </View>
