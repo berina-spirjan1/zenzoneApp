@@ -1,5 +1,14 @@
 import React, {Component} from "react";
-import {Alert, SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {
+    Alert,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from "react-native";
+
 import Icon from "../components/icons/Icon";
 import LottieView from "lottie-react-native";
 

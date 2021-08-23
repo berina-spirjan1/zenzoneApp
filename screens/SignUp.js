@@ -14,7 +14,7 @@ import {
 
 import Icon from "../components/icons/Icon";
 import Cload from "../components/icons/Cload";
-
+import LottieView from "lottie-react-native";
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -28,6 +28,10 @@ export default class SignUp extends Component {
         return (
             <View style={stylesLightMode.backgroundStyle}>
                 <Cload style={stylesLightMode.cloads}/>
+                {/*<LottieView style={stylesDarkMode.lottie}*/}
+                {/*            source={require("../assets/images/stars.json")}*/}
+                {/*            autoPlay*/}
+                {/*            loop={true}/>*/}
                 <Text style={stylesLightMode.welcomeTitle}>WELCOME TO </Text>
                 <Text style={stylesLightMode.zenzoneTitle}>ZENZONE</Text>
                 <SafeAreaView style={stylesLightMode.container}
@@ -52,7 +56,7 @@ export default class SignUp extends Component {
                             <Text style={{color: "#334A6D", fontWeight: 'bold'}}
                                   onPress={(e) => this.onTextPress(e, 'Login clicked')}> Login</Text></Text>
                         <TouchableOpacity style={stylesLightMode.button}
-                                        onPress={() => Alert.dialog("Button pressed")}>
+                                          onPress={() => Alert.alert('SignUp')}>
                             <Text style={stylesDarkMode.buttonText}>
                                 SIGN UP</Text>
                         </TouchableOpacity>
@@ -79,7 +83,7 @@ const stylesLightMode = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         justifyContent: 'center',
-        top: 60
+        top:55
     },
     zenzoneTitle: {
         fontSize: 28,
