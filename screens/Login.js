@@ -6,7 +6,7 @@ import {
     TextInput,
     TouchableOpacity,
     View,
-    Image, Animated
+    Image, Animated, StatusBar
 } from 'react-native';
 import { StyleSheet } from 'react-native'
 import Icon from '../components/icons/Icon';
@@ -26,37 +26,41 @@ export default class Login extends Component {
 
     render() {
         return (
-            <View style={stylesDarkMode.backgroundStyle}>
-                <LottieView style={stylesDarkMode.lottie}
-                            source={require("../assets/images/stars.json")}
-                            autoPlay
-                            loop={true}/>
-                <Text style={stylesDarkMode.welcomeTitle}>WELCOME TO </Text>
-                <Text style={stylesDarkMode.zenzoneTitle}>ZENZONE</Text>
-                <SafeAreaView>
-                    <Text style={stylesDarkMode.username}>Username</Text>
-                    <TextInput style={stylesDarkMode.inputUsername}>
-                        <FontAwesome5 name="user" size={20} color={"#000000"}/>
-                    </TextInput>
-                    <Text style={stylesDarkMode.password}>Password</Text>
-                    <TextInput style={stylesDarkMode.inputPassword}>
-                        <FontAwesome5 name="lock" size={20} color={"#000000"}/>
-                    </TextInput>
-                </SafeAreaView>
-                <Text style={stylesDarkMode.forgotLoginDetails}>Forgot your login details?
-                    <Text style={stylesDarkMode.helpLogin}
-                          onPress={(e) => this.onTextPress(e, 'Get help logging in')}> Get help logging in</Text>
-                </Text>
-                <View>
-                    <TouchableOpacity
-                        style={stylesDarkMode.button}
-                        onPress={() => Alert.alert('Go back')}>
-                        <Text style={stylesDarkMode.loginText}>LOGIN</Text>
-                    </TouchableOpacity>
-                </View>
-                <Icon style={stylesLightMode.icon}/>
-            </View>
-
+            <>
+                    <StatusBar
+                                animated={true}
+                                backgroundColor="#6C63FF"/>
+                    <View style={stylesDarkMode.backgroundStyle}>
+                    <LottieView style={stylesDarkMode.lottie}
+                                source={require("../assets/images/stars.json")}
+                                autoPlay
+                                loop={true}/>
+                    <Text style={stylesDarkMode.welcomeTitle}>WELCOME TO </Text>
+                    <Text style={stylesDarkMode.zenzoneTitle}>ZENZONE</Text>
+                    <SafeAreaView>
+                        <Text style={stylesDarkMode.username}>Username</Text>
+                        <TextInput style={stylesDarkMode.inputUsername}>
+                            <FontAwesome5 name="user" size={20} color={"#000000"}/>
+                        </TextInput>
+                        <Text style={stylesDarkMode.password}>Password</Text>
+                        <TextInput style={stylesDarkMode.inputPassword}>
+                            <FontAwesome5 name="lock" size={20} color={"#000000"}/>
+                        </TextInput>
+                    </SafeAreaView>
+                    <Text style={stylesDarkMode.forgotLoginDetails}>Forgot your login details?
+                        <Text style={stylesDarkMode.helpLogin}
+                              onPress={(e) => this.onTextPress(e, 'Get help logging in')}> Get help logging in</Text>
+                    </Text>
+                    <View>
+                        <TouchableOpacity
+                            style={stylesDarkMode.button}
+                            onPress={() => Alert.alert('Go back')}>
+                            <Text style={stylesDarkMode.loginText}>LOGIN</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <Icon style={stylesLightMode.icon}/>
+                    </View>
+            </>
         )
     }
 }
@@ -183,7 +187,7 @@ const stylesDarkMode = StyleSheet.create({
         justifyContent: 'center',
     },
     stars:{
-        top:-100,
+        top:-150,
         left:0
     },
     welcomeTitle: {
@@ -192,7 +196,7 @@ const stylesDarkMode = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         justifyContent: 'center',
-        top: 107
+        top: 80
     },
     zenzoneTitle: {
         fontSize: 28,
@@ -200,10 +204,10 @@ const stylesDarkMode = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         justifyContent: 'center',
-        top: 105
+        top: 85
     },
     username: {
-        top: 130,
+        top: 100,
         margin: 17,
         marginLeft: 20,
         fontWeight: 'bold',
@@ -216,7 +220,7 @@ const stylesDarkMode = StyleSheet.create({
         marginLeft: 20,
         marginRight: 30,
         borderRadius: 27,
-        marginTop: 130,
+        marginTop: 100,
         backgroundColor: 'white',
         opacity: 0.40,
         color: '#FFFFFF',

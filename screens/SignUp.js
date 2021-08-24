@@ -33,54 +33,60 @@ export default class SignUp extends Component {
         const screenHeight = Dimensions.get('window').height
 
         return (
-            <View style={stylesLightMode.backgroundStyle}>
-                <Cload style={stylesLightMode.cloads}/>
-                <Text style={stylesLightMode.welcomeTitle}>WELCOME TO </Text>
-                <Text style={stylesLightMode.zenzoneTitle}>ZENZONE</Text>
-                <SafeAreaView style={stylesLightMode.container}
-                              style={{height: screenHeight}}>
-                    <ScrollView vertical={true}
-                                style={stylesLightMode.scrollView}>
-                        <Text style={stylesLightMode.hintText}>Username</Text>
-                        <TextInput style={stylesLightMode.inputLabel}>
-                            <FontAwesome5 name={'user'} size={18} color={'#000000'}/>
-                        </TextInput>
-                        <Text style={stylesLightMode.hintText}>Full name</Text>
-                        <TextInput style={stylesLightMode.inputLabel}>
-                            <FontAwesome5 name={'signature'} size={18} color={'#000000'}/>
-                        </TextInput>
-                        <Text style={stylesLightMode.hintText}>E-mail</Text>
-                        <TextInput style={stylesLightMode.inputLabel}>
-                            <FontAwesome5 name={'envelope'} size={18} color={'#000000'}/>
-                        </TextInput>
-                        <Text style={stylesLightMode.hintText}>Office location</Text>
-                        <TextInput style={stylesLightMode.inputLabel}>
-                            <FontAwesome5 name={'map-marker-alt'} size={18} color={'#000000'}/>
-                        </TextInput>
-                        <Text style={stylesLightMode.hintText}>Work position</Text>
-                        <TextInput style={stylesLightMode.inputLabel}>
-                            <FontAwesome5 name={'briefcase'} size={18} color={'#000000'}/>
-                        </TextInput>
-                        <Text style={stylesLightMode.hintText}>Password</Text>
-                        <TextInput style={stylesLightMode.inputLabel}>
-                            <FontAwesome5 name={'key'} size={18} color={'#000000'}/>
-                        </TextInput>
-                        <Text style={stylesLightMode.hintText}>Confirm password</Text>
-                        <TextInput style={stylesLightMode.inputLabel}>
-                            <FontAwesome5 name={'lock'} size={18} color={'#000000'}/>
-                        </TextInput>
-                        <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
-                            <Text style={{color: "#334A6D", fontWeight: 'bold'}}
-                                  onPress={(e) => this.onTextPress(e, 'Login clicked')}> Login</Text></Text>
-                        <TouchableOpacity style={stylesLightMode.button}
-                                          onPress={() => Alert.alert('SignUp')}>
-                            <Text style={stylesDarkMode.buttonText}>
-                                SIGN UP</Text>
-                        </TouchableOpacity>
-                        <Icon style={stylesLightMode.icon}/>
-                    </ScrollView>
-                </SafeAreaView>
-            </View>
+            <>
+                <StatusBar
+                    animated={true}
+                    backgroundColor="#334A6D"/>
+                <View style={stylesLightMode.backgroundStyle}>
+                    <Cload style={stylesLightMode.cloads}/>
+                    <Text style={stylesLightMode.welcomeTitle}>WELCOME TO </Text>
+                    <Text style={stylesLightMode.zenzoneTitle}>ZENZONE</Text>
+                    <SafeAreaView style={stylesLightMode.container}
+                                  style={{height: screenHeight}}>
+                        <ScrollView vertical={true}
+                                    style={stylesLightMode.scrollView}>
+                            <Text style={stylesLightMode.hintText}>Username</Text>
+                            <TextInput style={stylesLightMode.inputLabel}>
+                                <FontAwesome5 name={'user'} size={18} color={'#000000'}/>
+                            </TextInput>
+                            <Text style={stylesLightMode.hintText}>Full name</Text>
+                            <TextInput style={stylesLightMode.inputLabel}>
+                                <FontAwesome5 name={'signature'} size={18} color={'#000000'}/>
+                            </TextInput>
+                            <Text style={stylesLightMode.hintText}>E-mail</Text>
+                            <TextInput style={stylesLightMode.inputLabel}>
+                                <FontAwesome5 name={'envelope'} size={18} color={'#000000'}/>
+                            </TextInput>
+                            <Text style={stylesLightMode.hintText}>Office location</Text>
+                            <TextInput style={stylesLightMode.inputLabel}>
+                                <FontAwesome5 name={'map-marker-alt'} size={18} color={'#000000'}/>
+                            </TextInput>
+                            <Text style={stylesLightMode.hintText}>Work position</Text>
+                            <TextInput style={stylesLightMode.inputLabel}>
+                                <FontAwesome5 name={'briefcase'} size={18} color={'#000000'}/>
+                            </TextInput>
+                            <Text style={stylesLightMode.hintText}>Password</Text>
+                            <TextInput style={stylesLightMode.inputLabel}>
+                                <FontAwesome5 name={'key'} size={18} color={'#000000'}/>
+                            </TextInput>
+                            <Text style={stylesLightMode.hintText}>Confirm password</Text>
+                            <TextInput style={stylesLightMode.inputLabel}>
+                                <FontAwesome5 name={'lock'} size={18} color={'#000000'}/>
+                            </TextInput>
+                            <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
+                                <Text style={{color: "#334A6D", fontWeight: 'bold'}}
+                                      onPress={(e) => this.onTextPress(e, 'Login clicked')}> Login</Text></Text>
+                            <TouchableOpacity style={stylesLightMode.button}
+                                              onPress={() => Alert.alert('SignUp')}>
+                                <Text style={stylesDarkMode.buttonText}>
+                                    SIGN UP</Text>
+                            </TouchableOpacity>
+                            <Icon style={stylesLightMode.icon}/>
+                        </ScrollView>
+                    </SafeAreaView>
+                </View>
+        </>
+
         );
     }
 }
@@ -134,7 +140,7 @@ const stylesLightMode = StyleSheet.create({
         borderRadius: 27,
         backgroundColor: 'white',
         marginTop: 0,
-        opacity: 0.40,
+        opacity: 0.3,
         color: '#000000',
         borderWidth: 0,
         shadowColor: '#000000',
