@@ -1,16 +1,18 @@
-import React, {Component} from "react";
+import React, {Component} from 'react';
 import {
     Alert,
     SafeAreaView,
-    StyleSheet,
     Text,
     TextInput,
     TouchableOpacity,
-    View
-} from "react-native";
+    View,
+    Image, Animated
+} from 'react-native';
+import { StyleSheet } from 'react-native'
+import Icon from '../components/icons/Icon';
+import LottieView from 'lottie-react-native';
+import {FontAwesome5} from "@expo/vector-icons";
 
-import Icon from "../components/icons/Icon";
-import LottieView from "lottie-react-native";
 
 export default class Login extends Component {
     constructor(props) {
@@ -33,9 +35,13 @@ export default class Login extends Component {
                 <Text style={stylesDarkMode.zenzoneTitle}>ZENZONE</Text>
                 <SafeAreaView>
                     <Text style={stylesDarkMode.username}>Username</Text>
-                    <TextInput style={stylesDarkMode.inputUsername}/>
+                    <TextInput style={stylesDarkMode.inputUsername}>
+                        <FontAwesome5 name="user" size={20} color={"#000000"}/>
+                    </TextInput>
                     <Text style={stylesDarkMode.password}>Password</Text>
-                    <TextInput style={stylesDarkMode.inputPassword}/>
+                    <TextInput style={stylesDarkMode.inputPassword}>
+                        <FontAwesome5 name="lock" size={20} color={"#000000"}/>
+                    </TextInput>
                 </SafeAreaView>
                 <Text style={stylesDarkMode.forgotLoginDetails}>Forgot your login details?
                     <Text style={stylesDarkMode.helpLogin}
@@ -106,7 +112,7 @@ const stylesLightMode = StyleSheet.create({
         elevation: 5,
         shadowOffset: {width: 20, height: 2},
         shadowOpacity: 1,
-        shadowRadius: 10,
+        shadowRadius: 10
 
     },
 
@@ -169,6 +175,12 @@ const stylesLightMode = StyleSheet.create({
 const stylesDarkMode = StyleSheet.create({
     backgroundStyle: {
         backgroundColor: "#1C1F23"
+    },
+    lottie:{
+        flex:1,
+        marginLeft:40,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     stars:{
         top:-100,
@@ -283,3 +295,8 @@ const stylesDarkMode = StyleSheet.create({
         justifyContent: 'center'
     }
 });
+
+// const mapStateToProps = state => state;
+// const mapDispatchToProps = dispatch => ({});
+// const connectComponent = connect(mapStateToProps, mapDispatchToProps);
+// export default connectComponent(App);

@@ -11,6 +11,8 @@ import {
     View,
     Alert
 } from "react-native";
+import {FontAwesome5} from "@expo/vector-icons";
+
 
 import Icon from "../components/icons/Icon";
 import Cload from "../components/icons/Cload";
@@ -21,6 +23,11 @@ export default class SignUp extends Component {
         super();
     }
 
+    //todo add handler for event that you can go to forgot password page, this only shows in terminal
+    onTextPress(event, text) {
+        console.log(text);
+    }
+
     render() {
 
         const screenHeight = Dimensions.get('window').height
@@ -28,10 +35,6 @@ export default class SignUp extends Component {
         return (
             <View style={stylesLightMode.backgroundStyle}>
                 <Cload style={stylesLightMode.cloads}/>
-                {/*<LottieView style={stylesDarkMode.lottie}*/}
-                {/*            source={require("../assets/images/stars.json")}*/}
-                {/*            autoPlay*/}
-                {/*            loop={true}/>*/}
                 <Text style={stylesLightMode.welcomeTitle}>WELCOME TO </Text>
                 <Text style={stylesLightMode.zenzoneTitle}>ZENZONE</Text>
                 <SafeAreaView style={stylesLightMode.container}
@@ -39,19 +42,33 @@ export default class SignUp extends Component {
                     <ScrollView vertical={true}
                                 style={stylesLightMode.scrollView}>
                         <Text style={stylesLightMode.hintText}>Username</Text>
-                        <TextInput style={stylesLightMode.inputLabel}/>
+                        <TextInput style={stylesLightMode.inputLabel}>
+                            <FontAwesome5 name={'user'} size={18} color={'#000000'}/>
+                        </TextInput>
                         <Text style={stylesLightMode.hintText}>Full name</Text>
-                        <TextInput style={stylesLightMode.inputLabel}/>
+                        <TextInput style={stylesLightMode.inputLabel}>
+                            <FontAwesome5 name={'signature'} size={18} color={'#000000'}/>
+                        </TextInput>
                         <Text style={stylesLightMode.hintText}>E-mail</Text>
-                        <TextInput style={stylesLightMode.inputLabel}/>
+                        <TextInput style={stylesLightMode.inputLabel}>
+                            <FontAwesome5 name={'envelope'} size={18} color={'#000000'}/>
+                        </TextInput>
                         <Text style={stylesLightMode.hintText}>Office location</Text>
-                        <TextInput style={stylesLightMode.inputLabel}/>
+                        <TextInput style={stylesLightMode.inputLabel}>
+                            <FontAwesome5 name={'map-marker-alt'} size={18} color={'#000000'}/>
+                        </TextInput>
                         <Text style={stylesLightMode.hintText}>Work position</Text>
-                        <TextInput style={stylesLightMode.inputLabel}/>
+                        <TextInput style={stylesLightMode.inputLabel}>
+                            <FontAwesome5 name={'briefcase'} size={18} color={'#000000'}/>
+                        </TextInput>
                         <Text style={stylesLightMode.hintText}>Password</Text>
-                        <TextInput style={stylesLightMode.inputLabel}/>
+                        <TextInput style={stylesLightMode.inputLabel}>
+                            <FontAwesome5 name={'key'} size={18} color={'#000000'}/>
+                        </TextInput>
                         <Text style={stylesLightMode.hintText}>Confirm password</Text>
-                        <TextInput style={stylesLightMode.inputLabel}/>
+                        <TextInput style={stylesLightMode.inputLabel}>
+                            <FontAwesome5 name={'lock'} size={18} color={'#000000'}/>
+                        </TextInput>
                         <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
                             <Text style={{color: "#334A6D", fontWeight: 'bold'}}
                                   onPress={(e) => this.onTextPress(e, 'Login clicked')}> Login</Text></Text>
@@ -74,7 +91,7 @@ const stylesLightMode = StyleSheet.create({
         backgroundColor: "#93B4E5"
     },
     cloads:{
-        top:210,
+        top:80,
         left:0
     },
     welcomeTitle: {
@@ -83,7 +100,7 @@ const stylesLightMode = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         justifyContent: 'center',
-        top:55
+        top:-80
     },
     zenzoneTitle: {
         fontSize: 28,
@@ -91,7 +108,7 @@ const stylesLightMode = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         justifyContent: 'center',
-        top: 60
+        top: -80
     },
     container: {
         flex: 1,
@@ -100,7 +117,7 @@ const stylesLightMode = StyleSheet.create({
     },
     scrollView: {
         alignSelf: 'stretch',
-        marginTop: 70,
+        marginTop: -40,
         marginBottom: 50
     },
     hintText: {
@@ -162,7 +179,7 @@ const stylesLightMode = StyleSheet.create({
     icon: {
         flex: 1,
         marginTop: 0,
-        marginBottom: 70,
+        marginBottom: 200,
         justifyContent: 'center'
     }
 })
