@@ -8,7 +8,7 @@ function ForgotPasswordFormIcon(props) {
             xmlns="http://www.w3.org/2000/svg"
             width={314.857}
             height={491.729}
-            viewBox="-20 -50 380 491.729"
+            viewBox="-20 -25 380 491.729"
             {...props}
         >
             <Defs></Defs>
