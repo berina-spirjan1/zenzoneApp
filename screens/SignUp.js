@@ -16,7 +16,6 @@ import {FontAwesome5} from "@expo/vector-icons";
 
 import Icon from "../components/icons/Icon";
 import Cload from "../components/icons/Cload";
-import LottieView from "lottie-react-native";
 
 export default class SignUp extends Component {
     constructor(props) {
