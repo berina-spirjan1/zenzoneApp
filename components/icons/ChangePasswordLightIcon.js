@@ -1,13 +1,13 @@
 import * as React from "react"
 import Svg, { G, Path, Ellipse } from "react-native-svg"
 
-function ConfirmPasswordLightIcon(props) {
+function ChangePasswordLightIcon(props) {
     return (
         <Svg
             xmlns="http://www.w3.org/2000/svg"
-            width={370.99}
-            height={362.58}
-            viewBox="0 0 370.99 362.58"
+            width={320}
+            height={360}
+            viewBox="0 0 500 362.58"
             {...props}
         >
             <G data-name="Social media-cuate">
@@ -1774,4 +1774,4 @@ function ConfirmPasswordLightIcon(props) {
     )
 }
 
-export default ConfirmPasswordLightIcon
+export default ChangePasswordLightIcon
