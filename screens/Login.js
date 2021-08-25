@@ -27,9 +27,8 @@ export default class Login extends Component {
     render() {
         return (
             <>
-                    <StatusBar
-                                animated={true}
-                                backgroundColor="#6C63FF"/>
+                    <StatusBar animated={true}
+                               backgroundColor="#6C63FF"/>
                     <View style={stylesDarkMode.backgroundStyle}>
                     <LottieView style={stylesDarkMode.lottie}
                                 source={require("../assets/images/stars.json")}
