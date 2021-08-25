@@ -39,11 +39,15 @@ export default class Login extends Component {
                     <SafeAreaView>
                         <Text style={stylesDarkMode.username}>Username</Text>
                         <TextInput style={stylesDarkMode.inputUsername}>
-                            <FontAwesome5 name="user" size={20} color={"#000000"}/>
+                            <FontAwesome5 name="user"
+                                          size={20}
+                                          color={"#000000"}/>
                         </TextInput>
                         <Text style={stylesDarkMode.password}>Password</Text>
                         <TextInput style={stylesDarkMode.inputPassword}>
-                            <FontAwesome5 name="lock" size={20} color={"#000000"}/>
+                            <FontAwesome5 name="lock"
+                                          size={20}
+                                          color={"#000000"}/>
                         </TextInput>
                     </SafeAreaView>
                     <Text style={stylesDarkMode.forgotLoginDetails}>Forgot your login details?

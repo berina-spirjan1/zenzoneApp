@@ -46,23 +46,33 @@ export default class SignUp extends Component {
                                     style={stylesLightMode.scrollView}>
                             <Text style={stylesLightMode.hintText}>Username</Text>
                             <TextInput style={stylesLightMode.inputLabel}>
-                                <FontAwesome5 name={'user'} size={18} color={'#000000'}/>
+                                <FontAwesome5 name={'user'}
+                                              size={18}
+                                              color={'#000000'}/>
                             </TextInput>
                             <Text style={stylesLightMode.hintText}>Full name</Text>
                             <TextInput style={stylesLightMode.inputLabel}>
-                                <FontAwesome5 name={'signature'} size={18} color={'#000000'}/>
+                                <FontAwesome5 name={'signature'}
+                                              size={18}
+                                              color={'#000000'}/>
                             </TextInput>
                             <Text style={stylesLightMode.hintText}>E-mail</Text>
                             <TextInput style={stylesLightMode.inputLabel}>
-                                <FontAwesome5 name={'envelope'} size={18} color={'#000000'}/>
+                                <FontAwesome5 name={'envelope'}
+                                              size={18}
+                                              color={'#000000'}/>
                             </TextInput>
                             <Text style={stylesLightMode.hintText}>Office location</Text>
                             <TextInput style={stylesLightMode.inputLabel}>
-                                <FontAwesome5 name={'map-marker-alt'} size={18} color={'#000000'}/>
+                                <FontAwesome5 name={'map-marker-alt'}
+                                              size={18}
+                                              color={'#000000'}/>
                             </TextInput>
                             <Text style={stylesLightMode.hintText}>Work position</Text>
                             <TextInput style={stylesLightMode.inputLabel}>
-                                <FontAwesome5 name={'briefcase'} size={18} color={'#000000'}/>
+                                <FontAwesome5 name={'briefcase'}
+                                              size={18}
+                                              color={'#000000'}/>
                             </TextInput>
                             <Text style={stylesLightMode.hintText}>Password</Text>
                             <TextInput style={stylesLightMode.inputLabel}>
@@ -70,7 +80,9 @@ export default class SignUp extends Component {
                             </TextInput>
                             <Text style={stylesLightMode.hintText}>Confirm password</Text>
                             <TextInput style={stylesLightMode.inputLabel}>
-                                <FontAwesome5 name={'lock'} size={18} color={'#000000'}/>
+                                <FontAwesome5 name={'lock'}
+                                              size={18}
+                                              color={'#000000'}/>
                             </TextInput>
                             <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
                                 <Text style={{color: "#334A6D", fontWeight: 'bold'}}
