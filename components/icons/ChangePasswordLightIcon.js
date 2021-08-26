@@ -5,9 +5,9 @@ function ChangePasswordLightIcon(props) {
     return (
         <Svg
             xmlns="http://www.w3.org/2000/svg"
-            width={280}
-            height={320}
-            viewBox="0 0 500 362.58"
+            width={320}
+            height={360}
+            viewBox="0 40 500 362.58"
             {...props}
         >
             <G data-name="Social media-cuate">
