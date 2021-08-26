@@ -5,8 +5,8 @@ function ChangePasswordLightIcon(props) {
     return (
         <Svg
             xmlns="http://www.w3.org/2000/svg"
-            width={320}
-            height={360}
+            width={280}
+            height={320}
             viewBox="0 0 500 362.58"
             {...props}
         >
