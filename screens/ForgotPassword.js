@@ -13,7 +13,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 
 import ForgotPasswordFormIcon from "../components/icons/ForgotPasswordFormIcon";
 import ForgotPasswordWomenIcon from "../components/icons/ForgotPasswordWomenIcon";
-import Toolbar from "../components/toolbar/Toolbar";
+import {Toolbar} from "react-native-material-ui";
 
 export default class ForgotPassword extends Component{
     constructor(props) {
@@ -22,22 +22,27 @@ export default class ForgotPassword extends Component{
 
     render() {
         return(
-            <View style={styles.container}>
-                <StatusBar
-                    animated={true}
-                    backgroundColor="#93B4E5"/>
-                <TextInput style={styles.inputEmail}>
-                    <FontAwesome5 name={'envelope'} size={18} color={'#000000'}/>
-                </TextInput>
-                <TouchableOpacity style={styles.button}
-                                  onPress={() => Alert.alert('Button clicked')}>
-                    <Text style={styles.resetPassword}>Reset password</Text>
-                </TouchableOpacity>
-                <ForgotPasswordFormIcon style={{ top: -230}}>
-                </ForgotPasswordFormIcon>
+            <>
+                <Toolbar style={{ container: {backgroundColor: '#93B4E5'}}}
+                         centerElement=" Forgot password"/>
+                <View style={styles.container}>
 
-                <ForgotPasswordWomenIcon style={styles.womenIcon}/>
-            </View>
+                    <StatusBar
+                        animated={true}
+                        backgroundColor="#6285B3"/>
+                    <TextInput style={styles.inputEmail}>
+                        <FontAwesome5 name={'envelope'} size={18} color={'#000000'}/>
+                    </TextInput>
+                    <TouchableOpacity style={styles.button}
+                                      onPress={() => Alert.alert('Button clicked')}>
+                        <Text style={styles.resetPassword}>Reset password</Text>
+                    </TouchableOpacity>
+                    <ForgotPasswordFormIcon style={{ top: -290}}>
+                    </ForgotPasswordFormIcon>
+
+                    <ForgotPasswordWomenIcon style={styles.womenIcon}/>
+                </View>
+        </>
         )
     }
 }
@@ -45,6 +50,9 @@ export default class ForgotPassword extends Component{
 const styles = StyleSheet.create({
     container:{
         backgroundColor: '#646668'
+    },
+    toolBar:{
+        backgroundColor: '#000000'
     },
     email:{
         color: '#FFFFFF',
@@ -68,13 +76,13 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 20, height: 2 },
         shadowOpacity: 1,
         shadowRadius: 10,
-        top: 205,
+        top: 140,
         zIndex: 2
     },
     button:{
         backgroundColor: '#6285B3',
         height: 40,
-        top: 215,
+        top: 150,
         width: 150,
         borderRadius: 27,
         marginLeft: 70,
@@ -88,6 +96,6 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase'
     },
     womenIcon:{
-        top: -305
+        top: -360
     }
 })
