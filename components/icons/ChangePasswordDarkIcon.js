@@ -5,9 +5,9 @@ function ChangePasswordDarkIcon(props) {
     return (
         <Svg
             xmlns="http://www.w3.org/2000/svg"
-            width={370.987}
-            height={362.58}
-            viewBox="0 0 370.987 362.58"
+            width={280}
+            height={320}
+            viewBox="0 0 500 362.58"
             {...props}
         >
             <G data-name="Social media-cuate (1)">
