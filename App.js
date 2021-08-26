@@ -1,20 +1,17 @@
 import React from 'react';
-import {StyleSheet, View,} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import ChangePassword from "./screens/ChangePassword";
+import Navigator from './routes/Drawer';
+import ForgotPassword from "./screens/ForgotPassword";
 import Login from "./screens/Login";
-import SignUp from "./screens/SignUp";
-import BottomNavigationBar from "./components/bottomNavigationBar/BottomNavigationBar";
-
 
 export default function App() {
-    return (<>
-
-            <View>
-                <BottomNavigationBar/>
-            </View></>
-
+    return (
+        <View >
+            <ForgotPassword/>
+        </View>
     );
 }
-
 
 
 const styles = StyleSheet.create({
@@ -24,3 +21,4 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     }
 });
+
