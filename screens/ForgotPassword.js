@@ -13,7 +13,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 
 import ForgotPasswordFormIcon from "../components/icons/ForgotPasswordFormIcon";
 import ForgotPasswordWomenIcon from "../components/icons/ForgotPasswordWomenIcon";
-import {Toolbar} from "react-native-material-ui";
+import { Toolbar } from "react-native-material-ui";
 
 export default class ForgotPassword extends Component{
     constructor(props) {
@@ -23,24 +23,26 @@ export default class ForgotPassword extends Component{
     render() {
         return(
             <>
-                <Toolbar style={{ container: {backgroundColor: '#93B4E5'}}}
+                <Toolbar style={{ container: { backgroundColor: '#93B4E5' }}}
                          centerElement=" Forgot password"/>
-                <View style={styles.container}>
+                <View style={ styles.container }>
 
                     <StatusBar
                         animated={true}
                         backgroundColor="#6285B3"/>
-                    <TextInput style={styles.inputEmail}>
-                        <FontAwesome5 name={'envelope'} size={18} color={'#000000'}/>
+                    <TextInput style={ styles.inputEmail }>
+                        <FontAwesome5 name={'envelope'}
+                                      size={18}
+                                      color={'#000000'}/>
                     </TextInput>
-                    <TouchableOpacity style={styles.button}
+                    <TouchableOpacity style={ styles.button }
                                       onPress={() => Alert.alert('Button clicked')}>
-                        <Text style={styles.resetPassword}>Reset password</Text>
+                        <Text style={ styles.resetPassword }>Reset password</Text>
                     </TouchableOpacity>
                     <ForgotPasswordFormIcon style={{ top: -290}}>
                     </ForgotPasswordFormIcon>
 
-                    <ForgotPasswordWomenIcon style={styles.womenIcon}/>
+                    <ForgotPasswordWomenIcon style={ styles.womenIcon }/>
                 </View>
         </>
         )

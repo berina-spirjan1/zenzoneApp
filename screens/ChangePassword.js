@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {FontAwesome5} from "@expo/vector-icons";
 import ChangePasswordLightIcon from "../components/icons/ChangePasswordLightIcon";
+import {Toolbar} from "react-native-material-ui";
 
 export default class ChangePassword extends Component{
     constructor(props) {
@@ -20,7 +21,9 @@ export default class ChangePassword extends Component{
         return (
             <>
                 <StatusBar animated={true}
-                           backgroundColor="#83A9E1"/>
+                           backgroundColor="#6285B3"/>
+                <Toolbar style={{ container: {backgroundColor: '#93B4E5'}}}
+                         centerElement="Change password"/>
                 <View style={styles.container}>
                     <Text style={styles.oldPassword}>Old password</Text>
                     <TextInput style={styles.inputOldPassword}>
@@ -40,10 +43,12 @@ export default class ChangePassword extends Component{
                                       size={18}
                                       color={'#000000'}/>
                     </TextInput>
-                    <TouchableOpacity style={styles.button}
-                                      onPress={() => Alert.dialog('Confirm button clicked')}>
-                        <Text style={styles.buttonText}>Confirm</Text>
-                    </TouchableOpacity>
+                    <View>
+                        <TouchableOpacity style={styles.button}
+                                          onPress={() => Alert.alert('Confirm password')}>
+                            <Text style={styles.buttonText}>Confirm</Text>
+                        </TouchableOpacity>
+                    </View>
                     <ChangePasswordLightIcon style={styles.changePasswordIcon}/>
                 </View>
             </>
@@ -63,7 +68,7 @@ const styles = StyleSheet.create({
         color: '#000000',
         fontSize: 16,
         marginLeft: 20,
-        top: 50
+        top: 30
     },
     inputOldPassword:{
         height: 50,
@@ -72,7 +77,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 30,
         borderRadius: 27,
-        marginTop: 65,
+        marginTop: 40,
         backgroundColor: 'white',
         opacity: 0.40,
         color: '#000000',
@@ -95,7 +100,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 30,
         borderRadius: 27,
-        marginTop: 20,
+        marginTop: 10,
         backgroundColor: 'white',
         opacity: 0.40,
         color: '#000000',
@@ -113,7 +118,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginRight: 30,
         borderRadius: 27,
-        marginTop: 20,
+        marginTop: 10,
         backgroundColor: 'white',
         opacity: 0.40,
         color: '#000000',
@@ -140,7 +145,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 1,
         shadowRadius: 10,
         marginTop:20,
-        left: 225
+        left: 225,
+        marginBottom: 12
     },
     buttonText:{
         textTransform: 'uppercase',
@@ -150,7 +156,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     changePasswordIcon:{
-        top: -45,
-        left: 50
+        top: -35,
+        left: 20
     }
 })

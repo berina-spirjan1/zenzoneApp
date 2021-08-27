@@ -1,14 +1,15 @@
 import React from "react";
-import {createAppContainer} from "react-navigation";
-import {createBottomTabNavigator} from "react-navigation-tabs";
-import {FontAwesome5} from "@expo/vector-icons";
+import { createAppContainer } from "react-navigation";
+import { createBottomTabNavigator } from "react-navigation-tabs";
+import { FontAwesome5 } from "@expo/vector-icons";
+
 import HomePage from "../../screens/HomePage";
 import DailyChallengeDetails from "../../screens/DailyChallengeDetails";
 import Leaderboard from "../../screens/Leaderboard";
 import Login from "../../screens/Login";
 import AddButtonOnNavigationBar from "./AddButtonOnNavigationBar";
 
-const TabNavigator = createBottomTabNavigator(
+const BottomNavigationBar = createBottomTabNavigator(
     {
         Activities: {
             screen: HomePage,
@@ -38,7 +39,6 @@ const TabNavigator = createBottomTabNavigator(
             screen: Login,
             navigationOptions: {
                 tabBarIcon: () => <FontAwesome5 name="user-check" size={25} color={"#000000"}/>
-
             }
         }
     },
@@ -49,4 +49,4 @@ const TabNavigator = createBottomTabNavigator(
     }
 )
 
-export default createAppContainer(TabNavigator);
+export default createAppContainer(BottomNavigationBar);
