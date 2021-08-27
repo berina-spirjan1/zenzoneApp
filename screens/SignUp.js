@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import {
     Dimensions,
     SafeAreaView,
@@ -11,8 +11,7 @@ import {
     View,
     Alert
 } from "react-native";
-import {FontAwesome5} from "@expo/vector-icons";
-
+import { FontAwesome5 } from "@expo/vector-icons";
 
 import Icon from "../components/icons/Icon";
 import Cload from "../components/icons/Cload";
@@ -44,55 +43,61 @@ export default class SignUp extends Component {
                                   style={{height: screenHeight}}>
                         <ScrollView vertical={true}
                                     style={stylesLightMode.scrollView}>
-                            <Text style={stylesLightMode.hintText}>Username</Text>
-                            <TextInput style={stylesLightMode.inputLabel}>
-                                <FontAwesome5 name={'user'}
-                                              size={18}
-                                              color={'#000000'}/>
-                            </TextInput>
-                            <Text style={stylesLightMode.hintText}>Full name</Text>
-                            <TextInput style={stylesLightMode.inputLabel}>
-                                <FontAwesome5 name={'signature'}
-                                              size={18}
-                                              color={'#000000'}/>
-                            </TextInput>
-                            <Text style={stylesLightMode.hintText}>E-mail</Text>
-                            <TextInput style={stylesLightMode.inputLabel}>
-                                <FontAwesome5 name={'envelope'}
-                                              size={18}
-                                              color={'#000000'}/>
-                            </TextInput>
-                            <Text style={stylesLightMode.hintText}>Office location</Text>
-                            <TextInput style={stylesLightMode.inputLabel}>
-                                <FontAwesome5 name={'map-marker-alt'}
-                                              size={18}
-                                              color={'#000000'}/>
-                            </TextInput>
-                            <Text style={stylesLightMode.hintText}>Work position</Text>
-                            <TextInput style={stylesLightMode.inputLabel}>
-                                <FontAwesome5 name={'briefcase'}
-                                              size={18}
-                                              color={'#000000'}/>
-                            </TextInput>
-                            <Text style={stylesLightMode.hintText}>Password</Text>
-                            <TextInput style={stylesLightMode.inputLabel}>
-                                <FontAwesome5 name={'key'} size={18} color={'#000000'}/>
-                            </TextInput>
-                            <Text style={stylesLightMode.hintText}>Confirm password</Text>
-                            <TextInput style={stylesLightMode.inputLabel}>
-                                <FontAwesome5 name={'lock'}
-                                              size={18}
-                                              color={'#000000'}/>
-                            </TextInput>
-                            <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
-                                <Text style={{color: "#334A6D", fontWeight: 'bold'}}
-                                      onPress={(e) => this.onTextPress(e, 'Login clicked')}> Login</Text></Text>
-                            <TouchableOpacity style={stylesLightMode.button}
-                                              onPress={() => Alert.alert('SignUp')}>
-                                <Text style={stylesDarkMode.buttonText}>
-                                    SIGN UP</Text>
-                            </TouchableOpacity>
-                            <Icon style={stylesLightMode.icon}/>
+                                <Text style={stylesLightMode.hintText}>Username</Text>
+                                <TextInput style={stylesLightMode.inputLabel}>
+                                    <FontAwesome5 name={'signature'}
+                                                  size={18}
+                                                  color={'#000000'}/>
+                                </TextInput>
+                                <Text style={stylesLightMode.hintText}>First name</Text>
+                                <TextInput style={stylesLightMode.inputLabel}>
+                                    <FontAwesome5 name={'user'}
+                                                  size={18}
+                                                  color={'#000000'}/>
+                                </TextInput>
+                                <Text style={stylesLightMode.hintText}>Last name</Text>
+                                <TextInput style={stylesLightMode.inputLabel}>
+                                    <FontAwesome5 name={'user'}
+                                                  size={18}
+                                                  color={'#000000'}/>
+                                </TextInput>
+                                <Text style={stylesLightMode.hintText}>E-mail</Text>
+                                <TextInput style={stylesLightMode.inputLabel}>
+                                    <FontAwesome5 name={'envelope'}
+                                                  size={18}
+                                                  color={'#000000'}/>
+                                </TextInput>
+                                <Text style={stylesLightMode.hintText}>Office location</Text>
+                                <TextInput style={stylesLightMode.inputLabel}>
+                                    <FontAwesome5 name={'map-marker-alt'}
+                                                  size={18}
+                                                  color={'#000000'}/>
+                                </TextInput>
+                                <Text style={stylesLightMode.hintText}>Work position</Text>
+                                <TextInput style={stylesLightMode.inputLabel}>
+                                    <FontAwesome5 name={'briefcase'}
+                                                  size={18}
+                                                  color={'#000000'}/>
+                                </TextInput>
+                                <Text style={stylesLightMode.hintText}>Password</Text>
+                                <TextInput style={stylesLightMode.inputLabel}>
+                                    <FontAwesome5 name={'key'} size={18} color={'#000000'}/>
+                                </TextInput>
+                                <Text style={stylesLightMode.hintText}>Confirm password</Text>
+                                <TextInput style={stylesLightMode.inputLabel}>
+                                    <FontAwesome5 name={'lock'}
+                                                  size={18}
+                                                  color={'#000000'}/>
+                                </TextInput>
+                                <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
+                                    <Text style={{color: "#334A6D", fontWeight: 'bold'}}
+                                          onPress={(e) => this.onTextPress(e, 'Login clicked')}> Login</Text></Text>
+                                <TouchableOpacity style={stylesLightMode.button}
+                                                  onPress={() => Alert.alert('SignUp')}>
+                                    <Text style={stylesDarkMode.buttonText}>
+                                        SIGN UP</Text>
+                                </TouchableOpacity>
+                                <Icon style={stylesLightMode.icon}/>
                         </ScrollView>
                     </SafeAreaView>
                 </View>
@@ -108,7 +113,7 @@ const stylesLightMode = StyleSheet.create({
         backgroundColor: "#93B4E5"
     },
     cloads:{
-        top:80,
+        top:50,
         left:0
     },
     welcomeTitle: {
@@ -117,7 +122,7 @@ const stylesLightMode = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         justifyContent: 'center',
-        top:-80
+        top:-100
     },
     zenzoneTitle: {
         fontSize: 28,
@@ -125,16 +130,16 @@ const stylesLightMode = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         justifyContent: 'center',
-        top: -80
+        top: -100
     },
     container: {
-        flex: 1,
+        flex:1,
         paddingTop: StatusBar.currentHeight,
         paddingVertical: 20
     },
     scrollView: {
         alignSelf: 'stretch',
-        marginTop: -40,
+        marginTop: -60,
         marginBottom: 50
     },
     hintText: {
