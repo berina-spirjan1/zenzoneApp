@@ -1,12 +1,13 @@
 import React from 'react';
-import {NavigationContainer} from "@react-navigation/native";
-import {createDrawerNavigator} from "@react-navigation/drawer";
+import { NavigationContainer } from "@react-navigation/native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import Login from "../../screens/Login";
+
 import SignUp from "../../screens/SignUp";
 import HomePage from "../../screens/HomePage";
 import DailyChallengeDetails from "../../screens/DailyChallengeDetails";
-import Line from "../Line";
+
+
 const Drawer = createDrawerNavigator();
 
 function SideMenu(){
@@ -19,7 +20,7 @@ function SideMenu(){
                               hideStatusBar={true}
                               overlayColor={'#CBDBF2'}
                               drawerStyle={{
-                                  backgroundColor: '#e63636',
+                                  backgroundColor: '#616C75',
                                   width:150
                               }}
                               screenOptions={{
@@ -41,8 +42,8 @@ function SideMenu(){
                                   title: 'Activities',
                                   drawerIcon: ({focused}) =>(
                                       <FontAwesome5 name={'user'}
-                                                    size={focused ? 25 : 20}
-                                                    color={focused ? '#000' : '#0080ff'}/>
+                                                    size={focused ? 22 : 20}
+                                                    color={focused ? '#000' : '#616C75'}/>
                                   )
                               }}/>
                <Drawer.Screen name={'Sign Up'}
@@ -51,8 +52,8 @@ function SideMenu(){
                                   title: 'Sign Up',
                                   drawerIcon: ({focused}) => (
                                       <FontAwesome5 name={'user-check'}
-                                                    size={focused ? 25 : 20}
-                                                    color={focused ? '#000' : '#0080ff'}/>
+                                                    size={focused ? 22 : 20}
+                                                    color={focused ? '#000' : '#616C75'}/>
                                   )
                               }}/>
                 <Drawer.Screen name={"Today's challenge"}
@@ -61,8 +62,8 @@ function SideMenu(){
                                    title: "Today's challenge",
                                    drawerIcon: ({focused}) => (
                                        <FontAwesome5 name={'flag-checkered'}
-                                                     size={focused ? 25 : 20}
-                                                     color={focused ? '#000' : '#0080ff'}/>
+                                                     size={focused ? 22 : 20}
+                                                     color={focused ? '#000' : '#616C75'}/>
                                    )
                                }}/>
             </Drawer.Navigator>
