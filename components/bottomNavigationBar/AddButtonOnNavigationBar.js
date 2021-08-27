@@ -1,25 +1,24 @@
-import React, {Component} from "react";
+import React, { Component } from 'react';
 import {
-    View,
+    Animated,
     StyleSheet,
     TouchableHighlight,
-    Animated
-} from "react-native";
+    View
+} from 'react-native';
 import {
-    FontAwesome5,
-    Feather
-} from "@expo/vector-icons";
+    Feather,
+    FontAwesome5
+} from '@expo/vector-icons';
 
-export default class AddButtonOnNavigationBar extends Component{
-    buttonSize= new Animated.Value(1)
+export default class AddButtonOnNavigationBar extends Component {
+    buttonSize = new Animated.Value(1)
     mode = new Animated.Value(0)
 
-
-    handlePress = () =>{
+    handlePress = () => {
         Animated.sequence([
             Animated.timing(this.buttonSize, {
                 toValue: 0.95,
-                 duration: 200
+                duration: 200
             }),
             Animated.timing(this.buttonSize, {
                 toValue: 1
@@ -30,7 +29,7 @@ export default class AddButtonOnNavigationBar extends Component{
         ]).start();
     }
 
-    render(){
+    render() {
         const sizeStyle = {
             transform: [{ scale: this.buttonSize }]
         };
@@ -71,28 +70,42 @@ export default class AddButtonOnNavigationBar extends Component{
         });
 
 
-        return(
-            <View style={styles.container}>
-                <Animated.View style={{ position: 'absolute', left: activityX, top: activityY}}>
-                    <View style={styles.secondaryButton}>
-                        <Feather name="feather" size={25} color={"#FFFFFF"}/>
+        return (
+            <View style={ styles.container }>
+                <Animated.View style={{ position: 'absolute',
+                                        left: activityX,
+                                        top: activityY }}>
+                    <View style={ styles.secondaryButton }>
+                        <Feather name="feather"
+                                 size={25}
+                                 color={"#000"}/>
                     </View>
                 </Animated.View>
-                <Animated.View style={{ position: 'absolute', left: registerX, top: registerY}}>
-                    <View style={styles.secondaryButton}>
-                        <Feather name="user" size={25} color={"#FFFFFF"}/>
+                <Animated.View style={{ position: 'absolute',
+                                        left: registerX,
+                                        top: registerY }}>
+                    <View style={ styles.secondaryButton }>
+                        <Feather name="user"
+                                 size={25}
+                                 color={"#000"}/>
                     </View>
                 </Animated.View>
-                <Animated.View style={{ position: 'absolute', left: forgotPasswordX, top: forgotPasswordY}}>
-                    <View style={styles.secondaryButton}>
-                        <Feather name="key" size={25} color={"#FFFFFF"}/>
+                <Animated.View style={{ position: 'absolute',
+                                        left: forgotPasswordX,
+                                        top: forgotPasswordY }}>
+                    <View style={ styles.secondaryButton }>
+                        <Feather name="key"
+                                 size={25}
+                                 color={"#000"}/>
                     </View>
                 </Animated.View>
-                <Animated.View style={[styles.button, sizeStyle]}>
-                    <TouchableHighlight underlayColor={"#93B4E5"}
+                <Animated.View style={ [styles.button, sizeStyle] }>
+                    <TouchableHighlight underlayColor={"#000"}
                                         onPress={this.handlePress}>
                         <Animated.View style={{ transform: [{ rotate: rotation }] }}>
-                            <FontAwesome5 name="plus" size={25} color={"#000000"}/>
+                            <FontAwesome5 name="plus"
+                                          size={25}
+                                          color={"#000000"}/>
                         </Animated.View>
                     </TouchableHighlight>
                 </Animated.View>
@@ -102,13 +115,13 @@ export default class AddButtonOnNavigationBar extends Component{
 }
 
 
-const styles= StyleSheet.create({
-    container:{
+const styles = StyleSheet.create({
+    container: {
         position: 'absolute',
         alignItems: 'center'
     },
-    button:{
-        backgroundColor: "#93B4E5",
+    button: {
+        backgroundColor: "#93b4e5",
         alignItems: 'center',
         justifyContent: 'center',
         width: 72,
@@ -116,19 +129,19 @@ const styles= StyleSheet.create({
         borderRadius: 35,
         position: 'absolute',
         top: -60,
-        shadowColor: "#93B4E5",
-        shadowOffset: { height: 10 },
+        shadowColor: "#93b4e5",
+        shadowOffset: {height: 10},
         shadowOpacity: 0.3,
         borderWidth: 3,
-        borderColor: "#93B4E5"
+        borderColor: "#93b4e5"
     },
-    secondaryButton:{
+    secondaryButton: {
         position: 'absolute',
         alignItems: 'center',
         justifyContent: 'center',
         width: 48,
         height: 48,
         borderRadius: 24,
-        backgroundColor: '#93B4E5'
+        backgroundColor: '#93b4e5'
     }
 })

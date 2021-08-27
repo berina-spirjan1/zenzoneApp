@@ -17,7 +17,6 @@ export default class Language extends Component{
     }
 
 
-
     render() {
 
         const [username, setUsername] = useState('')
@@ -57,8 +56,8 @@ export default class Language extends Component{
                         <Text style={ styles.username }>{setUsername}</Text>
                         <Text style={ styles.personalInfo }>Personal info</Text>
                         <TouchableOpacity style={ styles.buttonUserInfo }
-                                          onPress={() => Alert.dialog('Button user info clicked')}>
-                            <FontAwesome5 name={'arrow-right-solid'}
+                                          onPress={() => Alert.alert('Button user info clicked')}>
+                            <FontAwesome5 name={'arrow-right'}
                                           size={13}
                                           color={'#847F7F'}/>
                         </TouchableOpacity>
@@ -135,7 +134,8 @@ const styles = StyleSheet.create({
         padding: 8,
         marginLeft: 20,
         height: 50,
-        width: 220
+        width: 220,
+        borderRadius: 27
     },
     englishFlag:{
         height: 50,
@@ -153,7 +153,8 @@ const styles = StyleSheet.create({
         padding: 8,
         marginLeft: 20,
         height: 50,
-        width: 220
+        width: 220,
+        borderRadius: 27
     },
     bosnianFlag:{
         height: 50,

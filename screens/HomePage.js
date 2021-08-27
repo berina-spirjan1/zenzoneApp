@@ -18,12 +18,14 @@ export default class HomePage extends Component{
                 <StatusBar
                     animated={true}
                     backgroundColor="#6285B3"/>
-                <Toolbar style={{ container: {backgroundColor: '#93B4E5'}}}
+                <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                     leftElement="menu"
                     centerElement="Activities"
                     searchable={{
                         autoFocus: true,
                         placeholder: 'Search',
+                        // onChangeText: text => searchFilterFunction(text),
+                        // onSearchCloseRequested: () => setName(nameList),
                     }}
                     rightElement={{
                         menu: {
@@ -42,13 +44,13 @@ export default class HomePage extends Component{
 }
 
 
-const styleLightMode=StyleSheet.create({
+const styleLightMode = StyleSheet.create({
     container:{
 
     },
     bottomNavigationBar:{
-        flex:1,
-        justifyContent:'flex-end'
+        flex: 1,
+        justifyContent: 'flex-end'
     },
 })
 
