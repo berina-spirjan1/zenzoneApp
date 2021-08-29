@@ -1,14 +1,8 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {NavigationContainer} from "@react-navigation/native";
-import {createDrawerNavigator} from "@react-navigation/drawer";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import Login from "./screens/Login";
-import SignUp from "./screens/SignUp";
-import SideMenu from "./components/sideMenu/SideMenu";
-import HomePage from "./screens/HomePage";
 import BottomNavigationBar from "./components/bottomNavigationBar/BottomNavigationBar";
-import { createStackNavigator} from "@react-navigation/stack";
+import {createStackNavigator} from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
 
