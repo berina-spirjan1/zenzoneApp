@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";

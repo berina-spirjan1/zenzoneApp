@@ -1,5 +1,8 @@
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+    BottomTabBar,
+    createBottomTabNavigator
+} from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Svg, { Path } from "react-native-svg";
 import {
@@ -13,7 +16,7 @@ import DailyChallengeDetails from "../../screens/DailyChallengeDetails";
 import Leaderboard from "../../screens/Leaderboard";
 import SignUp from "../../screens/SignUp";
 import Login from "../../screens/Login";
-
+import {isIphoneX} from "react-native-iphone-x-helper";
 
 const Tab = createBottomTabNavigator();
 
@@ -63,17 +66,39 @@ function TabBarCustomButton({accessibilityState, children, onPress}){
 
 }
 
+function CustomTabBar(props){
+    if (isIphoneX()){
+        return (
+            <View>
+                <View style={styles.customTabBar}/>
+                <BottomTabBar {...props.props}/>
+            </View>
+
+        )
+    }
+    else{
+        return(
+            <BottomTabBar {...props.props}/>
+            )
+    }
+}
+
 
 function BottomNavigationBar(){
     return(
-        <Tab.Navigator tabBarOptions={{
-            showLabel: false,
-            style:{
-                borderTopWidth: 0,
-                backgroundColor: 'transparent',
-                elevation: 0
-        }
-        }}>
+        <Tab.Navigator
+            tabBarOptions={{
+                showLabel: false,
+                style:{
+                    borderTopWidth: 0,
+                    backgroundColor: 'transparent',
+                    elevation: 0
+            }
+        }}
+            tabBar={(props) => (
+                <CustomTabBar props={props}/>
+            )}
+        >
             <Tab.Screen name={'Activities'}
                         component={HomePage}
                         options={{
@@ -153,6 +178,14 @@ const styles = StyleSheet.create({
         flex:1,
         height: 60,
         backgroundColor: '#93B4E5'
+    },
+    customTabBar:{
+        position: 'absolute',
+        bottom:0,
+        left:0,
+        right:0,
+        height: 30,
+        backgroundColor: 'white'
     }
 })
 
