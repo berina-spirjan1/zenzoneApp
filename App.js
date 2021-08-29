@@ -1,16 +1,18 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import ChangePassword from "./screens/ChangePassword";
-import Navigator from './routes/Drawer';
-import ForgotPassword from "./screens/ForgotPassword";
-import Login from "./screens/Login";
-import HomePage from "./screens/HomePage";
+import {StyleSheet} from 'react-native';
+import {NavigationContainer} from "@react-navigation/native";
+import BottomNavigationBar from "./components/bottomNavigationBar/BottomNavigationBar";
+import {createStackNavigator} from "@react-navigation/stack";
+
+const Stack = createStackNavigator();
+
 
 export default function App() {
     return (
-        <View >
-            <ForgotPassword/>
-        </View>
+        <NavigationContainer>
+            <BottomNavigationBar/>
+        </NavigationContainer>
+
     );
 }
 
