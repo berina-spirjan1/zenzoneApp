@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
         width:50,
         height:50,
         borderRadius:25,
-        backgroundColor: '#93B4E5'
+        backgroundColor: '#6285B3'
     },
     menuItem:{
         flex:1,
