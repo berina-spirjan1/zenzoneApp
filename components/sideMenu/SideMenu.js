@@ -2,11 +2,12 @@ import React from 'react';
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import { Image } from 'react-native';
 
 import SignUp from "../../screens/SignUp";
 import HomePage from "../../screens/HomePage";
 import DailyChallengeDetails from "../../screens/DailyChallengeDetails";
-
+import Login from "../../screens/Login";
 
 const Drawer = createDrawerNavigator();
 
@@ -24,6 +25,7 @@ function SideMenu(){
                                   width:150
                               }}
                               screenOptions={{
+                                  drawerActiveTintColor: '#93B4E5',
                                   headerShown: true,
                                   swipeEnabled: false,
                                   gestureEnabled: true,
@@ -41,11 +43,21 @@ function SideMenu(){
                               options={{
                                   title: 'Activities',
                                   drawerIcon: ({focused}) =>(
-                                      <FontAwesome5 name={'user'}
+                                      <FontAwesome5 name={'book-reader'}
                                                     size={focused ? 22 : 20}
                                                     color={focused ? '#000' : '#616C75'}/>
                                   )
                               }}/>
+                <Drawer.Screen name={'Login'}
+                               component={Login}
+                               options={{
+                                   title: 'Login',
+                                   drawerIcon: ({focused}) =>(
+                                       <FontAwesome5 name={'user'}
+                                                     size={focused ? 22 : 20}
+                                                     color={focused ? '#000' : '#616C75'}/>
+                                   )
+                               }}/>
                <Drawer.Screen name={'Sign Up'}
                               component={SignUp}
                               options={{
