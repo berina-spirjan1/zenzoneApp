@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     },
     menuItem:{
         flex:1,
-        height: 60,
+        height: 50,
         backgroundColor: '#93B4E5'
     },
     customTabBar:{
