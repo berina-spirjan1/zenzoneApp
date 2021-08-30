@@ -51,6 +51,7 @@ function SideMenu(){
                 <Drawer.Screen name={'Login'}
                                component={Login}
                                options={{
+                                   headerShown: false,
                                    title: 'Login',
                                    drawerIcon: ({focused}) =>(
                                        <FontAwesome5 name={'user'}
@@ -61,6 +62,7 @@ function SideMenu(){
                <Drawer.Screen name={'Sign Up'}
                               component={SignUp}
                               options={{
+                                  headerShown: false,
                                   title: 'Sign Up',
                                   drawerIcon: ({focused}) => (
                                       <FontAwesome5 name={'user-check'}
@@ -71,6 +73,7 @@ function SideMenu(){
                 <Drawer.Screen name={"Today's challenge"}
                                component={DailyChallengeDetails}
                                options={{
+                                   headerShown: false,
                                    title: "Today's challenge",
                                    drawerIcon: ({focused}) => (
                                        <FontAwesome5 name={'flag-checkered'}

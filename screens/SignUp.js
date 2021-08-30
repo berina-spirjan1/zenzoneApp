@@ -21,6 +21,21 @@ export default class SignUp extends Component {
         super();
     }
 
+    validate = (text) => {
+        console.log(text);
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+        if (reg.test(text) === false) {
+            console.log("Email is Not Correct");
+            this.setState({ email: text })
+            return false;
+        }
+        else {
+            this.setState({ email: text })
+            console.log("Email is Correct");
+        }
+    }
+
+
     //todo add handler for event that you can go to forgot password page, this only shows in terminal
     onTextPress(event, text) {
         console.log(text);
@@ -62,7 +77,8 @@ export default class SignUp extends Component {
                                                   color={'#000000'}/>
                                 </TextInput>
                                 <Text style={stylesLightMode.hintText}>E-mail</Text>
-                                <TextInput style={stylesLightMode.inputLabel}>
+                                <TextInput style={stylesLightMode.inputLabel}
+                                           onChangeText={(text) => this.validate(text)}>
                                     <FontAwesome5 name={'envelope'}
                                                   size={18}
                                                   color={'#000000'}/>
