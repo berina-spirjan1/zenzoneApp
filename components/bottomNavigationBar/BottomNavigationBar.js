@@ -11,6 +11,8 @@ import CreateNewActivityPage from "../../screens/CreateNewActivityPage";
 import TabBarCustomButton from "./TabBarCustomButton";
 import CustomTabBar from "./CustomTabBar";
 import SignUp from "../../screens/SignUp";
+import ForgotPassword from "../../screens/ForgotPassword";
+import ChangePassword from "../../screens/ChangePassword";
 
 const Tab = createBottomTabNavigator();
 
@@ -36,7 +38,7 @@ function BottomNavigationBar(){
                             tabBarIcon: ({focused}) => (
                                 <FontAwesome5 name={'book-reader'}
                                               size={focused ? 22 : 20}
-                                              color={focused ? '#000' : '#616C75'}/>
+                                              color={focused ? '#FFF' : '#616C75'}/>
                             ),
                             tabBarButton: (props) => (
                                 <TabBarCustomButton {...props}/>
@@ -49,7 +51,7 @@ function BottomNavigationBar(){
                             tabBarIcon: ({focused}) => (
                                 <FontAwesome5 name={'clipboard-check'}
                                               size={focused ? 22 : 20}
-                                              color={focused ? '#000' : '#616C75'}/>
+                                              color={focused ? '#FFF' : '#616C75'}/>
                             ),
                             tabBarButton: (props) => (
                                 <TabBarCustomButton {...props}/>
@@ -62,7 +64,7 @@ function BottomNavigationBar(){
                             tabBarIcon: ({focused}) => (
                                 <FontAwesome5 name={'plus'}
                                               size={focused ? 22 : 20}
-                                              color={focused ? '#000' : '#616C75'}/>
+                                              color={focused ? '#FFF' : '#616C75'}/>
                             ),
                             tabBarButton: (props) => (
                                 <TabBarCustomButton {...props}/>
@@ -75,7 +77,7 @@ function BottomNavigationBar(){
                             tabBarIcon: ({focused}) => (
                                 <FontAwesome5 name={'medal'}
                                               size={focused ? 22 : 20}
-                                              color={focused ? '#000' : '#616C75'}/>
+                                              color={focused ? '#FFF' : '#616C75'}/>
                             ),
                             tabBarButton: (props) => (
                                 <TabBarCustomButton {...props}/>
@@ -88,7 +90,7 @@ function BottomNavigationBar(){
                             tabBarIcon: ({focused}) => (
                                 <FontAwesome5 name={'user-check'}
                                               size={focused ? 22 : 20}
-                                              color={focused ? '#000' : '#616C75'}/>
+                                              color={focused ? '#FFF' : '#616C75'}/>
                             ),
                             tabBarButton: (props) => (
                                 <TabBarCustomButton {...props}/>
@@ -101,7 +103,7 @@ function BottomNavigationBar(){
                             tabBarIcon: ({focused}) => (
                                 <FontAwesome5 name={'user'}
                                               size={focused ? 22 : 20}
-                                              color={focused ? '#000' : '#616C75'}/>
+                                              color={focused ? '#FFF' : '#616C75'}/>
                             ),
                             tabBarButton: (props) => (
                                 <TabBarCustomButton {...props}/>
