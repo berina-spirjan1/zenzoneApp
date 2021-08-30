@@ -1,19 +1,15 @@
 import React from "react";
-import {
-    BottomTabBar,
-    createBottomTabNavigator
-} from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import HomePage from "../../screens/HomePage";
 import DailyChallengeDetails from "../../screens/DailyChallengeDetails";
 import Leaderboard from "../../screens/Leaderboard";
-import SignUp from "../../screens/SignUp";
 import Login from "../../screens/Login";
+import CreateNewActivityPage from "../../screens/CreateNewActivityPage";
 
 import TabBarCustomButton from "./TabBarCustomButton";
 import CustomTabBar from "./CustomTabBar";
-import CreateNewActivityPage from "../../screens/CreateNewActivityPage";
 
 const Tab = createBottomTabNavigator();
 
