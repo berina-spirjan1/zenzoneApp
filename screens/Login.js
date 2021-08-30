@@ -19,6 +19,20 @@ export default class Login extends Component {
         super();
     }
 
+    validate = (text) => {
+        console.log(text);
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+        if (reg.test(text) === false) {
+            Alert.alert("Email is Not Correct");
+            this.setState({ email: text })
+            return false;
+        }
+        else {
+            this.setState({ email: text })
+            console.log("Email is Correct");
+        }
+    }
+
     //todo add handler for event that you can go to forgot password page, this only shows in terminal
     onTextPress(event, text) {
         console.log(text);
