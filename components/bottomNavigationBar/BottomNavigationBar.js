@@ -10,6 +10,7 @@ import CreateNewActivityPage from "../../screens/CreateNewActivityPage";
 
 import TabBarCustomButton from "./TabBarCustomButton";
 import CustomTabBar from "./CustomTabBar";
+import SignUp from "../../screens/SignUp";
 
 const Tab = createBottomTabNavigator();
 
@@ -86,6 +87,19 @@ function BottomNavigationBar(){
                             headerShown: false,
                             tabBarIcon: ({focused}) => (
                                 <FontAwesome5 name={'user-check'}
+                                              size={focused ? 22 : 20}
+                                              color={focused ? '#000' : '#616C75'}/>
+                            ),
+                            tabBarButton: (props) => (
+                                <TabBarCustomButton {...props}/>
+                            )
+                        }}/>
+            <Tab.Screen name={'Sign Up'}
+                        component={SignUp}
+                        options={{
+                            headerShown: false,
+                            tabBarIcon: ({focused}) => (
+                                <FontAwesome5 name={'user'}
                                               size={focused ? 22 : 20}
                                               color={focused ? '#000' : '#616C75'}/>
                             ),
