@@ -295,7 +295,7 @@ const stylesDarkMode = StyleSheet.create({
     icon: {
         flex: 1,
         marginTop: 0,
-        marginBottom: 70,
+        marginBottom: 100,
         justifyContent: 'center'
     }
 })

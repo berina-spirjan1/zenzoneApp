@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useState} from "react";
 import { View,
          StyleSheet,
          Text,
@@ -7,7 +7,7 @@ import { View,
          TouchableOpacity,
          Image,
          Alert
-} from 'react-native';
+} from "react-native";
 
 import { FontAwesome5 } from "@expo/vector-icons";
 

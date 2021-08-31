@@ -7,12 +7,12 @@ import DailyChallengeDetails from "../../screens/DailyChallengeDetails";
 import Leaderboard from "../../screens/Leaderboard";
 import Login from "../../screens/Login";
 import CreateNewActivityPage from "../../screens/CreateNewActivityPage";
+import SignUp from "../../screens/SignUp";
 
 import TabBarCustomButton from "./TabBarCustomButton";
 import CustomTabBar from "./CustomTabBar";
-import SignUp from "../../screens/SignUp";
-import ForgotPassword from "../../screens/ForgotPassword";
-import ChangePassword from "../../screens/ChangePassword";
+
+
 
 const Tab = createBottomTabNavigator();
 
