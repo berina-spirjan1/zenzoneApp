@@ -1,20 +1,32 @@
 import React, {Component} from "react";
 import {
     View,
-    StyleSheet, StatusBar
+    StyleSheet,
+    StatusBar,
+    Text,
+    SafeAreaView,
+    ScrollView, Dimensions
 } from "react-native";
-import {createAppContainer} from "react-navigation";
-import {createDrawerNavigator} from "react-navigation-drawer";
 import {Toolbar} from "react-native-material-ui";
+import ActivityCard from "../components/cards/ActivityCard";
 
 export default class HomePage extends Component{
     constructor(props) {
         super();
     }
 
+    //todo add handler for event that you can go to forgot password page, this only shows in terminal
+    onTextPress(event, text) {
+        console.log(text);
+    }
+
+
     render() {
+
+        const screenHeight = Dimensions.get('window').height
+
         return(
-            <>
+            <View style={styleLightMode.container}>
                 <StatusBar
                     animated={true}
                     backgroundColor="#6285B3"/>
@@ -34,10 +46,21 @@ export default class HomePage extends Component{
                         }
                     }}
                     onRightElementPress={ (label) => { console.log(label) }}/>
-                <View>
 
-                </View>
-            </>
+                <SafeAreaView>
+                    <ScrollView style={screenHeight}
+                                style={styleLightMode.scrollView}>
+                        <View style={{flexDirection: 'row'}}>
+                            <Text style={styleLightMode.titleCategories}>Categories</Text>
+                            <Text style={styleLightMode.seeAll}
+                                  onPress={(e) => this.onTextPress(e, 'See all')}>See all</Text>
+                        </View>
+
+                    </ScrollView>
+
+                </SafeAreaView>
+                <ActivityCard/>
+            </View>
 
         )
     }
@@ -46,12 +69,25 @@ export default class HomePage extends Component{
 
 const styleLightMode = StyleSheet.create({
     container:{
-
+        backgroundColor: '#cbdbf2',
+        flex:1
     },
     bottomNavigationBar:{
         flex: 1,
         justifyContent: 'flex-end'
     },
+    titleCategories:{
+        fontSize:16,
+        marginTop: 15,
+        marginLeft: 20,
+        marginRight: 180,
+        textTransform: 'uppercase',
+        fontWeight: 'bold'
+    },
+    seeAll:{
+        marginRight: 20,
+        marginTop:15
+    }
 })
 
 const styleDarkMode=StyleSheet.create({
