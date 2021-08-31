@@ -9,26 +9,26 @@ import {
 
 import {
     Text,
-    StyleSheet
+    StyleSheet,
+    View
 } from "react-native";
 
-import Button from 'react-native-button';
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 function ActivityCard(){
     return(
         <Card style={styles.card}>
-            <CardTitle>
-                <Text style={styles.title}>Card Title</Text>
-            </CardTitle>
+
+            <View style={styles.icon}>
+                <FontAwesome5 name={'running'}
+                              size={35}
+                              color={'#000'}/>
+            </View>
+
             <CardContent>
-                <Text>Content</Text>
+                <Text style={styles.categoryName}>Sport</Text>
             </CardContent>
             <CardAction >
-                <Button
-                    style={styles.button}
-                    >
-                    Button 1
-                </Button>
 
             </CardAction>
         </Card>
@@ -38,15 +38,20 @@ function ActivityCard(){
 export default ActivityCard;
 
 const styles = StyleSheet.create({
-    title: {
-        fontSize: 38,
-        backgroundColor: 'transparent'
-    },
     button: {
         marginRight: 10
     },
     card:{
         borderRadius:25,
         height:100
+    },
+    categoryName:{
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+        color: '#000000'
+    },
+    icon:{
+        justifyContent:'center',
+        marginTop:20
     }
 });

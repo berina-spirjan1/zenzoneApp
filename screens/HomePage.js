@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 import ActivityCard from "../components/cards/ActivityCard";
+import CategoryCard from "../components/cards/CategoryCard";
 
 export default class HomePage extends Component{
     constructor(props) {
@@ -59,7 +60,10 @@ export default class HomePage extends Component{
                     </ScrollView>
 
                 </SafeAreaView>
-                <ActivityCard/>
+                <View style={styleLightMode.card}>
+                    <CategoryCard/>
+                </View>
+
             </View>
 
         )
@@ -87,6 +91,12 @@ const styleLightMode = StyleSheet.create({
     seeAll:{
         marginRight: 20,
         marginTop:15
+    },
+    card:{
+        height:106,
+        width:90,
+        marginTop: 10,
+        marginLeft:17
     }
 })
 
