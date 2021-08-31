@@ -1,26 +1,28 @@
 import React, {Component} from 'react';
 import {View} from "react-native";
 import LottieView from 'lottie-react-native';
-import ZenZoneTitle from "../components/ZenZoneTitle";
+import ZenZoneTitle from "../components/icons/ZenZoneTitle";
+import HomePage from "./HomePage";
 
-function Splash(){
+export default class Splash extends Component<Props>{
 
-    return(
+    render() {
+        return(
 
-        <View>
-            <LottieView
+            <View>
+                <LottieView
                     style={styles.lottie}
                     source={require("../assets/images/men.json")}
                     autoPlay={true}
                     loop={true}/>
-            {/*todo change template for background in adobe xd*/}
-            {/*<BackgroundThemeSplashScreen/>*/}
-            <ZenZoneTitle style={styles.title}/>
+                {/*todo change template for background in adobe xd*/}
+                {/*<BackgroundThemeSplashScreen/>*/}
+                <ZenZoneTitle style={styles.title}/>
 
-        </View>
-    )
+            </View>
+        )
+    }
 }
-export default Splash;
 
 const styles={
     lottie:{
