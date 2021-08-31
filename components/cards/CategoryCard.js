@@ -15,9 +15,10 @@ import {
 
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-function ActivityCard(){
+function CategoryCard(){
     return(
-        <Card style={styles.card}>
+        <Card style={styles.card}
+              style = {{borderRadius: 100}}>
 
             <View style={styles.icon}>
                 <FontAwesome5 name={'running'}
@@ -35,15 +36,11 @@ function ActivityCard(){
     )
 }
 
-export default ActivityCard;
+export default CategoryCard;
 
 const styles = StyleSheet.create({
     button: {
         marginRight: 10
-    },
-    card:{
-        borderRadius:25,
-        height:100
     },
     categoryName:{
         textTransform: 'uppercase',

@@ -5,11 +5,13 @@ import {
     StatusBar,
     Text,
     SafeAreaView,
-    ScrollView, Dimensions
+    ScrollView,
+    Dimensions
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
-import ActivityCard from "../components/cards/ActivityCard";
+
 import CategoryCard from "../components/cards/CategoryCard";
+import ActivityCard from "../components/cards/ActivityCard";
 
 export default class HomePage extends Component{
     constructor(props) {
@@ -56,13 +58,47 @@ export default class HomePage extends Component{
                             <Text style={styleLightMode.seeAll}
                                   onPress={(e) => this.onTextPress(e, 'See all')}>See all</Text>
                         </View>
-
+                        <SafeAreaView>
+                            <ScrollView showsHorizontalScrollIndicator={false}
+                                        horizontal>
+                                <View style={styleLightMode.categoryCard}>
+                                    <CategoryCard/>
+                                </View>
+                                <View style={styleLightMode.categoryCard}>
+                                    <CategoryCard/>
+                                </View>
+                                <View style={styleLightMode.categoryCard}>
+                                    <CategoryCard/>
+                                </View>
+                                <View style={styleLightMode.categoryCard}>
+                                    <CategoryCard/>
+                                </View>
+                                <View style={styleLightMode.categoryCard}>
+                                    <CategoryCard/>
+                                </View>
+                            </ScrollView>
+                        </SafeAreaView>
+                        <Text style={styleLightMode.singleCategoryName}>Travel</Text>
+                        <SafeAreaView>
+                            <ScrollView horizontal
+                                        showsHorizontalScrollIndicator={false}>
+                                <View style={styleLightMode.activityCard}>
+                                    <ActivityCard />
+                                </View>
+                                <View style={styleLightMode.activityCard}>
+                                    <ActivityCard />
+                                </View>
+                                <View style={styleLightMode.activityCard}>
+                                    <ActivityCard />
+                                </View>
+                                <View style={styleLightMode.activityCard}>
+                                    <ActivityCard />
+                                </View>
+                            </ScrollView>
+                        </SafeAreaView>
                     </ScrollView>
 
                 </SafeAreaView>
-                <View style={styleLightMode.card}>
-                    <CategoryCard/>
-                </View>
 
             </View>
 
@@ -92,17 +128,28 @@ const styleLightMode = StyleSheet.create({
         marginRight: 20,
         marginTop:15
     },
-    card:{
+    categoryCard:{
         height:106,
         width:90,
         marginTop: 10,
-        marginLeft:17
+        marginLeft:17,
+        borderRadius: 50
+    },
+    singleCategoryName:{
+        fontSize:14,
+        marginLeft: 20,
+        marginTop: 30,
+        fontWeight: 'bold',
+        textTransform: 'uppercase'
+    },
+    activityCard:{
+        height:502,
+        width:284,
+        marginTop: 10,
+        marginLeft:17,
+        borderRadius: 50,
+        marginBottom:70
     }
 })
 
-const styleDarkMode=StyleSheet.create({
-    container:{
-
-    }
-})
 
