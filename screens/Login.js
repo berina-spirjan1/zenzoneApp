@@ -9,7 +9,7 @@ import {
     Image, Animated, StatusBar
 } from 'react-native';
 import { StyleSheet } from 'react-native'
-import Icon from '../components/icons/Icon';
+import Icon from '../assets/icons/Icon';
 import LottieView from 'lottie-react-native';
 import {FontAwesome5} from "@expo/vector-icons";
 

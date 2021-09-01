@@ -17,8 +17,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 function CategoryCard(){
     return(
-        <Card style={styles.card}
-              style = {{borderRadius: 100}}>
+        <Card  styles={{ card: { backgroundColor: '#79BCE1', borderRadius:30 }}}>
 
             <View style={styles.icon}>
                 <FontAwesome5 name={'running'}
@@ -45,7 +44,8 @@ const styles = StyleSheet.create({
     categoryName:{
         textTransform: 'uppercase',
         fontWeight: 'bold',
-        color: '#000000'
+        color: '#000000',
+        paddingBottom:10
     },
     icon:{
         justifyContent:'center',

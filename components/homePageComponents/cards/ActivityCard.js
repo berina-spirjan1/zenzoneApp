@@ -9,7 +9,8 @@ import {
     StyleSheet,
     Image,
     View,
-    TouchableOpacity
+    TouchableOpacity,
+    Alert
 } from "react-native";
 
 import Button from 'react-native-button';
@@ -18,7 +19,15 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 function ActivityCard(){
     return(
             <Card style={styles.card}
-                  styles={{ card: { backgroundColor: '#93B4E5', borderRadius:30 }}}>
+                  styles={{ card: { backgroundColor: '#93B4E5', borderRadius:30,
+                                    shadowColor: "#000000",
+                                    shadowOffset: {
+                                          width: 0,
+                                          height: 8,
+                                      },
+                                    shadowOpacity: 0.44,
+                                    shadowRadius: 10.84,
+                                    elevation: 16 }}}>
                 <View style={styles.header}>
                     <Image source={require("../../../assets/images/icon.png")}
                            style={styles.profilePicture}/>
@@ -46,7 +55,8 @@ function ActivityCard(){
                 </Text>
 
                 <CardAction >
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button}
+                                      onPress={() => Alert.alert('Single activity screen needs to open')}>
                         <Text style={styles.buttonText}>Show more</Text>
                     </TouchableOpacity>
 
@@ -72,7 +82,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold',
         textTransform:'uppercase',
-        padding:5
+        padding:5,
+        fontFamily:'Roboto_400Regular'
     },
     header:{
       marginTop:17,

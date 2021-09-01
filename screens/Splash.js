@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View} from "react-native";
 import LottieView from 'lottie-react-native';
-import ZenZoneTitle from "../components/icons/ZenZoneTitle";
+import ZenZoneTitle from "../assets/icons/ZenZoneTitle";
 import HomePage from "./HomePage";
 
 export default class Splash extends Component<Props>{

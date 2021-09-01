@@ -9,7 +9,7 @@ import {
 import CollapsingToolbar from 'react-native-collapsingtoolbar';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import RobotPictureDarkMode from "../components/icons/RobotPictureDarkMode";
+import RobotPictureDarkMode from "../assets/icons/RobotPictureDarkMode";
 
 
 function ErrorPage(){
