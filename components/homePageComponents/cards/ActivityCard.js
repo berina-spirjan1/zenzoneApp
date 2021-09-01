@@ -20,7 +20,7 @@ function ActivityCard(){
     return(
             <Card style={styles.card}>
                 <View style={styles.header}>
-                    <Image source={require("../../assets/images/icon.png")}
+                    <Image source={require("../../../assets/images/icon.png")}
                            style={styles.profilePicture}/>
 
                     <Text style={styles.username}>lejla_1234</Text>

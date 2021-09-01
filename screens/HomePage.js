@@ -10,8 +10,9 @@ import {
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 
-import CategoryCard from "../components/cards/CategoryCard";
-import ActivityCard from "../components/cards/ActivityCard";
+import CategoryCard from "../components/homePageComponents/cards/CategoryCard";
+import ActivityCard from "../components/homePageComponents/cards/ActivityCard";
+import FollowerCard from "../components/homePageComponents/cards/FollowerCard";
 
 export default class HomePage extends Component{
     constructor(props) {
@@ -96,6 +97,25 @@ export default class HomePage extends Component{
                                 </View>
                             </ScrollView>
                         </SafeAreaView>
+
+                        <Text style={styleLightMode.followers}>Followers</Text>
+                        <SafeAreaView>
+                            <ScrollView horizontal
+                                        showHorizontalScrollIndicator={false}>
+                                <View style={styleLightMode.followerCard}>
+                                    <FollowerCard/>
+                                </View>
+                                <View style={styleLightMode.followerCard}>
+                                    <FollowerCard/>
+                                </View>
+                                <View style={styleLightMode.followerCard}>
+                                    <FollowerCard/>
+                                </View>
+                                <View style={styleLightMode.followerCard}>
+                                    <FollowerCard/>
+                                </View>
+                            </ScrollView>
+                        </SafeAreaView>
                     </ScrollView>
 
                 </SafeAreaView>
@@ -117,7 +137,7 @@ const styleLightMode = StyleSheet.create({
         justifyContent: 'flex-end'
     },
     titleCategories:{
-        fontSize:16,
+        fontSize: 16,
         marginTop: 15,
         marginLeft: 20,
         marginRight: 180,
@@ -126,29 +146,44 @@ const styleLightMode = StyleSheet.create({
     },
     seeAll:{
         marginRight: 20,
-        marginTop:15
+        marginTop: 15
     },
     categoryCard:{
-        height:106,
-        width:90,
+        height: 106,
+        width: 90,
         marginTop: 10,
-        marginLeft:17,
+        marginLeft: 17,
         borderRadius: 50
     },
     singleCategoryName:{
-        fontSize:14,
+        fontSize: 14,
         marginLeft: 20,
         marginTop: 30,
         fontWeight: 'bold',
         textTransform: 'uppercase'
     },
     activityCard:{
-        height:502,
-        width:284,
+        height: 502,
+        width: 284,
         marginTop: 10,
         marginLeft:17,
         borderRadius: 50,
         marginBottom:70
+    },
+    followers:{
+        marginRight: 20,
+        color: '#000000',
+        marginBottom:10,
+        marginTop: -40,
+        marginLeft: 20,
+        textTransform: 'uppercase',
+        fontWeight: 'bold'
+    },
+    followerCard:{
+        height: 100,
+        width: 100,
+        marginLeft: 17,
+        marginBottom: 100
     }
 })
 
