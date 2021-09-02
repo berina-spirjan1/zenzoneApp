@@ -116,6 +116,24 @@ export default class HomePage extends Component{
                                 </View>
                             </ScrollView>
                         </SafeAreaView>
+                        <Text style={styleLightMode.famillyActivities}>Familly activities</Text>
+                        <SafeAreaView>
+                            <ScrollView horizontal
+                                        showsHorizontalScrollIndicator={false}>
+                                <View style={styleLightMode.activityCard}>
+                                    <ActivityCard />
+                                </View>
+                                <View style={styleLightMode.activityCard}>
+                                    <ActivityCard />
+                                </View>
+                                <View style={styleLightMode.activityCard}>
+                                    <ActivityCard />
+                                </View>
+                                <View style={styleLightMode.activityCard}>
+                                    <ActivityCard />
+                                </View>
+                            </ScrollView>
+                        </SafeAreaView>
                     </ScrollView>
 
                 </SafeAreaView>
@@ -130,7 +148,8 @@ export default class HomePage extends Component{
 const styleLightMode = StyleSheet.create({
     container:{
         backgroundColor: '#cbdbf2',
-        flex:1
+        flex:1,
+        fontFamily:'Roboto_400Regular'
     },
     bottomNavigationBar:{
         flex: 1,
@@ -142,14 +161,14 @@ const styleLightMode = StyleSheet.create({
         marginLeft: 20,
         marginRight: 180,
         textTransform: 'uppercase',
-        fontWeight: 'bold'
+        fontWeight:'bold'
     },
     seeAll:{
         marginRight: 20,
         marginTop: 15
     },
     categoryCard:{
-        height: 106,
+        height: 115,
         width: 90,
         marginTop: 10,
         marginLeft: 17,
@@ -163,7 +182,7 @@ const styleLightMode = StyleSheet.create({
         textTransform: 'uppercase'
     },
     activityCard:{
-        height: 502,
+        height: 520,
         width: 284,
         marginTop: 10,
         marginLeft:17,
@@ -184,6 +203,12 @@ const styleLightMode = StyleSheet.create({
         width: 100,
         marginLeft: 17,
         marginBottom: 100
+    },
+    famillyActivities:{
+        marginTop: -65,
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+        marginLeft: 20
     }
 })
 

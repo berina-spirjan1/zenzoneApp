@@ -6,7 +6,9 @@ import {
     TextInput,
     TouchableOpacity,
     View,
-    Image, Animated, StatusBar
+    Image,
+    Animated,
+    StatusBar
 } from 'react-native';
 import { StyleSheet } from 'react-native'
 import Icon from '../assets/icons/Icon';
@@ -40,7 +42,7 @@ export default class Login extends Component {
 
     render() {
         return (
-            <>
+            <View style={stylesLightMode.container}>
                     <StatusBar animated={true}
                                backgroundColor="#6C63FF"/>
                     <View style={stylesDarkMode.backgroundStyle}>
@@ -77,13 +79,16 @@ export default class Login extends Component {
                     </View>
                     <Icon style={stylesLightMode.icon}/>
                     </View>
-            </>
+            </View>
         )
     }
 }
 
 
 const stylesLightMode = StyleSheet.create({
+    container:{
+        fontFamily: 'Roboto_400Regular'
+    },
     backgroundStyle: {
         backgroundColor: "#93B4E5"
     },
