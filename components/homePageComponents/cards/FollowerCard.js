@@ -5,13 +5,12 @@ import {
     StyleSheet,
     Image
 } from "react-native";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import {Card, CardAction, CardContent} from "react-native-card-view";
+
 
 function FollowerCard(){
     return(
             <View style={styles.icon}>
-                <Image source={require('../../../assets/images/bosnian_flag.png')}
+                <Image source={require('../../../assets/images/bosnianFlag.png')}
                         style={styles.image}/>
             </View>
     )
@@ -25,6 +24,14 @@ const styles = StyleSheet.create({
         width: 100,
         height:100,
         marginTop:0,
-        borderRadius: 25
+        borderRadius: 25,
+        shadowColor: "#000000",
+        shadowOffset: {
+            width: 0,
+            height: 8,
+        },
+        shadowOpacity: 0.44,
+        shadowRadius: 10.84,
+        elevation: 16
     }
 });

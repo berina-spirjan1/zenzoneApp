@@ -13,13 +13,13 @@ import {
     Alert
 } from "react-native";
 
-import Button from 'react-native-button';
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 function ActivityCard(){
     return(
             <Card style={styles.card}
-                  styles={{ card: { backgroundColor: '#93B4E5', borderRadius:30,
+                  styles={{ card: { backgroundColor: '#93B4E5',
+                                    borderRadius:30,
                                     shadowColor: "#000000",
                                     shadowOffset: {
                                           width: 0,
@@ -39,10 +39,18 @@ function ActivityCard(){
                            style={styles.activityImage}/>
                 </View>
                 <View style={{flexDirection: 'row'}}>
-                    <Image source={require('../../../assets/images/rodjoImage.png')}
-                           style={styles.like}/>
-                    <Image source={require('../../../assets/images/rodjoImage.png')}
-                           style={styles.dislike}/>
+                    <TouchableOpacity onPress={() => Alert.alert('Like')}>
+                        <View style={styles.greenCircle}>
+                            <Image source={require('../../../assets/images/rodjoImage.png')}
+                                   style={styles.like}/>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={ () => Alert.alert('Dislike')}>
+                        <View style={styles.redCircle}>
+                            <Image source={require('../../../assets/images/rodjoImage.png')}
+                                   style={styles.dislike}/>
+                        </View>
+                    </TouchableOpacity>
                     <FontAwesome5 name={'comment'}
                                   size={29}
                                   color={'#000000'}
@@ -108,18 +116,19 @@ const styles = StyleSheet.create({
         borderRadius:59
     },
     like:{
-        marginTop: 7,
+        marginTop: 0,
         height:30,
         width:30,
         borderRadius:30,
-        left:-65
+        left:0,
+        zIndex: 1
     },
     dislike:{
         height:30,
         width:30,
         borderRadius:30,
-        marginTop:7,
-        left:-60
+        marginTop:0,
+        left:0
     },
     activityText:{
         marginLeft: 25,
@@ -128,5 +137,22 @@ const styles = StyleSheet.create({
     },
     commentIcon:{
         left:60
+    },
+    greenCircle:{
+        backgroundColor: '#06FD37',
+        height: 30,
+        width:30,
+        borderRadius:30,
+        marginTop: 7,
+        left:-65,
+        zIndex: 2
+    },
+    redCircle:{
+        backgroundColor: '#FD0628',
+        height:30,
+        width:30,
+        borderRadius:30,
+        marginTop:7,
+        left:-60
     }
 });
