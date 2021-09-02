@@ -55,6 +55,15 @@ export default class CreateNewActivity extends Component{
                                  <TextInput numberOfLines={2}
                                             placeholder={'Activity title'}
                                             style={styles.titleInput}/>
+                                 <View style={{flexDirection: 'row'}}>
+                                     <Text style={styles.comment}>Comment</Text>
+                                     <Text style={styles.counter}>1/1000</Text>
+                                 </View>
+
+                                 <TextInput numberOfLines={10}
+                                            placeholder={'Enter description for activity'}
+                                            style={styles.activityDescription}
+                                            multiline={true}/>
                              </ScrollView>
                 </SafeAreaView>
 
@@ -104,5 +113,27 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginTop: 10,
         padding: 10
+    },
+    comment:{
+        fontSize: 17,
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+        marginLeft: 20,
+        marginTop: 10
+    },
+    counter:{
+        marginLeft: 160,
+        marginTop: 10,
+    },
+    activityDescription:{
+        backgroundColor: '#FFF',
+        opacity: 0.5,
+        borderRadius: 26,
+        width: 300,
+        height: 200,
+        marginLeft: 20,
+        marginTop: 10,
+        padding: 10,
+        marginBottom: 100
     }
 })
