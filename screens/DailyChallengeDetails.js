@@ -44,7 +44,8 @@ export default class DailyChallengeDetails extends Component{
 
                 <SafeAreaView style={stylesLightMode.safeArea}
                               style={{height: screenHeight}}>
-                    <ScrollView vertical={true} style={stylesLightMode.scrollView}>
+                    <ScrollView vertical
+                                style={stylesLightMode.scrollView}>
                         {/*<Text style={stylesLightMode.text}>{this.state.data}</Text>*/}
                         <Text style={stylesLightMode.text}>
                             Lorem ipsum dolor sit amet,
