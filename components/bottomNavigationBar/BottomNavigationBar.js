@@ -29,8 +29,7 @@ function BottomNavigationBar(){
         }}
             tabBar={(props) => (
                 <CustomTabBar props={props}/>
-            )}
-        >
+            )}>
             <Tab.Screen name={'Activities'}
                         component={HomePage}
                         options={{
