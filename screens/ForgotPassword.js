@@ -11,8 +11,8 @@ import {
 import { FontAwesome5 } from "@expo/vector-icons";
 
 
-import ForgotPasswordFormIcon from "../components/icons/ForgotPasswordFormIcon";
-import ForgotPasswordWomenIcon from "../components/icons/ForgotPasswordWomenIcon";
+import ForgotPasswordFormIcon from "../assets/icons/ForgotPasswordFormIcon";
+import ForgotPasswordWomenIcon from "../assets/icons/ForgotPasswordWomenIcon";
 import { Toolbar } from "react-native-material-ui";
 
 export default class ForgotPassword extends Component{

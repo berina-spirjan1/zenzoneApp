@@ -96,19 +96,6 @@ function BottomNavigationBar(){
                                 <TabBarCustomButton {...props}/>
                             )
                         }}/>
-            <Tab.Screen name={'Sign Up'}
-                        component={SignUp}
-                        options={{
-                            headerShown: false,
-                            tabBarIcon: ({focused}) => (
-                                <FontAwesome5 name={'user'}
-                                              size={focused ? 22 : 20}
-                                              color={focused ? '#FFF' : '#616C75'}/>
-                            ),
-                            tabBarButton: (props) => (
-                                <TabBarCustomButton {...props}/>
-                            )
-                        }}/>
 
         </Tab.Navigator>
     )

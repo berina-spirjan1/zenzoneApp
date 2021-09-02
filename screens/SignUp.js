@@ -13,8 +13,8 @@ import {
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 
-import Icon from "../components/icons/Icon";
-import Cload from "../components/icons/Cload";
+import Icon from "../assets/icons/Icon";
+import Cload from "../assets/icons/Cload";
 
 export default class SignUp extends Component {
     constructor(props) {

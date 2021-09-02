@@ -9,7 +9,7 @@ import {
     Alert
 } from 'react-native';
 import {FontAwesome5} from "@expo/vector-icons";
-import ChangePasswordLightIcon from "../components/icons/ChangePasswordLightIcon";
+import ChangePasswordLightIcon from "../assets/icons/ChangePasswordLightIcon";
 import {Toolbar} from "react-native-material-ui";
 
 export default class ChangePassword extends Component{
