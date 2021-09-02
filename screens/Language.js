@@ -65,7 +65,7 @@ export default class Language extends Component{
                     <Text style={ styles.languageSettings }>Language settings</Text>
                     <View style={ styles.languages }>
                         <View style={ styles.englishLanguage }>
-                            <Image source={ require('../assets/images/english_flag.png') }
+                            <Image source={ require('../assets/images/englishFlag.png') }
                                    style={ styles.englishFlag }/>
                             <Text style={ styles.englishText }>English</Text>
                             <CheckBox value={ isEnglish }
@@ -73,7 +73,7 @@ export default class Language extends Component{
                                       style={ styles.checkboxEnglish }/>
                         </View>
                         <View style={styles.bosnianLanguage}>
-                            <Image source={ require('../assets/images/bosnian_flag.png') }
+                            <Image source={ require('../assets/images/bosnianFlag.png') }
                                    style={ styles.bosnianFlag }/>
                             <Text style={ styles.bosnianText }>Bosnian</Text>
                             <CheckBox value={ isEnglish }
