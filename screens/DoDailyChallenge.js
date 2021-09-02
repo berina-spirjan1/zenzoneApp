@@ -1,4 +1,4 @@
-import React, {Component} from "react"
+import React, { Component } from "react"
 import {
     View,
     Text,
@@ -11,7 +11,8 @@ import {
     ScrollView, Dimensions
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import {Toolbar} from "react-native-material-ui";
+import { Toolbar } from "react-native-material-ui";
+import DoChallengeIconDarkMode from "../assets/icons/DoChallengeIconDarkMode";
 
 
 export default class DoDailyChallenge extends Component{
@@ -45,9 +46,9 @@ export default class DoDailyChallenge extends Component{
                                   style={styles.icon}/>
                     <Text style={styles.uploadImageText}>Upload image</Text>
                 </TouchableOpacity>
-                <SafeAreaView>
-                    <ScrollView vertical={true}
-                                style={screenHeight}>
+                <SafeAreaView style={styles.safeAreaContainer}
+                              style={{height: screenHeight}}>
+                    <ScrollView style={styles.scrollView}>
                         <Text style={styles.title}>Title</Text>
                         <TextInput numberOfLines={2}
                                    placeholder={'Activity title'}
@@ -59,7 +60,9 @@ export default class DoDailyChallenge extends Component{
 
                         <TextInput numberOfLines={10}
                                    placeholder={'Enter description for activity'}
-                                   style={styles.activityDescription}/>
+                                   style={styles.activityDescription}
+                                   multiline={true}/>
+                        <DoChallengeIconDarkMode/>
                     </ScrollView>
                 </SafeAreaView>
             </View>
@@ -69,7 +72,8 @@ export default class DoDailyChallenge extends Component{
 
 const styles = StyleSheet.create({
     container:{
-        fontFamily: 'Roboto_400Regular'
+        fontFamily: 'Roboto_400Regular',
+        backgroundColor: '#CBDBF2'
     },
     buttonContainer:{
         backgroundColor: '#6285B3',
@@ -78,7 +82,15 @@ const styles = StyleSheet.create({
         padding: 50,
         borderRadius: 26,
         marginTop: 30,
-        marginLeft: 20
+        marginLeft: 20,
+        shadowColor: "#000000",
+        shadowOffset: {
+            width: 0,
+            height: 8,
+        },
+        shadowOpacity: 0.44,
+        shadowRadius: 10.84,
+        elevation: 16
     },
     uploadImageText:{
         textTransform: 'uppercase',
@@ -126,9 +138,18 @@ const styles = StyleSheet.create({
         opacity: 0.5,
         borderRadius: 26,
         width: 300,
-        height: 50,
         marginLeft: 20,
         marginTop: 10,
         padding: 10
+    },
+    safeAreaContainer:{
+        flex:1,
+        paddingTop: StatusBar.currentHeight,
+        paddingVertical: 20
+    },
+    scrollView:{
+        alignSelf: 'stretch',
+        marginTop: 10,
+        marginBottom: 50
     }
 })
