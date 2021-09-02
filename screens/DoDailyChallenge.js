@@ -29,6 +29,7 @@ export default class DoDailyChallenge extends Component{
                     animated={true}
                     backgroundColor="#6285B3"/>
                 <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                         leftElement="arrow-back"
                          centerElement="Today's challenge"
                          rightElement={{
                              menu: {
@@ -49,10 +50,6 @@ export default class DoDailyChallenge extends Component{
                 <SafeAreaView style={styles.safeAreaContainer}
                               style={{height: screenHeight}}>
                     <ScrollView style={styles.scrollView}>
-                        <Text style={styles.title}>Title</Text>
-                        <TextInput numberOfLines={2}
-                                   placeholder={'Activity title'}
-                                   style={styles.titleInput}/>
                         <View style={{flexDirection: 'row'}}>
                             <Text style={styles.comment}>Comment</Text>
                             <Text style={styles.counter}>1/1000</Text>
