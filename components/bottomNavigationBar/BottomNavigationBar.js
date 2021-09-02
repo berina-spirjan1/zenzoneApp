@@ -6,7 +6,7 @@ import HomePage from "../../screens/HomePage";
 import DailyChallengeDetails from "../../screens/DailyChallengeDetails";
 import Leaderboard from "../../screens/Leaderboard";
 import Login from "../../screens/Login";
-import CreateNewActivityPage from "../../screens/CreateNewActivityPage";
+import DoDailyChallenge from "../../screens/DoDailyChallenge";
 import SignUp from "../../screens/SignUp";
 
 import TabBarCustomButton from "./TabBarCustomButton";
@@ -57,7 +57,7 @@ function BottomNavigationBar(){
                             )
                         }}/>
             <Tab.Screen name={'New activity'}
-                        component={CreateNewActivityPage}
+                        component={DoDailyChallenge}
                         options={{
                             headerShown: false,
                             tabBarIcon: ({focused}) => (
