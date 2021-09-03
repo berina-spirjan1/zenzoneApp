@@ -5,9 +5,9 @@ function Icon(props) {
     return (
         <Svg
             xmlns="http://www.w3.org/2000/svg"
-            width={263.049}
+            width={200}
             height={207.981}
-            viewBox="0 0 263.049 240"
+            viewBox="0 60 200 240"
             {...props}
         >
             <G data-name="Group 1">
