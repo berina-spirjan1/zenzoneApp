@@ -44,7 +44,7 @@ export default class Login extends Component {
         return (
             <View style={stylesLightMode.container}>
                     <StatusBar animated={true}
-                               backgroundColor="#6C63FF"/>
+                               backgroundColor="#6285B3"/>
                     <View style={stylesDarkMode.backgroundStyle}>
                     <LottieView style={stylesDarkMode.lottie}
                                 source={require("../assets/images/stars.json")}
@@ -79,13 +79,16 @@ export default class Login extends Component {
                     </View>
                         <Text style={stylesDarkMode.signUp}>You still don't have your ZenZone account?</Text>
                         <View style={{flexDirection: 'row'}}>
+                            <Text style={stylesDarkMode.next}>Sign up</Text>
                             <FontAwesome5 name={'chevron-right'}
                                           size={16}
-                                          color={'#000000'}/>
-                            <Text style={stylesDarkMode.next}>Sign up</Text>
+                                          color={'#FFFFFF'}
+                                          style={stylesDarkMode.nextIcon}/>
                         </View>
+                            <Icon style={stylesLightMode.icon}/>
 
-                    <Icon style={stylesLightMode.icon}/>
+
+
                     </View>
             </View>
         )
@@ -308,15 +311,15 @@ const stylesDarkMode = StyleSheet.create({
         opacity: 0.8
     },
     button:{
-        backgroundColor:"#6C63FF",
+        backgroundColor:"#6285B3",
         color:"#000000",
         width: 100,
-        left:227,
-        borderRadius:26,
-        padding:1,
-        height:40,
-        paddingTop:0,
-        marginBottom:20
+        left: 227,
+        borderRadius: 26,
+        padding: 1,
+        height: 40,
+        paddingTop: 0,
+        marginBottom: 20
     },
     loginText: {
         textAlign: 'center',
@@ -328,19 +331,25 @@ const stylesDarkMode = StyleSheet.create({
     icon: {
         flex: 1,
         marginTop: 0,
-        marginBottom:-10,
+        marginBottom: 100,
         justifyContent: 'center'
     },
     signUp:{
         fontSize: 10,
-        color:'#FFFFFF',
+        color: '#FFFFFF',
+        marginLeft: 150
 
     },
-    next:{
-        color:'#FFFFFF',
+    next: {
+        color: '#FFFFFF',
         textTransform: 'uppercase',
         fontFamily: 'Roboto_100Thin_Italic',
-        fontSize: 12
+        fontSize: 12,
+        marginLeft: 290
+    }
+    ,
+    nextIcon:{
+        marginLeft:-80
     }
 });
 
