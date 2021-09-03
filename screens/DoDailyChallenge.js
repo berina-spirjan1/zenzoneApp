@@ -3,6 +3,7 @@ import {
     View,
     Text,
     StyleSheet,
+    Image,
     TouchableOpacity,
     Alert,
     StatusBar,
@@ -59,7 +60,13 @@ export default class DoDailyChallenge extends Component{
                                    placeholder={'Enter description for activity'}
                                    style={styles.activityDescription}
                                    multiline={true}/>
-                        <DoChallengeIconDarkMode/>
+                        <Image source={require('../assets/images/DoDailyChallenge.svg')}
+                               style={styles.imageForDaily}/>
+                        <TouchableOpacity style={styles.finishButton}
+                                          //todo add function for sending report for daily challenge to backend
+                                          onPress={() => Alert.alert('Finish daily')}>
+                            <Text style={styles.finishText}>finish</Text>
+                        </TouchableOpacity>
                     </ScrollView>
                 </SafeAreaView>
             </View>
@@ -148,5 +155,15 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         marginTop: 10,
         marginBottom: 50
+    },
+    imageForDaily:{
+        width: 200,
+        height: 100
+    },
+    finishButton:{
+        backgroundColor: '#6285b3',
+        height: 40,
+        width: 100,
+        borderRadius: 18
     }
 })
