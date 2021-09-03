@@ -77,6 +77,14 @@ export default class Login extends Component {
                             <Text style={stylesDarkMode.loginText}>LOGIN</Text>
                         </TouchableOpacity>
                     </View>
+                        <Text style={stylesDarkMode.signUp}>You still don't have your ZenZone account?</Text>
+                        <View style={{flexDirection: 'row'}}>
+                            <FontAwesome5 name={'chevron-right'}
+                                          size={16}
+                                          color={'#000000'}/>
+                            <Text style={stylesDarkMode.next}>Sign up</Text>
+                        </View>
+
                     <Icon style={stylesLightMode.icon}/>
                     </View>
             </View>
@@ -194,6 +202,9 @@ const stylesLightMode = StyleSheet.create({
         flex: 1,
         marginTop: -50,
         justifyContent: 'center'
+    },
+    signUp:{
+
     }
 });
 
@@ -319,10 +330,17 @@ const stylesDarkMode = StyleSheet.create({
         marginTop: 0,
         marginBottom:-10,
         justifyContent: 'center'
+    },
+    signUp:{
+        fontSize: 10,
+        color:'#FFFFFF',
+
+    },
+    next:{
+        color:'#FFFFFF',
+        textTransform: 'uppercase',
+        fontFamily: 'Roboto_100Thin_Italic',
+        fontSize: 12
     }
 });
 
-// const mapStateToProps = state => state;
-// const mapDispatchToProps = dispatch => ({});
-// const connectComponent = connect(mapStateToProps, mapDispatchToProps);
-// export default connectComponent(App);
