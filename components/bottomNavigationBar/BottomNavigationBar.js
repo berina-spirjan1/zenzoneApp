@@ -6,8 +6,6 @@ import HomePage from "../../screens/HomePage";
 import DailyChallengeDetails from "../../screens/DailyChallengeDetails";
 import Leaderboard from "../../screens/Leaderboard";
 import Login from "../../screens/Login";
-import DoDailyChallenge from "../../screens/DoDailyChallenge";
-import SignUp from "../../screens/SignUp";
 
 import TabBarCustomButton from "./TabBarCustomButton";
 import CustomTabBar from "./CustomTabBar";
