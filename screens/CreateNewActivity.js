@@ -8,10 +8,12 @@ import {
     StatusBar,
     TextInput,
     TouchableOpacity,
-    Alert
+    Alert,
+    Image
 } from "react-native";
 import CategoryCard from "../components/homePageComponents/cards/CategoryCard";
-import {Toolbar} from "react-native-material-ui";
+
+import { Toolbar } from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 
@@ -75,16 +77,22 @@ export default class CreateNewActivity extends Component{
                                                    color={'#000000'}/>
                                      <Text style={styles.addPhoto}>Add photo</Text>
                                  </View>
-                                 <TouchableOpacity style={styles.cardAddPhoto}
-                                                   onPress={() => Alert.alert('Open gallery')}>
-                                    <FontAwesome5 name={'camera'}
-                                                  size={20}
-                                                  color={'#000000'}
-                                                  style={styles.cameraIcon}/>
-                                    <Text style={styles.add}>Add</Text>
-                                 </TouchableOpacity>
+
+                                 <SafeAreaView>
+                                     <ScrollView horizontal
+                                                 showsHorizontalScrollIndicator={false}>
+                                         <TouchableOpacity style={styles.cardAddPhoto}
+                                                           onPress={() => Alert.alert('Open gallery')}>
+                                             <FontAwesome5 name={'camera'}
+                                                           size={20}
+                                                           color={'#000000'}
+                                                           style={styles.cameraIcon}/>
+                                             <Text style={styles.add}>Add</Text>
+                                         </TouchableOpacity>
+                                     </ScrollView>
+                                 </SafeAreaView>
                                  <TouchableOpacity style={styles.postActivityButton}
-                                                   //todo add post activity successfull page that miss in Adobe xd
+                                     //todo add post activity successfull page that miss in Adobe xd
                                                    onPress={() => Alert.alert('Post activity successfull page')}>
                                      <Text style={styles.postActivityText}>POST ACTIVITY</Text>
                                  </TouchableOpacity>
