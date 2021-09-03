@@ -4,10 +4,15 @@ import {
     Text,
     ScrollView,
     StyleSheet,
-    SafeAreaView, StatusBar, TextInput
+    SafeAreaView,
+    StatusBar,
+    TextInput,
+    TouchableOpacity,
+    Alert
 } from "react-native";
 import CategoryCard from "../components/homePageComponents/cards/CategoryCard";
 import {Toolbar} from "react-native-material-ui";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 
 export default class CreateNewActivity extends Component{
@@ -56,14 +61,33 @@ export default class CreateNewActivity extends Component{
                                             placeholder={'Activity title'}
                                             style={styles.titleInput}/>
                                  <View style={{flexDirection: 'row'}}>
-                                     <Text style={styles.comment}>Comment</Text>
-                                     <Text style={styles.counter}>1/1000</Text>
+                                     <Text style={styles.comment}>Description</Text>
+                                     <Text style={styles.counter}>0/1000</Text>
                                  </View>
 
                                  <TextInput numberOfLines={10}
                                             placeholder={'Enter description for activity'}
                                             style={styles.activityDescription}
                                             multiline={true}/>
+                                 <View style={styles.addPhotoSection}>
+                                     <FontAwesome5 name={'camera'}
+                                                   size={25}
+                                                   color={'#000000'}/>
+                                     <Text style={styles.addPhoto}>Add photo</Text>
+                                 </View>
+                                 <TouchableOpacity style={styles.cardAddPhoto}
+                                                   onPress={() => Alert.alert('Open gallery')}>
+                                    <FontAwesome5 name={'camera'}
+                                                  size={20}
+                                                  color={'#000000'}
+                                                  style={styles.cameraIcon}/>
+                                    <Text style={styles.add}>Add</Text>
+                                 </TouchableOpacity>
+                                 <TouchableOpacity style={styles.postActivityButton}
+                                                   //todo add post activity successfull page that miss in Adobe xd
+                                                   onPress={() => Alert.alert('Post activity successfull page')}>
+                                     <Text style={styles.postActivityText}>POST ACTIVITY</Text>
+                                 </TouchableOpacity>
                              </ScrollView>
                 </SafeAreaView>
 
@@ -101,7 +125,7 @@ const styles = StyleSheet.create({
     title:{
         textTransform: 'uppercase',
         fontWeight: 'bold',
-        fontSize: 17,
+        fontSize: 14,
         marginLeft: 20,
         marginTop:30
     },
@@ -115,7 +139,7 @@ const styles = StyleSheet.create({
         padding: 10
     },
     comment:{
-        fontSize: 17,
+        fontSize: 14,
         fontWeight: 'bold',
         textTransform: 'uppercase',
         marginLeft: 20,
@@ -133,7 +157,71 @@ const styles = StyleSheet.create({
         height: 200,
         marginLeft: 20,
         marginTop: 10,
-        padding: 10,
-        marginBottom: 100
+        padding: 10
+    },
+    addPhotoSection:{
+        flexDirection: 'row',
+        marginTop: 15,
+        marginLeft:20,
+
+    },
+
+    addPhoto:{
+        textTransform: 'uppercase',
+        fontSize: 14,
+        fontWeight: 'bold',
+        marginLeft:5,
+        marginTop:6
+    },
+    cardAddPhoto:{
+        backgroundColor:'#6285b3',
+        marginTop:15,
+        width: 90,
+        height: 90,
+        borderRadius: 25,
+        marginLeft:20,
+        justifyContent: 'center',
+        textAlign: 'center',
+        shadowColor: "#000000",
+        shadowOffset: {
+            width: 0,
+            height: 28,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 3.84,
+        elevation: 5
+
+    },
+    cameraIcon:{
+        justifyContent: 'center',
+        marginTop:10,
+        marginLeft:35
+    },
+    add:{
+        textTransform:'uppercase',
+        marginLeft:30
+    },
+    postActivityButton:{
+        marginBottom:100,
+        backgroundColor: '#6285b3',
+        borderRadius: 18,
+        marginTop:50,
+        height: 40,
+        width: 131,
+        left:180,
+        padding:10,
+        shadowColor: "#000000",
+        shadowOffset: {
+            width: 0,
+            height: 28,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 3.84,
+        elevation: 5
+    },
+    postActivityText:{
+        textAlign: 'center',
+        justifyContent: 'center',
+        fontWeight:'bold'
     }
 })
