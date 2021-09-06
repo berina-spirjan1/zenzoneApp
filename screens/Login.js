@@ -6,14 +6,14 @@ import {
     TextInput,
     TouchableOpacity,
     View,
-    Image,
-    Animated,
     StatusBar
 } from 'react-native';
 import { StyleSheet } from 'react-native'
 import Icon from '../assets/icons/Icon';
 import LottieView from 'lottie-react-native';
 import {FontAwesome5} from "@expo/vector-icons";
+import SignUp from "./SignUp";
+
 
 
 export default class Login extends Component {
@@ -79,7 +79,8 @@ export default class Login extends Component {
                     </View>
                         <Text style={stylesDarkMode.signUp}>You still don't have your ZenZone account?</Text>
                         <View style={{flexDirection: 'row'}}>
-                            <Text style={stylesDarkMode.next}>Sign up</Text>
+                            <Text style={stylesDarkMode.next}
+                                  onPress={() => this.props.navigation.navigate('SignUp')} >Sign up</Text>
                             <FontAwesome5 name={'chevron-right'}
                                           size={16}
                                           color={'#FFFFFF'}
@@ -330,14 +331,15 @@ const stylesDarkMode = StyleSheet.create({
     },
     icon: {
         flex: 1,
-        marginTop: 0,
+        marginTop: 50,
         marginBottom: 100,
         justifyContent: 'center'
     },
     signUp:{
         fontSize: 10,
         color: '#FFFFFF',
-        marginLeft: 150
+        marginLeft: 150,
+        marginTop: 50
 
     },
     next: {

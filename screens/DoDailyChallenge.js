@@ -50,18 +50,18 @@ export default class DoDailyChallenge extends Component{
                 </TouchableOpacity>
                 <SafeAreaView style={styles.safeAreaContainer}
                               style={{height: screenHeight}}>
-                    <ScrollView style={styles.scrollView}>
+                    <ScrollView style={styles.scrollView}
+                                vertical={true}>
                         <View style={{flexDirection: 'row'}}>
                             <Text style={styles.comment}>Comment</Text>
-                            <Text style={styles.counter}>1/1000</Text>
+                            <Text style={styles.counter}>0/1000</Text>
                         </View>
 
                         <TextInput numberOfLines={10}
                                    placeholder={'Enter description for activity'}
                                    style={styles.activityDescription}
                                    multiline={true}/>
-                        <Image source={require('../assets/images/DoDailyChallenge.svg')}
-                               style={styles.imageForDaily}/>
+                        <DoChallengeIconDarkMode style={{ marginTop: 10 }}/>
                         <TouchableOpacity style={styles.finishButton}
                                           //todo add function for sending report for daily challenge to backend
                                           onPress={() => Alert.alert('Finish daily')}>
@@ -81,8 +81,8 @@ const styles = StyleSheet.create({
     },
     buttonContainer:{
         backgroundColor: '#6285B3',
-        width: 300,
-        height: 200,
+        marginRight: 20,
+        height: 150,
         padding: 50,
         borderRadius: 26,
         marginTop: 30,
@@ -90,34 +90,36 @@ const styles = StyleSheet.create({
         shadowColor: "#000000",
         shadowOffset: {
             width: 0,
-            height: 8,
+            height: 4,
         },
         shadowOpacity: 0.44,
-        shadowRadius: 10.84,
-        elevation: 16
+        shadowRadius: 5,
+        elevation: 10
     },
     uploadImageText:{
         textTransform: 'uppercase',
         textAlign:'center',
         justifyContent: 'center',
         fontWeight: 'bold',
-        marginTop: 5
+        marginTop: 5,
+        marginLeft:13
     },
     icon:{
         justifyContent: 'center',
-        marginLeft: 75,
-        marginTop: 20
+        marginLeft: 95,
+        marginTop: 0
     },
     comment:{
         fontSize: 17,
         fontWeight: 'bold',
         textTransform: 'uppercase',
         marginLeft: 20,
-        marginTop: 10
+        marginTop: 30,
+
     },
     counter:{
-        marginLeft: 160,
-        marginTop: 10,
+        marginLeft: 185,
+        marginTop: 30
     },
     title:{
         textTransform: 'uppercase',
@@ -130,12 +132,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         opacity: 0.5,
         borderRadius: 26,
-        width: 300,
+        marginRight:20,
         height: 200,
         marginLeft: 20,
         marginTop: 10,
-        padding: 10,
-        marginBottom: 100
+        padding: 20
     },
     titleInput:{
         backgroundColor: '#FFF',
@@ -156,14 +157,29 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 50
     },
-    imageForDaily:{
-        width: 200,
-        height: 100
-    },
     finishButton:{
         backgroundColor: '#6285b3',
         height: 40,
         width: 100,
-        borderRadius: 18
+        marginTop:-70,
+        borderRadius: 18,
+        padding: 10,
+        shadowColor: "#000000",
+        shadowOffset: {
+            width: 0,
+            height: 6,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 3.84,
+        elevation: 2,
+        marginBottom:100,
+        left:230
+    },
+    finishText:{
+        textTransform: 'uppercase',
+        color: '#000000',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        fontSize:16
     }
 })

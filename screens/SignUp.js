@@ -177,9 +177,9 @@ const stylesLightMode = StyleSheet.create({
         borderWidth: 0,
         shadowColor: '#000000',
         elevation: 5,
-        shadowOffset: {width: 20, height: 2},
+        shadowOffset: {width: 5, height: 2},
         shadowOpacity: 1,
-        shadowRadius: 10,
+        shadowRadius: 5,
 
     },
     buttonLogin: {

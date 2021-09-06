@@ -8,8 +8,7 @@ import {
     StatusBar,
     TextInput,
     TouchableOpacity,
-    Alert,
-    Image
+    Alert
 } from "react-native";
 import CategoryCard from "../components/homePageComponents/cards/CategoryCard";
 
@@ -120,7 +119,7 @@ const styles = StyleSheet.create({
     },
     categoryCard:{
         height: 115,
-        width: 90,
+        width: 95,
         marginTop: 10,
         marginLeft: 17,
         borderRadius: 50
@@ -141,7 +140,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         opacity: 0.5,
         borderRadius: 26,
-        width: 300,
+        marginRight:20,
         marginLeft: 20,
         marginTop: 10,
         padding: 10
@@ -161,7 +160,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         opacity: 0.5,
         borderRadius: 26,
-        width: 300,
+        marginRight:20,
         height: 200,
         marginLeft: 20,
         marginTop: 10,
@@ -193,11 +192,11 @@ const styles = StyleSheet.create({
         shadowColor: "#000000",
         shadowOffset: {
             width: 0,
-            height: 28,
+            height: 3,
         },
         shadowOpacity: 0.2,
         shadowRadius: 3.84,
-        elevation: 5
+        elevation: 3
 
     },
     cameraIcon:{
@@ -213,19 +212,19 @@ const styles = StyleSheet.create({
         marginBottom:100,
         backgroundColor: '#6285b3',
         borderRadius: 18,
-        marginTop:50,
+        marginTop: 30,
         height: 40,
         width: 131,
-        left:180,
+        left:200,
         padding:10,
         shadowColor: "#000000",
         shadowOffset: {
             width: 0,
-            height: 28,
+            height: 5,
         },
         shadowOpacity: 0.2,
         shadowRadius: 3.84,
-        elevation: 5
+        elevation: 2,
     },
     postActivityText:{
         textAlign: 'center',

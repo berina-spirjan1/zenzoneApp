@@ -10,6 +10,7 @@ import Login from "../../screens/Login";
 import TabBarCustomButton from "./TabBarCustomButton";
 import CustomTabBar from "./CustomTabBar";
 import CreateNewActivity from "../../screens/CreateNewActivity";
+import DoDailyChallenge from "../../screens/DoDailyChallenge";
 
 
 
@@ -69,7 +70,7 @@ function BottomNavigationBar(){
                             )
                         }}/>
             <Tab.Screen name={'Ranking'}
-                        component={Leaderboard}
+                        component={DoDailyChallenge}
                         options={{
                             headerShown: false,
                             tabBarIcon: ({focused}) => (

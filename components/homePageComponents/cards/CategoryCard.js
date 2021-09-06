@@ -22,11 +22,11 @@ function CategoryCard(){
                                  shadowColor: "#000000",
                                  shadowOffset: {
                                     width: 0,
-                                    height: 8,
+                                    height: 2,
                                  },
                                  shadowOpacity: 0.44,
-                                 shadowRadius: 10.84,
-                                 elevation: 16
+                                 shadowRadius: 3,
+                                 elevation: 5
             }}}>
 
             <View style={styles.icon}>

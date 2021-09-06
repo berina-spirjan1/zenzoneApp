@@ -5,9 +5,9 @@ function DoChallengeIconDarkMode(props) {
     return (
         <Svg
             xmlns="http://www.w3.org/2000/svg"
-            width={334.6}
-            height={226.06}
-            viewBox="0 0 334.6 226.06"
+            width={300}
+            height={200}
+            viewBox="10 0 334.6 226.06"
             {...props}
         >
             <G data-name="Done-rafiki (3)">

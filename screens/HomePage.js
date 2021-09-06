@@ -101,7 +101,7 @@ export default class HomePage extends Component{
                         <Text style={styleLightMode.followers}>Followers</Text>
                         <SafeAreaView>
                             <ScrollView horizontal
-                                        showHorizontalScrollIndicator={false}>
+                                        showsHorizontalScrollIndicator={false}>
                                 <View style={styleLightMode.followerCard}>
                                     <FollowerCard/>
                                 </View>
@@ -116,7 +116,7 @@ export default class HomePage extends Component{
                                 </View>
                             </ScrollView>
                         </SafeAreaView>
-                        <Text style={styleLightMode.famillyActivities}>Familly activities</Text>
+                        <Text style={styleLightMode.familyActivities}>Familly activities</Text>
                         <SafeAreaView>
                             <ScrollView horizontal
                                         showsHorizontalScrollIndicator={false}>
@@ -169,7 +169,7 @@ const styleLightMode = StyleSheet.create({
     },
     categoryCard:{
         height: 115,
-        width: 90,
+        width: 95,
         marginTop: 10,
         marginLeft: 17,
         borderRadius: 50
@@ -204,7 +204,7 @@ const styleLightMode = StyleSheet.create({
         marginLeft: 17,
         marginBottom: 100
     },
-    famillyActivities:{
+    familyActivities:{
         marginTop: -65,
         textTransform: 'uppercase',
         fontWeight: 'bold',
