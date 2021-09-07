@@ -15,10 +15,15 @@ import { FontAwesome5 } from "@expo/vector-icons";
 
 import Icon from "../assets/icons/Icon";
 import Cload from "../assets/icons/Cload";
+import {Actions} from "react-native-router-flux";
 
 export default class SignUp extends Component {
     constructor(props) {
         super();
+    }
+
+    login() {
+        Actions.login()
     }
 
     validate = (text) => {
@@ -107,7 +112,7 @@ export default class SignUp extends Component {
                                 </TextInput>
                                 <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
                                     <Text style={{color: "#334A6D", fontWeight: 'bold'}}
-                                          onPress={(e) => this.onTextPress(e, 'Login clicked')}> Login</Text></Text>
+                                          onPress={this.login}> Login</Text></Text>
                                 <TouchableOpacity style={stylesLightMode.button}
                                                   onPress={() => Alert.alert('SignUp')}>
                                     <Text style={stylesDarkMode.buttonText}>

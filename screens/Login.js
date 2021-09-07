@@ -13,12 +13,20 @@ import Icon from '../assets/icons/Icon';
 import LottieView from 'lottie-react-native';
 import {FontAwesome5} from "@expo/vector-icons";
 import SignUp from "./SignUp";
-
+import {Actions} from 'react-native-router-flux';
 
 
 export default class Login extends Component {
     constructor(props) {
         super();
+    }
+
+    signup() {
+        Actions.signup()
+    }
+
+    forgotPassword(){
+        Actions.forgotPassword()
     }
 
     validate = (text) => {
@@ -68,7 +76,7 @@ export default class Login extends Component {
                     </SafeAreaView>
                     <Text style={stylesDarkMode.forgotLoginDetails}>Forgot your login details?
                         <Text style={stylesDarkMode.helpLogin}
-                              onPress={(e) => this.onTextPress(e, 'Get help logging in')}> Get help logging in</Text>
+                              onPress={this.forgotPassword}> Get help logging in</Text>
                     </Text>
                     <View>
                         <TouchableOpacity
@@ -80,7 +88,7 @@ export default class Login extends Component {
                         <Text style={stylesDarkMode.signUp}>You still don't have your ZenZone account?</Text>
                         <View style={{flexDirection: 'row'}}>
                             <Text style={stylesDarkMode.next}
-                                  onPress={() => this.props.navigation.navigate('SignUp')} >Sign up</Text>
+                                  onPress={this.signup} >Sign up</Text>
                             <FontAwesome5 name={'chevron-right'}
                                           size={16}
                                           color={'#FFFFFF'}

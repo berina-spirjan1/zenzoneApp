@@ -5,14 +5,13 @@ function BackgroundForLoginLocation(props) {
     return (
         <Svg
             xmlns="http://www.w3.org/2000/svg"
-            width={475}
+            width={500}
             height={678}
-            viewBox="20 0 560 800"
+            viewBox="20 0 580 800"
             {...props}
         >
             <G
                 fill="#1c1f23"
-                stroke="#707070"
                 data-name="Rectangle 1"
                 transform="translate(15 15)"
             >
