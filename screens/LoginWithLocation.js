@@ -11,10 +11,14 @@ import {
 import BackgroundForLoginLocation from "../components/backgrounds/BackgroundForLoginLocation";
 import {FontAwesome5} from "@expo/vector-icons";
 
-//todo change CSS
 export default class LoginWithLocation extends Component{
     constructor(props) {
         super();
+    }
+
+    //todo add handler for event that you can go to forgot password page, this only shows in terminal
+    onTextPress(event, text) {
+        console.log(text);
     }
 
     render() {
