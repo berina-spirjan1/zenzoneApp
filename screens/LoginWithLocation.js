@@ -74,14 +74,14 @@ const styles = StyleSheet.create({
     },
     safeArea:{
         position: 'absolute',
-        zIndex: 2
+        zIndex: 1
     },
     welcomeTitle:{
         top:270,
         color: '#FFFFFF',
         textAlign: 'center',
         left:35,
-        zIndex: 2,
+        zIndex: 1,
         fontSize: 28,
         fontWeight: 'bold'
     },
@@ -90,12 +90,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         left:35,
         top:270,
-        zIndex: 2,
+        zIndex: 1,
         fontSize: 28,
         fontWeight: 'bold'
     },
     username:{
-        zIndex: 2,
+        zIndex: 1,
         top:300,
         color: '#FFFFFF',
         marginLeft: 20
@@ -120,14 +120,14 @@ const styles = StyleSheet.create({
         shadowRadius: 10
     },
     password:{
-        zIndex: 2,
+        zIndex: 1,
         color:'#FFFFFF',
         top:300,
         marginLeft: 20,
         marginTop:10
     },
     inputPassword:{
-        zIndex: 2,
+        zIndex: 1,
         height: 50,
         margin: 10,
         padding: 10,
@@ -184,7 +184,8 @@ const styles = StyleSheet.create({
         marginTop: -140,
         padding:0,
         shadowOpacity: 40,
-        elevation: 40
+        elevation: 40,
+        zIndex:0
     },
     imageTop:{
 
