@@ -34,13 +34,13 @@ export default class LoginWithLocation extends Component{
                             <Text style={styles.username}>Username</Text>
                             <TextInput style={styles.inputUsername}>
                                 <FontAwesome5 name="user"
-                                              size={20}
+                                              size={18}
                                               color={"#000000"}/>
                             </TextInput>
                             <Text style={styles.password}>Password</Text>
                             <TextInput style={styles.inputPassword}>
                                 <FontAwesome5 name="lock"
-                                              size={20}
+                                              size={18}
                                               color={"#000000"}/>
                             </TextInput>
                         </SafeAreaView>
