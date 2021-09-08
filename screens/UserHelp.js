@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import UserInfoComponent from "../components/UserInfoComponent";
 
 export default class UserHelp extends Component{
     constructor(props) {
@@ -29,19 +30,7 @@ export default class UserHelp extends Component{
                 <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                          leftElement="arrow-back"
                          centerElement="Help"/>
-                <Text style={styles.account}>Account</Text>
-                <View style={styles.userInfo}>
-                    <Image source={require('../assets/images/rodjoImage.png')}
-                           style={styles.userProfileImage}/>
-                    <Text style={styles.username}>@rodjo</Text>
-                    <Text style={styles.personalInfo}>{"\n"}Personal info</Text>
-                    <TouchableOpacity style={styles.nextButton}>
-                        <FontAwesome5 name={'chevron-right'}
-                                      size={15}
-                                      color={'#000000'}
-                                      style={styles.icon}/>
-                    </TouchableOpacity>
-                </View>
+                <UserInfoComponent/>
                 <Text style={styles.userHelp}>Help</Text>
                 <SafeAreaView style={styles.safeArea}
                               style={{height: screenHeight}}>
@@ -62,47 +51,6 @@ const styles = StyleSheet.create({
     container:{
         backgroundColor: '#cbdbf2',
         flex: 1
-    },
-    account:{
-        fontSize: 20,
-        fontFamily:'Roboto_700Bold_Italic',
-        fontWeight: 'bold',
-        marginTop: 45,
-        marginLeft: 20,
-        color: '#393F48'
-    },
-    userProfileImage:{
-        width: 100,
-        height: 100,
-        borderRadius: 100,
-        marginLeft: 20
-    },
-    userInfo:{
-        flexDirection: 'row',
-        marginTop: 25
-    },
-    username:{
-        fontWeight: 'bold',
-        marginLeft: 30,
-        marginTop:30,
-        color:'#393F48'
-    },
-    nextButton:{
-        height: 40,
-        width: 40,
-        backgroundColor: '#FFFDFD',
-        borderRadius: 10,
-        marginLeft:55,
-        marginTop:30
-    },
-    personalInfo:{
-        marginLeft:-45,
-        marginTop:40
-    },
-    icon:{
-        justifyContent: 'center',
-        textAlign: 'center',
-        marginTop:10
     },
     userHelp:{
         color: '#393f48',

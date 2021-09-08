@@ -75,7 +75,7 @@ function BottomNavigationBar(){
                             )
                         }}/>
             <Tab.Screen name={'Ranking'}
-                        component={Settings}
+                        component={UserHelp}
                         options={{
                             headerShown: false,
                             tabBarIcon: ({focused}) => (
