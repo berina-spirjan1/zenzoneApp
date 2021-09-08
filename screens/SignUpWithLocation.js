@@ -115,13 +115,15 @@ const styles = StyleSheet.create({
     },
     safeArea:{
         position: 'absolute',
-        zIndex: 2
+        zIndex: 0,
+        elevation:0,
     },
     welcomeTitle:{
         top:270,
         color: '#FFFFFF',
         textAlign: 'center',
         zIndex: 1,
+        elevation:1,
         fontSize: 28,
         fontWeight: 'bold'
     },
@@ -130,6 +132,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         top:270,
         zIndex: 1,
+        elevation: 1,
         fontSize: 28,
         fontWeight: 'bold'
     },
@@ -169,6 +172,7 @@ const styles = StyleSheet.create({
     },
     password:{
         zIndex: 1,
+        elevation:1,
         color:'#FFFFFF',
         top:300,
         marginLeft: 20,
@@ -214,8 +218,8 @@ const styles = StyleSheet.create({
         marginTop: -160,
         padding:0,
         shadowOpacity: 40,
-        elevation: 40,
-        zIndex:0
+        zIndex:0,
+        elevation:0
     },
     imageTop:{
 
