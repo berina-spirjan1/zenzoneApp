@@ -46,7 +46,7 @@ export default class Settings extends Component{
                                   size={20}
                                   color={'#3A4F72'}
                                   style={styles.icon}/>
-                    <Text style={styles.titleSection}>Dark/Light mode</Text>
+                    <Text style={styles.titleSection}> Dark/Light mode</Text>
                     <ToggleSwitch
                         isOn={false}
                         onColor="#FFFDFD"
@@ -63,7 +63,7 @@ export default class Settings extends Component{
                                   size={20}
                                   color={'#3A4F72'}
                                   style={styles.icon}/>
-                    <Text style={styles.titleSection}>Help</Text>
+                    <Text style={styles.titleSection}> Help</Text>
                     <View style={styles.buttonNext2}>
                         <NextButton/>
                     </View>
