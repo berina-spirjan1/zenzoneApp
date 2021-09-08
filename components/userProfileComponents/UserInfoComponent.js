@@ -7,22 +7,18 @@ import {
     StyleSheet
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import NextButton from "./NextButton";
 
 function UserInfoComponent(){
     return(
         <View>
             <Text style={styles.account}>Account</Text>
             <View style={styles.userInfo}>
-                <Image source={require('../assets/images/rodjoImage.png')}
+                <Image source={require('../../assets/images/rodjoImage.png')}
                        style={styles.userProfileImage}/>
                 <Text style={styles.username}>@rodjo</Text>
                 <Text style={styles.personalInfo}>{"\n"}Personal info</Text>
-                <TouchableOpacity style={styles.nextButton}>
-                    <FontAwesome5 name={'chevron-right'}
-                                  size={15}
-                                  color={'#000000'}
-                                  style={styles.icon}/>
-                </TouchableOpacity>
+                <NextButton/>
             </View>
         </View>
     )
