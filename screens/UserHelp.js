@@ -28,8 +28,7 @@ export default class UserHelp extends Component{
                     backgroundColor="#334A6D"/>
                 <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                          leftElement="arrow-back"
-                         centerElement="Help"
-                         onRightElementPress={ (label) => { console.log(label) }}/>
+                         centerElement="Help"/>
                 <Text style={styles.account}>Account</Text>
                 <View style={styles.userInfo}>
                     <Image source={require('../assets/images/rodjoImage.png')}
