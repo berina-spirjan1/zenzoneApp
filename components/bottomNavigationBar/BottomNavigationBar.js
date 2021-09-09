@@ -5,7 +5,6 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import HomePage from "../../screens/HomePage";
 import DailyChallengeDetails from "../../screens/DailyChallengeDetails";
 import Leaderboard from "../../screens/Leaderboard";
-import Login from "../../screens/Login";
 
 import TabBarCustomButton from "./TabBarCustomButton";
 import CustomTabBar from "./CustomTabBar";

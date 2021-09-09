@@ -6,7 +6,7 @@ import {
 import {Toolbar} from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-export default class MyProfile extends Component{
+export default class MyProfileInfo extends Component{
     constructor(props) {
         super();
     }
