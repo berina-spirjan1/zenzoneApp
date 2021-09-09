@@ -13,6 +13,7 @@ import {
 import {Router} from "react-native-router-flux";
 import Routes from "./routes/Routes";
 import UserProfile from "./screens/UserProfile";
+import MyProfile from "./screens/MyProfile";
 
 const Stack = createStackNavigator();
 
@@ -33,7 +34,7 @@ export default function App() {
         //     <BottomNavigationBar/>
         // </NavigationContainer>
         // <Routes/>
-        <UserProfile/>
+        <MyProfile/>
     );
 }
 
