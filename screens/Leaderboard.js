@@ -26,11 +26,11 @@ export default class Leaderboard extends Component{
           <View style={styles.container}>
               <ImageBackground source={require('../assets/images/backgroundLeaderboardLightMode.png')}
                                style={styles.imageBackground}/>
-                  <FontAwesome5 name={'crown'}
-                                size={40}
-                                color={'#FFD700'}
-                                style={styles.crownIcon}/>
-                  <View style={styles.rankings}>
+              <FontAwesome5 name={'crown'}
+                            size={40}
+                            color={'#FFD700'}
+                            style={styles.crownIcon}/>
+              <View style={styles.rankings}>
                       <View style={styles.firstPlace}>
                           <Image source={require('../assets/images/rodjoImage.png')}
                                  style={styles.userImageRankings}/>
@@ -52,7 +52,7 @@ export default class Leaderboard extends Component{
                                 numberOfLines={2}>@rodjo</Text>
                           <Text style={styles.badgesCounterThirdPlace}>15</Text>
                       </View>
-                  </View>
+              </View>
               <SafeAreaView style={styles.safeArea}
                             style={{height: screenHeight}}>
                   <ScrollView vertical={true}
@@ -116,7 +116,8 @@ const styles = StyleSheet.create({
         marginLeft:-250,
         marginTop: -80,
         flex: 1,
-        marginBottom:300
+        marginBottom:300,
+        opacity:0.5
     },
     rankings:{
         // bottom:270
