@@ -9,11 +9,10 @@ import {
     StatusBar
 } from 'react-native';
 import { StyleSheet } from 'react-native'
-import Icon from '../assets/icons/Icon';
 import LottieView from 'lottie-react-native';
 import {FontAwesome5} from "@expo/vector-icons";
-import SignUp from "./SignUp";
 import {Actions} from 'react-native-router-flux';
+import Icon from "../../assets/icons/Icon";
 
 
 export default class Login extends Component {
@@ -55,7 +54,7 @@ export default class Login extends Component {
                                backgroundColor="#6285B3"/>
                     <View style={stylesDarkMode.backgroundStyle}>
                     <LottieView style={stylesDarkMode.lottie}
-                                source={require("../assets/images/stars.json")}
+                                source={require("../../assets/images/stars.json")}
                                 autoPlay
                                 loop={true}/>
                     <Text style={stylesDarkMode.welcomeTitle}>WELCOME TO </Text>

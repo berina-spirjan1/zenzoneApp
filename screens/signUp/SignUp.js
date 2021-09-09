@@ -13,9 +13,9 @@ import {
 } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 
-import Icon from "../assets/icons/Icon";
-import Cload from "../assets/icons/Cload";
 import {Actions} from "react-native-router-flux";
+import Cload from "../../assets/icons/Cload";
+import Icon from "../../assets/icons/Icon";
 
 export default class SignUp extends Component {
     constructor(props) {
