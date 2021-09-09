@@ -12,10 +12,36 @@ import {
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import {Actions} from "react-native-router-flux";
 
 export default class UserProfile extends Component{
     constructor(props) {
         super();
+    }
+
+
+    profile() {
+        Actions.profile()
+    }
+
+    myProfile(){
+        Actions.myProfile()
+    }
+
+    badges(){
+        Actions.badges()
+    }
+
+    leaderboard(){
+        Actions.leaderboard()
+    }
+
+    activities(){
+        Actions.activities()
+    }
+
+    settings(){
+        Actions.settings()
     }
 
     render() {
@@ -34,7 +60,8 @@ export default class UserProfile extends Component{
                 <SafeAreaView>
                     <ScrollView vertical={true}
                                 style={{marginTop:0}}>
-                        <TouchableOpacity style={styles.items}>
+                        <TouchableOpacity style={styles.items}
+                                          onPress={this.myProfile}>
                             <View style={styles.itemRow}>
                                 <FontAwesome5 name={'user'}
                                               size={20}
@@ -43,7 +70,8 @@ export default class UserProfile extends Component{
                                 <Text style={styles.menuItem}>My profile</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.items}>
+                        <TouchableOpacity style={styles.items}
+                                          onPress={this.badges}>
                             <View style={styles.itemRow}>
                                 <FontAwesome5 name={'certificate'}
                                               size={20}
@@ -52,7 +80,8 @@ export default class UserProfile extends Component{
                                 <Text style={styles.menuItem}>Badges</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.items}>
+                        <TouchableOpacity style={styles.items}
+                                          onPress={this.leaderboard}>
                             <View style={styles.itemRow}>
                                 <FontAwesome5 name={'medal'}
                                               size={20}
@@ -61,7 +90,8 @@ export default class UserProfile extends Component{
                                 <Text style={styles.menuItem}>Leaderboard for this month</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.items}>
+                        <TouchableOpacity style={styles.items}
+                                          onPress={this.activities}>
                             <View style={styles.itemRow}>
                                 <FontAwesome5 name={'book-reader'}
                                               size={20}
@@ -70,7 +100,8 @@ export default class UserProfile extends Component{
                                 <Text style={styles.menuItem}>Activities</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.items}>
+                        <TouchableOpacity style={styles.items}
+                                          onPress={this.settings}>
                             <View style={styles.itemRow}>
                                 <FontAwesome5 name={'cog'}
                                               size={20}
