@@ -11,7 +11,7 @@ import {
     Dimensions
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
-import UserInfoComponent from "../components/userProfileComponents/UserInfoComponent";
+import UserInfoComponent from "../../components/userProfileComponents/UserInfoComponent";
 
 export default class UserHelp extends Component{
     constructor(props) {

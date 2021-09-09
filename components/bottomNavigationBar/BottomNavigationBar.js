@@ -10,7 +10,6 @@ import TabBarCustomButton from "./TabBarCustomButton";
 import CustomTabBar from "./CustomTabBar";
 import CreateNewActivity from "../../screens/CreateNewActivity";
 
-import UserProfile from "../../screens/UserProfile";
 import RoutesLoginSignUp from "../../routes/RoutesLoginSignUp";
 
 
@@ -71,7 +70,7 @@ function BottomNavigationBar(){
                             )
                         }}/>
             <Tab.Screen name={'Ranking'}
-                        component={UserProfile}
+                        component={Leaderboard}
                         options={{
                             headerShown: false,
                             tabBarIcon: ({focused}) => (
