@@ -11,7 +11,7 @@ import {
     Roboto_700Bold_Italic
 } from '@expo-google-fonts/roboto';
 import {Router} from "react-native-router-flux";
-import Routes from "./routes/Routes";
+import RoutesLoginSignUp from "./routes/RoutesLoginSignUp";
 import UserProfile from "./screens/UserProfile";
 import MyProfile from "./screens/MyProfile";
 import Login from "./screens/Login";

@@ -4,7 +4,7 @@ import Login from "../screens/Login";
 import SignUp from "../screens/SignUp";
 import ForgotPassword from "../screens/ForgotPassword";
 
-export default class Routes extends Component {
+export default class RoutesLoginSignUp extends Component {
     render() {
         return(
             <Router>
