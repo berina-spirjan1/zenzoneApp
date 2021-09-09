@@ -12,6 +12,7 @@ import CustomTabBar from "./CustomTabBar";
 import CreateNewActivity from "../../screens/CreateNewActivity";
 
 import UserProfile from "../../screens/UserProfile";
+import Routes from "../../routes/Routes";
 
 
 
@@ -84,7 +85,7 @@ function BottomNavigationBar(){
                             )
                         }}/>
             <Tab.Screen name={'Login'}
-                        component={Login}
+                        component={Routes}
                         options={{
                             headerShown: false,
                             tabBarIcon: ({focused}) => (
