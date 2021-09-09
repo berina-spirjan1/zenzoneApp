@@ -10,12 +10,8 @@ import Login from "../../screens/Login";
 import TabBarCustomButton from "./TabBarCustomButton";
 import CustomTabBar from "./CustomTabBar";
 import CreateNewActivity from "../../screens/CreateNewActivity";
-import DoDailyChallenge from "../../screens/DoDailyChallenge";
-import ChangePassword from "../../screens/ChangePassword";
-import LoginWithLocation from "../../screens/LoginWithLocation";
-import SignUpWithLocation from "../../screens/SignUpWithLocation";
-import UserHelp from "../../screens/UserHelp";
-import Settings from "../../screens/Settings";
+
+import UserProfile from "../../screens/UserProfile";
 
 
 
@@ -75,7 +71,7 @@ function BottomNavigationBar(){
                             )
                         }}/>
             <Tab.Screen name={'Ranking'}
-                        component={UserHelp}
+                        component={UserProfile}
                         options={{
                             headerShown: false,
                             tabBarIcon: ({focused}) => (

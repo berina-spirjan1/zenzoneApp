@@ -7,7 +7,12 @@ import AppLoading from 'expo-app-loading';
 import {
     useFonts,
     Roboto_400Regular,
-    Roboto_100Thin_Italic } from '@expo-google-fonts/roboto';
+    Roboto_100Thin_Italic,
+    Roboto_700Bold_Italic
+} from '@expo-google-fonts/roboto';
+import {Router} from "react-native-router-flux";
+import Routes from "./routes/Routes";
+import UserProfile from "./screens/UserProfile";
 
 const Stack = createStackNavigator();
 
@@ -15,7 +20,8 @@ const Stack = createStackNavigator();
 export default function App() {
     let [fontsLoaded] = useFonts({
         Roboto_400Regular,
-        Roboto_100Thin_Italic
+        Roboto_100Thin_Italic,
+        Roboto_700Bold_Italic
     });
 
     if (!fontsLoaded) {
@@ -23,10 +29,11 @@ export default function App() {
     }
 
     return (
-        <NavigationContainer>
-            <BottomNavigationBar/>
-        </NavigationContainer>
-
+        // <NavigationContainer>
+        //     <BottomNavigationBar/>
+        // </NavigationContainer>
+        // <Routes/>
+        <UserProfile/>
     );
 }
 

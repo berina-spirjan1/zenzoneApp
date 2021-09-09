@@ -7,7 +7,7 @@ import {
     StyleSheet
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import NextButton from "./NextButton";
+import NextButton from "../buttons/NextButton";
 
 function UserInfoComponent(){
     return(

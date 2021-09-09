@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         borderWidth: 0,
         shadowColor: '#000000',
         elevation: 5,
-        shadowOffset: {width: 20, height: 2},
+        shadowOffset: {width: 5, height: 2},
         shadowOpacity: 1,
         shadowRadius: 10
     },
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         borderWidth: 0,
         shadowColor: '#000000',
         elevation: 5,
-        shadowOffset: {width: 20, height: 2},
+        shadowOffset: {width: 5, height: 2},
         shadowOpacity: 1,
         shadowRadius: 10
     },
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
         borderWidth: 0,
         shadowColor: '#000000',
         elevation: 5,
-        shadowOffset: { width: 20, height: 2 },
+        shadowOffset: { width: 5, height: 2 },
         shadowOpacity: 1,
         shadowRadius: 10
     },
@@ -140,10 +140,10 @@ const styles = StyleSheet.create({
         width: 100,
         borderRadius: 18,
         shadowColor: '#000000',
-        elevation: 5,
-        shadowOffset: { width: 20, height: 2 },
+        elevation: 3,
+        shadowOffset: { width: 1, height: 0 },
         shadowOpacity: 1,
-        shadowRadius: 10,
+        shadowRadius: 2,
         marginTop:20,
         left: 225,
         marginBottom: 12
