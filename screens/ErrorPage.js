@@ -6,8 +6,6 @@ import {
     Text,
     View
 } from "react-native";
-import CollapsingToolbar from 'react-native-collapsingtoolbar';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 import RobotPictureDarkMode from "../assets/icons/RobotPictureDarkMode";
 
