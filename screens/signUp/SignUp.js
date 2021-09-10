@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component, useState} from "react";
 import {
     Dimensions,
     SafeAreaView,
@@ -16,6 +16,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import {Actions} from "react-native-router-flux";
 import Cload from "../../assets/icons/Cload";
 import Icon from "../../assets/icons/Icon";
+import {config} from "../../configuration/config";
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -49,6 +50,95 @@ export default class SignUp extends Component {
     render() {
 
         const screenHeight = Dimensions.get('window').height
+
+        // const [username, setUsername] = useState('');
+        // const [firstName, setFirstName] = useState('');
+        // const [lastName, setLastName] = useState('');
+        // const [email, setEmail] = useState('');
+        // const [officeLocation, setOfficeLocation] = useState('');
+        // const [workPosition, setWorkPosition] = useState('');
+        // const [password, setPassword] = useState('');
+        // const [confirmPassword, setConfirmPassword] = useState('');
+        //
+        // const [message, setMessage] = useState('');
+        // const [isLogin, setIsLogin] = useState(true);
+        // const [isError, setIsError] = useState(false);
+        //
+        // const onChangeHandler = () => {
+        //     setIsLogin(!isLogin);
+        //     setMessage('');
+        // }
+        //
+        // const onLoggedIn = token =>{
+        //     fetch(`${config}/user`,{
+        //         method: 'GET',
+        //         headers:{
+        //             "Content-Type": "application/json",
+        //             "Accept": "application/json",
+        //         },
+        //     })
+        //         .then(async res => {
+        //             try{
+        //                 const jsonRes = await res.json();
+        //                 if(res.status===200){
+        //                     setMessage(jsonRes.message)
+        //                 }
+        //             }
+        //             catch (err){
+        //                 console.log(err);
+        //             }
+        //         })
+        //         .catch(err =>{
+        //             console.log(err);
+        //         });
+        // }
+        //
+        // const onSubmitHandler = () =>{
+        //
+        //     const user = {
+        //         username,
+        //         firstName,
+        //         lastName,
+        //         email,
+        //         officeLocation,
+        //         workPosition,
+        //         password,
+        //         confirmPassword
+        //     };
+        //
+        //
+        //     fetch(`${config}/${isLogin ? 'login' : 'register'}`,{
+        //         method: 'POST',
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify(user)
+        //     })
+        //         .then(async res => {
+        //             try{
+        //                 const jsonRes = await res.json();
+        //                 if(res.status!==200){
+        //                     setIsError(true);
+        //                     setMessage(jsonRes.message)
+        //                 }
+        //                 else{
+        //
+        //                 }
+        //             }
+        //             catch (err){
+        //                 console.log(err);
+        //             }
+        //         })
+        //         .catch(err =>{
+        //             console.log(err);
+        //         });
+        // };
+        //
+        // const getMessage = () =>{
+        //     const status = isError ? `Error: ` : `Success: `;
+        //     return status + message;
+        // }
+
 
         return (
             <>
@@ -127,8 +217,7 @@ export default class SignUp extends Component {
                                           onPress={this.login}> Login</Text></Text>
                                 <TouchableOpacity style={stylesLightMode.button}
                                                   onPress={() => Alert.alert('SignUp')}>
-                                    <Text style={stylesDarkMode.buttonText}>
-                                        SIGN UP</Text>
+                                    <Text style={stylesDarkMode.buttonText}>SIGN UP</Text>
                                 </TouchableOpacity>
                                 <Icon style={stylesLightMode.icon}/>
                         </ScrollView>
