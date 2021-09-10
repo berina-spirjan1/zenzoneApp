@@ -1,3 +1,4 @@
+export const AUTH_STARTED = 'auth_started';
 export const AUTH_SUCCESS = 'auth_success';
 export const AUTH_FAILED = 'auth_failed';
 

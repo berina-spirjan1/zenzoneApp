@@ -14,7 +14,7 @@ import {FontAwesome5} from "@expo/vector-icons";
 import {Actions} from 'react-native-router-flux';
 import Icon from "../../assets/icons/Icon";
 import store from "../../redux/store";
-import {authFailed, authSuccess} from "../../redux/actions";
+import {authFailed, authStarted, authSuccess} from "../../redux/actions";
 
 export default class Login extends Component {
     constructor(props) {
@@ -51,11 +51,14 @@ export default class Login extends Component {
     render() {
 
         //creating actions for redux
-        //action for success login
-        store.dispatch(authSuccess)
+        //action for started login
+        store.dispatch(authStarted)
 
         //action that means something went wrong at logging in
         store.dispatch(authFailed)
+
+        //action for successfully logging in
+        store.dispatch(authSuccess);
 
         //this method will call every time when store changes
         const unsubscribe = store.subscribe(() =>{

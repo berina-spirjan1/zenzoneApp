@@ -6,9 +6,11 @@ const initialState = {
 
 export const reducer = (state = initialState, action) =>{
     switch (action.type){
-        case Types.AUTH_SUCCESS:
+        case Types.AUTH_STARTED:
             return state;
         case Types.AUTH_FAILED:
+            return state;
+        case Types.AUTH_SUCCESS:
             return state;
         case Types.FAILED_ADDING_ACTIVITY:
             return state;
@@ -25,6 +27,8 @@ export const reducer = (state = initialState, action) =>{
         case Types.SENDING_REPORT_FOR_CHALLENGE_SUCCESS:
             return state;
         case Types.SUCCESSFULLY_ADDED_ACTIVITY:
+            return state;
+        default:
             return state;
     }
 }
