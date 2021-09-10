@@ -4,7 +4,7 @@ const initialState = {
     contacts: []
 }
 
-export const reducer = (state = initialState, action) =>{
+const reducer = (state = initialState, action) =>{
     switch (action.type){
         case Types.AUTH_STARTED:
             return state;
