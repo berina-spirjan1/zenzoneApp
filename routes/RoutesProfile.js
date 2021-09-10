@@ -5,12 +5,12 @@ import {
     Scene
 } from 'react-native-router-flux';
 
-import MyProfileInfo from "../screens/MyProfileInfo";
-import UserProfile from "../screens/UserProfile";
 import Badges from "../screens/Badges";
 import Leaderboard from "../screens/Leaderboard";
 import HomePage from "../screens/HomePage";
-import Settings from "../screens/Settings";
+import UserProfile from "../screens/userProfile/UserProfile";
+import MyProfileInfo from "../screens/userProfile/MyProfileInfo";
+import Settings from "../screens/userProfile/Settings";
 
 
 export default class RoutesProfile extends Component{
