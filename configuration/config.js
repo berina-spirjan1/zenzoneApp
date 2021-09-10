@@ -7,3 +7,4 @@ export const ACTIVITY = `${API_URL}/activity`;
 export const CATEGORY = `${API_URL}/category`;
 
 export const CHANGE_PASSWORD = `${API_URL}/change-password`;
+export const USER = `${API_URL}/user`;

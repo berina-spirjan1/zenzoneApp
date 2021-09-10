@@ -16,7 +16,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import {Actions} from "react-native-router-flux";
 import Cload from "../../assets/icons/Cload";
 import Icon from "../../assets/icons/Icon";
-import {config} from "../../configuration/config";
+import {API_URL} from "../../configuration/config";
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -70,7 +70,7 @@ export default class SignUp extends Component {
         // }
         //
         // const onLoggedIn = token =>{
-        //     fetch(`${config}/user`,{
+        //     fetch(`${API_URL}/user`,{
         //         method: 'GET',
         //         headers:{
         //             "Content-Type": "application/json",
@@ -107,7 +107,7 @@ export default class SignUp extends Component {
         //     };
         //
         //
-        //     fetch(`${config}/${isLogin ? 'login' : 'register'}`,{
+        //     fetch(`${API_URL}/${isLogin ? 'login' : 'register'}`,{
         //         method: 'POST',
         //         headers: {
         //             "Content-Type": "application/json",
