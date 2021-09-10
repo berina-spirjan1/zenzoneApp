@@ -13,7 +13,8 @@ import LottieView from 'lottie-react-native';
 import {FontAwesome5} from "@expo/vector-icons";
 import {Actions} from 'react-native-router-flux';
 import Icon from "../../assets/icons/Icon";
-
+import store from "../../redux/store";
+import {authFailed, authSuccess} from "../../redux/actions";
 
 export default class Login extends Component {
     constructor(props) {
@@ -48,6 +49,20 @@ export default class Login extends Component {
     }
 
     render() {
+
+        //creating actions for redux
+        //action for success login
+        store.dispatch(authSuccess)
+
+        //action that means something went wrong at logging in
+        store.dispatch(authFailed)
+
+        //this method will call every time when store changes
+        const unsubscribe = store.subscribe(() =>{
+            console.log('Store changed! ',store.getState());
+        })
+
+
         return (
             <View style={stylesLightMode.container}>
                     <StatusBar animated={true}
