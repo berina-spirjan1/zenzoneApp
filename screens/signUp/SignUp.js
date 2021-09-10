@@ -69,18 +69,21 @@ export default class SignUp extends Component {
                                                   size={18}
                                                   color={'#000000'}/>
                                 </TextInput>
+                                <Text style={stylesLightMode.formValidation}>The username field shoudn't be empty.</Text>
                                 <Text style={stylesLightMode.hintText}>First name</Text>
                                 <TextInput style={stylesLightMode.inputLabel}>
                                     <FontAwesome5 name={'user'}
                                                   size={18}
                                                   color={'#000000'}/>
                                 </TextInput>
+                                <Text style={stylesLightMode.formValidation}>The first name field shoudn't be empty.</Text>
                                 <Text style={stylesLightMode.hintText}>Last name</Text>
                                 <TextInput style={stylesLightMode.inputLabel}>
                                     <FontAwesome5 name={'user'}
                                                   size={18}
                                                   color={'#000000'}/>
                                 </TextInput>
+                                <Text style={stylesLightMode.formValidation}>The last name field shoudn't be empty.</Text>
                                 <Text style={stylesLightMode.hintText}>E-mail</Text>
                                 <TextInput style={stylesLightMode.inputLabel}
                                            onChangeText={(text) => this.validate(text)}>
@@ -88,28 +91,37 @@ export default class SignUp extends Component {
                                                   size={18}
                                                   color={'#000000'}/>
                                 </TextInput>
+                                <Text style={stylesLightMode.formValidation}>The e-mail field shoudn't be empty.</Text>
                                 <Text style={stylesLightMode.hintText}>Office location</Text>
                                 <TextInput style={stylesLightMode.inputLabel}>
                                     <FontAwesome5 name={'map-marker-alt'}
                                                   size={18}
                                                   color={'#000000'}/>
                                 </TextInput>
+                                <Text style={stylesLightMode.formValidation}>The office location field shoudn't be empty.</Text>
                                 <Text style={stylesLightMode.hintText}>Work position</Text>
                                 <TextInput style={stylesLightMode.inputLabel}>
                                     <FontAwesome5 name={'briefcase'}
                                                   size={18}
                                                   color={'#000000'}/>
                                 </TextInput>
+                                <Text style={stylesLightMode.formValidation}>The work position field shoudn't be empty.</Text>
                                 <Text style={stylesLightMode.hintText}>Password</Text>
-                                <TextInput style={stylesLightMode.inputLabel}>
-                                    <FontAwesome5 name={'key'} size={18} color={'#000000'}/>
+                                <TextInput style={stylesLightMode.inputLabel}
+                                           secureTextEntry={true}>
+                                    <FontAwesome5 name={'key'}
+                                                  size={18}
+                                                  color={'#000000'}/>
                                 </TextInput>
-                                <Text style={stylesLightMode.hintText}>Confirm password</Text>
+                                <Text style={stylesLightMode.formValidation}>The password field shoudn't be empty.</Text>
+                                <Text style={stylesLightMode.hintText}
+                                      secureTextEntry={true}>Confirm password</Text>
                                 <TextInput style={stylesLightMode.inputLabel}>
                                     <FontAwesome5 name={'lock'}
                                                   size={18}
                                                   color={'#000000'}/>
                                 </TextInput>
+                                <Text style={stylesLightMode.formValidation}>The confirm password field shoudn't be empty.</Text>
                                 <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
                                     <Text style={{color: "#334A6D", fontWeight: 'bold'}}
                                           onPress={this.login}> Login</Text></Text>
@@ -224,6 +236,13 @@ const stylesLightMode = StyleSheet.create({
         marginTop: 0,
         marginBottom: 200,
         justifyContent: 'center'
+    },
+    formValidation:{
+        marginLeft:30,
+        fontSize:12,
+        color: 'red',
+        marginTop:5,
+        fontFamily: 'Roboto_300Light'
     }
 })
 
