@@ -30,12 +30,9 @@ export const LoginForm = () =>{
         })
             .then(async res => {
                 try{
-
                     store.dispatch(authStarted());
 
                     const jsonRes = await res.json();
-                    // const token = jsonRes.data.token;
-                    // console.log(token)
                     console.log(jsonRes)
 
                     if(res.status!==200){
