@@ -16,7 +16,10 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import {Actions} from "react-native-router-flux";
 import Cload from "../../assets/icons/Cload";
 import Icon from "../../assets/icons/Icon";
-import {API_URL} from "../../configuration/config";
+import {API_URL, LOGIN, REGISTER} from "../../configuration/config";
+import {Provider} from "react-redux";
+import store from "../../redux/store";
+import {authFailed, authStarted, authSuccess} from "../../redux/actions";
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -41,37 +44,31 @@ export default class SignUp extends Component {
         }
     }
 
-
-    //todo add handler for event that you can go to forgot password page, this only shows in terminal
-    onTextPress(event, text) {
-        console.log(text);
-    }
-
     render() {
 
         const screenHeight = Dimensions.get('window').height
 
-        // const [username, setUsername] = useState('');
-        // const [firstName, setFirstName] = useState('');
-        // const [lastName, setLastName] = useState('');
-        // const [email, setEmail] = useState('');
-        // const [officeLocation, setOfficeLocation] = useState('');
-        // const [workPosition, setWorkPosition] = useState('');
-        // const [password, setPassword] = useState('');
-        // const [confirmPassword, setConfirmPassword] = useState('');
-        //
+        const [username, setUsername] = '';
+        const [first_name, setFirstName] = '';
+        const [last_name, setLastName] = '';
+        const [email, setEmail] = '';
+        const [office_location, setOfficeLocation] = '';
+        const [work_position, setWorkPosition] = '';
+        const [password, setPassword] = '';
+        const [confirm_password, setConfirmPassword] = '';
+
         // const [message, setMessage] = useState('');
         // const [isLogin, setIsLogin] = useState(true);
         // const [isError, setIsError] = useState(false);
-        //
+
         // const onChangeHandler = () => {
         //     setIsLogin(!isLogin);
         //     setMessage('');
         // }
         //
         // const onLoggedIn = token =>{
-        //     fetch(`${API_URL}/user`,{
-        //         method: 'GET',
+        //     fetch(`${REGISTER}`,{
+        //         method: 'POST',
         //         headers:{
         //             "Content-Type": "application/json",
         //             "Accept": "application/json",
@@ -81,7 +78,7 @@ export default class SignUp extends Component {
         //             try{
         //                 const jsonRes = await res.json();
         //                 if(res.status===200){
-        //                     setMessage(jsonRes.message)
+        //                     store.dispatch(authSuccess());
         //                 }
         //             }
         //             catch (err){
@@ -92,48 +89,45 @@ export default class SignUp extends Component {
         //             console.log(err);
         //         });
         // }
-        //
-        // const onSubmitHandler = () =>{
-        //
-        //     const user = {
-        //         username,
-        //         firstName,
-        //         lastName,
-        //         email,
-        //         officeLocation,
-        //         workPosition,
-        //         password,
-        //         confirmPassword
-        //     };
-        //
-        //
-        //     fetch(`${API_URL}/${isLogin ? 'login' : 'register'}`,{
-        //         method: 'POST',
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify(user)
-        //     })
-        //         .then(async res => {
-        //             try{
-        //                 const jsonRes = await res.json();
-        //                 if(res.status!==200){
-        //                     setIsError(true);
-        //                     setMessage(jsonRes.message)
-        //                 }
-        //                 else{
-        //
-        //                 }
-        //             }
-        //             catch (err){
-        //                 console.log(err);
-        //             }
-        //         })
-        //         .catch(err =>{
-        //             console.log(err);
-        //         });
-        // };
-        //
+
+        const onSubmitHandler = () =>{
+
+            const user = {
+                username,
+                first_name,
+                last_name,
+                email,
+                password,
+                confirm_password,
+                office_location,
+                work_position,
+            };
+
+            fetch(`${REGISTER}`,{
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+                body: JSON.stringify(user)
+            })
+                .then(async res => {
+                    try{
+                        const jsonRes = await res.json();
+                        console.log(user)
+                        if(res.status!==200){
+                            store.dispatch(authFailed());
+                        }
+                        else{
+                            store.dispatch(authStarted());
+                        }
+                    }
+                    catch (err){
+                        console.log(err);
+                    }
+                })
+        };
+
         // const getMessage = () =>{
         //     const status = isError ? `Error: ` : `Success: `;
         //     return status + message;
@@ -141,7 +135,7 @@ export default class SignUp extends Component {
 
 
         return (
-            <>
+            <Provider store={store}>
                 <StatusBar
                     animated={true}
                     backgroundColor="#334A6D"/>
@@ -154,76 +148,84 @@ export default class SignUp extends Component {
                         <ScrollView vertical={true}
                                     style={stylesLightMode.scrollView}>
                                 <Text style={stylesLightMode.hintText}>Username</Text>
-                                <TextInput style={stylesLightMode.inputLabel}>
-                                    <FontAwesome5 name={'signature'}
-                                                  size={18}
-                                                  color={'#000000'}/>
+                                <TextInput style={stylesLightMode.inputLabel}
+                                           onChangeText={username}>
+                                    {/*<FontAwesome5 name={'signature'}*/}
+                                    {/*              size={18}*/}
+                                    {/*              color={'#000000'}/>*/}
                                 </TextInput>
                                 <Text style={stylesLightMode.formValidation}>The username field shoudn't be empty.</Text>
                                 <Text style={stylesLightMode.hintText}>First name</Text>
-                                <TextInput style={stylesLightMode.inputLabel}>
-                                    <FontAwesome5 name={'user'}
-                                                  size={18}
-                                                  color={'#000000'}/>
+                                <TextInput style={stylesLightMode.inputLabel}
+                                           onChangeText={setFirstName}>
+                                    {/*<FontAwesome5 name={'user'}*/}
+                                    {/*              size={18}*/}
+                                    {/*              color={'#000000'}/>*/}
                                 </TextInput>
                                 <Text style={stylesLightMode.formValidation}>The first name field shoudn't be empty.</Text>
                                 <Text style={stylesLightMode.hintText}>Last name</Text>
-                                <TextInput style={stylesLightMode.inputLabel}>
-                                    <FontAwesome5 name={'user'}
-                                                  size={18}
-                                                  color={'#000000'}/>
+                                <TextInput style={stylesLightMode.inputLabel}
+                                           onChangeText={setLastName}>
+                                    {/*<FontAwesome5 name={'user'}*/}
+                                    {/*              size={18}*/}
+                                    {/*              color={'#000000'}/>*/}
                                 </TextInput>
                                 <Text style={stylesLightMode.formValidation}>The last name field shoudn't be empty.</Text>
                                 <Text style={stylesLightMode.hintText}>E-mail</Text>
                                 <TextInput style={stylesLightMode.inputLabel}
-                                           onChangeText={(text) => this.validate(text)}>
-                                    <FontAwesome5 name={'envelope'}
-                                                  size={18}
-                                                  color={'#000000'}/>
+                                           // onChangeText={(text) => this.validate(text)}
+                                           onChangeText={setEmail}>
+                                    {/*<FontAwesome5 name={'envelope'}*/}
+                                    {/*              size={18}*/}
+                                    {/*              color={'#000000'}/>*/}
                                 </TextInput>
                                 <Text style={stylesLightMode.formValidation}>The e-mail field shoudn't be empty.</Text>
                                 <Text style={stylesLightMode.hintText}>Office location</Text>
-                                <TextInput style={stylesLightMode.inputLabel}>
-                                    <FontAwesome5 name={'map-marker-alt'}
-                                                  size={18}
-                                                  color={'#000000'}/>
+                                <TextInput style={stylesLightMode.inputLabel}
+                                           onChangeText={setOfficeLocation}>
+                                    {/*<FontAwesome5 name={'map-marker-alt'}*/}
+                                    {/*              size={18}*/}
+                                    {/*              color={'#000000'}/>*/}
                                 </TextInput>
                                 <Text style={stylesLightMode.formValidation}>The office location field shoudn't be empty.</Text>
                                 <Text style={stylesLightMode.hintText}>Work position</Text>
-                                <TextInput style={stylesLightMode.inputLabel}>
-                                    <FontAwesome5 name={'briefcase'}
-                                                  size={18}
-                                                  color={'#000000'}/>
+                                <TextInput style={stylesLightMode.inputLabel}
+                                           onChangeText={setWorkPosition}>
+                                    {/*<FontAwesome5 name={'briefcase'}*/}
+                                    {/*              size={18}*/}
+                                    {/*              color={'#000000'}/>*/}
                                 </TextInput>
                                 <Text style={stylesLightMode.formValidation}>The work position field shoudn't be empty.</Text>
                                 <Text style={stylesLightMode.hintText}>Password</Text>
                                 <TextInput style={stylesLightMode.inputLabel}
-                                           secureTextEntry={true}>
-                                    <FontAwesome5 name={'key'}
-                                                  size={18}
-                                                  color={'#000000'}/>
+                                           secureTextEntry={true}
+                                           onChangeText={setPassword}>
+                                    {/*<FontAwesome5 name={'key'}*/}
+                                    {/*              size={18}*/}
+                                    {/*              color={'#000000'}/>*/}
                                 </TextInput>
                                 <Text style={stylesLightMode.formValidation}>The password field shoudn't be empty.</Text>
                                 <Text style={stylesLightMode.hintText}
-                                      secureTextEntry={true}>Confirm password</Text>
+                                      secureTextEntry={true}
+                                      onChangeText={setConfirmPassword}>Confirm password</Text>
                                 <TextInput style={stylesLightMode.inputLabel}>
-                                    <FontAwesome5 name={'lock'}
-                                                  size={18}
-                                                  color={'#000000'}/>
+                                    {/*<FontAwesome5 name={'lock'}*/}
+                                    {/*              size={18}*/}
+                                    {/*              color={'#000000'}/>*/}
                                 </TextInput>
                                 <Text style={stylesLightMode.formValidation}>The confirm password field shoudn't be empty.</Text>
                                 <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
                                     <Text style={{color: "#334A6D", fontWeight: 'bold'}}
                                           onPress={this.login}> Login</Text></Text>
                                 <TouchableOpacity style={stylesLightMode.button}
-                                                  onPress={() => Alert.alert('SignUp')}>
+                                                  onPress={onSubmitHandler}>
                                     <Text style={stylesDarkMode.buttonText}>SIGN UP</Text>
                                 </TouchableOpacity>
                                 <Icon style={stylesLightMode.icon}/>
                         </ScrollView>
                     </SafeAreaView>
                 </View>
-        </>
+        </Provider>
 
         );
     }
