@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import store from "../../redux/store";
-import {authFailed, authStarted} from "../../redux/actions";
+import {authFailed, authStarted, authSuccess} from "../../redux/actions";
 import {
     Dimensions,
     SafeAreaView,
@@ -57,13 +57,16 @@ export const SignUpForm = () =>{
         })
             .then(async res => {
                 try{
+                    store.dispatch(authStarted());
+
                     const jsonRes = await res.json();
+
                     console.log(res)
                     if(res.status!==200){
                         store.dispatch(authFailed());
                     }
                     else{
-                        store.dispatch(authStarted());
+                        store.dispatch(authSuccess());
                     }
                 }
                 catch (err){

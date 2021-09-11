@@ -1,26 +1,10 @@
-import React, {Component, useState} from "react";
-import {
-    Dimensions,
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
-    Alert
-} from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import React, { Component } from "react";
+import { StatusBar } from "react-native";
 
-import {Actions} from "react-native-router-flux";
-import Cload from "../../assets/icons/Cload";
-import Icon from "../../assets/icons/Icon";
-import {API_URL, LOGIN, REGISTER} from "../../configuration/config";
-import {Provider} from "react-redux";
+import { Actions } from "react-native-router-flux";
+import { Provider } from "react-redux";
 import store from "../../redux/store";
-import {authFailed, authStarted, authSuccess} from "../../redux/actions";
-import {SignUpForm} from "./SignUpForm";
+import { SignUpForm } from "./SignUpForm";
 
 export default class SignUp extends Component {
     constructor(props) {
