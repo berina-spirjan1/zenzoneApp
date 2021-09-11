@@ -14,8 +14,8 @@ import {
 } from "react-native";
 import Cload from "../../assets/icons/Cload";
 import Icon from "../../assets/icons/Icon";
-import {Provider} from "react-redux";
-import {Actions} from "react-native-router-flux";
+import { Actions } from "react-native-router-flux";
+import {REGISTER} from "../../configuration/config";
 
 
 export const SignUpForm = () =>{
@@ -47,7 +47,7 @@ export const SignUpForm = () =>{
             work_position,
         };
 
-        fetch("https://vucko-1049-backend.zendev.se/api/register",{
+        fetch(`${REGISTER}`,{
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -61,7 +61,7 @@ export const SignUpForm = () =>{
 
                     const jsonRes = await res.json();
 
-                    console.log(jsonRes)
+                    console.log(jsonRes.message)
                     if(res.status!==200){
                         store.dispatch(authFailed());
                     }
