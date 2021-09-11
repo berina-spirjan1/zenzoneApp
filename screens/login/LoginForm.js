@@ -10,13 +10,13 @@ import {authFailed, authStarted, authSuccess} from "../../redux/actions";
 
 export const LoginForm = () =>{
 
-    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] =  useState('');
 
     const onLoginHandler = () =>{
 
         const user = {
-            name,
+            email,
             password,
         };
 
@@ -30,11 +30,14 @@ export const LoginForm = () =>{
         })
             .then(async res => {
                 try{
+
                     store.dispatch(authStarted());
 
                     const jsonRes = await res.json();
-
+                    // const token = jsonRes.data.token;
+                    // console.log(token)
                     console.log(jsonRes)
+
                     if(res.status!==200){
                         store.dispatch(authFailed());
                     }
@@ -60,9 +63,9 @@ export const LoginForm = () =>{
                 <Text style={stylesDarkMode.welcomeTitle}>WELCOME TO </Text>
                 <Text style={stylesDarkMode.zenzoneTitle}>ZENZONE</Text>
                 <SafeAreaView>
-                    <Text style={stylesDarkMode.username}>Username</Text>
+                    <Text style={stylesDarkMode.username}>E-mail</Text>
                     <TextInput style={stylesDarkMode.inputUsername}
-                               onChangeText={setName}>
+                               onChangeText={setEmail}>
                         {/*<FontAwesome5 name="user"*/}
                         {/*              size={20}*/}
                         {/*              color={"#000000"}/>*/}
