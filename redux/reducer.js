@@ -1,14 +1,22 @@
 import * as Types from './types';
 
 const initialState = {
-    contacts: []
+    loading: false,
+    isError: false,
+    isSuccess: false,
+    userData: []
 }
 
 //receives the action and modifies the state to give us a new store
 const reducer = (state = initialState, action) =>{
     switch (action.type){
         case Types.AUTH_STARTED:
-            return state;
+            return {
+                loading: true,
+                isError: false,
+                isSuccess: false,
+                userData: action
+            };
         case Types.AUTH_FAILED:
             return state;
         case Types.AUTH_SUCCESS:
