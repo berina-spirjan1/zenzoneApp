@@ -44,11 +44,6 @@ export default class Login extends Component {
         }
     }
 
-    //todo add handler for event that you can go to forgot password page, this only shows in terminal
-    onTextPress(event, text) {
-        console.log(text);
-    }
-
     render() {
 
         //creating actions for redux
