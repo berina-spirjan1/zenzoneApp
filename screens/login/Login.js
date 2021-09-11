@@ -52,13 +52,13 @@ export default class Login extends Component {
 
         //creating actions for redux
         //action for started login
-        store.dispatch(authStarted)
+        store.dispatch(authStarted())
 
         //action that means something went wrong at logging in
-        store.dispatch(authFailed)
+        store.dispatch(authFailed())
 
         //action for successfully logging in
-        store.dispatch(authSuccess);
+        store.dispatch(authSuccess());
 
         //this method will call every time when store changes
         const unsubscribe = store.subscribe(() =>{
