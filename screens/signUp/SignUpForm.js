@@ -19,7 +19,7 @@ import {Actions} from "react-native-router-flux";
 
 
 export const SignUpForm = () =>{
-    const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
     const [first_name, setFirstName] =  useState('');
     const [last_name, setLastName] =  useState('');
     const [email, setEmail] =  useState('');
@@ -37,7 +37,7 @@ export const SignUpForm = () =>{
     const onSubmitHandler = () =>{
 
         const user = {
-            username,
+            name,
             first_name,
             last_name,
             email,
@@ -58,7 +58,7 @@ export const SignUpForm = () =>{
             .then(async res => {
                 try{
                     const jsonRes = await res.json();
-                    console.log(user)
+                    console.log(res)
                     if(res.status!==200){
                         store.dispatch(authFailed());
                     }
@@ -83,7 +83,7 @@ export const SignUpForm = () =>{
                         style={stylesLightMode.scrollView}>
                 <Text style={stylesLightMode.hintText}>Username</Text>
                 <TextInput style={stylesLightMode.inputLabel}
-                           onChangeText={setUsername}>
+                           onChangeText={setName}>
                     {/*<FontAwesome5 name={'signature'}*/}
                     {/*              size={18}*/}
                     {/*              color={'#000000'}/>*/}
@@ -139,10 +139,10 @@ export const SignUpForm = () =>{
                     {/*              color={'#000000'}/>*/}
                 </TextInput>
                 <Text style={stylesLightMode.formValidation}>The password field shoudn't be empty.</Text>
-                <Text style={stylesLightMode.hintText}
-                      secureTextEntry={true}
-                      onChangeText={setConfirmPassword}>Confirm password</Text>
-                <TextInput style={stylesLightMode.inputLabel}>
+                <Text style={stylesLightMode.hintText}>Confirm password</Text>
+                <TextInput style={stylesLightMode.inputLabel}
+                           secureTextEntry={true}
+                           onChangeText={setConfirmPassword}>
                     {/*<FontAwesome5 name={'lock'}*/}
                     {/*              size={18}*/}
                     {/*              color={'#000000'}/>*/}
@@ -150,7 +150,7 @@ export const SignUpForm = () =>{
                 <Text style={stylesLightMode.formValidation}>The confirm password field shoudn't be empty.</Text>
                 <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
                     <Text style={{color: "#334A6D", fontWeight: 'bold'}}
-                          onPress={this.login}> Login</Text></Text>
+                          onPress={login}> Login</Text></Text>
                 <TouchableOpacity style={stylesLightMode.button}
                                   onPress={onSubmitHandler}>
                     <Text style={stylesDarkMode.buttonText}>SIGN UP</Text>
