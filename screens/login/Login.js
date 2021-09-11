@@ -15,6 +15,7 @@ import {Actions} from 'react-native-router-flux';
 import Icon from "../../assets/icons/Icon";
 import store from "../../redux/store";
 import {authFailed, authStarted, authSuccess} from "../../redux/actions";
+import {Provider} from "react-redux";
 
 export default class Login extends Component {
     constructor(props) {
@@ -67,41 +68,42 @@ export default class Login extends Component {
 
 
         return (
-            <View style={stylesLightMode.container}>
+            <Provider store={store}>
+                <View style={stylesLightMode.container}>
                     <StatusBar animated={true}
                                backgroundColor="#6285B3"/>
                     <View style={stylesDarkMode.backgroundStyle}>
-                    <LottieView style={stylesDarkMode.lottie}
-                                source={require("../../assets/images/stars.json")}
-                                autoPlay
-                                loop={true}/>
-                    <Text style={stylesDarkMode.welcomeTitle}>WELCOME TO </Text>
-                    <Text style={stylesDarkMode.zenzoneTitle}>ZENZONE</Text>
-                    <SafeAreaView>
-                        <Text style={stylesDarkMode.username}>Username</Text>
-                        <TextInput style={stylesDarkMode.inputUsername}>
-                            <FontAwesome5 name="user"
-                                          size={20}
-                                          color={"#000000"}/>
-                        </TextInput>
-                        <Text style={stylesDarkMode.password}>Password</Text>
-                        <TextInput style={stylesDarkMode.inputPassword}>
-                            <FontAwesome5 name="lock"
-                                          size={20}
-                                          color={"#000000"}/>
-                        </TextInput>
-                    </SafeAreaView>
-                    <Text style={stylesDarkMode.forgotLoginDetails}>Forgot your login details?
-                        <Text style={stylesDarkMode.helpLogin}
-                              onPress={this.forgotPassword}> Get help logging in</Text>
-                    </Text>
-                    <View>
-                        <TouchableOpacity
-                            style={stylesDarkMode.button}
-                            onPress={() => Alert.alert('Go back')}>
-                            <Text style={stylesDarkMode.loginText}>LOGIN</Text>
-                        </TouchableOpacity>
-                    </View>
+                        <LottieView style={stylesDarkMode.lottie}
+                                    source={require("../../assets/images/stars.json")}
+                                    autoPlay
+                                    loop={true}/>
+                        <Text style={stylesDarkMode.welcomeTitle}>WELCOME TO </Text>
+                        <Text style={stylesDarkMode.zenzoneTitle}>ZENZONE</Text>
+                        <SafeAreaView>
+                            <Text style={stylesDarkMode.username}>Username</Text>
+                            <TextInput style={stylesDarkMode.inputUsername}>
+                                <FontAwesome5 name="user"
+                                              size={20}
+                                              color={"#000000"}/>
+                            </TextInput>
+                            <Text style={stylesDarkMode.password}>Password</Text>
+                            <TextInput style={stylesDarkMode.inputPassword}>
+                                <FontAwesome5 name="lock"
+                                              size={20}
+                                              color={"#000000"}/>
+                            </TextInput>
+                        </SafeAreaView>
+                        <Text style={stylesDarkMode.forgotLoginDetails}>Forgot your login details?
+                            <Text style={stylesDarkMode.helpLogin}
+                                  onPress={this.forgotPassword}> Get help logging in</Text>
+                        </Text>
+                        <View>
+                            <TouchableOpacity
+                                style={stylesDarkMode.button}
+                                onPress={() => Alert.alert('Go back')}>
+                                <Text style={stylesDarkMode.loginText}>LOGIN</Text>
+                            </TouchableOpacity>
+                        </View>
                         <Text style={stylesDarkMode.signUp}>You still don't have your ZenZone account?</Text>
                         <View style={{flexDirection: 'row'}}>
                             <Text style={stylesDarkMode.next}
@@ -111,12 +113,14 @@ export default class Login extends Component {
                                           color={'#FFFFFF'}
                                           style={stylesDarkMode.nextIcon}/>
                         </View>
-                            <Icon style={stylesLightMode.icon}/>
+                        <Icon style={stylesLightMode.icon}/>
 
 
 
                     </View>
-            </View>
+                </View>
+            </Provider>
+
         )
     }
 }

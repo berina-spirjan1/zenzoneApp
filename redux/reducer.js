@@ -4,6 +4,7 @@ const initialState = {
     contacts: []
 }
 
+//receives the action and modifies the state to give us a new store
 const reducer = (state = initialState, action) =>{
     switch (action.type){
         case Types.AUTH_STARTED:
