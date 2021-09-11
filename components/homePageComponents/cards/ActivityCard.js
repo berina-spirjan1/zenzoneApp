@@ -32,7 +32,7 @@ function ActivityCard(){
                     <Image source={require("../../../assets/images/icon.png")}
                            style={styles.profilePicture}/>
                     <Text style={styles.username}>lejla_1234</Text>
-                    <Text style={styles.activityTitle}>Taj Mahal</Text>
+                    <Text style={styles.activityTitle}>{"\n"}Taj Mahal</Text>
                 </View>
                 <View>
                     <Image source={require('../../../assets/images/taj_mahal.jpg')}
@@ -100,14 +100,16 @@ const styles = StyleSheet.create({
     profilePicture:{
         width: 70,
         height: 70,
-        borderRadius:25
+        borderRadius:25,
+        marginLeft: -55
     },
     username:{
         marginLeft:30,
         fontWeight: 'bold'
     },
     activityTitle:{
-
+        marginLeft: -65,
+        marginTop: 10
     },
     activityImage:{
         marginTop:25,
