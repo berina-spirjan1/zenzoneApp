@@ -1,22 +1,10 @@
 import React, {Component} from 'react';
-import {
-    Alert,
-    SafeAreaView,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
-    StatusBar
-} from 'react-native';
-import { StyleSheet } from 'react-native'
-import LottieView from 'lottie-react-native';
-import {FontAwesome5} from "@expo/vector-icons";
+import {Alert} from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import Icon from "../../assets/icons/Icon";
 import store from "../../redux/store";
-import {authFailed, authStarted, authSuccess} from "../../redux/actions";
 import {Provider} from "react-redux";
-import {LoginForm} from "./LoginForm";
+import {LoginForm} from "../../components/loginComponents/LoginForm";
+
 
 export default class Login extends Component {
     constructor(props) {

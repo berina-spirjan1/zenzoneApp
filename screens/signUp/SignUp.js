@@ -4,7 +4,7 @@ import { StatusBar } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { Provider } from "react-redux";
 import store from "../../redux/store";
-import { SignUpForm } from "./SignUpForm";
+import {SignUpForm} from "../../components/signUpComponents/SignUpForm";
 
 export default class SignUp extends Component {
     constructor(props) {
