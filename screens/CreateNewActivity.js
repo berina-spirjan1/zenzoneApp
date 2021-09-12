@@ -14,7 +14,7 @@ import CategoryCard from "../components/homePageComponents/cards/CategoryCard";
 
 import { Toolbar } from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-
+import ImageUploader from "../components/ImageUploader";
 
 export default class CreateNewActivity extends Component{
     constructor(props) {
@@ -80,14 +80,7 @@ export default class CreateNewActivity extends Component{
                                  <SafeAreaView>
                                      <ScrollView horizontal
                                                  showsHorizontalScrollIndicator={false}>
-                                         <TouchableOpacity style={styles.cardAddPhoto}
-                                                           onPress={() => Alert.alert('Open gallery')}>
-                                             <FontAwesome5 name={'camera'}
-                                                           size={20}
-                                                           color={'#000000'}
-                                                           style={styles.cameraIcon}/>
-                                             <Text style={styles.add}>Add</Text>
-                                         </TouchableOpacity>
+                                         <ImageUploader/>
                                      </ScrollView>
                                  </SafeAreaView>
                                  <TouchableOpacity style={styles.postActivityButton}
@@ -95,6 +88,7 @@ export default class CreateNewActivity extends Component{
                                                    onPress={() => Alert.alert('Post activity successfull page')}>
                                      <Text style={styles.postActivityText}>POST ACTIVITY</Text>
                                  </TouchableOpacity>
+
                              </ScrollView>
                 </SafeAreaView>
 
@@ -179,34 +173,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft:5,
         marginTop:6
-    },
-    cardAddPhoto:{
-        backgroundColor:'#6285b3',
-        marginTop:15,
-        width: 90,
-        height: 90,
-        borderRadius: 25,
-        marginLeft:20,
-        justifyContent: 'center',
-        textAlign: 'center',
-        shadowColor: "#000000",
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.2,
-        shadowRadius: 3.84,
-        elevation: 3
-
-    },
-    cameraIcon:{
-        justifyContent: 'center',
-        marginTop:10,
-        marginLeft:35
-    },
-    add:{
-        textTransform:'uppercase',
-        marginLeft:30
     },
     postActivityButton:{
         marginBottom:100,
