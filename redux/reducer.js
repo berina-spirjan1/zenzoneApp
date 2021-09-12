@@ -18,15 +18,40 @@ const reducer = (state = initialState, action) =>{
                 userData: action
             };
         case Types.AUTH_FAILED:
-            return state;
+            return {
+                loading: false,
+                isError: true,
+                isSuccess: false,
+                userData: action
+            };
         case Types.AUTH_SUCCESS:
-            return state;
+            return {
+                loading: false,
+                isError: false,
+                isSuccess: true,
+                userData: action
+            };
         case Types.USER_REGISTRATION_STARTED:
-            return state;
+            return {
+                loading: true,
+                isError: false,
+                isSuccess: false,
+                userData: action
+            };
         case Types.USER_REGISTRATION_FAILED:
-            return state;
+            return {
+                loading: false,
+                isError: true,
+                isSuccess: false,
+                userData: action
+            };
         case Types.USER_REGISTRATION_SUCCESS:
-            return state;
+            return {
+                loading: false,
+                isError: false,
+                isSuccess: true,
+                userData: action
+            };
         case Types.SUCCESSFULLY_ADDED_ACTIVITY:
             return state;
         case Types.FAILED_ADDING_ACTIVITY:
