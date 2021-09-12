@@ -3,14 +3,15 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { FontAwesome5 } from "@expo/vector-icons";
 
 import HomePage from "../../screens/HomePage";
-import DailyChallengeDetails from "../../screens/DailyChallengeDetails";
-import Leaderboard from "../../screens/Leaderboard";
 
 import TabBarCustomButton from "./TabBarCustomButton";
 import CustomTabBar from "./CustomTabBar";
 import CreateNewActivity from "../../screens/CreateNewActivity";
 
 import RoutesLoginSignUp from "../../routes/RoutesLoginSignUp";
+import LoginWithLocation from "../../screens/login/LoginWithLocation";
+
+import ChangePassword from "../../screens/ChangePassword";
 
 
 
@@ -44,7 +45,7 @@ function BottomNavigationBar(){
                             )
                         }}/>
             <Tab.Screen name={'Challenge'}
-                        component={DailyChallengeDetails}
+                        component={ChangePassword}
                         options={{
                             headerShown: false,
                             tabBarIcon: ({focused}) => (
@@ -70,7 +71,7 @@ function BottomNavigationBar(){
                             )
                         }}/>
             <Tab.Screen name={'Ranking'}
-                        component={Leaderboard}
+                        component={LoginWithLocation}
                         options={{
                             headerShown: false,
                             tabBarIcon: ({focused}) => (

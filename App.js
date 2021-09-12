@@ -1,8 +1,8 @@
 import React from "react";
-import {StyleSheet} from "react-native";
-import {NavigationContainer} from "@react-navigation/native";
+import { StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 import BottomNavigationBar from "./components/bottomNavigationBar/BottomNavigationBar";
-import {createStackNavigator} from "@react-navigation/stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import AppLoading from 'expo-app-loading';
 import {
     Roboto_100Thin_Italic,
@@ -29,10 +29,10 @@ export default function App() {
     }
 
     return (
-        // <NavigationContainer>
-        //     <BottomNavigationBar/>
-        // </NavigationContainer>
-        <SignUp/>
+        <NavigationContainer>
+            <BottomNavigationBar/>
+        </NavigationContainer>
+         // <SignUp/>
     );
 }
 
