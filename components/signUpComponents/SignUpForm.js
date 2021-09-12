@@ -14,7 +14,8 @@ import {
     Text,
     TextInput,
     TouchableOpacity,
-    View
+    View,
+    Alert
 } from "react-native";
 import Cload from "../../assets/icons/Cload";
 import Icon from "../../assets/icons/Icon";
