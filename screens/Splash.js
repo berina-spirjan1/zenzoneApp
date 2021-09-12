@@ -3,9 +3,9 @@ import {View} from "react-native";
 import LottieView from 'lottie-react-native';
 import ZenZoneTitle from "../assets/icons/ZenZoneTitle";
 
-export default class Splash extends Component<Props>{
-
+export default class Splash extends Component{
     render() {
+
         return(
 
             <View>
