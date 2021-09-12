@@ -1,8 +1,6 @@
 import React from "react";
 import {
     Card,
-    CardImage,
-    CardTitle,
     CardContent,
     CardAction
 } from 'react-native-card-view';
