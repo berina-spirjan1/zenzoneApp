@@ -42,3 +42,45 @@ export function userRegistrationSuccess(){
         type: actions.USER_REGISTRATION_SUCCESS
     }
 }
+
+//action for started changing forgot password
+export function forgotPasswordChangingStarted(){
+    return{
+        type: actions.FORGOT_PASSWORD_CHANGING_STARTED
+    }
+}
+
+//action that means something went wrong when user tried to change his/her forgot password
+export function forgotPasswordChangingFailed(){
+    return{
+        type: actions.FORGOT_PASSWORD_CHANGING_FAILED
+    }
+}
+
+//action for successfully changed forgot password
+export function forgotPasswordChangedSuccess(){
+    return{
+        type: actions.FORGOT_PASSWORD_CHANGED_SUCCESS
+    }
+}
+
+//action for started changing password
+export function changePasswordStarted(){
+    return{
+        type: actions.CHANGE_PASSWORD_STARTED
+    }
+}
+
+//action for failed changing password
+export function changePasswordFailed(){
+    return{
+        type: actions.CHANGE_PASSWORD_FAILED
+    }
+}
+
+//action for successfully changed password
+export function changePasswordSuccess(){
+    return{
+        type: actions.CHANGE_PASSWORD_SUCCESS
+    }
+}
