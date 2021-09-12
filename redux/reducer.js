@@ -52,6 +52,48 @@ const reducer = (state = initialState, action) =>{
                 isSuccess: true,
                 userData: action
             };
+        case Types.FORGOT_PASSWORD_CHANGING_STARTED:
+            return{
+                loading: true,
+                isError: false,
+                isSuccess: false,
+                userData: action
+            };
+        case Types.FORGOT_PASSWORD_CHANGING_FAILED:
+            return{
+                loading: false,
+                isError: true,
+                isSuccess: false,
+                userData: action
+            };
+        case Types.FORGOT_PASSWORD_CHANGED_SUCCESS:
+            return{
+                loading: false,
+                isError: false,
+                isSuccess: true,
+                userData: action
+            };
+        case Types.CHANGE_PASSWORD_STARTED:
+            return{
+                loading: true,
+                isError: false,
+                isSuccess: false,
+                userData: action
+            };
+        case Types.CHANGE_PASSWORD_FAILED:
+            return{
+                loading: false,
+                isError: true,
+                isSuccess: false,
+                userData: action
+            };
+        case Types.CHANGE_PASSWORD_SUCCESS:
+            return{
+                loading:false,
+                isError: false,
+                isSuccess: true,
+                userData: action
+            };
         case Types.SUCCESSFULLY_ADDED_ACTIVITY:
             return state;
         case Types.FAILED_ADDING_ACTIVITY:
