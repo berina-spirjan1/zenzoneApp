@@ -1,11 +1,9 @@
 import React, {useState} from "react";
 import store from "../../redux/store";
 import {
-    authFailed,
-    authStarted,
-    authSuccess,
     userRegistrationFailed,
-    userRegistrationStarted, userRegistrationSuccess
+    userRegistrationStarted,
+    userRegistrationSuccess
 } from "../../redux/actions";
 import {
     Dimensions,
