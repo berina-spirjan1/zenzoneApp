@@ -69,6 +69,7 @@ export const LoginForm = () =>{
                     </TextInput>
                     <Text style={stylesDarkMode.password}>Password</Text>
                     <TextInput style={stylesDarkMode.inputPassword}
+                               secureTextEntry={true}
                                onChangeText={setPassword}>
                         {/*<FontAwesome5 name="lock"*/}
                         {/*              size={20}*/}
@@ -78,8 +79,7 @@ export const LoginForm = () =>{
                 <Text style={stylesDarkMode.forgotLoginDetails}>Forgot your login details?
                     <Text style={stylesDarkMode.helpLogin}
                           // onPress={this.forgotPassword}
-                    >
-                        Get help logging in</Text>
+                    > Get help logging in</Text>
                 </Text>
                 <View>
                     <TouchableOpacity
@@ -216,7 +216,8 @@ const stylesLightMode = StyleSheet.create({
     icon: {
         flex: 1,
         marginTop: -50,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginBottom: 100
     },
     signUp:{
 
@@ -226,7 +227,7 @@ const stylesLightMode = StyleSheet.create({
 
 const stylesDarkMode = StyleSheet.create({
     backgroundStyle: {
-        backgroundColor: "#1C1F23"
+        backgroundColor: "#1C1F23",
     },
     lottie:{
         flex:1,
@@ -350,8 +351,7 @@ const stylesDarkMode = StyleSheet.create({
         fontSize: 10,
         color: '#FFFFFF',
         marginLeft: 150,
-        marginTop: 50
-
+        marginTop: 10
     },
     next: {
         color: '#FFFFFF',
