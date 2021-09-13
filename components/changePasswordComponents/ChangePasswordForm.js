@@ -84,7 +84,7 @@ export const ChangePasswordForm = () =>{
                     <Text style={styles.buttonText}>Confirm</Text>
                 </TouchableOpacity>
             </View>
-            {/*<ChangePasswordLightIcon style={styles.changePasswordIcon}/>*/}
+            <ChangePasswordLightIcon style={styles.changePasswordIcon}/>
         </View>
     )
 }

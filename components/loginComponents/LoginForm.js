@@ -3,7 +3,7 @@ import LottieView from "lottie-react-native";
 import {FontAwesome5} from "@expo/vector-icons";
 import Icon from "../../assets/icons/Icon";
 import React, {useState} from "react";
-import {LOGIN, REGISTER} from "../../configuration/config";
+import {LOGIN} from "../../configuration/config";
 import store from "../../redux/store";
 import {authFailed, authStarted, authSuccess} from "../../redux/actions";
 

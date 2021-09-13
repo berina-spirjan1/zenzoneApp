@@ -42,4 +42,3 @@ export const SENDING_REPORT_FOR_CHALLENGE_SUCCESS = 'sending_report_for_challeng
 export const STARTED_UPDATING_USER_INFORMATIONS = 'started_updating_user_informations';
 export const FAILED_UPDATING_USER_INFORMATIONS = 'failed_updating_user_informations';
 
-//todo add more states for different status in pages!
