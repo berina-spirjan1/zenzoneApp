@@ -28,8 +28,7 @@ export default class CreateNewActivity extends Component{
                     backgroundColor="#6285B3"/>
                 <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                          // leftElement="arrow-back"
-                         centerElement="Activities"
-                         onRightElementPress={ (label) => { console.log(label) }}/>
+                         centerElement="Activities"/>
                 <SafeAreaView>
                              <ScrollView>
                                  <View style={{flexDirection: 'row'}}>

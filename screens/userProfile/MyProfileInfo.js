@@ -20,9 +20,9 @@ export default class MyProfileInfo extends Component{
                 <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                          leftElement="arrow-back"
                          centerElement="My profile"/>
-                <ImageBackground source={require('../assets/images/backgroundLeaderboardLightMode.png')}
+                <ImageBackground source={require('../../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
-                <Image source={require('../assets/images/rodjoImage.png')}
+                <Image source={require('../../assets/images/rodjoImage.png')}
                        style={styles.userImage}/>
                 <Text style={styles.username}>@arnel_maric</Text>
                 <SafeAreaView>

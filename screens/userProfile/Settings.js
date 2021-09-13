@@ -5,11 +5,12 @@ import {
     Text, StatusBar
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
-import UserInfoComponent from "../components/userProfileComponents/UserInfoComponent";
+
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import BackgroundForIconsUserProfile from "../components/backgrounds/BackgroundForIconsUserProfile";
-import NextButton from "../components/buttons/NextButton";
 import ToggleSwitch from "toggle-switch-react-native";
+import UserInfoComponent from "../../components/userProfileComponents/UserInfoComponent";
+import BackgroundForIconsUserProfile from "../../components/backgrounds/BackgroundForIconsUserProfile";
+import NextButton from "../../components/buttons/NextButton";
 
 
 export default class Settings extends Component{

@@ -1,15 +1,5 @@
-import React, { Component } from 'react';
-import {
-    View,
-    Text,
-    TextInput,
-    StyleSheet,
-    TouchableOpacity,
-    StatusBar,
-    Alert
-} from 'react-native';
-import {FontAwesome5} from "@expo/vector-icons";
-import ChangePasswordLightIcon from "../assets/icons/ChangePasswordLightIcon";
+import React, {Component} from 'react';
+import {StatusBar} from 'react-native';
 import {Toolbar} from "react-native-material-ui";
 import {ChangePasswordForm} from "../components/changePasswordComponents/ChangePasswordForm";
 

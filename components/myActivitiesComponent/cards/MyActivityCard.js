@@ -53,14 +53,16 @@ const styles = StyleSheet.create({
         height: 100,
         width: 100,
         borderRadius: 11,
-        marginLeft: -20,
+        marginLeft: 20,
         marginTop: 10
     },
     activityTitle:{
         fontSize: 18,
         fontFamily: 'Roboto_400Regular',
         marginTop: 20,
-        marginLeft: 10
+        marginLeft: 10,
+        marginRight: 10,
+        paddingRight: 10
     },
     button:{
         backgroundColor: '#6285B3',
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
         height: 30,
         width: 90,
         marginTop: -70,
-        marginLeft: -10,
+        marginLeft: 20,
         padding: 7
     },
     buttonText:{

@@ -6,10 +6,8 @@ import {CHANGE_PASSWORD, FORGOT_PASSWORD} from "../../configuration/config";
 import store from "../../redux/store";
 import {
     changePasswordFailed,
-    changePasswordStarted, changePasswordSuccess,
-    forgotPasswordChangedSuccess,
-    forgotPasswordChangingFailed,
-    forgotPasswordChangingStarted
+    changePasswordStarted,
+    changePasswordSuccess,
 } from "../../redux/actions";
 
 
