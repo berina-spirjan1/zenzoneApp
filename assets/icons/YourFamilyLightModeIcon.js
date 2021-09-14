@@ -1,13 +1,13 @@
 import * as React from "react"
 import Svg, { G, Path, Ellipse } from "react-native-svg"
 
-function YourFamillyLightModeIcon(props) {
+function YourFamilyLightModeIcon(props) {
     return (
         <Svg
             xmlns="http://www.w3.org/2000/svg"
-            width={432.5}
-            height={229.79}
-            viewBox="0 0 432.5 229.79"
+            width={310}
+            height={180}
+            viewBox="0 0 410 250"
             {...props}
         >
             <G data-name="Company-pana (1)">
@@ -4049,4 +4049,4 @@ function YourFamillyLightModeIcon(props) {
     )
 }
 
-export default YourFamillyLightModeIcon
+export default YourFamilyLightModeIcon

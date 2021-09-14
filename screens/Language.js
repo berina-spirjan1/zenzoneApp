@@ -9,7 +9,6 @@ import { View,
          Alert
 } from "react-native";
 
-import { FontAwesome5 } from "@expo/vector-icons";
 import UserInfoComponent from "../components/userProfileComponents/UserInfoComponent";
 
 export default class Language extends Component{
@@ -26,12 +25,6 @@ export default class Language extends Component{
                            backgroundColor="#ABC4E9"/>
                 <View style={ styles.container }>
                     <UserInfoComponent/>
-                        <TouchableOpacity style={ styles.buttonUserInfo }
-                                          onPress={() => Alert.alert('Button user info clicked')}>
-                            <FontAwesome5 name={'arrow-right'}
-                                          size={13}
-                                          color={'#847F7F'}/>
-                        </TouchableOpacity>
                     <Text style={ styles.languageSettings }>Language settings</Text>
                     <View style={ styles.languages }>
                         <View style={ styles.englishLanguage }>
@@ -99,10 +92,13 @@ const styles = StyleSheet.create({
     englishLanguage:{
         backgroundColor: '#ABC4E9',
         padding: 8,
+        marginTop: 20,
         marginLeft: 20,
-        height: 50,
-        width: 220,
-        borderRadius: 27
+        height: 70,
+        width: 310,
+        borderRadius: 27,
+        marginBottom: 20,
+        flexDirection: 'row'
     },
     englishFlag:{
         height: 50,
@@ -110,18 +106,25 @@ const styles = StyleSheet.create({
         borderRadius: 50
     },
     englishText:{
-        left:150
+        marginLeft: 50,
+        marginTop: 15,
+        fontFamily: 'Roboto_700Bold',
+        fontSize: 18,
+        color: '#455061'
     },
     checkboxEnglish:{
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#FFFFFF',
+        marginLeft: 85,
+        marginTop: 10
     },
     bosnianLanguage:{
         backgroundColor: '#ABC4E9',
         padding: 8,
         marginLeft: 20,
-        height: 50,
-        width: 220,
-        borderRadius: 27
+        height: 70,
+        width: 310,
+        borderRadius: 27,
+        flexDirection: 'row'
     },
     bosnianFlag:{
         height: 50,
@@ -129,9 +132,16 @@ const styles = StyleSheet.create({
         borderRadius: 50
     },
     bosnianText:{
-
+        marginLeft: 50,
+        marginTop: 15,
+        fontFamily: 'Roboto_700Bold',
+        fontSize: 18,
+        color: '#455061'
     },
     checkboxBosnian:{
-        backgroundColor: '#FFFFFF'
+        backgroundColor: '#FFFFFF',
+        borderRadius: 20,
+        marginTop: 10,
+        marginLeft: 80
     }
 })

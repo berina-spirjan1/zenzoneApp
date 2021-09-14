@@ -1,7 +1,7 @@
 import * as React from "react"
 import Svg, { Path, G, Ellipse } from "react-native-svg"
 
-function YourFamillyDarkModeIcon(props) {
+function YourFamilyDarkModeIcon(props) {
     return (
         <Svg
             xmlns="http://www.w3.org/2000/svg"
@@ -4043,4 +4043,4 @@ function YourFamillyDarkModeIcon(props) {
     )
 }
 
-export default YourFamillyDarkModeIcon
+export default YourFamilyDarkModeIcon
