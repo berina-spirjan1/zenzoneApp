@@ -1,4 +1,14 @@
-import {Alert, SafeAreaView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {
+    Alert,
+    AsyncStorage,
+    SafeAreaView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from "react-native";
 import LottieView from "lottie-react-native";
 import {FontAwesome5} from "@expo/vector-icons";
 import Icon from "../../assets/icons/Icon";
@@ -39,7 +49,9 @@ export const LoginForm = () =>{
                         store.dispatch(authFailed());
                     }
                     else{
+                        await AsyncStorage.setItem('jwt', jsonRes.token)
                         store.dispatch(authSuccess());
+                        this.props.navigator.pop();
                     }
                 }
                 catch (err){

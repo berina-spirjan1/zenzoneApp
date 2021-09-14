@@ -21,6 +21,8 @@ import Cload from "../../assets/icons/Cload";
 import Icon from "../../assets/icons/Icon";
 import { Actions } from "react-native-router-flux";
 import {REGISTER} from "../../configuration/config";
+import {useNavigation} from "@react-navigation/core";
+import {AsyncStorage} from "react-native";
 
 
 export const SignUpForm = () =>{
@@ -38,6 +40,8 @@ export const SignUpForm = () =>{
     const login = () => {
         Actions.login()
     }
+
+    const navigation = useNavigation();
 
     const onSubmitHandler = () =>{
 
