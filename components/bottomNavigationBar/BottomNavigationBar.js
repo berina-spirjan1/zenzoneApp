@@ -12,6 +12,9 @@ import RoutesLoginSignUp from "../../routes/RoutesLoginSignUp";
 import LoginWithLocation from "../../screens/login/LoginWithLocation";
 
 import ChangePassword from "../../screens/ChangePassword";
+import MyActivities from "../../screens/MyActivities";
+import RoutesProfile from "../../routes/RoutesProfile";
+import RoutesMyActivity from "../../routes/RoutesMyActivity";
 
 
 
@@ -45,7 +48,7 @@ function BottomNavigationBar(){
                             )
                         }}/>
             <Tab.Screen name={'Challenge'}
-                        component={ChangePassword}
+                        component={RoutesMyActivity}
                         options={{
                             headerShown: false,
                             tabBarIcon: ({focused}) => (

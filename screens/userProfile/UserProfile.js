@@ -8,7 +8,7 @@ import {
     Text,
     TouchableOpacity,
     SafeAreaView,
-    ScrollView
+    ScrollView, Dimensions
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -17,11 +17,6 @@ import {Actions} from "react-native-router-flux";
 export default class UserProfile extends Component{
     constructor(props) {
         super();
-    }
-
-
-    profile() {
-        Actions.profile()
     }
 
     myProfile(){
@@ -45,6 +40,9 @@ export default class UserProfile extends Component{
     }
 
     render() {
+
+        const screenHeight = Dimensions.get('window').height
+
         return(
             <View style={styles.container}>
                 <StatusBar
@@ -57,9 +55,10 @@ export default class UserProfile extends Component{
                 <Image source={require('../../assets/images/rodjoImage.png')}
                        style={styles.userImage}/>
                 <Text style={styles.username}>@arnel_maric</Text>
-                <SafeAreaView>
+                <SafeAreaView style={styles.safeArea}
+                              style={{height: screenHeight}}>
                     <ScrollView vertical={true}
-                                style={{marginTop:0}}>
+                                style={styles.scrollView}>
                         <TouchableOpacity style={styles.items}
                                           onPress={this.myProfile}>
                             <View style={styles.itemRow}>
@@ -109,15 +108,7 @@ export default class UserProfile extends Component{
                                 <Text style={styles.menuItem}>Settings</Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.bottomTabBar}>
-                            <View style={styles.itemRow}>
-                                <FontAwesome5 name={'sign-in-alt'}
-                                              size={20}
-                                              color={'#3B495E'}/>
-                                <Text style={styles.menuItem}>Logout</Text>
-                            </View>
-
-                        </TouchableOpacity>
+                        <View style={styles.bottom}/>
                     </ScrollView>
                 </SafeAreaView>
 
@@ -132,14 +123,14 @@ const styles = StyleSheet.create({
         flex: 1
     },
     imageBackground:{
-        height: 520,
+        height: 500,
         width: 700,
         justifyContent: 'center',
-        marginLeft:-170,
-        marginTop: -90,
-        opacity:0.5,
+        marginLeft:-150,
+        marginTop: -150,
         flex: 1,
-        marginBottom:300
+        marginBottom:300,
+        opacity:0.5
     },
     userImage:{
         width: 150,
@@ -174,10 +165,16 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#616C75'
     },
-    bottomTabBar:{
-        backgroundColor: '#93B4E5',
-        height: 60,
-        paddingLeft: 0,
-        paddingTop:10
+    bottom:{
+        marginBottom: 220
+    },
+    safeArea:{
+        flex:1,
+        paddingTop: StatusBar.currentHeight,
+        paddingVertical: 20
+    },
+    scrollView:{
+        alignSelf: 'stretch',
+        marginBottom: 250
     }
 })

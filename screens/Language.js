@@ -10,6 +10,7 @@ import { View,
 } from "react-native";
 
 import { FontAwesome5 } from "@expo/vector-icons";
+import UserInfoComponent from "../components/userProfileComponents/UserInfoComponent";
 
 export default class Language extends Component{
     constructor(props) {
@@ -19,66 +20,31 @@ export default class Language extends Component{
 
     render() {
 
-        const [username, setUsername] = useState('')
-        const [userProfilePicture, setUserProfilePicture] = useState('')
-        const [isEnglish, setEnglish] = useState(true)
-
-        const getData = () => {
-            //GET request
-            fetch('https://neki.json', {
-                method: 'GET',
-                //Request Type
-            })
-                .then((response) => response.json())
-                //If response is in json then in success
-                .then((responseJson) => {
-                    //Success
-                    alert(JSON.stringify(responseJson));
-                    console.log(responseJson);
-                })
-                //If response is not in json then in error
-                .catch((error) => {
-                    //Error
-                    alert(JSON.stringify(error));
-                    console.error(error);
-                });
-        }
-
             return(
             <>
                 <StatusBar animated={ true }
                            backgroundColor="#ABC4E9"/>
                 <View style={ styles.container }>
-                    <Text style={ styles.account }>Account</Text>
-                    <View style={ styles.userInformation }>
-                        <Image source={ require('../assets/images/userIcon.svg') }
-                               style={ styles.image }/>
-                        <Text style={ styles.username }>{setUsername}</Text>
-                        <Text style={ styles.personalInfo }>Personal info</Text>
+                    <UserInfoComponent/>
                         <TouchableOpacity style={ styles.buttonUserInfo }
                                           onPress={() => Alert.alert('Button user info clicked')}>
                             <FontAwesome5 name={'arrow-right'}
                                           size={13}
                                           color={'#847F7F'}/>
                         </TouchableOpacity>
-                    </View>
                     <Text style={ styles.languageSettings }>Language settings</Text>
                     <View style={ styles.languages }>
                         <View style={ styles.englishLanguage }>
                             <Image source={ require('../assets/images/englishFlag.png') }
                                    style={ styles.englishFlag }/>
                             <Text style={ styles.englishText }>English</Text>
-                            <CheckBox value={ isEnglish }
-                                      onValueChange={ setEnglish }
-                                      style={ styles.checkboxEnglish }/>
+                            <CheckBox style={ styles.checkboxEnglish }/>
                         </View>
                         <View style={styles.bosnianLanguage}>
                             <Image source={ require('../assets/images/bosnianFlag.png') }
                                    style={ styles.bosnianFlag }/>
                             <Text style={ styles.bosnianText }>Bosnian</Text>
-                            <CheckBox value={ isEnglish }
-                                      onValueChange={ setEnglish }
-                                      style={ styles.checkboxBosnian }/>
+                            <CheckBox style={ styles.checkboxBosnian }/>
                         </View>
                     </View>
                 </View>
@@ -90,7 +56,8 @@ export default class Language extends Component{
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: '#CBDBF2'
+        backgroundColor: '#CBDBF2',
+        flex: 1
     },
     account:{
         color: '#000000',

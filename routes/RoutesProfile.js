@@ -18,12 +18,12 @@ export default class RoutesProfile extends Component{
         return(
             <Router>
                 <Stack key={"root"} hideNavBar={true}>
-                    <Scene key={"profile"} component={UserProfile} title={"Profile"} initial={true}/>
-                    <Scene key={"myProfile"} component={MyProfileInfo} title={"My profile"} />
-                    <Scene key={"badges"} component={Badges} title={"Badges"}/>
-                    <Scene key={"leaderboard"} component={Leaderboard} title={"Leaderboard"}/>
-                    <Scene key={"activities"} component={HomePage} title={"Activities"}/>
-                    <Scene key={"settings"} component={Settings} title={"Settings"}/>
+                    <Scene key={"profile"} component={UserProfile} title={"profile"} initial={true}/>
+                    <Scene key={"myProfile"} component={MyProfileInfo} title={"myProfile"} />
+                    <Scene key={"badges"} component={Badges} title={"badges"}/>
+                    <Scene key={"leaderboard"} component={Leaderboard} title={"leaderboard"}/>
+                    <Scene key={"activities"} component={HomePage} title={"activities"}/>
+                    <Scene key={"settings"} component={Settings} title={"settings"}/>
                 </Stack>
             </Router>
         )
