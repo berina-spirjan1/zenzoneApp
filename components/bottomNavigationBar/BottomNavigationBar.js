@@ -15,6 +15,7 @@ import RoutesMyActivity from "../../routes/RoutesMyActivity";
 import Badges from "../../screens/Badges";
 import DailyChallengeDetails from "../../screens/DailyChallengeDetails";
 import RoutesForChallenge from "../../routes/RoutesForChallenge";
+import Congratulations from "../../screens/Congratulations";
 
 
 

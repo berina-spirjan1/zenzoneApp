@@ -23,6 +23,11 @@ export default class DoDailyChallenge extends Component{
         super();
     }
 
+    congratulations(){
+        Actions.congratulations()
+    }
+
+
     challengeDetails(){
         Actions.challengeDetails()
     }
@@ -65,8 +70,7 @@ export default class DoDailyChallenge extends Component{
                                    multiline={true}/>
                         <DoChallengeIconDarkMode style={{ marginTop: 10 }}/>
                         <TouchableOpacity style={styles.finishButton}
-                                          //todo add function for sending report for daily challenge to backend
-                                          onPress={() => Alert.alert('Finish daily')}>
+                                          onPress={this.congratulations}>
                             <Text style={styles.finishText}>finish</Text>
                         </TouchableOpacity>
                     </ScrollView>
