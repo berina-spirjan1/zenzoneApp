@@ -10,12 +10,16 @@ import {
     View
 } from "react-native";
 import BackgroundForLoginLocation from "../../components/backgrounds/BackgroundForLoginLocation";
-import {FontAwesome5} from "@expo/vector-icons";
-import React, {useState} from "react";
-import {Actions} from "react-native-router-flux";
-import {REGISTER} from "../../configuration/config";
+import { FontAwesome5 } from "@expo/vector-icons";
+import React, { useState } from "react";
+import { Actions } from "react-native-router-flux";
+import { REGISTER } from "../../configuration/config";
 import store from "../../redux/store";
-import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../../redux/actions";
+import {
+    userRegistrationFailed,
+    userRegistrationStarted,
+    userRegistrationSuccess
+} from "../../redux/actions";
 
 
 export const SignUpWithLocationForm = () =>{

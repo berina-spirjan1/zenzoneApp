@@ -1,5 +1,8 @@
 import React from "react";
-import {Card, CardAction} from "react-native-card-view";
+import {
+    Card,
+    CardAction
+} from "react-native-card-view";
 import {
     Alert,
     Image,

@@ -1,8 +1,15 @@
-import {Alert, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
-import {FontAwesome5} from "@expo/vector-icons";
+import {
+    Alert,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from "react-native";
+import { FontAwesome5 } from "@expo/vector-icons";
 import ChangePasswordLightIcon from "../../assets/icons/ChangePasswordLightIcon";
-import React, {useState} from "react";
-import {CHANGE_PASSWORD, FORGOT_PASSWORD} from "../../configuration/config";
+import React, { useState } from "react";
+import { CHANGE_PASSWORD } from "../../configuration/config";
 import store from "../../redux/store";
 import {
     changePasswordFailed,

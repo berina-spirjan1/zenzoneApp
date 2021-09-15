@@ -1,9 +1,9 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import {
     View,
     StyleSheet, StatusBar, ImageBackground, Image, Text, SafeAreaView, ScrollView, TouchableOpacity
 } from "react-native";
-import {Toolbar} from "react-native-material-ui";
+import { Toolbar } from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 export default class MyProfileInfo extends Component{

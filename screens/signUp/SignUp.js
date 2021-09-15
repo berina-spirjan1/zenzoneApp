@@ -4,7 +4,7 @@ import { StatusBar } from "react-native";
 import { Actions } from "react-native-router-flux";
 import { Provider } from "react-redux";
 import store from "../../redux/store";
-import {SignUpForm} from "../../components/signUpComponents/SignUpForm";
+import { SignUpForm } from "../../components/signUpComponents/SignUpForm";
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -13,20 +13,6 @@ export default class SignUp extends Component {
 
     login() {
         Actions.login()
-    }
-
-    validate = (text) => {
-        console.log(text);
-        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
-        if (reg.test(text) === false) {
-            console.log("Email is Not Correct");
-            this.setState({ email: text })
-            return false;
-        }
-        else {
-            this.setState({ email: text })
-            console.log("Email is Correct");
-        }
     }
 
     render() {

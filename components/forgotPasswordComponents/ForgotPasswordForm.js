@@ -1,9 +1,17 @@
-import {Alert, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
-import {FontAwesome5} from "@expo/vector-icons";
+import {
+    Alert,
+    StatusBar,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from "react-native";
+import { FontAwesome5 } from "@expo/vector-icons";
 import ForgotPasswordFormIcon from "../../assets/icons/ForgotPasswordFormIcon";
 import ForgotPasswordWomenIcon from "../../assets/icons/ForgotPasswordWomenIcon";
-import React, {useState} from "react";
-import {FORGOT_PASSWORD, REGISTER} from "../../configuration/config";
+import React, { useState } from "react";
+import { FORGOT_PASSWORD } from "../../configuration/config";
 import store from "../../redux/store";
 import {
     forgotPasswordChangedSuccess,

@@ -5,7 +5,7 @@ import {
 } from "react-native";
 import YourFamilyLightModeIcon from "../assets/icons/YourFamilyLightModeIcon";
 import FamilyCard from "../components/followerComponents/cards/FamilyCard";
-import {Toolbar} from "react-native-material-ui";
+import { Toolbar } from "react-native-material-ui";
 
 export default class ListOfFollowers extends Component{
     constructor(props) {

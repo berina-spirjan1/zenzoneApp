@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import store from "../../redux/store";
 import {
     userRegistrationFailed,
@@ -20,9 +20,9 @@ import {
 import Cload from "../../assets/icons/Cload";
 import Icon from "../../assets/icons/Icon";
 import { Actions } from "react-native-router-flux";
-import {REGISTER} from "../../configuration/config";
-import {useNavigation} from "@react-navigation/core";
-import {AsyncStorage} from "react-native";
+import { REGISTER } from "../../configuration/config";
+import { useNavigation } from "@react-navigation/core";
+import validate from "react-native-web/dist/exports/StyleSheet/validate";
 
 
 export const SignUpForm = () =>{
@@ -40,10 +40,59 @@ export const SignUpForm = () =>{
     const login = () => {
         Actions.login()
     }
+    const validate = (text) => {
+        console.log(text);
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+        if (reg.test(text) === false) {
+            this.setState({ email: text })
+            return false;
+        }
+        else {
+            this.setState({ email: text })
+            return true;
+        }
+    }
 
     const navigation = useNavigation();
 
     const onSubmitHandler = () =>{
+        if (name.length===0){
+           // messageArray.push('The username filed is required.')
+        }
+
+        if(first_name.length===0){
+            // messageArray.push('The first name filed is required.')
+        }
+
+        if(last_name.length===0){
+            //  messageArray.push('The last name filed is required.')
+        }
+
+        if(email.length===0){
+            //  messageArray.push('The email filed is required.')
+        }
+
+        if(password.length<8 && password.length>0){
+            // messageArray.push('The last name filed is required.')
+        }
+
+        if(password.length===0){
+            // messageArray.push('The password filed is required.')
+        }
+
+        if(confirm_password!==password){
+
+        }
+
+        if(confirm_password===0){
+            // messageArray.push('The confirm password filed is required.')
+        }
+
+        if(!validate(email)){
+            // messageArray.push('Enter the valid form for email.')
+        }
+
+
 
         const user = {
             name,

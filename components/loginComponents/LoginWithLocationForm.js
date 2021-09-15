@@ -1,5 +1,5 @@
 import {
-    Alert,
+    Alert, AsyncStorage,
     Dimensions,
     Image,
     SafeAreaView,
@@ -12,11 +12,15 @@ import {
     View
 } from "react-native";
 import BackgroundForLoginLocation from "../../components/backgrounds/BackgroundForLoginLocation";
-import {FontAwesome5} from "@expo/vector-icons";
-import React, {useState} from "react";
-import {LOGIN} from "../../configuration/config";
+import { FontAwesome5 } from "@expo/vector-icons";
+import React, { useState } from "react";
+import { LOGIN } from "../../configuration/config";
 import store from "../../redux/store";
-import {authFailed, authStarted, authSuccess} from "../../redux/actions";
+import {
+    authFailed,
+    authStarted,
+    authSuccess
+} from "../../redux/actions";
 
 
 export const LoginWithLocationForm = () =>{
@@ -46,12 +50,14 @@ export const LoginWithLocationForm = () =>{
                     store.dispatch(authStarted());
 
                     const jsonRes = await res.json();
-                    console.log(jsonRes)
 
+                    console.log(jsonRes)
+                    console.log(jsonRes.data.token)
                     if(res.status!==200){
                         store.dispatch(authFailed());
                     }
                     else{
+                        await AsyncStorage.setItem('jwt', jsonRes.data.token)
                         store.dispatch(authSuccess());
                     }
                 }
@@ -60,6 +66,11 @@ export const LoginWithLocationForm = () =>{
                 }
             })
     };
+
+    const handleLogout = () =>{
+        AsyncStorage.removeItem('jws')
+        Alert.alert('userLogout')
+    }
 
 
     return(

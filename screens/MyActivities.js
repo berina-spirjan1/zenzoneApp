@@ -6,8 +6,8 @@ import {
     ScrollView, Dimensions, ImageBackground, Image, Text
 } from "react-native";
 import MyActivityCard from "../components/myActivitiesComponent/cards/MyActivityCard";
-import {Toolbar} from "react-native-material-ui";
-import {Actions} from "react-native-router-flux";
+import { Toolbar } from "react-native-material-ui";
+import { Actions } from "react-native-router-flux";
 
 export default class MyActivities extends Component{
     constructor(props) {

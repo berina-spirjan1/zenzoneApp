@@ -10,12 +10,16 @@ import {
     View
 } from "react-native";
 import LottieView from "lottie-react-native";
-import {FontAwesome5} from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 import Icon from "../../assets/icons/Icon";
-import React, {useState} from "react";
-import {LOGIN} from "../../configuration/config";
+import React, { useState } from "react";
+import { LOGIN } from "../../configuration/config";
 import store from "../../redux/store";
-import {authFailed, authStarted, authSuccess} from "../../redux/actions";
+import {
+    authFailed,
+    authStarted,
+    authSuccess
+} from "../../redux/actions";
 
 
 export const LoginForm = () =>{
@@ -43,15 +47,15 @@ export const LoginForm = () =>{
                     store.dispatch(authStarted());
 
                     const jsonRes = await res.json();
-                    console.log(jsonRes)
 
+                    console.log(jsonRes)
+                    console.log(jsonRes.data.token)
                     if(res.status!==200){
                         store.dispatch(authFailed());
                     }
                     else{
-                        await AsyncStorage.setItem('jwt', jsonRes.token)
+                        await AsyncStorage.setItem('jwt', jsonRes.data.token)
                         store.dispatch(authSuccess());
-                        this.props.navigator.pop();
                     }
                 }
                 catch (err){
@@ -59,6 +63,11 @@ export const LoginForm = () =>{
                 }
             })
     };
+
+    const handleLogout = () =>{
+        AsyncStorage.removeItem('jws')
+        Alert.alert('userLogout')
+    }
 
     return(
         <View style={stylesLightMode.container}>
@@ -103,7 +112,7 @@ export const LoginForm = () =>{
                 <Text style={stylesDarkMode.signUp}>You still don't have your ZenZone account?</Text>
                 <View style={{flexDirection: 'row'}}>
                     <Text style={stylesDarkMode.next}
-                          // onPress={this.signup}
+                          // onPress={}
                     >Sign up</Text>
                     <FontAwesome5 name={'chevron-right'}
                                   size={16}

@@ -1,5 +1,9 @@
-import React, {Component} from "react";
-import {Router, Scene, Stack} from "react-native-router-flux";
+import React, { Component } from "react";
+import {
+    Router,
+    Scene,
+    Stack
+} from "react-native-router-flux";
 import HomePage from "../screens/HomePage";
 import SingleActivity from "../screens/SingleActivity";
 import UserProfile from "../screens/userProfile/UserProfile";
