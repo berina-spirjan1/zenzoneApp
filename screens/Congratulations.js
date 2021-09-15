@@ -12,11 +12,11 @@ export default class Congratulations extends Component{
     render() {
         return(
             <View style={styles.container}>
-                {/*<LottieView*/}
-                {/*    style={styles.lottie}*/}
-                {/*    source={require("../assets/images/men.json")}*/}
-                {/*    autoPlay={true}*/}
-                {/*    loop={true}/>*/}
+                <LottieView
+                    style={styles.lottie}
+                    source={require("../assets/images/congratulationsStar.json")}
+                    autoPlay={true}
+                    loop={true}/>
             </View>
         )
     }
