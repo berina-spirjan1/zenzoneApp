@@ -9,13 +9,10 @@ import CustomTabBar from "./CustomTabBar";
 import CreateNewActivity from "../../screens/CreateNewActivity";
 
 import RoutesLoginSignUp from "../../routes/RoutesLoginSignUp";
-import LoginWithLocation from "../../screens/login/LoginWithLocation";
 
-import ChangePassword from "../../screens/ChangePassword";
-import MyActivities from "../../screens/MyActivities";
-import RoutesProfile from "../../routes/RoutesProfile";
 import RoutesMyActivity from "../../routes/RoutesMyActivity";
-import ListOfFollowers from "../../screens/ListOfFollowers";
+
+import Badges from "../../screens/Badges";
 
 
 
@@ -75,7 +72,7 @@ function BottomNavigationBar(){
                             )
                         }}/>
             <Tab.Screen name={'Ranking'}
-                        component={ListOfFollowers}
+                        component={Badges}
                         options={{
                             headerShown: false,
                             tabBarIcon: ({focused}) => (
