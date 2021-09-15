@@ -9,8 +9,13 @@ import {
     Roboto_400Regular,
     Roboto_700Bold_Italic,
     Roboto_300Light,
+    Roboto_500Medium,
+    Roboto_700Bold,
     useFonts
 } from '@expo-google-fonts/roboto';
+
+import Language from "./screens/Language";
+import Login from "./screens/login/Login";
 import SignUp from "./screens/signUp/SignUp";
 
 const Stack = createStackNavigator();
@@ -21,7 +26,9 @@ export default function App() {
         Roboto_400Regular,
         Roboto_100Thin_Italic,
         Roboto_700Bold_Italic,
-        Roboto_300Light
+        Roboto_300Light,
+        Roboto_500Medium,
+        Roboto_700Bold
     });
 
     if (!fontsLoaded) {
@@ -30,9 +37,11 @@ export default function App() {
 
     return (
         <NavigationContainer>
-            <BottomNavigationBar/>
-        </NavigationContainer>
-         // <SignUp/>
+             <BottomNavigationBar/>
+         </NavigationContainer>
+        //  <SignUp/>
+        // <Language/>
+        // <Login/>
     );
 }
 
