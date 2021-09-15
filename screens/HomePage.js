@@ -13,6 +13,7 @@ import {Toolbar} from "react-native-material-ui";
 import CategoryCard from "../components/homePageComponents/cards/CategoryCard";
 import ActivityCard from "../components/homePageComponents/cards/ActivityCard";
 import FollowerCard from "../components/homePageComponents/cards/FollowerCard";
+import {Actions} from "react-native-router-flux";
 
 export default class HomePage extends Component{
     constructor(props) {
@@ -24,6 +25,9 @@ export default class HomePage extends Component{
         console.log(text);
     }
 
+    sideMenu(){
+        Actions.sideMenu()
+    }
 
     render() {
 
@@ -43,6 +47,7 @@ export default class HomePage extends Component{
                         // onChangeText: text => searchFilterFunction(text),
                         // onSearchCloseRequested: () => setName(nameList),
                     }}
+                    onLeftElementPress={this.sideMenu}
                     rightElement={{
                         menu: {
                             icon: "more-vert",

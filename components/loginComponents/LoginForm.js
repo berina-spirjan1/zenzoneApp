@@ -69,6 +69,7 @@ export const LoginForm = () =>{
         Alert.alert('userLogout')
     }
 
+
     return(
         <View style={stylesLightMode.container}>
             <StatusBar animated={true}

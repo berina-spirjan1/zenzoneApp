@@ -106,7 +106,8 @@ const stylesLightMode = StyleSheet.create({
         textAlign: "center",
         justifyContent: "center",
         marginTop:20,
-        marginBottom:20
+        marginBottom:20,
+        fontFamily: 'Roboto_700Bold_Italic'
     },
     image:{
         width:360,

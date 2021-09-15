@@ -7,6 +7,7 @@ import {
 import ForgotPassword from "../screens/ForgotPassword";
 import Login from "../screens/login/Login";
 import SignUp from "../screens/signUp/SignUp";
+import {SignUpForm} from "../components/signUpComponents/SignUpForm";
 
 
 export default class RoutesLoginSignUp extends Component {

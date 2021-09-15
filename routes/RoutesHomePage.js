@@ -7,6 +7,7 @@ import {
 import HomePage from "../screens/HomePage";
 import SingleActivity from "../screens/SingleActivity";
 import UserProfile from "../screens/userProfile/UserProfile";
+import SideMenu from "../components/sideMenu/SideMenu";
 
 
 export default class RoutesHomePage extends Component{
@@ -17,6 +18,7 @@ export default class RoutesHomePage extends Component{
                     <Scene key={"homePageActivities"} component={HomePage} title={"Activities"} initial={true}/>
                     <Scene key={"singleActivity"} component={SingleActivity} title={"Single activity"}/>
                     <Scene key={"userProfile"} component={UserProfile} title={"User profile"}/>
+                    <Scene key={"sideMenu"} component={SideMenu} title={"sideMenu"}/>
                 </Stack>
             </Router>
         )

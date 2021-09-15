@@ -37,9 +37,7 @@ export const SignUpForm = () =>{
 
     const screenHeight = Dimensions.get('window').height
 
-    const login = () => {
-        Actions.login()
-    }
+
     const validate = (text) => {
         console.log(text);
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
@@ -53,7 +51,9 @@ export const SignUpForm = () =>{
         }
     }
 
-    const navigation = useNavigation();
+    const redirectToLogin = () =>{
+        Actions.login()
+    }
 
     const onSubmitHandler = () =>{
         if (name.length===0){
@@ -92,8 +92,6 @@ export const SignUpForm = () =>{
             // messageArray.push('Enter the valid form for email.')
         }
 
-
-
         const user = {
             name,
             first_name,
@@ -125,6 +123,7 @@ export const SignUpForm = () =>{
                     }
                     else{
                         store.dispatch(userRegistrationSuccess());
+                        redirectToLogin();
                     }
                 }
                 catch (err){
