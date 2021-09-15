@@ -15,6 +15,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { Toolbar } from "react-native-material-ui";
 import DoChallengeIconDarkMode from "../assets/icons/DoChallengeIconDarkMode";
 import {Actions} from "react-native-router-flux";
+import ImageUploaderChallenge from "../components/imageUploader/ImageUploaderChallenge";
 
 
 export default class DoDailyChallenge extends Component{
@@ -45,15 +46,10 @@ export default class DoDailyChallenge extends Component{
                              }
                          }}
                          onLeftElementPress={this.challengeDetails}/>
-                <TouchableOpacity style={styles.buttonContainer}
-                                  //todo add function for upload image
-                                  onPress={() => Alert.alert('Upload image')}>
-                    <FontAwesome5 name={'camera'}
-                                  size={45}
-                                  color={'#000'}
-                                  style={styles.icon}/>
-                    <Text style={styles.uploadImageText}>Upload image</Text>
-                </TouchableOpacity>
+                <View style={{marginTop: 100, marginBottom: 80}}>
+                    <ImageUploaderChallenge/>
+                </View>
+
                 <SafeAreaView style={styles.safeAreaContainer}
                               style={{height: screenHeight}}>
                     <ScrollView style={styles.scrollView}

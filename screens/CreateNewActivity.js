@@ -14,7 +14,7 @@ import CategoryCard from "../components/homePageComponents/cards/CategoryCard";
 
 import { Toolbar } from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import ImageUploader from "../components/ImageUploader";
+import ImageUploaderActivity from "../components/imageUploader/ImageUploaderActivity";
 
 export default class CreateNewActivity extends Component{
     constructor(props) {
@@ -79,7 +79,7 @@ export default class CreateNewActivity extends Component{
                                  <SafeAreaView>
                                      <ScrollView horizontal
                                                  showsHorizontalScrollIndicator={false}>
-                                         <ImageUploader/>
+                                         <ImageUploaderActivity/>
                                      </ScrollView>
                                  </SafeAreaView>
                                  <TouchableOpacity style={styles.postActivityButton}
