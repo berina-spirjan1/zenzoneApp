@@ -14,12 +14,18 @@ import {
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { Toolbar } from "react-native-material-ui";
 import DoChallengeIconDarkMode from "../assets/icons/DoChallengeIconDarkMode";
+import {Actions} from "react-native-router-flux";
 
 
 export default class DoDailyChallenge extends Component{
     constructor(props) {
         super();
     }
+
+    challengeDetails(){
+        Actions.challengeDetails()
+    }
+
     render() {
 
         const screenHeight = Dimensions.get('window').height
@@ -38,7 +44,7 @@ export default class DoDailyChallenge extends Component{
                                  labels: ["Activities", "Daily challenge", "Leaderboard", "Login"]
                              }
                          }}
-                         onRightElementPress={ (label) => { console.log(label) }}/>
+                         onLeftElementPress={this.challengeDetails}/>
                 <TouchableOpacity style={styles.buttonContainer}
                                   //todo add function for upload image
                                   onPress={() => Alert.alert('Upload image')}>
@@ -172,7 +178,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 3.84,
         elevation: 2,
-        marginBottom:100,
+        marginBottom:200,
         left:230
     },
     finishText:{

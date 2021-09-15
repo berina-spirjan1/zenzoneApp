@@ -6,13 +6,20 @@ import {
     StatusBar,
     StyleSheet,
     Text,
-    View
+    View,
+    TouchableOpacity
 } from "react-native";
 import {SafeAreaView} from "react-navigation";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import {Actions} from "react-native-router-flux";
 
 export default class DailyChallengeDetails extends Component{
     constructor(props) {
         super(props);
+    }
+
+    doDaily(){
+        Actions.doDaily()
     }
 
     /*componentDidMount = () => {
@@ -60,10 +67,26 @@ export default class DailyChallengeDetails extends Component{
                             odio eget, semper molestie leo.
                             Pellentesque rhoncus facilisis mi
                             semper ultricies.
+                            Lorem ipsum dolor sit amet,
+                            consectetur adipiscing elit.
+                            Vestibulum iaculis tortor odio, a
+                            rutrum tortor faucibus cursus.
+                            Nulla fringilla congue magna vitae
+                            fermentum. Quisque eleifend arcu
+                            non cursus laoreet. Duis efficitur
+                            mattis eros convallis placerat.
+                            Maecenas lorem dui, gravida at
+                            odio eget, semper molestie leo.
+                            Pellentesque rhoncus facilisis mi
+                            semper ultricies.
                         </Text>
-                        {/*<TouchableOpacity style={stylesLightMode.button}>*/}
-                        {/*    <i className="fas fa-check"/>*/}
-                        {/*</TouchableOpacity>*/}
+                        <TouchableOpacity style={stylesLightMode.button}
+                                          onPress={this.doDaily}>
+                            <FontAwesome5 name={'check'}
+                                          size={20}
+                                          color={'#000000'}
+                                          style={stylesLightMode.buttonIcon}/>
+                        </TouchableOpacity>
                     </ScrollView>
                 </SafeAreaView>
             </View>
@@ -105,12 +128,22 @@ const stylesLightMode = StyleSheet.create({
         padding: 10
     },
     button:{
-        color: "#384674"
+        backgroundColor: "#384674",
+        height: 50,
+        width: 50,
+        borderRadius: 60,
+        padding: 15,
+        marginLeft: 270,
+        marginBottom: 100
     },
     scrollView:{
         alignSelf: 'stretch',
-        marginTop: 20,
-        marginBottom: 50,
+        marginTop: 0,
+        marginBottom:420,
         padding:10
+    },
+    buttonIcon:{
+        textAlign: 'center',
+        justifyContent: 'center'
     }
 })
