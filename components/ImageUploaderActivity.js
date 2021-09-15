@@ -12,7 +12,7 @@ import {
 import * as ImagePicker from 'expo-image-picker';
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-export default function ImageUploader() {
+export default function ImageUploaderActivity() {
     const [image, setImage] = useState(null);
 
     useEffect(() => {
