@@ -17,6 +17,7 @@ import {
 import Language from "./screens/Language";
 import Login from "./screens/login/Login";
 import SignUp from "./screens/signUp/SignUp";
+import Congratulations from "./screens/Congratulations";
 
 const Stack = createStackNavigator();
 
@@ -36,12 +37,13 @@ export default function App() {
     }
 
     return (
-        <NavigationContainer>
-             <BottomNavigationBar/>
-         </NavigationContainer>
+        // <NavigationContainer>
+        //      <BottomNavigationBar/>
+        //  </NavigationContainer>
         //  <SignUp/>
         // <Language/>
         // <Login/>
+        <Congratulations/>
     );
 }
 

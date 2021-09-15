@@ -14,7 +14,7 @@ export default class RoutesForChallenge extends Component{
                     <Scene key={"challengeDetails"} component={DailyChallengeDetails} title={"challengeDetails"} initial={true}/>
                     <Scene key={"doDaily"} component={DoDailyChallenge} title={"doDaily"}/>
                     <Scene key={"congratulations"} component={Congratulations} title={"congratulations"}/>
-                    <Scene key={"goHome"} component={HomePage} title={"goHome"}/>
+                    {/*<Scene key={"goHome"} component={HomePage} title={"goHome"}/>*/}
                 </Stack>
             </Router>
         )
