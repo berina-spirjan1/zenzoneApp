@@ -16,6 +16,7 @@ import Badges from "../../screens/Badges";
 import DailyChallengeDetails from "../../screens/DailyChallengeDetails";
 import RoutesForChallenge from "../../routes/RoutesForChallenge";
 import Congratulations from "../../screens/Congratulations";
+import RoutesCreateActivity from "../../routes/RoutesCreateActivity";
 
 
 
@@ -62,7 +63,7 @@ function BottomNavigationBar(){
                             )
                         }}/>
             <Tab.Screen name={'New activity'}
-                        component={CreateNewActivity}
+                        component={RoutesCreateActivity}
                         options={{
                             headerShown: false,
                             tabBarIcon: ({focused}) => (

@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     },
     scrollView:{
         alignSelf: 'stretch',
-        marginTop: 10,
+        marginTop: 20,
         marginBottom: 50
     },
     finishButton:{
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 3.84,
         elevation: 2,
-        marginBottom:200,
+        marginBottom:300,
         left:230
     },
     finishText:{
