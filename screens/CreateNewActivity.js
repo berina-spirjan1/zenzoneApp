@@ -15,11 +15,17 @@ import CategoryCard from "../components/homePageComponents/cards/CategoryCard";
 import { Toolbar } from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import ImageUploaderActivity from "../components/imageUploader/ImageUploaderActivity";
+import {Actions} from "react-native-router-flux";
 
 export default class CreateNewActivity extends Component{
     constructor(props) {
         super();
     }
+
+    successfullyAdded(){
+        Actions.successfullyAdded()
+    }
+
     render() {
         return(
             <View style={styles.container}>
@@ -83,8 +89,7 @@ export default class CreateNewActivity extends Component{
                                      </ScrollView>
                                  </SafeAreaView>
                                  <TouchableOpacity style={styles.postActivityButton}
-                                     //todo add post activity successfull page that miss in Adobe xd
-                                                   onPress={() => Alert.alert('Post activity successfull page')}>
+                                                   onPress={this.successfullyAdded}>
                                      <Text style={styles.postActivityText}>POST ACTIVITY</Text>
                                  </TouchableOpacity>
 
