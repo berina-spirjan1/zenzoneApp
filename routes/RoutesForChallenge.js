@@ -3,7 +3,7 @@ import {Router, Scene, Stack} from "react-native-router-flux";
 import DailyChallengeDetails from "../screens/DailyChallengeDetails";
 import DoDailyChallenge from "../screens/DoDailyChallenge";
 import Congratulations from "../screens/Congratulations";
-import HomePage from "../screens/HomePage";
+
 
 
 export default class RoutesForChallenge extends Component{
