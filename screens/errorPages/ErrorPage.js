@@ -6,8 +6,8 @@ import {
     Text,
     View
 } from "react-native";
+import RobotPictureDarkMode from "../../assets/icons/RobotPictureDarkMode";
 
-import RobotPictureDarkMode from "../assets/icons/RobotPictureDarkMode";
 
 
 function ErrorPage(){
