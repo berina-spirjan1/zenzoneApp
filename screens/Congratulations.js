@@ -4,17 +4,9 @@ import {
     StyleSheet, Text, StatusBar, TouchableOpacity
 } from "react-native";
 import LottieView from 'lottie-react-native';
-import AnimatedText from "react-native-paper/src/components/Typography/AnimatedText";
 import {Toolbar} from "react-native-material-ui";
-import {Actions} from "react-native-router-flux";
 
-
-export default class Congratulations extends Component{
-
-    goHome(){
-        Actions.goHome()
-    }
-    render() {
+function Congratulations(){
         return(
             <>
                 <StatusBar
@@ -30,16 +22,17 @@ export default class Congratulations extends Component{
                         autoPlay={true}
                         loop={true}/>
                     <Text style={styles.informationBox}>Thank you for participating in the daily challenge. You will soon receive feedback from the administration and the possibility of winning a badge.</Text>
-                <TouchableOpacity style={styles.button}
-                                  onPress={this.goHome}>
-                    <Text style={styles.buttonText}>GO BACK</Text>
-                </TouchableOpacity>
+                {/*<TouchableOpacity style={styles.button}*/}
+                {/*                  onPress={this.goHome}>*/}
+                {/*    <Text style={styles.buttonText}>GO BACK</Text>*/}
+                {/*</TouchableOpacity>*/}
                 </View>
             </>
 
         )
-    }
 }
+
+export default Congratulations;
 
 const styles = StyleSheet.create({
     container:{
@@ -57,16 +50,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginLeft:0,
-        marginTop: -60
+        marginTop: -70
     },
     title:{
-        marginTop: 50,
+        marginTop: 20,
         fontSize: 30,
         fontFamily: 'Roboto_700Bold',
         color: '#5a28ff',
         textTransform: 'uppercase',
         textAlign: 'center',
-        marginBottom:50
+        marginBottom:40
     },
     button:{
         backgroundColor: '#5a28ff',
