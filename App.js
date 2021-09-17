@@ -1,8 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { NavigationContainer } from "@react-navigation/native";
-import BottomNavigationBar from "./components/bottomNavigationBar/BottomNavigationBar";
 import { createStackNavigator } from "@react-navigation/stack";
+
 import AppLoading from 'expo-app-loading';
 import {
     Roboto_100Thin_Italic,
@@ -14,10 +13,9 @@ import {
     useFonts
 } from '@expo-google-fonts/roboto';
 
-import Language from "./screens/Language";
-import Login from "./screens/login/Login";
-import SignUp from "./screens/signUp/SignUp";
-import Congratulations from "./screens/Congratulations";
+import ForgotPassword from "./screens/ForgotPassword";
+import {NavigationContainer} from "@react-navigation/native";
+import BottomNavigationBar from "./components/bottomNavigationBar/BottomNavigationBar";
 
 const Stack = createStackNavigator();
 
@@ -37,13 +35,13 @@ export default function App() {
     }
 
     return (
-        // <NavigationContainer>
-        //      <BottomNavigationBar/>
-        //  </NavigationContainer>
-        //  <SignUp/>
-        // <Language/>
-        // <Login/>
-        <Congratulations/>
+        <NavigationContainer>
+             <BottomNavigationBar/>
+         </NavigationContainer>
+        // <PrizePage/>
+        // <LocationPage/>
+        // <SignUp/>
+        // <ForgotPassword/>
     );
 }
 
