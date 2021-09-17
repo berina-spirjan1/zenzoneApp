@@ -31,6 +31,7 @@ export default class DailyChallengeCounter extends Component{
                     backgroundColor="#6285B3"/>
                 <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                          centerElement="Waiting for challenge"/>
+
                 <CountDown
                     //we count the remaining time until the daily challenge to be announced at 7 p.m.
                     until={((23-hours+7)%24)*60*60+(60-min)*60+sec}
@@ -47,7 +48,7 @@ export default class DailyChallengeCounter extends Component{
                     source={require("../assets/images/challengeAnimation.json")}
                     autoPlay={true}
                     loop={true}/>
-                <Text>New challenge</Text>
+                <Text style={styles.info}>Thank you for your interest. The new daily challenge begins for</Text>
             </View>
         )
     }
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
     countdown:{
         textAlign: 'center',
         justifyContent: 'center',
-        marginTop: 320,
+        marginTop: 390,
 
     },
     lottie:{
@@ -72,5 +73,10 @@ const styles = StyleSheet.create({
         marginTop: -100,
         marginRight: 10
     },
-
+    info:{
+        padding: 35,
+        fontSize: 20,
+        marginTop: -200,
+        fontWeight: 'bold'
+    }
 })
