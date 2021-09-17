@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         marginLeft: -40,
-        marginTop: -100,
+        marginTop: -90,
         marginRight: 10
     },
     info:{
