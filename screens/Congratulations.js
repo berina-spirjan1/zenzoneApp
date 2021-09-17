@@ -13,7 +13,7 @@ function Congratulations(){
                     animated={true}
                     backgroundColor="#6285B3"/>
                 <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                         centerElement="My activities"/>
+                         centerElement="Congratulations"/>
                 <View style={styles.container}>
                     <Text style={styles.title}>congratulations</Text>
                     <LottieView
