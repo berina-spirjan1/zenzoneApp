@@ -86,7 +86,7 @@ export default class Leaderboard extends Component{
                       </View>
                   </ScrollView>
               </SafeAreaView>
-              <View style={{marginBottom: 50}}/>
+              <View style={{marginBottom: 140}}/>
           </View>
         );
     }

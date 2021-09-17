@@ -19,7 +19,13 @@ export default class MyProfileInfo extends Component{
                     backgroundColor="#334A6D"/>
                 <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                          leftElement="arrow-back"
-                         centerElement="My profile"/>
+                         centerElement="My profile"
+                         rightElement={{
+                             menu: {
+                                 icon: "more-vert",
+                                 labels: ["Most popular activities", "Daily challenge", "Leaderboard", "Theme","Logout"]
+                             }
+                         }}/>
                 <ImageBackground source={require('../../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
                 <Image source={require('../../assets/images/rodjoImage.png')}

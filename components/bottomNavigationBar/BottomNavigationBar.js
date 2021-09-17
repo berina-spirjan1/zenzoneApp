@@ -9,10 +9,11 @@ import CustomTabBar from "./CustomTabBar";
 
 import RoutesLoginSignUp from "../../routes/RoutesLoginSignUp";
 
-import Badges from "../../screens/Badges";
+
 import RoutesForChallenge from "../../routes/RoutesForChallenge";
-import RoutesCreateActivity from "../../routes/RoutesCreateActivity";
-import MyProfileInfo from "../../screens/userProfile/MyProfileInfo";
+
+import Leaderboard from "../../screens/Leaderboard";
+import DailyChallengeCounter from "../../screens/dailyChallenge/DailyChallengeCounter";
 
 
 
@@ -59,7 +60,7 @@ function BottomNavigationBar(){
                             )
                         }}/>
             <Tab.Screen name={'New activity'}
-                        component={MyProfileInfo}
+                        component={DailyChallengeCounter}
                         options={{
                             headerShown: false,
                             tabBarIcon: ({focused}) => (
@@ -72,7 +73,7 @@ function BottomNavigationBar(){
                             )
                         }}/>
             <Tab.Screen name={'Ranking'}
-                        component={Badges}
+                        component={Leaderboard}
                         options={{
                             headerShown: false,
                             tabBarIcon: ({focused}) => (

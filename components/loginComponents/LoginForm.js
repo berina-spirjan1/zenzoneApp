@@ -13,7 +13,7 @@ import LottieView from "lottie-react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Icon from "../../assets/icons/Icon";
 import React, { useState } from "react";
-import { LOGIN } from "../../configuration/config";
+import {LOGIN, LOGOUT} from "../../configuration/config";
 import store from "../../redux/store";
 import {
     authFailed,
@@ -64,9 +64,25 @@ export const LoginForm = () =>{
             })
     };
 
-    const handleLogout = () =>{
-        AsyncStorage.removeItem('jws')
-        Alert.alert('userLogout')
+    const onDelete = async () => {
+        let access_token = AsyncStorage.getItem('jwt')
+
+        try {
+            let response = await fetch(`${LOGOUT}`, {
+                method: 'GET',
+            });
+            let res = await response.text();
+
+            if (response.status >= 200 && response.status < 300) {
+                console.log("success sir: " + res)
+                await AsyncStorage.removeItem('jwt')
+                let error = res;
+            } else {
+                throw error;
+            }
+        } catch (error) {
+            console.log("error: " + error)
+        }
     }
 
 
@@ -113,7 +129,7 @@ export const LoginForm = () =>{
                 <Text style={stylesDarkMode.signUp}>You still don't have your ZenZone account?</Text>
                 <View style={{flexDirection: 'row'}}>
                     <Text style={stylesDarkMode.next}
-                          // onPress={}
+                          onPress={onDelete}
                     >Sign up</Text>
                     <FontAwesome5 name={'chevron-right'}
                                   size={16}
@@ -121,7 +137,6 @@ export const LoginForm = () =>{
                                   style={stylesDarkMode.nextIcon}/>
                 </View>
                 <Icon style={stylesLightMode.icon}/>
-
 
 
             </View>

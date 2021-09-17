@@ -20,13 +20,34 @@ export default class HomePage extends Component{
         super();
     }
 
-    //todo add handler for event that you can go to forgot password page, this only shows in terminal
-    onTextPress(event, text) {
-        console.log(text);
-    }
-
+    //added navigations to another component or pages
     sideMenu(){
         Actions.sideMenu()
+    }
+
+    leaderboard(){
+        Actions.leaderboard()
+    }
+
+    daily(){
+        Actions.daily()
+    }
+
+    settings(){
+        Actions.settings()
+    }
+
+    //implementation for click on menu items
+    onElementClick(label){
+        if(label.index === 0){
+            this.leaderboard()
+        }
+        else if(label.index === 1){
+            this.daily()
+        }
+        else if(label.index === 2){
+            this.settings()
+        }
     }
 
     render() {
@@ -51,10 +72,10 @@ export default class HomePage extends Component{
                     rightElement={{
                         menu: {
                             icon: "more-vert",
-                            labels: ["Most popular activities", "Daily challenge", "Leaderboard", "Theme"]
+                            labels: ["Daily challenge", "Leaderboard", "Settings"]
                         }
                     }}
-                    onRightElementPress={ (label) => { console.log(label) }}/>
+                    onRightElementPress={(label) => this.onElementClick(label)}/>
 
                 <SafeAreaView>
                     <ScrollView style={screenHeight}
