@@ -4,7 +4,8 @@ import CountDown from "react-native-countdown-component";
 import {
     View,
     Text,
-    StyleSheet, StatusBar
+    StyleSheet,
+    StatusBar
 } from "react-native";
 import LottieView from "lottie-react-native";
 import { Toolbar } from "react-native-material-ui";
@@ -36,6 +37,7 @@ export default class DailyChallengeCounter extends Component{
                     //we count the remaining time until the daily challenge to be announced at 7 p.m.
                     until={((23-hours+7)%24)*60*60+(60-min)*60+sec}
                     onFinish={this.waiting}
+                    onPress={() => alert('hello')}
                     size={30}
                     style={styles.countdown}
                     digitStyle={{backgroundColor: '#3E65A1'}}
@@ -45,7 +47,7 @@ export default class DailyChallengeCounter extends Component{
                 />
                 <LottieView
                     style={styles.lottie}
-                    source={require("../assets/images/challengeAnimation.json")}
+                    source={require("../../assets/images/challengeAnimation.json")}
                     autoPlay={true}
                     loop={true}/>
                 <Text style={styles.info}>Thank you for your interest. The new daily challenge begins for</Text>

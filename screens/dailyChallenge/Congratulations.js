@@ -18,7 +18,7 @@ function Congratulations(){
                     <Text style={styles.title}>congratulations</Text>
                     <LottieView
                         style={styles.lottie}
-                        source={require("../assets/images/congratulationsStar.json")}
+                        source={require("../../assets/images/congratulationsStar.json")}
                         autoPlay={true}
                         loop={true}/>
                     <Text style={styles.informationBox}>Thank you for participating in the daily challenge. You will soon receive feedback from the administration and the possibility of winning a badge.</Text>

@@ -46,7 +46,7 @@ export default class DailyChallengeDetails extends Component{
         return (
             <View style={stylesLightMode.container}>
                 <Image style={stylesLightMode.image}
-                       source={require('../assets/images/img_1.png')}/>
+                       source={require('../../assets/images/img_1.png')}/>
                 <Text style={stylesLightMode.title}>daily challenge</Text>
 
                 <SafeAreaView style={stylesLightMode.safeArea}

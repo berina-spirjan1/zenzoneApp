@@ -13,9 +13,10 @@ import {
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { Toolbar } from "react-native-material-ui";
-import DoChallengeIconDarkMode from "../assets/icons/DoChallengeIconDarkMode";
 import {Actions} from "react-native-router-flux";
-import ImageUploaderChallenge from "../components/imageUploader/ImageUploaderChallenge";
+import ImageUploaderChallenge from "../../components/imageUploader/ImageUploaderChallenge";
+import DoChallengeIconDarkMode from "../../assets/icons/DoChallengeIconDarkMode";
+
 
 
 export default class DoDailyChallenge extends Component{
