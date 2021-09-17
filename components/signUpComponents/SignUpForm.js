@@ -51,46 +51,11 @@ export const SignUpForm = () =>{
         }
     }
 
-    const redirectToLogin = () =>{
-        Actions.login()
-    }
+    // const redirectToLogin = () =>{
+    //     Actions.login()
+    // }
 
     const onSubmitHandler = () =>{
-        if (name.length===0){
-           // messageArray.push('The username filed is required.')
-        }
-
-        if(first_name.length===0){
-            // messageArray.push('The first name filed is required.')
-        }
-
-        if(last_name.length===0){
-            //  messageArray.push('The last name filed is required.')
-        }
-
-        if(email.length===0){
-            //  messageArray.push('The email filed is required.')
-        }
-
-        if(password.length<8 && password.length>0){
-            // messageArray.push('The last name filed is required.')
-        }
-
-        if(password.length===0){
-            // messageArray.push('The password filed is required.')
-        }
-
-        if(confirm_password!==password){
-
-        }
-
-        if(confirm_password===0){
-            // messageArray.push('The confirm password filed is required.')
-        }
-
-        if(!validate(email)){
-            // messageArray.push('Enter the valid form for email.')
-        }
 
         const user = {
             name,
@@ -123,7 +88,6 @@ export const SignUpForm = () =>{
                     }
                     else{
                         store.dispatch(userRegistrationSuccess());
-                        redirectToLogin();
                     }
                 }
                 catch (err){
@@ -210,7 +174,8 @@ export const SignUpForm = () =>{
                 <Text style={stylesLightMode.formValidation}>The confirm password field is required.</Text>
                 <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
                     <Text style={{color: "#334A6D", fontWeight: 'bold'}}
-                          onPress={login}> Login</Text></Text>
+                          // onPress={login}
+                    > Login</Text></Text>
                 <TouchableOpacity style={stylesLightMode.button}
                                   onPress={onSubmitHandler}>
                     <Text style={stylesDarkMode.buttonText}>SIGN UP</Text>

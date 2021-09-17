@@ -10,10 +10,10 @@ export default class SignUp extends Component {
     constructor(props) {
         super();
     }
-
-    login() {
-        Actions.login()
-    }
+    //
+    // login() {
+    //     Actions.login()
+    // }
 
     render() {
 
