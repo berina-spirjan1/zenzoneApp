@@ -8,7 +8,7 @@ export default class Splash extends Component{
 
         return(
 
-            <View>
+            <View style={styles.container}>
                 <LottieView
                     style={styles.lottie}
                     source={require("../assets/images/men.json")}
@@ -24,6 +24,10 @@ export default class Splash extends Component{
 }
 
 const styles={
+    container:{
+        backgroundColor: '#93B4E5',
+        flex: 1
+    },
     lottie:{
         flex:1,
         alignItems: 'center',
