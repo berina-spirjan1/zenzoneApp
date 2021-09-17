@@ -2,6 +2,8 @@ export const API_URL = 'https://vucko-1049-backend.zendev.se/api';
 
 export const REGISTER =`${API_URL}/register`;
 export const LOGIN = `${API_URL}/login`;
+export const LOGOUT = `${API_URL}/logout`;
+
 
 export const CHANGE_PASSWORD = `${API_URL}/change-password`;
 export const FORGOT_PASSWORD = `${API_URL}/forget-password`;
