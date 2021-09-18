@@ -17,7 +17,10 @@ import store from "../../redux/store";
 import {
     authFailed,
     authStarted,
-    authSuccess, userLogoutFailed, userLogoutStarted, userLogoutSuccess
+    authSuccess,
+    userLogoutFailed,
+    userLogoutStarted,
+    userLogoutSuccess
 } from "../../redux/actions";
 import {Actions} from "react-native-router-flux";
 
@@ -34,6 +37,9 @@ export const LoginForm = () =>{
         Actions.switchLoginToUser()
     }
 
+    const forgotPassword = () =>{
+        Actions.forgotPassword()
+    }
 
     const onLoginHandler = () =>{
 
@@ -88,7 +94,7 @@ export const LoginForm = () =>{
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
-                'Authorization': {"Authorization": "Bearer " + token}
+                'Authorization': 'Bearer ' + token
             },
         })
             .then(async res => {
@@ -143,7 +149,7 @@ export const LoginForm = () =>{
                 </SafeAreaView>
                 <Text style={stylesDarkMode.forgotLoginDetails}>Forgot your login details?
                     <Text style={stylesDarkMode.helpLogin}
-                          // onPress={this.forgotPassword}
+                          onPress={forgotPassword}
                     > Get help logging in</Text>
                 </Text>
                 <View>
