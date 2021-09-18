@@ -1,5 +1,4 @@
 import {
-    Alert,
     AsyncStorage,
     SafeAreaView,
     StatusBar,
@@ -18,14 +17,23 @@ import store from "../../redux/store";
 import {
     authFailed,
     authStarted,
-    authSuccess
+    authSuccess, userLogoutFailed, userLogoutStarted, userLogoutSuccess
 } from "../../redux/actions";
+import {Actions} from "react-native-router-flux";
 
 
 export const LoginForm = () =>{
 
     const [email, setEmail] = useState('');
     const [password, setPassword] =  useState('');
+    let [token, setToken] = useState('')
+
+
+    //redirection from login page to user profile
+    const switchLoginToUser = () =>{
+        Actions.switchLoginToUser()
+    }
+
 
     const onLoginHandler = () =>{
 
@@ -50,11 +58,15 @@ export const LoginForm = () =>{
 
                     console.log(jsonRes)
                     console.log(jsonRes.data.token)
+                    token=jsonRes.data.token
                     if(res.status!==200){
                         store.dispatch(authFailed());
                     }
                     else{
-                        await AsyncStorage.setItem('jwt', jsonRes.data.token)
+                        if(jsonRes.data.token){
+                            await AsyncStorage.setItem('jwt', JSON.stringify(token))
+                        }
+                        switchLoginToUser();
                         store.dispatch(authSuccess());
                     }
                 }
@@ -64,26 +76,41 @@ export const LoginForm = () =>{
             })
     };
 
-    const onDelete = async () => {
-        let access_token = AsyncStorage.getItem('jwt')
+    const onLogoutHandler = async () => {
 
-        try {
-            let response = await fetch(`${LOGOUT}`, {
-                method: 'GET',
-            });
-            let res = await response.text();
+        console.log("OVO JE TOKEN", token)
 
-            if (response.status >= 200 && response.status < 300) {
-                console.log("success sir: " + res)
-                await AsyncStorage.removeItem('jwt')
-                let error = res;
-            } else {
-                throw error;
-            }
-        } catch (error) {
-            console.log("error: " + error)
-        }
-    }
+        fetch(`${LOGOUT}`, {
+            method: 'POST',
+            mode: 'no-cors',
+            cache: 'default',
+            credentials: 'same-origin',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                'Authorization': {"Authorization": "Bearer " + token}
+            },
+        })
+            .then(async res => {
+                try {
+                    store.dispatch(userLogoutStarted());
+
+                    const jsonRes = await res.json();
+
+                    console.log(jsonRes)
+                    if (res.status !== 200) {
+                        store.dispatch(userLogoutFailed());
+                        console.log("greska", res.status)
+                    } else {
+                        await AsyncStorage.removeItem('jwt')
+                        console.log("Successfully logout")
+                        store.dispatch(userLogoutSuccess());
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            })
+    };
 
 
     return(
@@ -129,7 +156,7 @@ export const LoginForm = () =>{
                 <Text style={stylesDarkMode.signUp}>You still don't have your ZenZone account?</Text>
                 <View style={{flexDirection: 'row'}}>
                     <Text style={stylesDarkMode.next}
-                          onPress={onDelete}
+                          onPress={onLogoutHandler}
                     >Sign up</Text>
                     <FontAwesome5 name={'chevron-right'}
                                   size={16}
