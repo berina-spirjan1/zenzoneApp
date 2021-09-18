@@ -15,9 +15,6 @@ export default class Login extends Component {
         Actions.signup()
     }
 
-    forgotPassword(){
-        Actions.forgotPassword()
-    }
 
     validate = (text) => {
         console.log(text);
@@ -34,22 +31,6 @@ export default class Login extends Component {
     }
 
     render() {
-
-        // //creating actions for redux
-        // //action for started login
-        // store.dispatch(authStarted())
-        //
-        // //action that means something went wrong at logging in
-        // store.dispatch(authFailed())
-        //
-        // //action for successfully logging in
-        // store.dispatch(authSuccess());
-        //
-        // //this method will call every time when store changes
-        // const unsubscribe = store.subscribe(() =>{
-        //     console.log('Store changed! ',store.getState());
-        // })
-        //
 
         return (
             <Provider store={store}>
