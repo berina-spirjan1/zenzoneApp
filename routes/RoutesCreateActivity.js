@@ -4,8 +4,8 @@ import {
     Scene,
     Stack
 } from "react-native-router-flux";
-import CreateNewActivity from "../screens/CreateNewActivity";
 import SuccessfullyAddedActivity from "../screens/SuccessfullyAddedActivity";
+import {CreateNewActivityForm} from "../components/createNewActivityComponents/CreateNewActivityForm";
 
 
 export default class RoutesCreateActivity extends Component {
@@ -13,8 +13,8 @@ export default class RoutesCreateActivity extends Component {
         return(
             <Router>
                 <Stack key={"root"} hideNavBar={true}>
-                    <Scene key={"createActivity"} component={CreateNewActivity} title={"createActivity"} initial={true}/>
-                    <Scene key={"successfullyAdded"} component={SuccessfullyAddedActivity} title={"successfullyAdded"}/>
+                    <Scene key={"switchCreateActivitySuccessfullyAdded"} component={CreateNewActivityForm} title={"switchCreateActivitySuccessfullyAdded"} initial={true}/>
+                    <Scene key={"switchSuccessfullyAddedCreateActivity"} component={SuccessfullyAddedActivity} title={"switchSuccessfullyAddedCreateActivity"}/>
                 </Stack>
             </Router>
         )

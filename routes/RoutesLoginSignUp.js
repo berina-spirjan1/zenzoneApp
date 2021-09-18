@@ -10,6 +10,7 @@ import SignUp from "../screens/signUp/SignUp";
 import {SignUpForm} from "../components/signUpComponents/SignUpForm";
 import {LoginForm} from "../components/loginComponents/LoginForm";
 import UserProfile from "../screens/userProfile/UserProfile";
+import CheckEmail from "../screens/CheckEmail";
 
 
 export default class RoutesLoginSignUp extends Component {
@@ -22,6 +23,8 @@ export default class RoutesLoginSignUp extends Component {
                     <Scene key="signup" component={SignUp} title="Register" />
                     <Scene key="signupForm" component={SignUpForm} title={"SignUpForm"}/>
                     <Scene key="forgotPassword" component={ForgotPassword} title={"forgotPassword"}/>
+                    <Scene key={"checkEmail"} component={CheckEmail} title={"checkEmail"}/>
+                    <Scene key={"login"} component={Login} title={"Login"}/>
                 </Stack>
             </Router>
         )
