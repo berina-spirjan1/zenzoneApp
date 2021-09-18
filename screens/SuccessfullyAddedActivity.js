@@ -12,8 +12,8 @@ import {Actions} from "react-native-router-flux";
 
 export default class SuccessfullyAddedActivity extends Component{
 
-    createActivity(){
-        Actions.createActivity()
+    switchCreateActivitySuccessfullyAdded(){
+        Actions.switchCreateActivitySuccessfullyAdded()
     }
 
     render() {
@@ -31,7 +31,7 @@ export default class SuccessfullyAddedActivity extends Component{
                     loop={true}/>
                 <Text style={styles.textBox}>Successfully added new activity!</Text>
                 <TouchableOpacity style={styles.button}
-                                  onPress={this.createActivity}>
+                                  onPress={this.switchCreateActivitySuccessfullyAdded}>
                     <Text style={styles.buttonText}>Create new activity</Text>
                 </TouchableOpacity>
             </View>
