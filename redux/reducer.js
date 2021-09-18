@@ -52,6 +52,27 @@ const reducer = (state = initialState, action) =>{
                 isSuccess: true,
                 userData: action
             };
+        case Types.USER_LOGOUT_STARTED:
+            return{
+                loading: true,
+                isError: false,
+                isSuccess: false,
+                userData: action
+            };
+        case Types.USER_LOGOUT_FAILED:
+            return{
+              loading: false,
+              isError: true,
+              isSuccess: false,
+              userData: action
+            };
+        case Types.USER_LOGOUT_SUCCESS:
+            return {
+                loading: false,
+                isError: false,
+                isSuccess: true,
+                userData: action
+            };
         case Types.FORGOT_PASSWORD_CHANGING_STARTED:
             return{
                 loading: true,

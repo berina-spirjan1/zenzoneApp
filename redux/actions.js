@@ -84,3 +84,24 @@ export function changePasswordSuccess(){
         type: actions.CHANGE_PASSWORD_SUCCESS
     }
 }
+
+//action for started user logout
+export function userLogoutStarted(){
+    return{
+        type: actions.USER_LOGOUT_STARTED
+    }
+}
+
+//action that means something went wrong when the user tried to logout
+export function userLogoutFailed(){
+    return{
+        type: actions.USER_LOGOUT_FAILED
+    }
+}
+
+//action for successfully logout user
+export function userLogoutSuccess(){
+    return{
+        type: actions.USER_LOGOUT_SUCCESS
+    }
+}

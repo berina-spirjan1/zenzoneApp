@@ -9,6 +9,11 @@ export const USER_REGISTRATION_STARTED = 'user_registration_started';
 export const USER_REGISTRATION_FAILED = 'user_registration_failed';
 export const USER_REGISTRATION_SUCCESS = 'user_registration_success';
 
+//logout
+export const USER_LOGOUT_STARTED = 'user_logout_started';
+export const USER_LOGOUT_FAILED = 'user_logout_failed';
+export const USER_LOGOUT_SUCCESS = 'user_logout_success';
+
 //forgot password
 export const FORGOT_PASSWORD_CHANGING_STARTED = 'forgot_password_changing_started';
 export const FORGOT_PASSWORD_CHANGING_FAILED = 'forgot_password_changing_failed';
