@@ -6,7 +6,6 @@ import {
     TouchableOpacity,
     View
 } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
 import ChangePasswordLightIcon from "../../assets/icons/ChangePasswordLightIcon";
 import React, { useState } from "react";
 import { CHANGE_PASSWORD } from "../../configuration/config";
