@@ -41,6 +41,10 @@ export const LoginForm = () =>{
         Actions.forgotPassword()
     }
 
+    const signup = () =>{
+        Actions.signup()
+    }
+
     const onLoginHandler = () =>{
 
         const user = {
@@ -162,7 +166,7 @@ export const LoginForm = () =>{
                 <Text style={stylesDarkMode.signUp}>You still don't have your ZenZone account?</Text>
                 <View style={{flexDirection: 'row'}}>
                     <Text style={stylesDarkMode.next}
-                          onPress={onLogoutHandler}
+                          onPress={signup}
                     >Sign up</Text>
                     <FontAwesome5 name={'chevron-right'}
                                   size={16}
