@@ -1,19 +1,36 @@
-import React, {useState} from "react";
-import {SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import React, {useEffect, useState} from "react";
+import {
+    Image,
+    Platform,
+    SafeAreaView,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from "react-native";
 import CategoryCard from "../homePageComponents/cards/CategoryCard";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import ImageUploaderActivity from "../imageUploader/ImageUploaderActivity";
 import {Actions} from "react-native-router-flux";
 import {ACTIVITY, ACTIVITY_PUBLIC, REGISTER} from "../../configuration/config";
 import store from "../../redux/store";
-import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../../redux/actions";
+import {
+    failedAddingActivity,
+    startedAddingActivity, successfullyAddedActivity,
+    userRegistrationFailed,
+    userRegistrationStarted,
+    userRegistrationSuccess
+} from "../../redux/actions";
+import * as ImagePicker from "expo-image-picker";
 
 
 export const CreateNewActivityForm = () =>{
 
-    // const [title, setTitle] = useState('')
-    // const [description, setDescription] = useState('')
-    // const [photo, setPhoto] = useState('')
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
+    const [image, setImage] = useState(null);
     // const [like_counter, setLikeCounter] = useState('')
     // const [dislike_counter, setDislikeCounter] = useState('')
     // const [badge, setBadge] = useState(null)
@@ -23,51 +40,71 @@ export const CreateNewActivityForm = () =>{
     // const [user_id, setUserId] = useState('')
     // const [category_id, setCategoryId] = useState('')
     //
+
+    useEffect(() => {
+        (async () => {
+            if (Platform.OS !== 'web') {
+                const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+                if (status !== 'granted') {
+                    alert('Sorry, we need camera roll permissions to make this work!');
+                }
+            }
+        })();
+    }, []);
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [3, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            setImage('');
+        }
+    };
+
+    const postNewActivity = () =>{
+        const activity = {
+            title,
+            description,
+            image
+        }
+        fetch(`${ACTIVITY}`,{
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+            },
+            body: JSON.stringify(activity)
+        })
+            .then(async res => {
+                try{
+                    store.dispatch(startedAddingActivity());
+
+                    const jsonRes = await res.json();
+
+                    console.log(jsonRes)
+                    if(res.status!==200){
+                        console.log(res.status)
+                        store.dispatch(failedAddingActivity());
+                    }
+                    else{
+                        store.dispatch(successfullyAddedActivity());
+                    }
+                }
+                catch (err){
+                    console.log(err);
+                }
+            })
+    }
+
     const switchSuccessfullyAddedCreateActivity = () =>{
         Actions.switchSuccessfullyAddedCreateActivity()
     }
-    //
-    // const postNewActivity = () =>{
-    //     const activity = {
-    //         title,
-    //         description,
-    //         photo,
-    //         like_counter,
-    //         dislike_counter,
-    //         badge,
-    //         public,
-    //         status,
-    //         liked,
-    //         user_id,
-    //         category_id
-    //     }
-    //     fetch(`${ACTIVITY}`,{
-    //         method: 'POST',
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "Accept": "application/json",
-    //         },
-    //         body: JSON.stringify(activity)
-    //     })
-    //         .then(async res => {
-    //             try{
-    //                 store.dispatch(userRegistrationStarted());
-    //
-    //                 const jsonRes = await res.json();
-    //
-    //                 console.log(jsonRes.message)
-    //                 if(res.status!==200){
-    //                     store.dispatch(userRegistrationFailed());
-    //                 }
-    //                 else{
-    //                     store.dispatch(userRegistrationSuccess());
-    //                 }
-    //             }
-    //             catch (err){
-    //                 console.log(err);
-    //             }
-    //         })
-    // }
 
     return(
         <View style={styles.container}>
@@ -102,6 +139,7 @@ export const CreateNewActivityForm = () =>{
                     <Text style={styles.title}>Title</Text>
                     <TextInput numberOfLines={2}
                                placeholder={'Activity title'}
+                               onChangeText={setTitle}
                                style={styles.titleInput}/>
                     <View style={{flexDirection: 'row'}}>
                         <Text style={styles.comment}>Description</Text>
@@ -110,6 +148,7 @@ export const CreateNewActivityForm = () =>{
 
                     <TextInput numberOfLines={10}
                                placeholder={'Enter description for activity'}
+                               onChangeText={setDescription}
                                style={styles.activityDescription}
                                multiline={true}/>
                     <View style={styles.addPhotoSection}>
@@ -122,11 +161,21 @@ export const CreateNewActivityForm = () =>{
                     <SafeAreaView>
                         <ScrollView horizontal
                                     showsHorizontalScrollIndicator={false}>
-                            <ImageUploaderActivity/>
+                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                <TouchableOpacity style={styles.cardAddPhoto}
+                                                  onPress={pickImage}>
+                                    <FontAwesome5 name={'camera'}
+                                                  size={20}
+                                                  color={'#000000'}
+                                                  style={styles.cameraIcon}/>
+                                    <Text style={styles.add}>Add</Text>
+                                </TouchableOpacity>
+                                {/*{image && <Image source={{ uri: image }} style={{ width: 223.06, height: 223.06 }} />}*/}
+                            </View>
                         </ScrollView>
                     </SafeAreaView>
                     <TouchableOpacity style={styles.postActivityButton}
-                                      onPress={switchSuccessfullyAddedCreateActivity}>
+                                      onPress={postNewActivity}>
                         <Text style={styles.postActivityText}>POST ACTIVITY</Text>
                     </TouchableOpacity>
 
@@ -237,5 +286,33 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         justifyContent: 'center',
         fontWeight:'bold'
-    }
+    },
+    cardAddPhoto:{
+        backgroundColor:'#6285b3',
+        marginTop:15,
+        width: 90,
+        height: 90,
+        borderRadius: 25,
+        marginLeft:20,
+        justifyContent: 'center',
+        textAlign: 'center',
+        shadowColor: "#000000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.2,
+        shadowRadius: 3.84,
+        elevation: 3
+
+    },
+    cameraIcon:{
+        justifyContent: 'center',
+        marginTop:10,
+        marginLeft:35
+    },
+    add:{
+        textTransform:'uppercase',
+        marginLeft:30
+    },
 })
