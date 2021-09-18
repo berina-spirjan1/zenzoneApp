@@ -18,11 +18,16 @@ import {
     forgotPasswordChangingFailed,
     forgotPasswordChangingStarted,
 } from "../../redux/actions";
+import {Actions} from "react-native-router-flux";
 
 
 export const ForgotPasswordForm = () =>{
 
     const [email, setEmail] = useState('');
+
+    const checkEmail = () =>{
+        Actions.checkEmail()
+    }
 
     const onResetHandler = () =>{
 
@@ -50,6 +55,7 @@ export const ForgotPasswordForm = () =>{
                     }
                     else{
                         store.dispatch(forgotPasswordChangedSuccess());
+                        checkEmail();
                     }
                 }
                 catch (err){
