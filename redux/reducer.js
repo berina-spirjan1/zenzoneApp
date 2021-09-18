@@ -116,11 +116,26 @@ const reducer = (state = initialState, action) =>{
                 userData: action
             };
         case Types.SUCCESSFULLY_ADDED_ACTIVITY:
-            return state;
+            return{
+                loading:false,
+                isError: false,
+                isSuccess: true,
+                userData: action
+            };
         case Types.FAILED_ADDING_ACTIVITY:
-            return state;
+            return{
+                loading: false,
+                isError: true,
+                isSuccess: false,
+                userData: action
+            };
         case Types.STARTED_ADDING_ACTIVITY:
-            return state;
+            return {
+                loading: true,
+                isError: false,
+                isSuccess: false,
+                userData: action
+            };
         case Types.STARTED_UPDATING_ACTIVITY:
             return state;
         case Types.FAILED_UPDATING_ACTIVITY:

@@ -105,3 +105,24 @@ export function userLogoutSuccess(){
         type: actions.USER_LOGOUT_SUCCESS
     }
 }
+
+//action for started adding new activity
+export function startedAddingActivity(){
+    return{
+        type: actions.STARTED_ADDING_ACTIVITY
+    }
+}
+
+//action that means something went wrong when the user tries to add new activity
+export function failedAddingActivity(){
+    return{
+        type: actions.FAILED_ADDING_ACTIVITY
+    }
+}
+
+//action for successfully added new activity
+export function successfullyAddedActivity(){
+    return{
+        type: actions.SUCCESSFULLY_ADDED_ACTIVITY
+    }
+}
