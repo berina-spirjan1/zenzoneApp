@@ -37,6 +37,10 @@ export const SignUpForm = () =>{
 
     const screenHeight = Dimensions.get('window').height
 
+    const login = () =>{
+        Actions.login()
+    }
+
 
     const validate = (text) => {
         console.log(text);
@@ -174,7 +178,7 @@ export const SignUpForm = () =>{
                 <Text style={stylesLightMode.formValidation}>The confirm password field is required.</Text>
                 <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
                     <Text style={{color: "#334A6D", fontWeight: 'bold'}}
-                          // onPress={login}
+                          onPress={login}
                     > Login</Text></Text>
                 <TouchableOpacity style={stylesLightMode.button}
                                   onPress={onSubmitHandler}>
