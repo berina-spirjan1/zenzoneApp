@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {
-    Image,
+    AsyncStorage,
     Platform,
     SafeAreaView,
     ScrollView,
@@ -12,39 +12,69 @@ import {
 } from "react-native";
 import CategoryCard from "../homePageComponents/cards/CategoryCard";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import ImageUploaderActivity from "../imageUploader/ImageUploaderActivity";
 import {Actions} from "react-native-router-flux";
-import {ACTIVITY, ACTIVITY_PUBLIC, REGISTER} from "../../configuration/config";
+import {ACTIVITY} from "../../configuration/config";
 import store from "../../redux/store";
-import {
-    failedAddingActivity,
-    startedAddingActivity, successfullyAddedActivity,
-    userRegistrationFailed,
-    userRegistrationStarted,
-    userRegistrationSuccess
-} from "../../redux/actions";
+import {failedAddingActivity, startedAddingActivity, successfullyAddedActivity,} from "../../redux/actions";
 import * as ImagePicker from "expo-image-picker";
 
+export const CreateNewActivityForm = () => {
 
-export const CreateNewActivityForm = () =>{
+    // const token = AsyncStorage.getItem('jwt')
 
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
-    const [image, setImage] = useState(null);
-    // const [like_counter, setLikeCounter] = useState('')
-    // const [dislike_counter, setDislikeCounter] = useState('')
-    // const [badge, setBadge] = useState(null)
-    // const [public, setPublic] = useState(false)
-    // const [status, setStatus] = useState(-1)
-    // const [liked, setLiked] = useState(null)
-    // const [user_id, setUserId] = useState('')
-    // const [category_id, setCategoryId] = useState('')
-    //
+    let [image, setImage] = useState(null);
 
+    //
+    // const uploadImage = async () => {
+    //     if (image != null) {
+    //         const fileToUpload = image;
+    //         const data = new FormData();
+    //         data.append('name', 'Image Upload');
+    //         data.append('file_attachment', fileToUpload);
+    //         let res = await fetch(
+    //             `${ACTIVITY}`,
+    //             {
+    //                 method: 'POST',
+    //                 body: data,
+    //                 headers: {
+    //                     'Content-Type': 'multipart/form-data; ',
+    //                 },
+    //             }
+    //         );
+    //         let responseJson = await res.json();
+    //         if (responseJson.status === 1) {
+    //             alert('Upload Successful');
+    //         }
+    //     } else {
+    //         alert('Please Select File first');
+    //     }
+    // };
+
+    // const selectFile = async () => {
+    //     try {
+    //         const res = await DocumentPicker.pick({
+    //             type: [DocumentPicker.types.images],
+    //         });
+    //         console.log('res : ' + JSON.stringify(res));
+    //         setImage(res);
+    //     } catch (err) {
+    //         setImage(null);
+    //         if (DocumentPicker.isCancel(err)) {
+    //             alert('Canceled');
+    //         } else {
+    //             alert('Unknown Error: ' + JSON.stringify(err));
+    //             throw err;
+    //         }
+    //     }
+    // };
+    //
+    //
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
-                const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+                const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();
                 if (status !== 'granted') {
                     alert('Sorry, we need camera roll permissions to make this work!');
                 }
@@ -57,63 +87,69 @@ export const CreateNewActivityForm = () =>{
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [3, 3],
-            quality: 1,
+            quality: 1
         });
-
+        image = result
         console.log(result);
 
         if (!result.cancelled) {
             setImage('');
         }
+
     };
 
-    const postNewActivity = () =>{
-        const activity = {
-            title,
-            description,
-            image
-        }
-        fetch(`${ACTIVITY}`,{
+    const postNewActivity = async () => {
+
+        const fileToUpload = image
+        console.log("OVO JE FAJL", fileToUpload)
+
+        const token = await AsyncStorage.getItem('jwt')
+        console.log(token)
+
+        const activity = new FormData();
+        activity.append('title', title);
+        activity.append('image', fileToUpload);
+        fetch(`${ACTIVITY}`, {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "multipart/form-data",
                 "Accept": "application/json",
+                'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify(activity)
         })
             .then(async res => {
-                try{
+                try {
                     store.dispatch(startedAddingActivity());
 
                     const jsonRes = await res.json();
 
                     console.log(jsonRes)
-                    if(res.status!==200){
+                    if (res.status !== 200) {
                         console.log(res.status)
                         store.dispatch(failedAddingActivity());
-                    }
-                    else{
+                    } else {
                         store.dispatch(successfullyAddedActivity());
+                        switchSuccessfullyAddedCreateActivity()
                     }
-                }
-                catch (err){
+                } catch (err) {
                     console.log(err);
                 }
             })
     }
 
-    const switchSuccessfullyAddedCreateActivity = () =>{
+    const switchSuccessfullyAddedCreateActivity = () => {
         Actions.switchSuccessfullyAddedCreateActivity()
     }
 
-    return(
+    return (
         <View style={styles.container}>
             <SafeAreaView>
                 <ScrollView>
                     <View style={{flexDirection: 'row'}}>
                         <Text style={styles.chooseCategory}>choose category</Text>
                         <Text style={styles.seeAll}
-                              // onPress={(e) => this.onTextPress(e, 'See all')}
+                            // onPress={(e) => this.onTextPress(e, 'See all')}
                         >See all</Text>
                     </View>
                     <SafeAreaView>
@@ -161,7 +197,7 @@ export const CreateNewActivityForm = () =>{
                     <SafeAreaView>
                         <ScrollView horizontal
                                     showsHorizontalScrollIndicator={false}>
-                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
                                 <TouchableOpacity style={styles.cardAddPhoto}
                                                   onPress={pickImage}>
                                     <FontAwesome5 name={'camera'}
@@ -175,7 +211,9 @@ export const CreateNewActivityForm = () =>{
                         </ScrollView>
                     </SafeAreaView>
                     <TouchableOpacity style={styles.postActivityButton}
-                                      onPress={postNewActivity}>
+                                      onPress={async () => {
+                                          await postNewActivity()
+                                      }}>
                         <Text style={styles.postActivityText}>POST ACTIVITY</Text>
                     </TouchableOpacity>
 
