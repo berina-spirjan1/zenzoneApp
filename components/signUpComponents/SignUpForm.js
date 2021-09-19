@@ -44,7 +44,7 @@ export const SignUpForm = () =>{
 
     const validate = (text) => {
         console.log(text);
-        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/.com;
         if (reg.test(text) === false) {
             this.setState({ email: text })
             return false;

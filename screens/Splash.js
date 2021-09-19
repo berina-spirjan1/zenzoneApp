@@ -14,8 +14,6 @@ export default class Splash extends Component{
                     source={require("../assets/images/men.json")}
                     autoPlay={true}
                     loop={true}/>
-                {/*todo change template for background in adobe xd*/}
-                {/*<BackgroundThemeSplashScreen/>*/}
                 <ZenZoneTitle style={styles.title}/>
 
             </View>

@@ -4,10 +4,11 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { Image } from 'react-native';
 
-import SignUp from "../../screens/SignUp";
+
 import HomePage from "../../screens/HomePage";
-import DailyChallengeDetails from "../../screens/DailyChallengeDetails";
-import Login from "../../screens/Login";
+import Login from "../../screens/login/Login";
+import SignUp from "../../screens/signUp/SignUp";
+import DailyChallengeDetails from "../../screens/dailyChallenge/DailyChallengeDetails";
 
 const Drawer = createDrawerNavigator();
 

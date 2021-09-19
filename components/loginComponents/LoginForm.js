@@ -24,7 +24,6 @@ import {
 } from "../../redux/actions";
 import {Actions} from "react-native-router-flux";
 
-
 export const LoginForm = () =>{
 
     const [email, setEmail] = useState('');
