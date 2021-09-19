@@ -5,7 +5,8 @@ import {AsyncStorage} from "react-native";
 
 export const onLogoutHandler = async () => {
 
-    const token = await AsyncStorage.getItem('jwt')
+    let token = await AsyncStorage.getItem('jwt')
+    token = JSON.parse(token)
 
     fetch(`${LOGOUT}`, {
         method: 'POST',
