@@ -1,5 +1,5 @@
 import {
-    Alert,
+    Alert, AsyncStorage,
     StyleSheet,
     Text,
     TextInput,
@@ -23,7 +23,10 @@ export const ChangePasswordForm = () =>{
     const [new_password, setNewPassword] = useState('')
     const [confirm_new_password, setConfirmNewPassword] = useState('')
 
-    const onChangePasswordHandler = () =>{
+    const onChangePasswordHandler = async () => {
+
+        let token = await AsyncStorage.getItem('jwt')
+        token = JSON.parse(token)
 
         const user = {
             current_password,
@@ -31,29 +34,28 @@ export const ChangePasswordForm = () =>{
             confirm_new_password
         };
 
-        fetch(`${CHANGE_PASSWORD}`,{
+        fetch(`${CHANGE_PASSWORD}`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
+                'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify(user)
         })
             .then(async res => {
-                try{
+                try {
                     store.dispatch(changePasswordStarted());
 
                     const jsonRes = await res.json();
 
                     console.log(jsonRes.message)
-                    if(res.status!==200){
+                    if (res.status !== 200) {
                         store.dispatch(changePasswordFailed());
-                    }
-                    else{
+                    } else {
                         store.dispatch(changePasswordSuccess());
                     }
-                }
-                catch (err){
+                } catch (err) {
                     console.log(err);
                 }
             })

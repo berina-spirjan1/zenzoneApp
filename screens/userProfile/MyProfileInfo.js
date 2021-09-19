@@ -17,6 +17,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import {onLogoutHandler} from "../../components/logout/Logout";
 import {USER} from "../../configuration/config";
+import {Actions} from "react-native-router-flux";
 
 export default class MyProfileInfo extends Component{
     constructor(props) {
@@ -51,6 +52,11 @@ export default class MyProfileInfo extends Component{
                 console.error(error);
             });
     }
+
+    switchToChangePassword(){
+        Actions.switchToChangePassword()
+    }
+
 
 
     render(){
@@ -141,9 +147,7 @@ export default class MyProfileInfo extends Component{
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.bottomTabBar}
-                                          onPress={async () => {
-                                              await onLogoutHandler()
-                                          }}>
+                                          onPress={this.switchToChangePassword}>
                             <View style={styles.itemRow}>
                                 <FontAwesome5 name={'lock'}
                                               size={20}

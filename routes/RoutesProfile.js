@@ -11,6 +11,8 @@ import HomePage from "../screens/HomePage";
 import UserProfile from "../screens/userProfile/UserProfile";
 import MyProfileInfo from "../screens/userProfile/MyProfileInfo";
 import Settings from "../screens/userProfile/Settings";
+import ChangePassword from "../screens/ChangePassword";
+import RoutesMyProfileInfo from "./RoutesMyProfileInfo";
 
 
 export default class RoutesProfile extends Component{
@@ -19,7 +21,7 @@ export default class RoutesProfile extends Component{
             <Router>
                 <Stack key={"root"} hideNavBar={true}>
                     <Scene key={"profile"} component={UserProfile} title={"profile"} initial={true}/>
-                    <Scene key={"myProfile"} component={MyProfileInfo} title={"myProfile"} />
+                    <Scene key={"myProfile"} component={RoutesMyProfileInfo} title={"myProfile"} />
                     <Scene key={"badges"} component={Badges} title={"badges"}/>
                     <Scene key={"leaderboard"} component={Leaderboard} title={"leaderboard"}/>
                     <Scene key={"activities"} component={HomePage} title={"activities"}/>
