@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
     scrollView:{
         alignSelf: 'stretch',
         marginTop: -10,
-        marginBottom: 425
+        marginBottom: 415
     },
     followersFollowing:{
         flexDirection: 'row',
