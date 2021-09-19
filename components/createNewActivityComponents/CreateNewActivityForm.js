@@ -103,8 +103,8 @@ export const CreateNewActivityForm = () => {
         const fileToUpload = image
         console.log("OVO JE FAJL", fileToUpload)
 
-        const token = await AsyncStorage.getItem('jwt')
-        console.log(token)
+        let token = await AsyncStorage.getItem('jwt')
+        token = JSON.parse(token)
 
         const activity = new FormData();
         activity.append('title', title);
