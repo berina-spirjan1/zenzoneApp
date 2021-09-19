@@ -1,29 +1,59 @@
-import React from "react";
+import React, {Component} from "react";
 import {
     Image,
     Text,
     TouchableOpacity,
     View,
-    StyleSheet
+    StyleSheet, AsyncStorage
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import NextButton from "../buttons/NextButton";
+import {USER} from "../../configuration/config";
 
-function UserInfoComponent(){
-    return(
-        <View>
-            <Text style={styles.account}>Account</Text>
-            <View style={styles.userInfo}>
-                <Image source={require('../../assets/images/rodjoImage.png')}
-                       style={styles.userProfileImage}/>
-                <Text style={styles.username}>@rodjo</Text>
-                <Text style={styles.personalInfo}>{"\n"}Personal info</Text>
-                <NextButton/>
+export default class UserInfoComponent extends Component{
+    state = {
+        data: ''
+    }
+
+    componentDidMount = async () => {
+        let token = await AsyncStorage.getItem('jwt')
+        token = JSON.parse(token)
+
+        fetch(`${USER}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                this.setState({
+                    data: responseJson
+                })
+                // console.log(this.state.data)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+    render() {
+        return(
+            <View>
+                <Text style={styles.account}>Account</Text>
+                <View style={styles.userInfo}>
+                    <Image source={require('../../assets/images/rodjoImage.png')}
+                           style={styles.userProfileImage}/>
+                    <Text style={styles.username}>{this.state.data.name}</Text>
+                    <Text style={styles.personalInfo}>{"\n"}Personal info</Text>
+                    <NextButton/>
+                </View>
             </View>
-        </View>
-    )
+        )
+    }
 }
-export default UserInfoComponent;
 
 const styles = StyleSheet.create({
     account:{
@@ -59,7 +89,7 @@ const styles = StyleSheet.create({
         marginTop:30
     },
     personalInfo:{
-        marginLeft:-45,
+        marginLeft:-90,
         marginTop:40
     },
     icon:{
