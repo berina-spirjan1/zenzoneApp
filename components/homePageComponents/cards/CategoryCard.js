@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import {
     Card,
     CardContent,
@@ -8,42 +8,72 @@ import {
 import {
     Text,
     StyleSheet,
-    View
+    View, AsyncStorage
 } from "react-native";
 
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import {CATEGORY} from "../../../configuration/config";
 
-function CategoryCard(){
-    return(
-        <Card  styles={{ card: { backgroundColor: '#79BCE1',
-                                 borderRadius:30,
-                                 shadowColor: "#000000",
-                                 shadowOffset: {
-                                    width: 0,
-                                    height: 2,
-                                 },
-                                 shadowOpacity: 0.44,
-                                 shadowRadius: 3,
-                                 elevation: 5
-            }}}>
+export default class CategoryCard extends Component{
+    state={
+        data: ''
+    }
 
-            <View style={styles.icon}>
-                <FontAwesome5 name={'running'}
-                              size={35}
-                              color={'#000'}/>
-            </View>
 
-            <CardContent>
-                <Text style={styles.categoryName}>Sport</Text>
-            </CardContent>
-            <CardAction >
+    componentDidMount = () => {
 
-            </CardAction>
-        </Card>
-    )
+        fetch(`${CATEGORY}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                this.setState({
+                    data: responseJson
+                })
+                console.log(this.state.data)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    render() {
+        return(
+            <Card  styles={{ card: { backgroundColor: '#79BCE1',
+                    borderRadius:30,
+                    shadowColor: "#000000",
+                    shadowOffset: {
+                        width: 0,
+                        height: 2,
+                    },
+                    shadowOpacity: 0.44,
+                    shadowRadius: 3,
+                    elevation: 5
+                }}}>
+
+                <View style={styles.icon}>
+                    <FontAwesome5 name={'running'}
+                                  size={35}
+                                  color={'#000'}/>
+                </View>
+
+                <CardContent>
+                    <Text style={styles.categoryName}>{this.state.data.title}</Text>
+                </CardContent>
+                <CardAction >
+
+                </CardAction>
+            </Card>
+        )
+    }
+
+
 }
-
-export default CategoryCard;
 
 const styles = StyleSheet.create({
     button: {
