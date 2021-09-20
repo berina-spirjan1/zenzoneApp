@@ -8,11 +8,13 @@ import {
     Text,
     TouchableOpacity,
     SafeAreaView,
-    ScrollView, Dimensions
+    ScrollView, Dimensions, AsyncStorage
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {Actions} from "react-native-router-flux";
+import {USER} from "../../configuration/config";
+import {onLogoutHandler} from "../../components/logout/Logout";
 
 export default class UserProfile extends Component{
     constructor(props) {
@@ -39,6 +41,42 @@ export default class UserProfile extends Component{
         Actions.settings()
     }
 
+
+    state = {
+        data: ''
+    }
+
+    componentDidMount = async () => {
+
+        let token = await AsyncStorage.getItem('jwt')
+        token = JSON.parse(token)
+
+        fetch(`${USER}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                this.setState({
+                    data: responseJson
+                })
+                // console.log(this.state.data)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    login(){
+        Actions.login()
+    }
+
+
     render() {
 
         const screenHeight = Dimensions.get('window').height
@@ -54,7 +92,7 @@ export default class UserProfile extends Component{
                                  style={styles.imageBackground}/>
                 <Image source={require('../../assets/images/rodjoImage.png')}
                        style={styles.userImage}/>
-                <Text style={styles.username}>@arnel_maric</Text>
+                <Text style={styles.username}>{this.state.data.name}</Text>
                 <SafeAreaView style={styles.safeArea}
                               style={{height: screenHeight}}>
                     <ScrollView vertical={true}
@@ -106,6 +144,15 @@ export default class UserProfile extends Component{
                                               size={20}
                                               color={'#616C75'}/>
                                 <Text style={styles.menuItem}>Settings</Text>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.items}
+                                          onPress={onLogoutHandler}>
+                            <View style={styles.itemRow}>
+                                <FontAwesome5 name={'sign-out-alt'}
+                                              size={20}
+                                              color={'#616C75'}/>
+                                <Text style={styles.menuItem}>Logout</Text>
                             </View>
                         </TouchableOpacity>
                         <View style={styles.bottom}/>

@@ -6,12 +6,44 @@ import {
     ImageBackground,
     Image,
     SafeAreaView,
-    ScrollView, Dimensions
+    ScrollView, Dimensions, AsyncStorage
 } from "react-native";
 import BadgeCard from "../components/badgesComponents/cards/BadgeCard";
+import {USER} from "../configuration/config";
 
 
 export default class Badges extends Component{
+
+    state = {
+        data: ''
+    }
+
+    componentDidMount = async () => {
+
+        let token = await AsyncStorage.getItem('jwt')
+        token = JSON.parse(token)
+
+        fetch(`${USER}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                this.setState({
+                    data: responseJson
+                })
+                // console.log(this.state.data)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
     render() {
 
         const screenHeight = Dimensions.get('window').height
@@ -22,7 +54,7 @@ export default class Badges extends Component{
                                  style={styles.imageBackground}/>
                 <Image source={require('../assets/images/rodjoImage.png')}
                        style={styles.userImage}/>
-                <Text style={styles.username}>@arnel_maric</Text>
+                <Text style={styles.username}>{this.state.data.name}</Text>
                 <SafeAreaView style={styles.safeArea}
                               style={{height: screenHeight}}>
                     <ScrollView vertical={true}
