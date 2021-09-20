@@ -57,7 +57,9 @@ export default class MyProfileInfo extends Component{
         Actions.switchToChangePassword()
     }
 
-
+    backToProfile(){
+        Actions.backToProfile()
+    }
 
     render(){
 
@@ -76,7 +78,8 @@ export default class MyProfileInfo extends Component{
                                  icon: "more-vert",
                                  labels: ["Most popular activities", "Daily challenge", "Leaderboard", "Theme","Logout"]
                              }
-                         }}/>
+                         }}
+                         onLeftElementPress={this.backToProfile}/>
                 <ImageBackground source={require('../../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
                 <Image source={require('../../assets/images/rodjoImage.png')}
