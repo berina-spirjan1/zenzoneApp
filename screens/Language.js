@@ -10,12 +10,17 @@ import { View,
 } from "react-native";
 
 import UserInfoComponent from "../components/userProfileComponents/UserInfoComponent";
+import {Toolbar} from "react-native-material-ui";
+import {Actions} from "react-native-router-flux";
 
 export default class Language extends Component{
     constructor(props) {
         super();
     }
 
+    switchToSettings(){
+        Actions.switchToSettings()
+    }
 
     render() {
 
@@ -23,6 +28,10 @@ export default class Language extends Component{
             <>
                 <StatusBar animated={ true }
                            backgroundColor="#ABC4E9"/>
+                <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                         leftElement="arrow-back"
+                         centerElement="Languages"
+                         onLeftElementPress={this.switchToSettings}/>
                 <View style={ styles.container }>
                     <UserInfoComponent/>
                     <Text style={ styles.languageSettings }>Language settings</Text>
