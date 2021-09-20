@@ -82,7 +82,7 @@ export default class MyProfileInfo extends Component{
                          onLeftElementPress={this.backToProfile}/>
                 <ImageBackground source={require('../../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
-                <Image source={require('../../assets/images/rodjoImage.png')}
+                <Image source={require('../../assets/images/user_photo.png')}
                        style={styles.userImage}/>
                 <Text style={styles.username}>{this.state.data.name}</Text>
                 <View style={styles.followersFollowing}>
