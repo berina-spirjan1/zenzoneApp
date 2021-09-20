@@ -6,9 +6,10 @@ import {
 } from "react-native";
 
 
-function NextButton(){
+function NextButton({onPress}){
     return(
-        <TouchableOpacity style={styles.nextButton}>
+        <TouchableOpacity style={styles.nextButton}
+                          onPress={onPress}>
             <FontAwesome5 name={'chevron-right'}
                           size={15}
                           color={'#000000'}
