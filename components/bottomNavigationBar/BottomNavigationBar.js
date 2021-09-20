@@ -14,6 +14,8 @@ import RoutesForChallenge from "../../routes/RoutesForChallenge";
 
 import Leaderboard from "../../screens/Leaderboard";
 import DailyChallengeCounter from "../../screens/dailyChallenge/DailyChallengeCounter";
+import CreateNewActivity from "../../screens/CreateNewActivity";
+import RoutesCreateActivity from "../../routes/RoutesCreateActivity";
 
 
 
@@ -60,7 +62,7 @@ function BottomNavigationBar(){
                             )
                         }}/>
             <Tab.Screen name={'New activity'}
-                        component={DailyChallengeCounter}
+                        component={RoutesCreateActivity}
                         options={{
                             headerShown: false,
                             tabBarIcon: ({focused}) => (
