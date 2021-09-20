@@ -12,6 +12,7 @@ import MyProfileInfo from "../screens/userProfile/MyProfileInfo";
 import Settings from "../screens/userProfile/Settings";
 import MyActivities from "../screens/MyActivities";
 import RoutesMyProfileInfo from "./RoutesMyProfileInfo";
+import RoutesSettings from "./RoutesSettings";
 
 
 export default class RoutesProfile extends Component{
@@ -24,7 +25,7 @@ export default class RoutesProfile extends Component{
                     <Scene key={"badges"} component={Badges} title={"badges"}/>
                     <Scene key={"leaderboard"} component={Leaderboard} title={"leaderboard"}/>
                     <Scene key={"activities"} component={MyActivities} title={"activities"}/>
-                    <Scene key={"settings"} component={Settings} title={"settings"}/>
+                    <Scene key={"settings"} component={RoutesSettings} title={"settings"}/>
                 </Stack>
             </Router>
         )

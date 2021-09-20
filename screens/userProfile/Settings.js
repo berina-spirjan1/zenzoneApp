@@ -11,11 +11,20 @@ import ToggleSwitch from "toggle-switch-react-native";
 import UserInfoComponent from "../../components/userProfileComponents/UserInfoComponent";
 import BackgroundForIconsUserProfile from "../../components/backgrounds/BackgroundForIconsUserProfile";
 import NextButton from "../../components/buttons/NextButton";
+import {Actions} from "react-native-router-flux";
 
 
 export default class Settings extends Component{
     constructor(props) {
         super();
+    }
+
+    toLanguage(){
+        Actions.toLanguage()
+    }
+
+    toHelp(){
+        Actions.toHelp()
     }
 
     render() {
@@ -38,7 +47,7 @@ export default class Settings extends Component{
                                   style={styles.icon}/>
                     <Text style={styles.titleSection}>Language</Text>
                     <View style={styles.buttonNext}>
-                        <NextButton/>
+                        <NextButton onPress={this.toLanguage}/>
                     </View>
                 </View>
                 <View style={styles.darkLightMode}>
@@ -66,7 +75,7 @@ export default class Settings extends Component{
                                   style={styles.icon}/>
                     <Text style={styles.titleSection}> Help</Text>
                     <View style={styles.buttonNext2}>
-                        <NextButton/>
+                        <NextButton onPress={this.toHelp}/>
                     </View>
                 </View>
             </View>
