@@ -7,11 +7,10 @@ import {
 
 import Badges from "../screens/Badges";
 import Leaderboard from "../screens/Leaderboard";
-import HomePage from "../screens/HomePage";
 import UserProfile from "../screens/userProfile/UserProfile";
 import MyProfileInfo from "../screens/userProfile/MyProfileInfo";
 import Settings from "../screens/userProfile/Settings";
-import ChangePassword from "../screens/ChangePassword";
+import MyActivities from "../screens/MyActivities";
 import RoutesMyProfileInfo from "./RoutesMyProfileInfo";
 
 
@@ -24,7 +23,7 @@ export default class RoutesProfile extends Component{
                     <Scene key={"myProfile"} component={RoutesMyProfileInfo} title={"myProfile"} />
                     <Scene key={"badges"} component={Badges} title={"badges"}/>
                     <Scene key={"leaderboard"} component={Leaderboard} title={"leaderboard"}/>
-                    <Scene key={"activities"} component={HomePage} title={"activities"}/>
+                    <Scene key={"activities"} component={MyActivities} title={"activities"}/>
                     <Scene key={"settings"} component={Settings} title={"settings"}/>
                 </Stack>
             </Router>
