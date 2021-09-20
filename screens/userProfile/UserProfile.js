@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
         marginTop: -150,
         flex: 1,
         marginBottom:300,
-        opacity:0.5
+        opacity:0.2
     },
     userImage:{
         width: 150,

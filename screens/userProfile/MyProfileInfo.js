@@ -80,7 +80,7 @@ export default class MyProfileInfo extends Component{
                              }
                          }}
                          onLeftElementPress={this.backToProfile}/>
-                <ImageBackground source={require('../../assets/images/BackgroundForUserProfile.png')}
+                <ImageBackground source={require('../../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
                 <Image source={require('../../assets/images/user_photo.png')}
                        style={styles.userImage}/>
@@ -158,7 +158,7 @@ export default class MyProfileInfo extends Component{
                                 <Text style={styles.menuItem}>Change password</Text>
                             </View>
                         </TouchableOpacity>
-                        <View style={{marginBottom:100}}/>
+                        <View style={{marginBottom:50}}/>
                     </ScrollView>
                 </SafeAreaView>
 
@@ -173,26 +173,26 @@ const styles = StyleSheet.create({
         flex: 1
     },
     imageBackground:{
-        height: 520,
+        height: 500,
         width: 700,
         justifyContent: 'center',
-        marginLeft:-170,
-        marginTop: -100,
-        opacity:0.5,
+        marginLeft:-150,
+        marginTop: -150,
         flex: 1,
-        marginBottom:300
+        marginBottom:300,
+        opacity:0.2
     },
     userImage:{
-        width: 150,
-        height: 150,
+        width: 100,
+        height: 100,
         borderRadius: 200,
-        top: -140,
-        left:110,
+        top: -100,
+        left:130,
         textAlign: 'center'
     },
     username:{
         fontSize: 22,
-        top:-130,
+        top:-100,
         fontFamily: 'Roboto_700Bold_Italic',
         textAlign: 'center',
         color:'#505760'
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#93B4E5',
         height: 60,
         paddingLeft: 0,
-        paddingTop:10
+        paddingTop: 10
     },
     safeArea:{
         flex:1,
@@ -228,12 +228,12 @@ const styles = StyleSheet.create({
     },
     scrollView:{
         alignSelf: 'stretch',
-        marginTop: -10,
+        marginTop: -20,
         marginBottom: 415
     },
     followersFollowing:{
         flexDirection: 'row',
-        marginTop: -110,
+        marginTop: -60,
         marginBottom: 100
     },
     followers:{
