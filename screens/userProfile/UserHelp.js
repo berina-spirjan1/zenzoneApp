@@ -12,11 +12,17 @@ import {
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 import UserInfoComponent from "../../components/userProfileComponents/UserInfoComponent";
+import {Actions} from "react-native-router-flux";
 
 export default class UserHelp extends Component{
     constructor(props) {
         super();
     }
+
+    switchToSettings(){
+        Actions.switchToSettings()
+    }
+
     render(){
 
         const screenHeight = Dimensions.get('window').height
@@ -28,7 +34,8 @@ export default class UserHelp extends Component{
                     backgroundColor="#334A6D"/>
                 <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                          leftElement="arrow-back"
-                         centerElement="Help"/>
+                         centerElement="Help"
+                         onLeftElementPress={this.switchToSettings}/>
                 <UserInfoComponent/>
                 <Text style={styles.userHelp}>Help</Text>
                 <SafeAreaView style={styles.safeArea}

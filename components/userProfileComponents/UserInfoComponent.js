@@ -6,9 +6,9 @@ import {
     View,
     StyleSheet, AsyncStorage
 } from "react-native";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import NextButton from "../buttons/NextButton";
 import {USER} from "../../configuration/config";
+import {Actions} from "react-native-router-flux";
 
 export default class UserInfoComponent extends Component{
     state = {
@@ -39,6 +39,11 @@ export default class UserInfoComponent extends Component{
                 console.error(error);
             });
     }
+
+    profileInfo(){
+        Actions.profileInfo()
+    }
+
     render() {
         return(
             <View>
@@ -48,7 +53,7 @@ export default class UserInfoComponent extends Component{
                            style={styles.userProfileImage}/>
                     <Text style={styles.username}>{this.state.data.name}</Text>
                     <Text style={styles.personalInfo}>{"\n"}Personal info</Text>
-                    <NextButton/>
+                    <NextButton onPress={this.profileInfo}/>
                 </View>
             </View>
         )

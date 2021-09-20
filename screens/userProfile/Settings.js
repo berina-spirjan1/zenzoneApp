@@ -27,6 +27,10 @@ export default class Settings extends Component{
         Actions.toHelp()
     }
 
+    toInfoMain(){
+        Actions.toInfoMain()
+    }
+
     render() {
 
         return(
@@ -36,7 +40,8 @@ export default class Settings extends Component{
                     backgroundColor="#334A6D"/>
                 <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                          leftElement="arrow-back"
-                         centerElement="Settings"/>
+                         centerElement="Settings"
+                         onLeftElementPress={this.toInfoMain}/>
                 <UserInfoComponent/>
                 <Text style={styles.settings}>Settings</Text>
                 <View style={styles.language}>
