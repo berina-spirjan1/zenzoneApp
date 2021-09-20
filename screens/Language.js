@@ -1,13 +1,5 @@
-import React, {Component, useState} from "react";
-import { View,
-         StyleSheet,
-         Text,
-         CheckBox,
-         StatusBar,
-         TouchableOpacity,
-         Image,
-         Alert
-} from "react-native";
+import React, {Component} from "react";
+import {CheckBox, Image, StatusBar, StyleSheet, Text, View,} from "react-native";
 
 import UserInfoComponent from "../components/userProfileComponents/UserInfoComponent";
 import {Toolbar} from "react-native-material-ui";

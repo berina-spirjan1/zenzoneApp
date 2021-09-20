@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Toolbar } from "react-native-material-ui";
-import { Provider } from "react-redux";
+import React, {Component} from "react";
+import {Toolbar} from "react-native-material-ui";
+import {Provider} from "react-redux";
 
-import { ForgotPasswordForm } from "../components/forgotPasswordComponents/ForgotPasswordForm";
+import {ForgotPasswordForm} from "../components/forgotPasswordComponents/ForgotPasswordForm";
 import store from "../redux/store";
 
 

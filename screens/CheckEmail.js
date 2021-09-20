@@ -1,9 +1,5 @@
 import React from "react";
-import {
-    View,
-    StyleSheet,
-    Text, TouchableOpacity
-} from "react-native";
+import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import LottieView from "lottie-react-native";
 import {Actions} from "react-native-router-flux";
 

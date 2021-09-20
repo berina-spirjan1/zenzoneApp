@@ -1,14 +1,14 @@
 import React, {Component} from "react";
 import {
-    View,
-    Text,
-    StyleSheet,
+    Dimensions,
+    Image,
+    ImageBackground,
     SafeAreaView,
     ScrollView,
-    Dimensions,
     StatusBar,
-    ImageBackground,
-    Image
+    StyleSheet,
+    Text,
+    View
 } from "react-native";
 import LeaderboardSingleListCard from "../components/leaderboardComponents/LeaderboardSingleListCard";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
