@@ -3,11 +3,12 @@ import {
     View,
     SafeAreaView,
     StyleSheet,
-    ScrollView, Dimensions, ImageBackground, Image, Text
+    ScrollView, Dimensions, ImageBackground, Image, Text, AsyncStorage
 } from "react-native";
 import MyActivityCard from "../components/myActivitiesComponent/cards/MyActivityCard";
 import { Toolbar } from "react-native-material-ui";
 import { Actions } from "react-native-router-flux";
+import {USER} from "../configuration/config";
 
 export default class MyActivities extends Component{
     constructor(props) {
@@ -16,6 +17,36 @@ export default class MyActivities extends Component{
 
     myProfileInfoBack(){
         Actions.myProfileInfoBack()
+    }
+
+    state = {
+        data: ''
+    }
+
+    componentDidMount = async () => {
+
+        let token = await AsyncStorage.getItem('jwt')
+        token = JSON.parse(token)
+
+        fetch(`${USER}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                this.setState({
+                    data: responseJson
+                })
+                // console.log(this.state.data)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
     }
 
     render() {
@@ -32,7 +63,7 @@ export default class MyActivities extends Component{
                                  style={styles.imageBackground}/>
                 <Image source={require('../assets/images/rodjoImage.png')}
                        style={styles.userImage}/>
-                <Text style={styles.username}>@arnel_maric</Text>
+                <Text style={styles.username}>{this.state.data.name}</Text>
                 <SafeAreaView style={styles.safeArea}
                               style={{height: screenHeight}}>
                     <ScrollView vertical={true}
