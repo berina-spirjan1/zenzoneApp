@@ -10,7 +10,7 @@ export default class RoutesSettings extends Component{
         return(
             <Router>
                 <Stack key={"root"} hideNavBar={true}>
-                    <Scene key={"fromSettings"} component={Settings} title={"fromSettings"} initial={true}/>
+                    <Scene key={"switchToSettings"} component={Settings} title={"switchToSettings"} initial={true}/>
                     <Scene key={"toLanguage"} component={Language} title={"toLanguage"}/>
                     <Scene key={"toHelp"} component={UserHelp} title={"toHelp"}/>
                 </Stack>
