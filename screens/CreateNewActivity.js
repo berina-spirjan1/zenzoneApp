@@ -1,18 +1,7 @@
 import React, {Component} from "react";
-import {
-    View,
-    Text,
-    ScrollView,
-    StyleSheet,
-    SafeAreaView,
-    StatusBar,
-    TextInput,
-    TouchableOpacity,
-    Alert
-} from "react-native";
-import CategoryCard from "../components/homePageComponents/cards/CategoryCard";
+import {StatusBar, StyleSheet, View} from "react-native";
 
-import { Toolbar } from "react-native-material-ui";
+import {Toolbar} from "react-native-material-ui";
 import {CreateNewActivityForm} from "../components/createNewActivityComponents/CreateNewActivityForm";
 
 export default class CreateNewActivity extends Component{

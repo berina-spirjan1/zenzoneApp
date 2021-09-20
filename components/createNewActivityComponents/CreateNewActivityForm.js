@@ -108,7 +108,11 @@ export const CreateNewActivityForm = () => {
 
         const activity = new FormData();
         activity.append('title', title);
-        activity.append('image', fileToUpload);
+        activity.append('image', {
+            name: 'ime slike',
+            type: image.type,
+            uri: Platform.OS === "android" ? image.uri : image.uri.replace("file://", "")
+        });
         fetch(`${ACTIVITY}`, {
             method: 'POST',
             headers: {
@@ -116,7 +120,7 @@ export const CreateNewActivityForm = () => {
                 "Accept": "application/json",
                 'Authorization': 'Bearer ' + token
             },
-            body: JSON.stringify(activity)
+            body: activity
         })
             .then(async res => {
                 try {
@@ -303,7 +307,7 @@ const styles = StyleSheet.create({
         marginTop:6
     },
     postActivityButton:{
-        marginBottom:100,
+        marginBottom:50,
         backgroundColor: '#6285b3',
         borderRadius: 18,
         marginTop: 30,

@@ -114,10 +114,10 @@ const styles = StyleSheet.create({
         width: 900,
         justifyContent: 'center',
         marginLeft:-250,
-        marginTop: -80,
+        marginTop: -150,
         flex: 1,
         marginBottom:300,
-        opacity:0.5
+        opacity:0.2
     },
     rankings:{
         // bottom:270
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         shadowRadius: 10,
         elevation: 10,
         marginLeft: 130,
-        marginTop: -140,
+        marginTop: -100,
         zIndex:2
     },
     secondPlace:{
@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
         marginBottom: 140
     },
     crownIcon:{
-        top:-150,
+        top:-110,
         left:155
     },
     userImageRankings:{
