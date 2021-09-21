@@ -10,6 +10,8 @@ import {
 } from "react-native";
 import BadgeCard from "../components/badgesComponents/cards/BadgeCard";
 import {USER} from "../configuration/config";
+import {Toolbar} from "react-native-material-ui";
+import {Actions} from "react-native-router-flux";
 
 
 export default class Badges extends Component{
@@ -44,17 +46,26 @@ export default class Badges extends Component{
             });
     }
 
+    profile(){
+        Actions.profile()
+    }
+
     render() {
 
         const screenHeight = Dimensions.get('window').height
 
         return(
             <View style={styles.container}>
+                <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                         leftElement="arrow-back"
+                         centerElement="Badges"
+                         onLeftElementPress={this.profile}/>
                 <ImageBackground source={require('../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
-                <Image source={require('../assets/images/rodjoImage.png')}
+                <Image source={require('../assets/images/user_photo.png')}
                        style={styles.userImage}/>
                 <Text style={styles.username}>{this.state.data.name}</Text>
+
                 <SafeAreaView style={styles.safeArea}
                               style={{height: screenHeight}}>
                     <ScrollView vertical={true}
