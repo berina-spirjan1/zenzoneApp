@@ -65,21 +65,24 @@ export const ChangePasswordForm = () =>{
         <View style={styles.container}>
             <Text style={styles.oldPassword}>Old password</Text>
             <TextInput style={styles.inputOldPassword}
-                       onChangeText={setCurrentPassword}>
+                       onChangeText={setCurrentPassword}
+                       secureTextEntry={true}>
                 {/*<FontAwesome5 name={'lock'}*/}
                 {/*              size={18}*/}
                 {/*              color={'#000000'}/>*/}
             </TextInput>
             <Text style={styles.newPassword}>New password</Text>
             <TextInput style={styles.inputNewPassword}
-                       onChangeText={setNewPassword}>
+                       onChangeText={setNewPassword}
+                       secureTextEntry={true}>
                 {/*<FontAwesome5 name={'key'}*/}
                 {/*              size={18}*/}
                 {/*              color={'#000000'}/>*/}
             </TextInput>
             <Text style={styles.confirmPassword}>Confirm password</Text>
             <TextInput style={styles.inputConfirmPassword}
-                       onChangeText={setConfirmNewPassword}>
+                       onChangeText={setConfirmNewPassword}
+                       secureTextEntry={true}>
                 {/*<FontAwesome5 name={'lock-open'}*/}
                 {/*              size={18}*/}
                 {/*              color={'#000000'}/>*/}
