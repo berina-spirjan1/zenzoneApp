@@ -20,57 +20,13 @@ import * as ImagePicker from "expo-image-picker";
 
 export const CreateNewActivityForm = () => {
 
-    // const token = AsyncStorage.getItem('jwt')
-
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     let [image, setImage] = useState(null);
+    const [imageUri, setImageUri] = useState('')
+    const [extension, setExtension] = useState('')
 
-    //
-    // const uploadImage = async () => {
-    //     if (image != null) {
-    //         const fileToUpload = image;
-    //         const data = new FormData();
-    //         data.append('name', 'Image Upload');
-    //         data.append('file_attachment', fileToUpload);
-    //         let res = await fetch(
-    //             `${ACTIVITY}`,
-    //             {
-    //                 method: 'POST',
-    //                 body: data,
-    //                 headers: {
-    //                     'Content-Type': 'multipart/form-data; ',
-    //                 },
-    //             }
-    //         );
-    //         let responseJson = await res.json();
-    //         if (responseJson.status === 1) {
-    //             alert('Upload Successful');
-    //         }
-    //     } else {
-    //         alert('Please Select File first');
-    //     }
-    // };
 
-    // const selectFile = async () => {
-    //     try {
-    //         const res = await DocumentPicker.pick({
-    //             type: [DocumentPicker.types.images],
-    //         });
-    //         console.log('res : ' + JSON.stringify(res));
-    //         setImage(res);
-    //     } catch (err) {
-    //         setImage(null);
-    //         if (DocumentPicker.isCancel(err)) {
-    //             alert('Canceled');
-    //         } else {
-    //             alert('Unknown Error: ' + JSON.stringify(err));
-    //             throw err;
-    //         }
-    //     }
-    // };
-    //
-    //
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
@@ -87,10 +43,11 @@ export const CreateNewActivityForm = () => {
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
             aspect: [3, 3],
-            quality: 1
+            quality: 0.5
         });
         image = result
         console.log(result);
+        setImageUri(Platform.OS === "android" ? image.uri : image.uri.replace("file:///", ""))
 
         if (!result.cancelled) {
             setImage('');
@@ -105,15 +62,17 @@ export const CreateNewActivityForm = () => {
 
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
-        const imageUri = image.uri
         const imageType = image.type
+        setExtension(imageUri.split('.').pop())
         const activity = new FormData();
+        activity.append('category_id',1);
         activity.append('title', title);
         activity.append('image', {
             name: `${imageType}`,
-            type:  `${imageType}`,
+            type:  `${imageType}/${extension}`,
             uri: imageUri
         });
+
         fetch(`${ACTIVITY}`, {
             method: 'POST',
             headers: {
