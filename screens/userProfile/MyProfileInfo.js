@@ -72,7 +72,7 @@ export default class MyProfileInfo extends Component{
         Actions.updateProfile()
     }
 
-    onClick(label){
+    onMenuItemClick(label){
         if(label.index===0){
             this.updateProfile()
         }
@@ -105,7 +105,7 @@ export default class MyProfileInfo extends Component{
                                  labels: ["Update profile", "Daily challenge", "Leaderboard","Logout"],
                              }
                          }}
-                         onRightElementPress={(label) => {this.onClick(label)}}
+                         onRightElementPress={(label) => {this.onMenuItemClick(label)}}
                          onLeftElementPress={this.backToProfile}/>
                 <ImageBackground source={require('../../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
