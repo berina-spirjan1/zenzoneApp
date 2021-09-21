@@ -61,6 +61,32 @@ export default class MyProfileInfo extends Component{
         Actions.backToProfile()
     }
 
+    goToDailyChallenge(){
+        Actions.goToDailyChallenge()
+    }
+
+    goToLeaderboard(){
+        Actions.goToLeaderboard()
+    }
+    updateProfile(){
+        Actions.updateProfile()
+    }
+
+    onClick(label){
+        if(label.index===0){
+            this.updateProfile()
+        }
+        else if(label.index===1){
+            this.goToDailyChallenge()
+        }
+        else if(label.index===2){
+            this.goToLeaderboard()
+        }
+        else if(label.index===3){
+            onLogoutHandler().then(r => console.log(r))
+        }
+    }
+
     render(){
 
         const screenHeight = Dimensions.get('window').height
@@ -76,9 +102,10 @@ export default class MyProfileInfo extends Component{
                          rightElement={{
                              menu: {
                                  icon: "more-vert",
-                                 labels: ["Most popular activities", "Daily challenge", "Leaderboard", "Theme","Logout"]
+                                 labels: ["Update profile", "Daily challenge", "Leaderboard","Logout"],
                              }
                          }}
+                         onRightElementPress={(label) => {this.onClick(label)}}
                          onLeftElementPress={this.backToProfile}/>
                 <ImageBackground source={require('../../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
