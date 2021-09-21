@@ -98,20 +98,21 @@ export const CreateNewActivityForm = () => {
 
     };
 
+
     const postNewActivity = async () => {
 
-        const fileToUpload = image
-        console.log("OVO JE FAJL", fileToUpload)
+        console.log("OVO JE FAJL", image)
 
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
-
+        const imageUri = image.uri
+        const imageType = image.type
         const activity = new FormData();
         activity.append('title', title);
         activity.append('image', {
-            name: 'ime slike',
-            type: image.type,
-            uri: Platform.OS === "android" ? image.uri : image.uri.replace("file://", "")
+            name: `${imageType}`,
+            type:  `${imageType}`,
+            uri: imageUri
         });
         fetch(`${ACTIVITY}`, {
             method: 'POST',
