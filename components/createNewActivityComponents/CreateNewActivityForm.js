@@ -55,7 +55,6 @@ export const CreateNewActivityForm = () => {
 
     };
 
-
     const postNewActivity = async () => {
 
         console.log("OVO JE FAJL", image)
@@ -66,13 +65,14 @@ export const CreateNewActivityForm = () => {
         setExtension(imageUri.split('.').pop())
         const activity = new FormData();
         activity.append('category_id',1);
+
         activity.append('title', title);
         activity.append('image', {
-            name: `${imageType}`,
+            name: `${imageType}.${extension}`,
             type:  `${imageType}/${extension}`,
             uri: imageUri
         });
-
+        activity.append('description', description)
         fetch(`${ACTIVITY}`, {
             method: 'POST',
             headers: {
