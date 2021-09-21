@@ -1,3 +1,4 @@
+export const BASE_URL = 'https://vucko-1049-backend.zendev.se/';
 export const API_URL = 'https://vucko-1049-backend.zendev.se/api';
 
 //authentication
