@@ -5,7 +5,7 @@ import {
     userLogoutStarted,
     userLogoutSuccess
 } from "../../redux/actions";
-import { AsyncStorage } from "react-native";
+import {Alert, AsyncStorage} from "react-native";
 
 export const onLogoutHandler = async () => {
 
@@ -36,6 +36,7 @@ export const onLogoutHandler = async () => {
                 } else {
                     await AsyncStorage.removeItem('jwt')
                     console.log("Successfully logout")
+                    Alert.alert('You have been successfully logged out. Please login in again below if you need to make changes or updates to your profile.')
                     store.dispatch(userLogoutSuccess());
                 }
             } catch (err) {
