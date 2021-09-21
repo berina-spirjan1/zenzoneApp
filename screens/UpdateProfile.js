@@ -68,16 +68,10 @@ export default class UpdateProfile extends Component{
                     backgroundColor="#334A6D"/>
                 <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                          leftElement="arrow-back"
-                         centerElement="My profile"
-                         rightElement={{
-                             menu: {
-                                 icon: "more-vert",
-                                 labels: ["Most popular activities", "Daily challenge", "Leaderboard", "Theme","Logout"]
-                             }
-                         }}/>
+                         centerElement="My profile"/>
                 <ImageBackground source={require('../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
-                <Image source={require('../assets/images/rodjoImage.png')}
+                <Image source={require('../assets/images/user_photo.png')}
                        style={styles.userImage}/>
                 <TextInput style={styles.username}>{this.state.data.name}</TextInput>
                 <View style={styles.followersFollowing}>
@@ -179,7 +173,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginLeft:-170,
         marginTop: -100,
-        opacity:0.5,
+        opacity:0.2,
         flex: 1,
         marginBottom:300
     },
