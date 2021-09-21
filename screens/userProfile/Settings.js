@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {
     View,
     StyleSheet,
-    Text, StatusBar
+    Text, StatusBar, AsyncStorage
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 
@@ -12,11 +12,16 @@ import UserInfoComponent from "../../components/userProfileComponents/UserInfoCo
 import BackgroundForIconsUserProfile from "../../components/backgrounds/BackgroundForIconsUserProfile";
 import NextButton from "../../components/buttons/NextButton";
 import {Actions} from "react-native-router-flux";
+import {USER} from "../../configuration/config";
 
 
 export default class Settings extends Component{
     constructor(props) {
         super();
+    }
+
+    state = {
+        data: ''
     }
 
     toLanguage(){
@@ -30,6 +35,35 @@ export default class Settings extends Component{
     toInfoMain(){
         Actions.toInfoMain()
     }
+
+
+    componentDidMount = async () => {
+
+        let token = await AsyncStorage.getItem('jwt')
+        token = JSON.parse(token)
+
+        fetch(`${USER}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                this.setState({
+                    data: responseJson
+                })
+                // console.log(this.state.data)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+
 
     render() {
 
@@ -65,7 +99,7 @@ export default class Settings extends Component{
                     <ToggleSwitch
                         isOn={false}
                         onColor="#FFFDFD"
-                        offColor="#FFFDFD"
+                        offColor="#000000"
                         labelStyle={{ color: "black", fontWeight: "900" }}
                         size="medium"
                         onToggle={isOn => console.log("changed to : ", isOn)}
