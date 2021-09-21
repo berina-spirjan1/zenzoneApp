@@ -77,12 +77,6 @@ export default class MyProfileInfo extends Component{
             this.updateProfile()
         }
         else if(label.index===1){
-            this.goToDailyChallenge()
-        }
-        else if(label.index===2){
-            this.goToLeaderboard()
-        }
-        else if(label.index===3){
             onLogoutHandler().then(r => console.log(r))
         }
     }
@@ -102,7 +96,7 @@ export default class MyProfileInfo extends Component{
                          rightElement={{
                              menu: {
                                  icon: "more-vert",
-                                 labels: ["Update profile", "Daily challenge", "Leaderboard","Logout"],
+                                 labels: ["Update profile","Logout"],
                              }
                          }}
                          onRightElementPress={(label) => {this.onMenuItemClick(label)}}
