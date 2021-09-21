@@ -36,7 +36,7 @@ export const onLogoutHandler = async () => {
                 } else {
                     await AsyncStorage.removeItem('jwt')
                     console.log("Successfully logout")
-                    Alert.alert('You have been successfully logged out. Please login in again below if you need to make changes or updates to your profile.')
+                    Alert.alert('You have been successfully logged out.')
                     store.dispatch(userLogoutSuccess());
                 }
             } catch (err) {
