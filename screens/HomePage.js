@@ -15,10 +15,12 @@ import {
 import {Toolbar} from "react-native-material-ui";
 
 import CategoryCard from "../components/homePageComponents/cards/CategoryCard";
-import ActivityCard from "../components/homePageComponents/cards/ActivityCard";
-import FollowerCard from "../components/homePageComponents/cards/FollowerCard";
 import {Actions} from "react-native-router-flux";
-import {ACTIVITY, BASE_URL, CATEGORY, USER} from "../configuration/config";
+import {
+    ACTIVITY,
+    BASE_URL,
+    CATEGORY
+} from "../configuration/config";
 import {Card, CardAction} from "react-native-card-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {renderIf} from "../utilities/CommonMethods";
@@ -32,7 +34,9 @@ export default class HomePage extends Component{
         // current_page: '',
         // per_page: '',
         searchText: '',
-        noData: false
+        noData: false,
+        noDataCategory: false,
+        categories: []
     }
 
     //added navigations to another component or pages
@@ -71,11 +75,31 @@ export default class HomePage extends Component{
             .catch((error) => {
                 console.error(error);
             });
+
+        fetch(`${CATEGORY}`, {
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    }
+                })
+                    .then((response) => response.json())
+                    .then((responseJson) => {
+                        // console.log(responseJson);
+                        this.setState({
+                            categories: responseJson
+                        })
+                        console.log(this.state.categories)
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
     }
 
     render() {
 
         const screenHeight = Dimensions.get('window').height
+
 
         return(
             <View style={styleLightMode.container}>
@@ -125,8 +149,7 @@ export default class HomePage extends Component{
                         <Text style={styleLightMode.singleCategoryName}>Travel</Text>
                         {renderIf(this.state.noData, <Text style={{textAlign: 'center'}}>No data found.</Text>)}
                         {renderIf(this.state.data.length,
-                            <ScrollView horizontal={true}
-                                        showsHorizontalScrollIndicator={false}>
+                            <ScrollView vertical>
                                 <View>
                                     {this.state.data.map(function(obj,i) {
                                         return (
@@ -149,9 +172,11 @@ export default class HomePage extends Component{
                                                 <View style={styleLightMode.header}>
                                                     <Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
                                                            style={styleLightMode.profilePicture}/>
-                                                    <Text style={styleLightMode.username}>{obj.user.name}</Text>
-                                                    <Text style={styleLightMode.activityTitle}>{"\n"}{obj.title}</Text>
+                                                    <Text style={styleLightMode.username}
+                                                         numberOfLines={3}>{obj.user.name}</Text>
                                                 </View>
+                                                <Text style={styleLightMode.activityTitle}
+                                                      numberOfLines={3}>{"\n"}{obj.title}</Text>
                                                 <View>
                                                     <Image source={{uri: `${BASE_URL}`+`${obj.photo_dir}`+`${obj.photo_name}`}}
                                                            style={styleLightMode.activityImage}/>
@@ -176,7 +201,7 @@ export default class HomePage extends Component{
                                                                   style={styleLightMode.commentIcon}/>
                                                 </View>
                                                 <Text style={styleLightMode.activityText}
-                                                      numberOfLines={4}>
+                                                      numberOfLines={3}>
                                                     {obj.description}
                                                 </Text>
 
@@ -196,67 +221,6 @@ export default class HomePage extends Component{
                         <View>
 
                         </View>
-
-                        {/*<SafeAreaView>*/}
-                        {/*    <ScrollView horizontal*/}
-                        {/*                showsHorizontalScrollIndicator={false}>*/}
-                        {/*        /!*<FlatList horizontal={true}*!/*/}
-                        {/*        /!*          data={this.state.data}*!/*/}
-                        {/*        /!*          keyExtractor={item => item.data.id}*!/*/}
-                        {/*        /!*          renderItem={({item}) =>(*!/*/}
-
-                        {/*        /!*          )}/>*!/*/}
-                        {/*        <View style={styleLightMode.activityCard}>*/}
-                        {/*            <ActivityCard />*/}
-                        {/*        </View>*/}
-                        {/*        <View style={styleLightMode.activityCard}>*/}
-                        {/*            <ActivityCard />*/}
-                        {/*        </View>*/}
-                        {/*        <View style={styleLightMode.activityCard}>*/}
-                        {/*            <ActivityCard />*/}
-                        {/*        </View>*/}
-                        {/*        <View style={styleLightMode.activityCard}>*/}
-                        {/*            <ActivityCard />*/}
-                        {/*        </View>*/}
-                        {/*    </ScrollView>*/}
-                        {/*</SafeAreaView>*/}
-
-                        {/*<Text style={styleLightMode.followers}>Followers</Text>*/}
-                        {/*<SafeAreaView>*/}
-                        {/*    <ScrollView horizontal*/}
-                        {/*                showsHorizontalScrollIndicator={false}>*/}
-                        {/*        <View style={styleLightMode.followerCard}>*/}
-                        {/*            <FollowerCard/>*/}
-                        {/*        </View>*/}
-                        {/*        <View style={styleLightMode.followerCard}>*/}
-                        {/*            <FollowerCard/>*/}
-                        {/*        </View>*/}
-                        {/*        <View style={styleLightMode.followerCard}>*/}
-                        {/*            <FollowerCard/>*/}
-                        {/*        </View>*/}
-                        {/*        <View style={styleLightMode.followerCard}>*/}
-                        {/*            <FollowerCard/>*/}
-                        {/*        </View>*/}
-                        {/*    </ScrollView>*/}
-                        {/*</SafeAreaView>*/}
-                        {/*<Text style={styleLightMode.familyActivities}>Familly activities</Text>*/}
-                        {/*<SafeAreaView>*/}
-                        {/*    <ScrollView horizontal*/}
-                        {/*                showsHorizontalScrollIndicator={false}>*/}
-                        {/*        <View style={styleLightMode.activityCard}>*/}
-                        {/*            <ActivityCard />*/}
-                        {/*        </View>*/}
-                        {/*        <View style={styleLightMode.activityCard}>*/}
-                        {/*            <ActivityCard />*/}
-                        {/*        </View>*/}
-                        {/*        <View style={styleLightMode.activityCard}>*/}
-                        {/*            <ActivityCard />*/}
-                        {/*        </View>*/}
-                        {/*        <View style={styleLightMode.activityCard}>*/}
-                        {/*            <ActivityCard />*/}
-                        {/*        </View>*/}
-                        {/*    </ScrollView>*/}
-                        {/*</SafeAreaView>*/}
                     </ScrollView>
                 </SafeAreaView>
             </View>
@@ -303,12 +267,12 @@ const styleLightMode = StyleSheet.create({
         textTransform: 'uppercase'
     },
     activityCard:{
-        height: 520,
-        width: 284,
+        height: 550,
+        width: 300,
         marginTop: 10,
-        marginLeft:17,
+        marginLeft:27,
         borderRadius: 50,
-        marginBottom:70
+        marginBottom: 20
     },
     followers:{
         marginRight: 20,
@@ -337,7 +301,8 @@ const styleLightMode = StyleSheet.create({
         borderRadius: 20,
         height:30,
         width:100,
-        left:60
+        left:60,
+        bottom: 10
     },
     buttonText:{
         justifyContent: 'center',
@@ -352,24 +317,36 @@ const styleLightMode = StyleSheet.create({
         flexDirection: 'row'
     },
     profilePicture:{
-        width: 70,
-        height: 70,
-        borderRadius:25,
-        marginLeft: -55
+        width: 50,
+        height: 50,
+        borderRadius:70,
+        marginLeft: -50
     },
     username:{
         marginLeft:30,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        justifyContent: 'center',
+        fontStyle: 'italic',
+        color: '#616C75',
+        marginTop: 15
     },
     activityTitle:{
-        marginLeft: -65,
-        marginTop: 10
+        marginLeft: 25,
+        marginRight: 20,
+        marginTop: 0,
+        justifyContent: 'center',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        fontSize:16,
+        color: '#4c545b',
     },
     activityImage:{
-        marginTop:25,
-        width: 223.5,
-        height:223.06,
-        borderRadius:59
+        marginTop:20,
+        width: 250,
+        height:250,
+        borderRadius:39,
+        borderColor: '#616C75',
+        borderWidth: 1
     },
     like:{
         marginTop: 0,
@@ -384,15 +361,17 @@ const styleLightMode = StyleSheet.create({
         width:30,
         borderRadius:30,
         marginTop:0,
-        left:0
+        left:0,
+        zIndex: 1
     },
     activityText:{
         marginLeft: 25,
         marginRight: 20,
-        marginTop:10
+        marginTop:15,
+        marginBottom: 10
     },
     commentIcon:{
-        left:60
+        left:60,top:5
     },
     greenCircle:{
         backgroundColor: '#06FD37',
