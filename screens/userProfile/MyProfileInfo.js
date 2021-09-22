@@ -157,7 +157,7 @@ export default class MyProfileInfo extends Component{
                         <TouchableOpacity style={styles.items}>
                             <View style={styles.itemRow}>
                                 <FontAwesome5 name={'map-marker-alt'}
-                                              size={20}
+                                              size={26}
                                               color={'#616C75'}/>
                                 <Text style={styles.menuItem}>{this.state.data.office_location}</Text>
                             </View>
