@@ -14,14 +14,13 @@ import {
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 
-import CategoryCard from "../components/homePageComponents/cards/CategoryCard";
 import {Actions} from "react-native-router-flux";
 import {
     ACTIVITY,
     BASE_URL,
     CATEGORY
 } from "../configuration/config";
-import {Card, CardAction} from "react-native-card-view";
+import {Card, CardAction, CardContent} from "react-native-card-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {renderIf} from "../utilities/CommonMethods";
 
@@ -85,11 +84,10 @@ export default class HomePage extends Component{
                 })
                     .then((response) => response.json())
                     .then((responseJson) => {
-                        // console.log(responseJson);
                         this.setState({
-                            categories: responseJson
+                            categories: responseJson.data.data
                         })
-                        console.log(this.state.categories)
+                        console.log(responseJson)
                     })
                     .catch((error) => {
                         console.error(error);
@@ -125,27 +123,45 @@ export default class HomePage extends Component{
                             <Text style={styleLightMode.seeAll}
                                   onPress={(e) => this.onTextPress(e, 'See all')}>See all</Text>
                         </View>
-                        <SafeAreaView>
-                            <ScrollView showsHorizontalScrollIndicator={false}
-                                        horizontal>
+                        {renderIf(this.state.noDataCategory, <Text style={{textAlign: 'center'}}>No data found.</Text>)}
+                        {renderIf(this.state.categories.length,
+                            <ScrollView horizontal={true}
+                                        showsHorizontalScrollIndicator={false}>
+                                <View style={{flexDirection: 'row'}}>
+                                    {this.state.categories.map(function(obj,i) {
+                                        return (
+                                            <View style={styleLightMode.categoryCard}>
+                                                <Card  styles={{ card: { backgroundColor: obj.color,
+                                                        borderRadius:30,
+                                                        shadowColor: "#000000",
+                                                        shadowOffset: {
+                                                            width: 0,
+                                                            height: 2,
+                                                        },
+                                                        shadowOpacity: 0.44,
+                                                        shadowRadius: 3,
+                                                        elevation: 5
+                                                    }}}>
 
-                                <View style={styleLightMode.categoryCard}>
-                                    <CategoryCard/>
-                                </View>
-                                <View style={styleLightMode.categoryCard}>
-                                    <CategoryCard/>
-                                </View>
-                                <View style={styleLightMode.categoryCard}>
-                                    <CategoryCard/>
-                                </View>
-                                <View style={styleLightMode.categoryCard}>
-                                    <CategoryCard/>
-                                </View>
-                                <View style={styleLightMode.categoryCard}>
-                                    <CategoryCard/>
+                                                    <View style={styleLightMode.icon2}>
+                                                        <FontAwesome5 name={obj.icon}
+                                                                      size={35}
+                                                                      color={'#000000'}/>
+                                                    </View>
+
+                                                    <CardContent>
+                                                        <Text style={styleLightMode.categoryName}>{obj.title}</Text>
+                                                    </CardContent>
+                                                    <CardAction >
+
+                                                    </CardAction>
+                                                </Card>
+                                            </View>
+                                        )
+                                    },this)}
                                 </View>
                             </ScrollView>
-                        </SafeAreaView>
+                        )}
                         <Text style={styleLightMode.singleCategoryName}>Travel</Text>
                         {renderIf(this.state.noData, <Text style={{textAlign: 'center'}}>No data found.</Text>)}
                         {renderIf(this.state.data.length,
@@ -389,6 +405,17 @@ const styleLightMode = StyleSheet.create({
         borderRadius:30,
         marginTop:7,
         left:-60
+    },
+    categoryName:{
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+        color: '#000000',
+        paddingBottom:10,
+        fontSize: 12
+    },
+    icon2:{
+        justifyContent:'center',
+        marginTop:20
     }
 })
 
