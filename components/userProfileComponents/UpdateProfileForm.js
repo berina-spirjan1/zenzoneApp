@@ -16,6 +16,7 @@ import * as ImagePicker from "expo-image-picker";
 import {ACTIVITY, USER_UPDATE} from "../../configuration/config";
 import store from "../../redux/store";
 import {failedAddingActivity, startedAddingActivity, successfullyAddedActivity} from "../../redux/actions";
+import {Actions} from "react-native-router-flux";
 
 
 export const UpdateProfileForm = () =>{
@@ -60,6 +61,8 @@ export const UpdateProfileForm = () =>{
     const updateProfile = async () => {
 
         console.log("OVO JE FAJL", image)
+        console.log('ovo je office location', office_location)
+
 
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
@@ -71,7 +74,8 @@ export const UpdateProfileForm = () =>{
         activity.append('email',email);
         activity.append('office_location', office_location);
         activity.append('work_position', work_position);
-        activity.append('image', {
+        activity.append('photo_dir', 'storage/images')
+        activity.append('photo_name', {
             name: `${imageType}.${extension}`,
             type:  `${imageType}/${extension}`,
             uri: imageUri
@@ -97,12 +101,18 @@ export const UpdateProfileForm = () =>{
                         store.dispatch(failedAddingActivity());
                     } else {
                         store.dispatch(successfullyAddedActivity());
+                        switchToMyProfileInfo()
                     }
                 } catch (err) {
                     console.log(err);
                 }
             })
     }
+
+    const switchToMyProfileInfo = () =>{
+        Actions.switchToMyProfileInfo()
+    }
+
 
     return(
         <View>
