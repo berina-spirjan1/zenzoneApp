@@ -99,7 +99,7 @@ export default class Settings extends Component{
                     <ToggleSwitch
                         isOn={false}
                         onColor="#FFFDFD"
-                        offColor="#000000"
+                        offColor="#393f48"
                         labelStyle={{ color: "black", fontWeight: "900" }}
                         size="medium"
                         onToggle={isOn => console.log("changed to : ", isOn)}
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
         marginTop: 30,
         marginLeft: 50,
         fontWeight: 'bold',
-
+        color: '#393f48'
     },
     buttonNext:{
         marginTop:-10,
