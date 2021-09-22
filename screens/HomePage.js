@@ -6,7 +6,11 @@ import {
     Text,
     SafeAreaView,
     ScrollView,
-    Dimensions, AsyncStorage, FlatList, Image, TouchableOpacity, Alert
+    Dimensions,
+    FlatList,
+    Image,
+    TouchableOpacity,
+    Alert
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 
@@ -14,20 +18,22 @@ import CategoryCard from "../components/homePageComponents/cards/CategoryCard";
 import ActivityCard from "../components/homePageComponents/cards/ActivityCard";
 import FollowerCard from "../components/homePageComponents/cards/FollowerCard";
 import {Actions} from "react-native-router-flux";
-import {ACTIVITY, USER} from "../configuration/config";
+import {ACTIVITY, BASE_URL, CATEGORY, USER} from "../configuration/config";
 import {Card, CardAction} from "react-native-card-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import {renderIf} from "../utilities/CommonMethods";
 
 export default class HomePage extends Component{
     constructor(props) {
         super();
     }
     state = {
-        data: '',
+        data: [],
         // current_page: '',
-        // per_page: ''
+        // per_page: '',
+        searchText: '',
+        noData: false
     }
-
 
     //added navigations to another component or pages
     sideMenu(){
@@ -46,19 +52,6 @@ export default class HomePage extends Component{
         Actions.settings()
     }
 
-    //implementation for click on menu items
-    onElementClick(label){
-        if(label.index === 0){
-            this.leaderboard()
-        }
-        else if(label.index === 1){
-            this.daily()
-        }
-        else if(label.index === 2){
-            this.settings()
-        }
-    }
-
     componentDidMount() {
 
         fetch(`${ACTIVITY}`, {
@@ -70,16 +63,15 @@ export default class HomePage extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log(responseJson);
+                console.log(responseJson.data.data);
                 this.setState({
-                    data: responseJson
+                    data: responseJson.data.data
                 })
             })
             .catch((error) => {
                 console.error(error);
             });
     }
-
 
     render() {
 
@@ -99,14 +91,7 @@ export default class HomePage extends Component{
                         // onChangeText: text => searchFilterFunction(text),
                         // onSearchCloseRequested: () => setName(nameList),
                     }}
-                    onLeftElementPress={this.sideMenu}
-                    rightElement={{
-                        menu: {
-                            icon: "more-vert",
-                            labels: ["Daily challenge", "Leaderboard", "Settings"]
-                        }
-                    }}
-                    onRightElementPress={(label) => this.onElementClick(label)}/>
+                    onLeftElementPress={this.sideMenu}/>
 
                 <SafeAreaView>
                     <ScrollView style={screenHeight}
@@ -138,64 +123,142 @@ export default class HomePage extends Component{
                             </ScrollView>
                         </SafeAreaView>
                         <Text style={styleLightMode.singleCategoryName}>Travel</Text>
-                        <SafeAreaView>
-                            <ScrollView horizontal
+                        {renderIf(this.state.noData, <Text style={{textAlign: 'center'}}>No data found.</Text>)}
+                        {renderIf(this.state.data.length,
+                            <ScrollView horizontal={true}
                                         showsHorizontalScrollIndicator={false}>
-                                <View style={styleLightMode.activityCard}>
-                                    <ActivityCard />
-                                </View>
-                                <View style={styleLightMode.activityCard}>
-                                    <ActivityCard />
-                                </View>
-                                <View style={styleLightMode.activityCard}>
-                                    <ActivityCard />
-                                </View>
-                                <View style={styleLightMode.activityCard}>
-                                    <ActivityCard />
-                                </View>
-                            </ScrollView>
-                        </SafeAreaView>
+                                <View>
+                                    {this.state.data.map(function(obj,i) {
+                                        return (
+                                            <View style={styleLightMode.activityCard}>
+                                            <Card style={styleLightMode.card}
+                                                  styles={{
+                                                      card: {
+                                                          backgroundColor: '#93B4E5',
+                                                          borderRadius: 30,
+                                                          shadowColor: "#000000",
+                                                          shadowOffset: {
+                                                              width: 0,
+                                                              height: 8,
+                                                          },
+                                                          shadowOpacity: 0.44,
+                                                          shadowRadius: 10.84,
+                                                          elevation: 16
+                                                      }
+                                                  }}>
+                                                <View style={styleLightMode.header}>
+                                                    <Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
+                                                           style={styleLightMode.profilePicture}/>
+                                                    <Text style={styleLightMode.username}>{obj.user.name}</Text>
+                                                    <Text style={styleLightMode.activityTitle}>{"\n"}{obj.title}</Text>
+                                                </View>
+                                                <View>
+                                                    <Image source={{uri: `${BASE_URL}`+`${obj.photo_dir}`+`${obj.photo_name}`}}
+                                                           style={styleLightMode.activityImage}/>
+                                                    {console.log(obj)}
+                                                </View>
+                                                <View style={{flexDirection: 'row'}}>
+                                                    <TouchableOpacity onPress={() => Alert.alert('Like')}>
+                                                        <View style={styleLightMode.greenCircle}>
+                                                            <Image source={require('../assets/images/rodjoImage.png')}
+                                                                   style={styleLightMode.like}/>
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                    <TouchableOpacity onPress={() => Alert.alert('Dislike')}>
+                                                        <View style={styleLightMode.redCircle}>
+                                                            <Image source={require('../assets/images/rodjoImage.png')}
+                                                                   style={styleLightMode.dislike}/>
+                                                        </View>
+                                                    </TouchableOpacity>
+                                                    <FontAwesome5 name={'comment'}
+                                                                  size={29}
+                                                                  color={'#000000'}
+                                                                  style={styleLightMode.commentIcon}/>
+                                                </View>
+                                                <Text style={styleLightMode.activityText}
+                                                      numberOfLines={4}>
+                                                    {obj.description}
+                                                </Text>
 
-                        <Text style={styleLightMode.followers}>Followers</Text>
-                        <SafeAreaView>
-                            <ScrollView horizontal
-                                        showsHorizontalScrollIndicator={false}>
-                                <View style={styleLightMode.followerCard}>
-                                    <FollowerCard/>
-                                </View>
-                                <View style={styleLightMode.followerCard}>
-                                    <FollowerCard/>
-                                </View>
-                                <View style={styleLightMode.followerCard}>
-                                    <FollowerCard/>
-                                </View>
-                                <View style={styleLightMode.followerCard}>
-                                    <FollowerCard/>
+                                                <CardAction>
+                                                    <TouchableOpacity style={styleLightMode.button}
+                                                                      onPress={() => Alert.alert('Single activity screen needs to open')}>
+                                                        <Text style={styleLightMode.buttonText}>Show more</Text>
+                                                    </TouchableOpacity>
+
+                                                </CardAction>
+                                            </Card></View>
+                                        )
+                                    },this)}
                                 </View>
                             </ScrollView>
-                        </SafeAreaView>
-                        <Text style={styleLightMode.familyActivities}>Familly activities</Text>
-                        <SafeAreaView>
-                            <ScrollView horizontal
-                                        showsHorizontalScrollIndicator={false}>
-                                <View style={styleLightMode.activityCard}>
-                                    <ActivityCard />
-                                </View>
-                                <View style={styleLightMode.activityCard}>
-                                    <ActivityCard />
-                                </View>
-                                <View style={styleLightMode.activityCard}>
-                                    <ActivityCard />
-                                </View>
-                                <View style={styleLightMode.activityCard}>
-                                    <ActivityCard />
-                                </View>
-                            </ScrollView>
-                        </SafeAreaView>
+                        )}
+                        <View>
+
+                        </View>
+
+                        {/*<SafeAreaView>*/}
+                        {/*    <ScrollView horizontal*/}
+                        {/*                showsHorizontalScrollIndicator={false}>*/}
+                        {/*        /!*<FlatList horizontal={true}*!/*/}
+                        {/*        /!*          data={this.state.data}*!/*/}
+                        {/*        /!*          keyExtractor={item => item.data.id}*!/*/}
+                        {/*        /!*          renderItem={({item}) =>(*!/*/}
+
+                        {/*        /!*          )}/>*!/*/}
+                        {/*        <View style={styleLightMode.activityCard}>*/}
+                        {/*            <ActivityCard />*/}
+                        {/*        </View>*/}
+                        {/*        <View style={styleLightMode.activityCard}>*/}
+                        {/*            <ActivityCard />*/}
+                        {/*        </View>*/}
+                        {/*        <View style={styleLightMode.activityCard}>*/}
+                        {/*            <ActivityCard />*/}
+                        {/*        </View>*/}
+                        {/*        <View style={styleLightMode.activityCard}>*/}
+                        {/*            <ActivityCard />*/}
+                        {/*        </View>*/}
+                        {/*    </ScrollView>*/}
+                        {/*</SafeAreaView>*/}
+
+                        {/*<Text style={styleLightMode.followers}>Followers</Text>*/}
+                        {/*<SafeAreaView>*/}
+                        {/*    <ScrollView horizontal*/}
+                        {/*                showsHorizontalScrollIndicator={false}>*/}
+                        {/*        <View style={styleLightMode.followerCard}>*/}
+                        {/*            <FollowerCard/>*/}
+                        {/*        </View>*/}
+                        {/*        <View style={styleLightMode.followerCard}>*/}
+                        {/*            <FollowerCard/>*/}
+                        {/*        </View>*/}
+                        {/*        <View style={styleLightMode.followerCard}>*/}
+                        {/*            <FollowerCard/>*/}
+                        {/*        </View>*/}
+                        {/*        <View style={styleLightMode.followerCard}>*/}
+                        {/*            <FollowerCard/>*/}
+                        {/*        </View>*/}
+                        {/*    </ScrollView>*/}
+                        {/*</SafeAreaView>*/}
+                        {/*<Text style={styleLightMode.familyActivities}>Familly activities</Text>*/}
+                        {/*<SafeAreaView>*/}
+                        {/*    <ScrollView horizontal*/}
+                        {/*                showsHorizontalScrollIndicator={false}>*/}
+                        {/*        <View style={styleLightMode.activityCard}>*/}
+                        {/*            <ActivityCard />*/}
+                        {/*        </View>*/}
+                        {/*        <View style={styleLightMode.activityCard}>*/}
+                        {/*            <ActivityCard />*/}
+                        {/*        </View>*/}
+                        {/*        <View style={styleLightMode.activityCard}>*/}
+                        {/*            <ActivityCard />*/}
+                        {/*        </View>*/}
+                        {/*        <View style={styleLightMode.activityCard}>*/}
+                        {/*            <ActivityCard />*/}
+                        {/*        </View>*/}
+                        {/*    </ScrollView>*/}
+                        {/*</SafeAreaView>*/}
                     </ScrollView>
-
                 </SafeAreaView>
-
             </View>
 
         )
@@ -267,6 +330,86 @@ const styleLightMode = StyleSheet.create({
         textTransform: 'uppercase',
         fontWeight: 'bold',
         marginLeft: 20
+    },
+    button: {
+        marginRight: 10,
+        backgroundColor: '#6285B3',
+        borderRadius: 20,
+        height:30,
+        width:100,
+        left:60
+    },
+    buttonText:{
+        justifyContent: 'center',
+        textAlign: 'center',
+        fontWeight: 'bold',
+        textTransform:'uppercase',
+        padding:5,
+        fontFamily:'Roboto_400Regular'
+    },
+    header:{
+        marginTop:17,
+        flexDirection: 'row'
+    },
+    profilePicture:{
+        width: 70,
+        height: 70,
+        borderRadius:25,
+        marginLeft: -55
+    },
+    username:{
+        marginLeft:30,
+        fontWeight: 'bold'
+    },
+    activityTitle:{
+        marginLeft: -65,
+        marginTop: 10
+    },
+    activityImage:{
+        marginTop:25,
+        width: 223.5,
+        height:223.06,
+        borderRadius:59
+    },
+    like:{
+        marginTop: 0,
+        height:30,
+        width:30,
+        borderRadius:30,
+        left:0,
+        zIndex: 1
+    },
+    dislike:{
+        height:30,
+        width:30,
+        borderRadius:30,
+        marginTop:0,
+        left:0
+    },
+    activityText:{
+        marginLeft: 25,
+        marginRight: 20,
+        marginTop:10
+    },
+    commentIcon:{
+        left:60
+    },
+    greenCircle:{
+        backgroundColor: '#06FD37',
+        height: 30,
+        width:30,
+        borderRadius:30,
+        marginTop: 7,
+        left:-65,
+        zIndex: 2
+    },
+    redCircle:{
+        backgroundColor: '#FD0628',
+        height:30,
+        width:30,
+        borderRadius:30,
+        marginTop:7,
+        left:-60
     }
 })
 
