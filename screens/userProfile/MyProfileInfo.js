@@ -16,7 +16,7 @@ import { Toolbar } from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import {onLogoutHandler} from "../../components/logout/Logout";
-import {USER} from "../../configuration/config";
+import {BASE_URL, USER} from "../../configuration/config";
 import {Actions} from "react-native-router-flux";
 
 export default class MyProfileInfo extends Component{
@@ -103,7 +103,7 @@ export default class MyProfileInfo extends Component{
                          onLeftElementPress={this.backToProfile}/>
                 <ImageBackground source={require('../../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
-                <Image source={require('../../assets/images/user_photo.png')}
+                <Image source={{uri: `${BASE_URL}`+`${this.state.data.photo_dir}`+`${this.state.data.photo_name}`}}
                        style={styles.userImage}/>
                 <Text style={styles.username}>{this.state.data.name}</Text>
                 <View style={styles.followersFollowing}>

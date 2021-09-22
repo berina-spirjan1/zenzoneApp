@@ -8,7 +8,7 @@ import {
 import MyActivityCard from "../components/myActivitiesComponent/cards/MyActivityCard";
 import { Toolbar } from "react-native-material-ui";
 import { Actions } from "react-native-router-flux";
-import {USER} from "../configuration/config";
+import {BASE_URL, USER} from "../configuration/config";
 
 export default class MyActivities extends Component{
     constructor(props) {
@@ -61,7 +61,7 @@ export default class MyActivities extends Component{
                          onLeftElementPress={this.myProfileInfoBack}/>
                 <ImageBackground source={require('../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
-                <Image source={require('../assets/images/rodjoImage.png')}
+                <Image source={{uri: `${BASE_URL}`+`${this.state.data.photo_dir}`+`${this.state.data.photo_name}`}}
                        style={styles.userImage}/>
                 <Text style={styles.username}>{this.state.data.name}</Text>
                 <SafeAreaView style={styles.safeArea}

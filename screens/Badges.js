@@ -9,7 +9,7 @@ import {
     ScrollView, Dimensions, AsyncStorage
 } from "react-native";
 import BadgeCard from "../components/badgesComponents/cards/BadgeCard";
-import {USER} from "../configuration/config";
+import {BASE_URL, USER} from "../configuration/config";
 import {Toolbar} from "react-native-material-ui";
 import {Actions} from "react-native-router-flux";
 
@@ -62,7 +62,7 @@ export default class Badges extends Component{
                          onLeftElementPress={this.profile}/>
                 <ImageBackground source={require('../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
-                <Image source={require('../assets/images/user_photo.png')}
+                <Image source={{uri: `${BASE_URL}`+`${this.state.data.photo_dir}`+`${this.state.data.photo_name}`}}
                        style={styles.userImage}/>
                 <Text style={styles.username}>{this.state.data.name}</Text>
 

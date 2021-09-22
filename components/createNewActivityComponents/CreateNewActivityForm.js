@@ -26,7 +26,6 @@ export const CreateNewActivityForm = () => {
     const [imageUri, setImageUri] = useState('')
     const [extension, setExtension] = useState('')
 
-
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
