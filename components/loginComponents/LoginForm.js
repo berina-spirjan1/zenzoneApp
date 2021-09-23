@@ -32,8 +32,8 @@ export const LoginForm = () =>{
 
 
     //redirection from login page to user profile
-    const switchLoginToUser = () =>{
-        Actions.switchLoginToUser()
+    const goToUserInfo = () =>{
+        Actions.goToUserInfo()
     }
 
     const forgotPassword = () =>{
@@ -75,7 +75,7 @@ export const LoginForm = () =>{
                         if(jsonRes.data.token){
                             await AsyncStorage.setItem('jwt', JSON.stringify(token))
                         }
-                        switchLoginToUser();
+                        goToUserInfo();
                         store.dispatch(authSuccess());
                     }
                 }
