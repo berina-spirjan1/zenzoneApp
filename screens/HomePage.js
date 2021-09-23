@@ -117,7 +117,7 @@ export default class HomePage extends Component{
                         // onChangeText: text => searchFilterFunction(text),
                         // onSearchCloseRequested: () => setName(nameList),
                     }}
-                    onLeftElementPress={this.siydeMenu}/>
+                    onLeftElementPress={this.sideMenu}/>
 
                 <SafeAreaView>
                     <ScrollView style={screenHeight}
