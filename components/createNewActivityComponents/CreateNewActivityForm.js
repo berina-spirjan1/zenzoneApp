@@ -153,7 +153,7 @@ export const CreateNewActivityForm = () => {
                                 {data.map(function(obj,i) {
                                     return (
                                         <TouchableOpacity style={styles.categoryCard}
-                                                          onPress={() => saveCategoryId(i)}>
+                                                          onPress={() => saveCategoryId(obj.id)}>
                                             <Card  styles={{ card: { backgroundColor: obj.color,
                                                     borderRadius:30,
                                                     shadowColor: "#000000",
