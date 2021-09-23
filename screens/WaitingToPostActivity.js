@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginLeft: 200,
         fontWeight: 'bold',
-        marginTop: 20
+        marginTop: 20,
+        fontStyle: 'italic'
     }
 })
