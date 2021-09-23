@@ -26,6 +26,7 @@ export default class RoutesLoginSignUp extends Component {
                     <Scene key="forgotPassword" component={ForgotPassword} title={"forgotPassword"}/>
                     <Scene key={"checkEmail"} component={CheckEmail} title={"checkEmail"}/>
                     <Scene key={"login"} component={Login} title={"Login"}/>
+                    <Scene key={"goToUserInfo"} component={RoutesProfile}/>
                 </Stack>
             </Router>
         )
