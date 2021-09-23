@@ -17,7 +17,8 @@ import { Actions } from "react-native-router-flux";
 import {
     ACTIVITY,
     BASE_URL,
-    CATEGORY, DISLIKE,
+    CATEGORY,
+    DISLIKE,
     LIKE,
 
 } from "../configuration/config";
@@ -42,8 +43,6 @@ export default class HomePage extends Component{
         noDataCategory: false,
         categories: [],
         isLoading: false,
-        isLiked: false,
-        isDisliked: false,
     }
 
     //added navigations to another component or pages
@@ -135,8 +134,10 @@ export default class HomePage extends Component{
                     console.log(jsonRes)
                     if (res.status !== 200) {
                         store.dispatch(userRegistrationFailed());
+                        await this.handleRemoveLike(id)
+                        alert('Successfully removed like')
                     } else {
-                        console.log('liked')
+                        alert('Successfully liked')
                         store.dispatch(userRegistrationSuccess());
                     }
                 } catch (err) {
@@ -144,6 +145,46 @@ export default class HomePage extends Component{
                 }
             })
     }
+
+    async handleRemoveLike(id) {
+
+        let tokenHelper = await AsyncStorage.getItem('jwt')
+        tokenHelper = JSON.parse(tokenHelper)
+
+        const likeObject = {
+            activity_id: id
+        }
+
+        console.log(likeObject.token)
+
+        fetch(`${LIKE}`, {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + tokenHelper
+            },
+            body: JSON.stringify(likeObject)
+        })
+            .then(async res => {
+                try {
+                    store.dispatch(userRegistrationStarted());
+
+                    const jsonRes = await res.json();
+
+                    console.log(jsonRes)
+                    if (res.status !== 200) {
+                        store.dispatch(userRegistrationFailed());
+                    } else {
+                        console.log('removed like')
+                        store.dispatch(userRegistrationSuccess());
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            })
+    }
+
 
     async handleDislike(id) {
         let tokenHelper = await AsyncStorage.getItem('jwt')
@@ -173,6 +214,46 @@ export default class HomePage extends Component{
                     console.log(jsonRes)
                     if (res.status !== 200) {
                         store.dispatch(userRegistrationFailed());
+                        await this.handleRemoveDislike(id)
+                        alert('Successfully removed dislike.')
+                    } else {
+                        alert('Successfully disliked activity')
+                        store.dispatch(userRegistrationSuccess());
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            })
+    }
+
+    async handleRemoveDislike(id) {
+        let tokenHelper = await AsyncStorage.getItem('jwt')
+        tokenHelper = JSON.parse(tokenHelper)
+
+        const likeObject = {
+            activity_id: id
+        }
+
+        console.log(likeObject.token)
+
+        fetch(`${DISLIKE}`, {
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + tokenHelper
+            },
+            body: JSON.stringify(likeObject)
+        })
+            .then(async res => {
+                try {
+                    store.dispatch(userRegistrationStarted());
+
+                    const jsonRes = await res.json();
+
+                    console.log(jsonRes)
+                    if (res.status !== 200) {
+                        store.dispatch(userRegistrationFailed());
                     } else {
                         console.log('dislike')
                         store.dispatch(userRegistrationSuccess());
@@ -182,6 +263,7 @@ export default class HomePage extends Component{
                 }
             })
     }
+
 
     render() {
 
@@ -291,7 +373,7 @@ export default class HomePage extends Component{
                                                             <Image source={require('../assets/images/rodjoImage.png')}
                                                                    style={styleLightMode.like}/>
                                                     </TouchableOpacity>
-                                                    <TouchableOpacity onPress={()=>console.log('here')}
+                                                    <TouchableOpacity onPress={async () => {await this.handleDislike(obj.id)}}
                                                                       style={styleLightMode.redCircle}>
                                                             <Image source={require('../assets/images/rodjoImage.png')}
                                                                    style={styleLightMode.dislike}/>
