@@ -2,7 +2,8 @@ import React, {Component} from "react";
 import {
     View,
     Modal,
-    ActivityIndicator
+    ActivityIndicator,
+    StyleSheet
 } from "react-native";
 
 export default class Loader extends Component{
