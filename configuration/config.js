@@ -11,11 +11,14 @@ export const USER = `${API_URL}/user`;
 export const USER_UPDATE = `${USER}/update`;
 
 //activity
-export const ACTIVITY = `${API_URL}/activity`;
-export const ACTIVITY_PUBLIC = `${ACTIVITY}/public`
+export const ACTIVITY = `${API_URL}/activity?page=4`;
 
 //category
 export const CATEGORY = `${API_URL}/category`;
+
+//likes and dislikes
+export const LIKE = `${ACTIVITY}/like`;
+export const DISLIKE = `${ACTIVITY}/dislike`
 
 export const CHANGE_PASSWORD = `${API_URL}/change-password`;
 export const FORGOT_PASSWORD = `${API_URL}/forget-password`;
