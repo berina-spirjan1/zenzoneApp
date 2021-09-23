@@ -10,9 +10,9 @@ export default class Loader extends Component{
     render(){
         return this.props.show ? (
             <Modal transparent animationType={"none"} visible={this.props.loading} onRequestClose={() => null}>
-                <View style={[styles.modalBackground, { backgroundColor: `rgba(0,0,0,0.4)` }]}>
+                <View style={[styles.modalBackground, { backgroundColor: `rgba(0,0,0,0.7)` }]}>
                     <View style={styles.activityIndicatorWrapper}>
-                        <ActivityIndicator />
+                        <ActivityIndicator size={80} color="#363559" />
                     </View>
                 </View>
             </Modal>
@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     activityIndicatorWrapper: {
-        backgroundColor: "white",
-        height: 100,
-        width: 100,
+        backgroundColor: "#93B4E5",
+        height: 150,
+        width: 150,
         borderRadius: 10,
         alignItems: "center",
         justifyContent: "center"
