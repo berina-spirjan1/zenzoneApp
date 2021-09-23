@@ -13,10 +13,12 @@ import {
 import CategoryCard from "../homePageComponents/cards/CategoryCard";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {Actions} from "react-native-router-flux";
-import {ACTIVITY} from "../../configuration/config";
+import {ACTIVITY, CATEGORY} from "../../configuration/config";
 import store from "../../redux/store";
 import {failedAddingActivity, startedAddingActivity, successfullyAddedActivity,} from "../../redux/actions";
 import * as ImagePicker from "expo-image-picker";
+import {renderIf} from "../../utilities/CommonMethods";
+import {Card, CardAction, CardContent} from "react-native-card-view";
 
 export const CreateNewActivityForm = () => {
 
@@ -25,6 +27,8 @@ export const CreateNewActivityForm = () => {
     let [image, setImage] = useState(null);
     const [imageUri, setImageUri] = useState('')
     const [extension, setExtension] = useState('')
+    let [data,setData] = useState([])
+    const [category_id, setCategoryId] = useState(1)
 
     useEffect(() => {
         (async () => {
@@ -53,6 +57,24 @@ export const CreateNewActivityForm = () => {
         }
 
     };
+    const getCategories = () =>{
+        fetch(`${CATEGORY}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                setData(responseJson.data.data)
+                console.log("--------------------------",data)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
 
     const postNewActivity = async () => {
 
@@ -63,7 +85,7 @@ export const CreateNewActivityForm = () => {
         const imageType = image.type
         setExtension(imageUri.split('.').pop())
         const activity = new FormData();
-        activity.append('category_id',1);
+        activity.append('category_id',category_id);
 
         activity.append('title', title);
         activity.append('image', {
@@ -101,8 +123,16 @@ export const CreateNewActivityForm = () => {
             })
     }
 
+
+
+
     const switchSuccessfullyAddedCreateActivity = () => {
         Actions.switchSuccessfullyAddedCreateActivity()
+    }
+
+    const saveCategoryId = (i) =>{
+        setCategoryId(i)
+        console.log(i)
     }
 
     return (
@@ -115,26 +145,46 @@ export const CreateNewActivityForm = () => {
                             // onPress={(e) => this.onTextPress(e, 'See all')}
                         >See all</Text>
                     </View>
-                    <SafeAreaView>
-                        <ScrollView horizontal
+                    {console.log("HEREEEEEEEEEEEEEEEE",data)}
+                    {renderIf(data.length,
+                        <ScrollView horizontal={true}
                                     showsHorizontalScrollIndicator={false}>
-                            <View style={styles.categoryCard}>
-                                <CategoryCard/>
-                            </View>
-                            <View style={styles.categoryCard}>
-                                <CategoryCard/>
-                            </View>
-                            <View style={styles.categoryCard}>
-                                <CategoryCard/>
-                            </View>
-                            <View style={styles.categoryCard}>
-                                <CategoryCard/>
-                            </View>
-                            <View style={styles.categoryCard}>
-                                <CategoryCard/>
+                            <View style={{flexDirection: 'row'}}>
+                                {data.map(function(obj,i) {
+                                    return (
+                                        <TouchableOpacity style={styles.categoryCard}
+                                                          onPress={() => saveCategoryId(i)}>
+                                            <Card  styles={{ card: { backgroundColor: obj.color,
+                                                    borderRadius:30,
+                                                    shadowColor: "#000000",
+                                                    shadowOffset: {
+                                                        width: 0,
+                                                        height: 2,
+                                                    },
+                                                    shadowOpacity: 0.44,
+                                                    shadowRadius: 3,
+                                                    elevation: 5
+                                                }}}>
+
+                                                <View style={styles.icon2}>
+                                                    <FontAwesome5 name={obj.icon}
+                                                                  size={35}
+                                                                  color={'#000000'}/>
+                                                </View>
+
+                                                <CardContent>
+                                                    <Text style={styles.categoryName}>{obj.title}</Text>
+                                                </CardContent>
+                                                <CardAction >
+
+                                                </CardAction>
+                                            </Card>
+                                        </TouchableOpacity>
+                                    )
+                                },this)}
                             </View>
                         </ScrollView>
-                    </SafeAreaView>
+                    )}
                     <Text style={styles.title}>Title</Text>
                     <TextInput numberOfLines={2}
                                placeholder={'Activity title'}
@@ -316,4 +366,15 @@ const styles = StyleSheet.create({
         textTransform:'uppercase',
         marginLeft:30
     },
+    categoryName:{
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+        color: '#000000',
+        paddingBottom:10,
+        fontSize: 11
+    },
+    icon2:{
+        justifyContent:'center',
+        marginTop:20
+    }
 })
