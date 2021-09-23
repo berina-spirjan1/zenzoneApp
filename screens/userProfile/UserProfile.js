@@ -13,7 +13,7 @@ import {
 import {Toolbar} from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {Actions} from "react-native-router-flux";
-import {USER} from "../../configuration/config";
+import {BASE_URL, USER} from "../../configuration/config";
 import {onLogoutHandler} from "../../components/logout/Logout";
 
 export default class UserProfile extends Component{
@@ -90,7 +90,7 @@ export default class UserProfile extends Component{
                          centerElement="Profile"/>
                 <ImageBackground source={require('../../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
-                <Image source={require('../../assets/images/rodjoImage.png')}
+                <Image source={{uri: `${BASE_URL}`+`${this.state.data.photo_dir}`+`${this.state.data.photo_name}`}}
                        style={styles.userImage}/>
                 <Text style={styles.username}>{this.state.data.name}</Text>
                 <SafeAreaView style={styles.safeArea}
