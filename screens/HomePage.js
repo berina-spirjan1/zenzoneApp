@@ -9,7 +9,7 @@ import {
     Dimensions,
     Image,
     TouchableOpacity,
-    Alert
+    Alert, AsyncStorage
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 
@@ -17,13 +17,17 @@ import { Actions } from "react-native-router-flux";
 import {
     ACTIVITY,
     BASE_URL,
-    CATEGORY
+    CATEGORY, DISLIKE,
+    LIKE,
+
 } from "../configuration/config";
 import {Card, CardAction, CardContent} from "react-native-card-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {renderIf} from "../utilities/CommonMethods";
 import SideMenu from "../components/sideMenu/SideMenu";
 import Loader from "../utilities/Loader";
+import store from "../redux/store";
+import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../redux/actions";
 
 export default class HomePage extends Component{
     constructor(props) {
@@ -37,7 +41,9 @@ export default class HomePage extends Component{
         noData: false,
         noDataCategory: false,
         categories: [],
-        isLoading: false
+        isLoading: false,
+        isLiked: false,
+        isDisliked: false,
     }
 
     //added navigations to another component or pages
@@ -100,6 +106,83 @@ export default class HomePage extends Component{
                     });
     }
 
+    async handleLike(id) {
+
+        let tokenHelper = await AsyncStorage.getItem('jwt')
+        tokenHelper = JSON.parse(tokenHelper)
+
+        const likeObject = {
+            activity_id: id
+        }
+
+        console.log(likeObject.token)
+
+        fetch(`${LIKE}`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + tokenHelper
+            },
+            body: JSON.stringify(likeObject)
+        })
+            .then(async res => {
+                try {
+                    store.dispatch(userRegistrationStarted());
+
+                    const jsonRes = await res.json();
+
+                    console.log(jsonRes)
+                    if (res.status !== 200) {
+                        store.dispatch(userRegistrationFailed());
+                    } else {
+                        console.log('liked')
+                        store.dispatch(userRegistrationSuccess());
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            })
+    }
+
+    async handleDislike(id) {
+        let tokenHelper = await AsyncStorage.getItem('jwt')
+        tokenHelper = JSON.parse(tokenHelper)
+
+        const likeObject = {
+            activity_id: id
+        }
+
+        console.log(likeObject.token)
+
+        fetch(`${DISLIKE}`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + tokenHelper
+            },
+            body: JSON.stringify(likeObject)
+        })
+            .then(async res => {
+                try {
+                    store.dispatch(userRegistrationStarted());
+
+                    const jsonRes = await res.json();
+
+                    console.log(jsonRes)
+                    if (res.status !== 200) {
+                        store.dispatch(userRegistrationFailed());
+                    } else {
+                        console.log('dislike')
+                        store.dispatch(userRegistrationSuccess());
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            })
+    }
+
     render() {
 
         const screenHeight = Dimensions.get('window').height
@@ -136,7 +219,8 @@ export default class HomePage extends Component{
                                 <View style={{flexDirection: 'row'}}>
                                     {this.state.categories.map(function(obj,i) {
                                         return (
-                                            <View style={styleLightMode.categoryCard}>
+                                            <TouchableOpacity style={styleLightMode.categoryCard}
+                                                              onPress={() => console.log(obj.id)}>
                                                 <Card  styles={{ card: { backgroundColor: obj.color,
                                                         borderRadius:30,
                                                         shadowColor: "#000000",
@@ -158,11 +242,8 @@ export default class HomePage extends Component{
                                                     <CardContent>
                                                         <Text style={styleLightMode.categoryName}>{obj.title}</Text>
                                                     </CardContent>
-                                                    <CardAction >
-
-                                                    </CardAction>
                                                 </Card>
-                                            </View>
+                                            </TouchableOpacity>
                                         )
                                     },this)}
                                 </View>
@@ -205,17 +286,15 @@ export default class HomePage extends Component{
                                                     {console.log(obj)}
                                                 </View>
                                                 <View style={{flexDirection: 'row'}}>
-                                                    <TouchableOpacity onPress={() => Alert.alert('Like')}>
-                                                        <View style={styleLightMode.greenCircle}>
+                                                    <TouchableOpacity onPress={async () => {await this.handleLike(obj.id)}}
+                                                                      style={styleLightMode.greenCircle}>
                                                             <Image source={require('../assets/images/rodjoImage.png')}
                                                                    style={styleLightMode.like}/>
-                                                        </View>
                                                     </TouchableOpacity>
-                                                    <TouchableOpacity onPress={() => Alert.alert('Dislike')}>
-                                                        <View style={styleLightMode.redCircle}>
+                                                    <TouchableOpacity onPress={()=>console.log('here')}
+                                                                      style={styleLightMode.redCircle}>
                                                             <Image source={require('../assets/images/rodjoImage.png')}
                                                                    style={styleLightMode.dislike}/>
-                                                        </View>
                                                     </TouchableOpacity>
                                                     <FontAwesome5 name={'comment'}
                                                                   size={29}
@@ -239,9 +318,6 @@ export default class HomePage extends Component{
                                 </View>
                             </ScrollView>
                         )}
-                        <View>
-
-                        </View>
                     </ScrollView>
                 </SafeAreaView>
             </View>
@@ -383,7 +459,8 @@ const styleLightMode = StyleSheet.create({
         borderRadius:30,
         marginTop:0,
         left:0,
-        zIndex: 1
+        zIndex: 1,
+        transform: [{ rotate: '180deg'}]
     },
     activityText:{
         marginLeft: 25,
@@ -401,7 +478,8 @@ const styleLightMode = StyleSheet.create({
         borderRadius:30,
         marginTop: 7,
         left:-65,
-        zIndex: 2
+        zIndex: 10,
+        elevation:10
     },
     redCircle:{
         backgroundColor: '#FD0628',
