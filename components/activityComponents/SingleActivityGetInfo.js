@@ -15,35 +15,35 @@ import { ACTIVITY } from "../../configuration/config";
 
 export default class SingleActivityGetInfo extends Component{
 
-    state = {
-        data: '',
-    }
-
-
-    componentDidMount = async () => {
-
-        let token = await AsyncStorage.getItem('jwt')
-        token = JSON.parse(token)
-
-        fetch(`${ACTIVITY}`, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                'Authorization': 'Bearer ' + token
-            }
-        })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log(responseJson);
-                this.setState({
-                    data: responseJson
-                })
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }
+    // state = {
+    //     data: '',
+    // }
+    //
+    //
+    // componentDidMount = async () => {
+    //
+    //     let token = await AsyncStorage.getItem('jwt')
+    //     token = JSON.parse(token)
+    //
+    //     fetch(`${ACTIVITY}`, {
+    //         method: 'GET',
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "Accept": "application/json",
+    //             'Authorization': 'Bearer ' + token
+    //         }
+    //     })
+    //         .then((response) => response.json())
+    //         .then((responseJson) => {
+    //             console.log(responseJson);
+    //             this.setState({
+    //                 data: responseJson
+    //             })
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         });
+    // }
 
     render() {
 

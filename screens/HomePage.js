@@ -23,6 +23,7 @@ import {Card, CardAction, CardContent} from "react-native-card-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {renderIf} from "../utilities/CommonMethods";
 import SideMenu from "../components/sideMenu/SideMenu";
+import Loader from "../utilities/Loader";
 
 export default class HomePage extends Component{
     constructor(props) {
@@ -35,7 +36,8 @@ export default class HomePage extends Component{
         searchText: '',
         noData: false,
         noDataCategory: false,
-        categories: []
+        categories: [],
+        isLoading: false
     }
 
     //added navigations to another component or pages
@@ -118,7 +120,7 @@ export default class HomePage extends Component{
                         // onSearchCloseRequested: () => setName(nameList),
                     }}
                     onLeftElementPress={this.sideMenu}/>
-
+                {this.state.isLoading ? <Loader show={true} loading={this.state.isLoading} /> : null}
                 <SafeAreaView>
                     <ScrollView style={screenHeight}
                                 style={styleLightMode.scrollView}>
