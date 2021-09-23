@@ -74,8 +74,7 @@ export const UpdateProfileForm = () =>{
         activity.append('email',email);
         activity.append('office_location', office_location);
         activity.append('work_position', work_position);
-        activity.append('photo_dir', 'storage/images')
-        activity.append('photo_name', {
+        activity.append('avatar', {
             name: `${imageType}.${extension}`,
             type:  `${imageType}/${extension}`,
             uri: imageUri
