@@ -7,14 +7,13 @@ import {
     SafeAreaView,
     ScrollView,
     Dimensions,
-    FlatList,
     Image,
     TouchableOpacity,
     Alert
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 
-import {Actions} from "react-native-router-flux";
+import { Actions } from "react-native-router-flux";
 import {
     ACTIVITY,
     BASE_URL,
@@ -23,6 +22,7 @@ import {
 import {Card, CardAction, CardContent} from "react-native-card-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {renderIf} from "../utilities/CommonMethods";
+import SideMenu from "../components/sideMenu/SideMenu";
 
 export default class HomePage extends Component{
     constructor(props) {
@@ -43,8 +43,8 @@ export default class HomePage extends Component{
         Actions.sideMenu()
     }
 
-    leaderboard(){
-        Actions.leaderboard()
+    leaderboard2(){
+        Actions.leaderboard2()
     }
 
     daily(){
@@ -53,6 +53,10 @@ export default class HomePage extends Component{
 
     settings(){
         Actions.settings()
+    }
+
+    seeAll() {
+        Actions.seeAll()
     }
 
     componentDidMount() {
@@ -113,7 +117,7 @@ export default class HomePage extends Component{
                         // onChangeText: text => searchFilterFunction(text),
                         // onSearchCloseRequested: () => setName(nameList),
                     }}
-                    onLeftElementPress={this.sideMenu}/>
+                    onLeftElementPress={this.siydeMenu}/>
 
                 <SafeAreaView>
                     <ScrollView style={screenHeight}
@@ -121,7 +125,7 @@ export default class HomePage extends Component{
                         <View style={{flexDirection: 'row'}}>
                             <Text style={styleLightMode.titleCategories}>Categories</Text>
                             <Text style={styleLightMode.seeAll}
-                                  onPress={(e) => this.onTextPress(e, 'See all')}>See all</Text>
+                                  onPress={this.seeAll}>See all</Text>
                         </View>
                         {renderIf(this.state.noDataCategory, <Text style={{textAlign: 'center'}}>No data found.</Text>)}
                         {renderIf(this.state.categories.length,
@@ -220,13 +224,12 @@ export default class HomePage extends Component{
                                                       numberOfLines={3}>
                                                     {obj.description}
                                                 </Text>
-
                                                 <CardAction>
                                                     <TouchableOpacity style={styleLightMode.button}
-                                                                      onPress={() => Alert.alert('Single activity screen needs to open')}>
+                                                                      // onPress={()=>this.props.navigation.navigate("singleActivity")}
+                                                                      key={i}>
                                                         <Text style={styleLightMode.buttonText}>Show more</Text>
                                                     </TouchableOpacity>
-
                                                 </CardAction>
                                             </Card></View>
                                         )
@@ -411,7 +414,7 @@ const styleLightMode = StyleSheet.create({
         fontWeight: 'bold',
         color: '#000000',
         paddingBottom:10,
-        fontSize: 12
+        fontSize: 11
     },
     icon2:{
         justifyContent:'center',
