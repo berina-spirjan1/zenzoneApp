@@ -3,19 +3,12 @@ import {
     View,
     Text,
     StyleSheet,
-    Image,
-    TouchableOpacity,
-    Alert,
     StatusBar,
-    TextInput,
-    SafeAreaView,
-    ScrollView, Dimensions
+    Dimensions
 } from "react-native";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { Toolbar } from "react-native-material-ui";
 import {Actions} from "react-native-router-flux";
-import ImageUploaderChallenge from "../../components/imageUploader/ImageUploaderChallenge";
-import DoChallengeIconDarkMode from "../../assets/icons/DoChallengeIconDarkMode";
+import {DoDailyChallengeForm} from "./DoDailyChallengeForm";
 
 
 
@@ -35,8 +28,6 @@ export default class DoDailyChallenge extends Component{
 
     render() {
 
-        const screenHeight = Dimensions.get('window').height
-
         return(
             <View style={styles.container}>
                 <StatusBar
@@ -52,30 +43,7 @@ export default class DoDailyChallenge extends Component{
                              }
                          }}
                          onLeftElementPress={this.challengeDetails}/>
-                <View style={{marginTop: 100, marginBottom: 80}}>
-                    <ImageUploaderChallenge/>
-                </View>
-
-                <SafeAreaView style={styles.safeAreaContainer}
-                              style={{height: screenHeight}}>
-                    <ScrollView style={styles.scrollView}
-                                vertical={true}>
-                        <View style={{flexDirection: 'row'}}>
-                            <Text style={styles.comment}>Comment</Text>
-                            <Text style={styles.counter}>0/1000</Text>
-                        </View>
-
-                        <TextInput numberOfLines={10}
-                                   placeholder={'Enter description for activity'}
-                                   style={styles.activityDescription}
-                                   multiline={true}/>
-                        <DoChallengeIconDarkMode style={{ marginTop: 10 }}/>
-                        <TouchableOpacity style={styles.finishButton}
-                                          onPress={this.congratulations}>
-                            <Text style={styles.finishText}>finish</Text>
-                        </TouchableOpacity>
-                    </ScrollView>
-                </SafeAreaView>
+                <DoDailyChallengeForm/>
             </View>
         )
     }
