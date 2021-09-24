@@ -9,6 +9,8 @@ import MyActivityCard from "../components/myActivitiesComponent/cards/MyActivity
 import { Toolbar } from "react-native-material-ui";
 import { Actions } from "react-native-router-flux";
 import {BASE_URL, USER} from "../configuration/config";
+import {isIphoneX} from "react-native-iphone-x-helper";
+import {renderIf} from "../utilities/CommonMethods";
 
 export default class MyActivities extends Component{
     constructor(props) {
@@ -55,10 +57,14 @@ export default class MyActivities extends Component{
 
         return(
             <View style={styles.container}>
-                <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                         leftElement="arrow-back"
-                         centerElement="My activities"
-                         onLeftElementPress={this.myProfileInfoBack}/>
+                {renderIf(isIphoneX(),  <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50} }}
+                                                 leftElement="arrow-back"
+                                                 centerElement="My activities"
+                                                 onLeftElementPress={this.myProfileInfoBack}/>)}
+                {renderIf(isIphoneX()===false, <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                                        leftElement="arrow-back"
+                                                        centerElement="My activities"
+                                                        onLeftElementPress={this.myProfileInfoBack}/>)}
                 <ImageBackground source={require('../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
                 <Image source={{uri: `${BASE_URL}`+`${this.state.data.photo_dir}`+`${this.state.data.photo_name}`}}
