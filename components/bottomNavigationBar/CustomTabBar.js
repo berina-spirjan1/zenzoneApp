@@ -12,7 +12,7 @@ function CustomTabBar(props){
         return (
             <View>
                 <View style={styles.customTabBar}/>
-                <BottomTabBar {...props.props}/>
+                <BottomTabBar {...props.props} style={{height: 50}}/>
             </View>
 
         )
