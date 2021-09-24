@@ -19,6 +19,7 @@ import {onLogoutHandler} from "../../components/logout/Logout";
 import {BASE_URL, USER} from "../../configuration/config";
 import {Actions} from "react-native-router-flux";
 import {renderIf} from "../../utilities/CommonMethods";
+import {isIphoneX} from "react-native-iphone-x-helper";
 
 export default class MyProfileInfo extends Component{
     constructor(props) {
@@ -91,17 +92,29 @@ export default class MyProfileInfo extends Component{
                 <StatusBar
                     animated={true}
                     backgroundColor="#334A6D"/>
-                <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                         leftElement="arrow-back"
-                         centerElement="My profile"
-                         rightElement={{
-                             menu: {
-                                 icon: "more-vert",
-                                 labels: ["Update profile","Logout"],
-                             }
-                         }}
-                         onRightElementPress={(label) => {this.onMenuItemClick(label)}}
-                         onLeftElementPress={this.backToProfile}/>
+                {renderIf(isIphoneX(),<Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
+                                               leftElement="arrow-back"
+                                               centerElement="My profile"
+                                               rightElement={{
+                                                   menu: {
+                                                       icon: "more-vert",
+                                                       labels: ["Update profile","Logout"],
+                                                   }
+                                               }}
+                                               onRightElementPress={(label) => {this.onMenuItemClick(label)}}
+                                               onLeftElementPress={this.backToProfile}/>)}
+                {renderIf(isIphoneX()===false,<Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                                       leftElement="arrow-back"
+                                                       centerElement="My profile"
+                                                       rightElement={{
+                                                           menu: {
+                                                               icon: "more-vert",
+                                                               labels: ["Update profile","Logout"],
+                                                           }
+                                                       }}
+                                                       onRightElementPress={(label) => {this.onMenuItemClick(label)}}
+                                                       onLeftElementPress={this.backToProfile}/> )}
+
                 <ImageBackground source={require('../../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
                 {renderIf(this.state.data.photo_dir===null, <Image source={require('../../assets/images/user_photo.png')}
