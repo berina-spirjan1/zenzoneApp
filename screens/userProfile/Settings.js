@@ -13,6 +13,8 @@ import BackgroundForIconsUserProfile from "../../components/backgrounds/Backgrou
 import NextButton from "../../components/buttons/NextButton";
 import {Actions} from "react-native-router-flux";
 import {USER} from "../../configuration/config";
+import {renderIf} from "../../utilities/CommonMethods";
+import {isIphoneX} from "react-native-iphone-x-helper";
 
 
 export default class Settings extends Component{
@@ -72,10 +74,14 @@ export default class Settings extends Component{
                 <StatusBar
                     animated={true}
                     backgroundColor="#334A6D"/>
-                <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                         leftElement="arrow-back"
-                         centerElement="Settings"
-                         onLeftElementPress={this.toInfoMain}/>
+                {renderIf(isIphoneX(),  <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
+                                                 leftElement="arrow-back"
+                                                 centerElement="Settings"
+                                                 onLeftElementPress={this.toInfoMain}/>)}
+                {renderIf(isIphoneX()===false,<Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                                       leftElement="arrow-back"
+                                                       centerElement="Settings"
+                                                       onLeftElementPress={this.toInfoMain}/>)}
                 <UserInfoComponent/>
                 <Text style={styles.settings}>Settings</Text>
                 <View style={styles.language}>
