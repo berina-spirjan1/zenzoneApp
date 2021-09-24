@@ -38,7 +38,7 @@ export default class UserHelp extends Component{
                                                leftElement="arrow-back"
                                                centerElement="Help"
                                                onLeftElementPress={this.switchToSettings}/> )}
-                {renderIf(isIphoneX()===false, <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                                                         leftElement="arrow-back"
                                                         centerElement="Help"
                                                         onLeftElementPress={this.switchToSettings}/>)}

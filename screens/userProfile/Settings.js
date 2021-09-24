@@ -78,7 +78,7 @@ export default class Settings extends Component{
                                                  leftElement="arrow-back"
                                                  centerElement="Settings"
                                                  onLeftElementPress={this.toInfoMain}/>)}
-                {renderIf(isIphoneX()===false,<Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                {renderIf(!isIphoneX(),<Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                                                        leftElement="arrow-back"
                                                        centerElement="Settings"
                                                        onLeftElementPress={this.toInfoMain}/>)}

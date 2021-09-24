@@ -90,7 +90,7 @@ export default class UserProfile extends Component{
                     backgroundColor="#334A6D"/>
                 {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
                                                 centerElement="Profile"/>)}
-                {renderIf(isIphoneX()===false, <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                                                         centerElement="Profile"/>)}
 
                 <ImageBackground source={require('../../assets/images/backgroundLeaderboardLightMode.png')}
