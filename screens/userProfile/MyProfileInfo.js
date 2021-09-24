@@ -18,6 +18,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {onLogoutHandler} from "../../components/logout/Logout";
 import {BASE_URL, USER} from "../../configuration/config";
 import {Actions} from "react-native-router-flux";
+import {renderIf} from "../../utilities/CommonMethods";
 
 export default class MyProfileInfo extends Component{
     constructor(props) {
@@ -103,8 +104,11 @@ export default class MyProfileInfo extends Component{
                          onLeftElementPress={this.backToProfile}/>
                 <ImageBackground source={require('../../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
-                <Image source={{uri: `${BASE_URL}`+`${this.state.data.photo_dir}`+`${this.state.data.photo_name}`}}
-                       style={styles.userImage}/>
+                {renderIf(this.state.data.photo_dir===null, <Image source={require('../../assets/images/user_photo.png')}
+                                                                            style={styles.userImage}/>)}
+                {renderIf(this.state.data.photo_dir!==null, <Image source={{uri: `${BASE_URL}`+`${this.state.data.photo_dir}`+`${this.state.data.photo_name}`}}
+                                                                            style={styles.userImage}/>)}
+
                 <Text style={styles.username}>{this.state.data.name}</Text>
                 <View style={styles.followersFollowing}>
                     <Text style={styles.followers}>Followers</Text>
