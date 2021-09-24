@@ -4,16 +4,21 @@ import {
     SafeAreaView, ScrollView, StatusBar, Text, TextInput, TouchableOpacity,
     View, StyleSheet, Dimensions
 } from "react-native";
-import ImageUploaderChallenge from "../../components/imageUploader/ImageUploaderChallenge";
+
 import DoChallengeIconDarkMode from "../../assets/icons/DoChallengeIconDarkMode";
 import * as ImagePicker from "expo-image-picker";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import {Actions} from "react-native-router-flux";
 
 
 export function DoDailyChallengeForm(){
 
     const [image, setImage] = useState(null);
     const screenHeight = Dimensions.get('window').height
+
+    const congratulations = () =>{
+        Actions.congratulations()
+    }
 
     useEffect(() => {
         (async () => {
@@ -72,8 +77,7 @@ export function DoDailyChallengeForm(){
                                multiline={true}/>
                     <DoChallengeIconDarkMode style={{ marginTop: 10 }}/>
                     <TouchableOpacity style={styles.finishButton}
-                                      // onPress={this.congratulations}
-                    >
+                                      onPress={congratulations}>
                         <Text style={styles.finishText}>finish</Text>
                     </TouchableOpacity>
                 </ScrollView>
