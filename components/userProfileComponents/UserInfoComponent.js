@@ -8,6 +8,7 @@ import {
 import NextButton from "../buttons/NextButton";
 import {BASE_URL, USER} from "../../configuration/config";
 import {Actions} from "react-native-router-flux";
+import {renderIf} from "../../utilities/CommonMethods";
 
 export default class UserInfoComponent extends Component{
     state = {
@@ -48,8 +49,11 @@ export default class UserInfoComponent extends Component{
             <View>
                 <Text style={styles.account}>Account</Text>
                 <View style={styles.userInfo}>
-                    <Image source={{uri: `${BASE_URL}`+`${this.state.data.photo_dir}`+`${this.state.data.photo_name}`}}
-                           style={styles.userProfileImage}/>
+                    {renderIf(this.state.data.photo_dir===null, <Image source={require('../../assets/images/user_photo.png')}
+                                                                style={styles.userImage}/>)}
+                    {renderIf(this.state.data.photo_dir!==null, <Image source={{uri: `${BASE_URL}`+`${this.state.data.photo_dir}`+`${this.state.data.photo_name}`}}
+                                                                       style={styles.userProfileImage}/>)}
+
                     <Text style={styles.username}>{this.state.data.name}</Text>
                     <Text style={styles.personalInfo}>{"\n"}Personal info</Text>
                     <NextButton onPress={this.profileInfo}/>
