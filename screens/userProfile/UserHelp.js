@@ -13,6 +13,8 @@ import {
 import {Toolbar} from "react-native-material-ui";
 import UserInfoComponent from "../../components/userProfileComponents/UserInfoComponent";
 import {Actions} from "react-native-router-flux";
+import {renderIf} from "../../utilities/CommonMethods";
+import {isIphoneX} from "react-native-iphone-x-helper";
 
 export default class UserHelp extends Component{
     constructor(props) {
@@ -32,10 +34,15 @@ export default class UserHelp extends Component{
                 <StatusBar
                     animated={true}
                     backgroundColor="#334A6D"/>
-                <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                         leftElement="arrow-back"
-                         centerElement="Help"
-                         onLeftElementPress={this.switchToSettings}/>
+                {renderIf(isIphoneX(),<Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
+                                               leftElement="arrow-back"
+                                               centerElement="Help"
+                                               onLeftElementPress={this.switchToSettings}/> )}
+                {renderIf(isIphoneX()===false, <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                                        leftElement="arrow-back"
+                                                        centerElement="Help"
+                                                        onLeftElementPress={this.switchToSettings}/>)}
+
                 <UserInfoComponent/>
                 <Text style={styles.userHelp}>Help</Text>
                 <SafeAreaView style={styles.safeArea}
