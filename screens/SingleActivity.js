@@ -3,13 +3,14 @@ import {
     View,
     StyleSheet,
     StatusBar, AsyncStorage, Image, ScrollView,
-    SafeAreaView, Dimensions, Text, ImageBackground, TouchableOpacity
+    SafeAreaView, Dimensions, Text, ImageBackground, TouchableOpacity, TextInput
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 import {ACTIVITY, SINGLE_ACTIVITY, USER} from "../configuration/config";
 import {isIphoneX} from "react-native-iphone-x-helper";
 import {renderIf} from "../utilities/CommonMethods";
 import {Actions} from "react-native-router-flux";
+import {FontAwesome5} from "@expo/vector-icons";
 
 export default class SingleActivity extends Component{
     constructor(props) {
@@ -18,7 +19,6 @@ export default class SingleActivity extends Component{
     state:{
         data: '',
     }
-
 
     async componentDidMount() {
         let id = AsyncStorage.getItem('id')
@@ -94,12 +94,28 @@ export default class SingleActivity extends Component{
 
                             </View>
                             <View style={styles.userWrapper}>
-                                <Image source={require('../assets/images/rodjoImage.png')}
+                                <Image source={require('../assets/images/user_photo.png')}
                                        style={styles.userProfilePicture}/>
+                                <TextInput placeholder={'Create new comment'}
+                                           style={styles.createNewComment}
+                                           maxLength = {50}/>
+                                <View style={{flexDirection: 'row'}}>
+                                    <TouchableOpacity style={styles.postButton}>
+                                        <Text style={styles.postButtonText}>POST</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styles.cameraButton}>
+                                        <FontAwesome5 name={'camera'}
+                                                      color={'#616C75'}
+                                                      size={20}/>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={styles.listOfComments}>
+                                    <View style={{flexDirection: 'row'}}>
 
+                                    </View>
+                                </View>
                             </View>
                         </View>
-
                     </ScrollView>
                 </SafeAreaView>
 
@@ -165,18 +181,18 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     userWrapper:{
-        backgroundColor: '#CBDBF2',
+        backgroundColor:  'rgba(98, 133, 179, 0.3)',
         marginTop: 30,
-        height: 120,
+        height: 250,
         borderRadius: 25,
-        marginBottom:200
+        marginBottom:150
     },
     userProfilePicture:{
         height: 50,
         width: 50,
         borderRadius: 50,
-        marginTop: -25,
-        marginLeft: 20
+        marginTop: -30,
+        marginLeft: 260
     },
     username: {
         fontSize: 14,
@@ -190,5 +206,46 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         color: '#616C75',
         marginBottom: 20
+    },
+    createNewComment:{
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 20,
+        borderRadius: 20,
+        height: 60,
+        padding: 10,
+        backgroundColor:  'rgba(171, 194,233, 0.8)'
+    },
+    postButton:{
+        height: 40,
+        backgroundColor:  'rgba(171, 194,233, 0.8)',
+        marginTop: 20,
+        width: 80,
+        borderRadius: 20,
+        padding: 10,
+        left:260
+    },
+    postButtonText:{
+        textAlign: 'center',
+        alignItems: 'center',
+        fontSize: 16,
+        textTransform: 'uppercase',
+        fontWeight: 'bold'
+    },
+    cameraButton:{
+        backgroundColor:  'rgba(171, 194,233, 0.8)',
+        height: 40,
+        marginTop: 20,
+        width: 40,
+        borderRadius: 20,
+        padding: 10,
+        left: 130
+    },
+    listOfComments:{
+        backgroundColor:  'rgba(171, 194,233, 0.8)',
+        marginTop: 30,
+        height: 250,
+        borderRadius: 25,
+        marginBottom:150
     }
 })
