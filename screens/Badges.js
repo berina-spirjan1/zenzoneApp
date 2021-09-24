@@ -12,6 +12,8 @@ import BadgeCard from "../components/badgesComponents/cards/BadgeCard";
 import {BASE_URL, USER} from "../configuration/config";
 import {Toolbar} from "react-native-material-ui";
 import {Actions} from "react-native-router-flux";
+import {renderIf} from "../utilities/CommonMethods";
+import {isIphoneX} from "react-native-iphone-x-helper";
 
 
 export default class Badges extends Component{
@@ -56,10 +58,14 @@ export default class Badges extends Component{
 
         return(
             <View style={styles.container}>
-                <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                         leftElement="arrow-back"
-                         centerElement="Badges"
-                         onLeftElementPress={this.profile}/>
+                {renderIf(isIphoneX(),  <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                                 leftElement="arrow-back"
+                                                 centerElement="Badges"
+                                                 onLeftElementPress={this.profile}/>)}
+                {renderIf(isIphoneX()!==false, <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                                        leftElement="arrow-back"
+                                                        centerElement="Badges"
+                                                        onLeftElementPress={this.profile}/> )}
                 <ImageBackground source={require('../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
                 <Image source={{uri: `${BASE_URL}`+`${this.state.data.photo_dir}`+`${this.state.data.photo_name}`}}
