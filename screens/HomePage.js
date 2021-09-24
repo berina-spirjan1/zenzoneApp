@@ -9,7 +9,7 @@ import {
     Dimensions,
     Image,
     TouchableOpacity,
-    Alert, AsyncStorage
+    Alert, AsyncStorage, TouchableHighlight
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 
@@ -29,6 +29,7 @@ import SideMenu from "../components/sideMenu/SideMenu";
 import Loader from "../utilities/Loader";
 import store from "../redux/store";
 import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../redux/actions";
+import {isIphoneX} from "react-native-iphone-x-helper";
 
 export default class HomePage extends Component{
     constructor(props) {
@@ -43,7 +44,8 @@ export default class HomePage extends Component{
         noDataCategory: false,
         categories: [],
         isLoading: false,
-        noPicture: false
+        isActiveLike: false,
+        isActiveDislike: false
     }
 
     //added navigations to another component or pages
@@ -276,16 +278,27 @@ export default class HomePage extends Component{
                 <StatusBar
                     animated={true}
                     backgroundColor="#6285B3"/>
-                <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                    leftElement="menu"
-                    centerElement="Activities"
-                    searchable={{
-                        autoFocus: true,
-                        placeholder: 'Search',
-                        // onChangeText: text => searchFilterFunction(text),
-                        // onSearchCloseRequested: () => setName(nameList),
-                    }}
-                    onLeftElementPress={this.sideMenu}/>
+                {renderIf(isIphoneX(),<Toolbar style={{ container: { backgroundColor: '#93B4E5',marginTop:50 } }}
+                                               leftElement="menu"
+                                               centerElement="Activities"
+                                               searchable={{
+                                                   autoFocus: true,
+                                                   placeholder: 'Search',
+                                                   // onChangeText: text => searchFilterFunction(text),
+                                                   // onSearchCloseRequested: () => setName(nameList),
+                                               }}
+                                               onLeftElementPress={this.sideMenu}/>)}
+                {renderIf(isIphoneX()===false,<Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                                leftElement="menu"
+                                                centerElement="Activities"
+                                                searchable={{
+                                                    autoFocus: true,
+                                                    placeholder: 'Search',
+                                                    // onChangeText: text => searchFilterFunction(text),
+                                                    // onSearchCloseRequested: () => setName(nameList),
+                                                }}
+                                                onLeftElementPress={this.sideMenu}/>)}
+
                 {this.state.isLoading ? <Loader show={true} loading={this.state.isLoading} /> : null}
                 <SafeAreaView>
                     <ScrollView style={screenHeight}
@@ -357,7 +370,7 @@ export default class HomePage extends Component{
                                                   }}>
                                                 <View style={styleLightMode.header}>
                                                     {renderIf(obj.user.photo_dir===null, <Image source={require('../assets/images/user_photo.png')}
-                                                                                                   style={styleLightMode.profilePicture}/>)}
+                                                                                                         style={styleLightMode.profilePicture}/>)}
                                                     {renderIf(obj.user.photo_dir!==null,<Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
                                                            style={styleLightMode.profilePicture}/>)}
                                                     <Text style={styleLightMode.username}
@@ -377,11 +390,12 @@ export default class HomePage extends Component{
                                                             <Image source={require('../assets/images/rodjoImage.png')}
                                                                    style={styleLightMode.like}/>
                                                     </TouchableOpacity>
-                                                    <TouchableOpacity onPress={async () => {await this.handleDislike(obj.id)}}
-                                                                      style={styleLightMode.redCircle}>
+                                                    <TouchableHighlight onPress={async () => {await this.handleDislike(obj.id)}}
+                                                                        style={styleLightMode.redCircle}
+                                                                        underlayColor={'red'}>
                                                             <Image source={require('../assets/images/rodjoImage.png')}
                                                                    style={styleLightMode.dislike}/>
-                                                    </TouchableOpacity>
+                                                    </TouchableHighlight>
                                                     <FontAwesome5 name={'comment'}
                                                                   size={29}
                                                                   color={'#000000'}
