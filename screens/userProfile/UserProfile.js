@@ -16,6 +16,7 @@ import {Actions} from "react-native-router-flux";
 import {BASE_URL, USER} from "../../configuration/config";
 import {onLogoutHandler} from "../../components/logout/Logout";
 import {renderIf} from "../../utilities/CommonMethods";
+import {isIphoneX} from "react-native-iphone-x-helper";
 
 export default class UserProfile extends Component{
     constructor(props) {
@@ -87,8 +88,11 @@ export default class UserProfile extends Component{
                 <StatusBar
                     animated={true}
                     backgroundColor="#334A6D"/>
-                <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                         centerElement="Profile"/>
+                {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
+                                                centerElement="Profile"/>)}
+                {renderIf(isIphoneX()===false, <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                                        centerElement="Profile"/>)}
+
                 <ImageBackground source={require('../../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
                 {renderIf(this.state.data.photo_dir===null, <Image source={require('../../assets/images/user_photo.png')}
