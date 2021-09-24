@@ -103,7 +103,7 @@ export default class MyProfileInfo extends Component{
                                                }}
                                                onRightElementPress={(label) => {this.onMenuItemClick(label)}}
                                                onLeftElementPress={this.backToProfile}/>)}
-                {renderIf(isIphoneX()===false,<Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                {renderIf(!isIphoneX(),<Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                                                        leftElement="arrow-back"
                                                        centerElement="My profile"
                                                        rightElement={{
