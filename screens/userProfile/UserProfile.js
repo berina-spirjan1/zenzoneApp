@@ -15,6 +15,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {Actions} from "react-native-router-flux";
 import {BASE_URL, USER} from "../../configuration/config";
 import {onLogoutHandler} from "../../components/logout/Logout";
+import {renderIf} from "../../utilities/CommonMethods";
 
 export default class UserProfile extends Component{
     constructor(props) {
@@ -90,8 +91,11 @@ export default class UserProfile extends Component{
                          centerElement="Profile"/>
                 <ImageBackground source={require('../../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
-                <Image source={{uri: `${BASE_URL}`+`${this.state.data.photo_dir}`+`${this.state.data.photo_name}`}}
-                       style={styles.userImage}/>
+                {renderIf(this.state.data.photo_dir===null, <Image source={require('../../assets/images/user_photo.png')}
+                                                                   style={styles.userImage}/>)}
+                {renderIf(this.state.data.photo_dir!==null, <Image source={{uri: `${BASE_URL}`+`${this.state.data.photo_dir}`+`${this.state.data.photo_name}`}}
+                                                                   style={styles.userImage}/>)}
+
                 <Text style={styles.username}>{this.state.data.name}</Text>
                 <SafeAreaView style={styles.safeArea}
                               style={{height: screenHeight}}>
