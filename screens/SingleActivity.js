@@ -1,21 +1,18 @@
 import React, {Component} from "react";
 import {
     View,
-    Text,
     StyleSheet,
-    Image,
-    SafeAreaView,
-    ScrollView, Dimensions, StatusBar
+    StatusBar, AsyncStorage
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
-import {SingleActivityGetInfo} from "../components/activityComponents/SingleActivityGetInfo";
+import {USER} from "../configuration/config";
+import {isIphoneX} from "react-native-iphone-x-helper";
+import {renderIf} from "../utilities/CommonMethods";
 
 export default class SingleActivity extends Component{
     constructor(props) {
         super();
     }
-
-
 
     render() {
         return(
@@ -23,11 +20,12 @@ export default class SingleActivity extends Component{
                 <StatusBar
                     animated={true}
                     backgroundColor="#6285B3"/>
-                <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                         leftElement="arrow-back"
-                         centerElement="Activity title"/>
-                <SingleActivityGetInfo/>
-
+                {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
+                                                leftElement="arrow-back"
+                                                centerElement="Activity title"/>)}
+                {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                                        leftElement="arrow-back"
+                                                        centerElement="Activity title"/> )}
             </View>
         )
     }

@@ -6,10 +6,15 @@ import {
     ImageBackground,
     Image,
     SafeAreaView,
-    ScrollView, Dimensions, AsyncStorage
+    ScrollView,
+    Dimensions,
+    AsyncStorage
 } from "react-native";
 import BadgeCard from "../components/badgesComponents/cards/BadgeCard";
-import {BASE_URL, USER} from "../configuration/config";
+import {
+    BASE_URL,
+    USER
+} from "../configuration/config";
 import {Toolbar} from "react-native-material-ui";
 import {Actions} from "react-native-router-flux";
 import {renderIf} from "../utilities/CommonMethods";
