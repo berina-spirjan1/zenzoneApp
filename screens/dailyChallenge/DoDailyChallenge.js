@@ -9,6 +9,8 @@ import {
 import { Toolbar } from "react-native-material-ui";
 import {Actions} from "react-native-router-flux";
 import {DoDailyChallengeForm} from "./DoDailyChallengeForm";
+import {renderIf} from "../../utilities/CommonMethods";
+import {isIphoneX} from "react-native-iphone-x-helper";
 
 
 
@@ -33,16 +35,26 @@ export default class DoDailyChallenge extends Component{
                 <StatusBar
                     animated={true}
                     backgroundColor="#6285B3"/>
-                <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                         leftElement="arrow-back"
-                         centerElement="Today's challenge"
-                         rightElement={{
-                             menu: {
-                                 icon: "more-vert",
-                                 labels: ["Activities", "Daily challenge", "Leaderboard", "Login"]
-                             }
-                         }}
-                         onLeftElementPress={this.challengeDetails}/>
+                {renderIf(isIphoneX(),<Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
+                                               leftElement="arrow-back"
+                                               centerElement="Today's challenge"
+                                               rightElement={{
+                                                   menu: {
+                                                       icon: "more-vert",
+                                                       labels: ["Activities", "Daily challenge", "Leaderboard", "Login"]
+                                                   }
+                                               }}
+                                               onLeftElementPress={this.challengeDetails}/>)}
+                {renderIf(!isIphoneX(),<Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                                leftElement="arrow-back"
+                                                centerElement="Today's challenge"
+                                                rightElement={{
+                                                    menu: {
+                                                        icon: "more-vert",
+                                                        labels: ["Activities", "Daily challenge", "Leaderboard", "Login"]
+                                                    }
+                                                }}
+                                                onLeftElementPress={this.challengeDetails}/>)}
                 <DoDailyChallengeForm/>
             </View>
         )
