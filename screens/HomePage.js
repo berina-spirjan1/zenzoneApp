@@ -43,6 +43,7 @@ export default class HomePage extends Component{
         noDataCategory: false,
         categories: [],
         isLoading: false,
+        noPicture: false
     }
 
     //added navigations to another component or pages
@@ -355,17 +356,20 @@ export default class HomePage extends Component{
                                                       }
                                                   }}>
                                                 <View style={styleLightMode.header}>
-                                                    <Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
-                                                           style={styleLightMode.profilePicture}/>
+                                                    {renderIf(obj.user.photo_dir===null, <Image source={require('../assets/images/user_photo.png')}
+                                                                                                   style={styleLightMode.profilePicture}/>)}
+                                                    {renderIf(obj.user.photo_dir!==null,<Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
+                                                           style={styleLightMode.profilePicture}/>)}
                                                     <Text style={styleLightMode.username}
                                                          numberOfLines={3}>{obj.user.name}</Text>
                                                 </View>
                                                 <Text style={styleLightMode.activityTitle}
                                                       numberOfLines={3}>{"\n"}{obj.title}</Text>
                                                 <View>
-                                                    <Image source={{uri: `${BASE_URL}`+`${obj.photo_dir}`+`${obj.photo_name}`}}
-                                                           style={styleLightMode.activityImage}/>
-                                                    {console.log(obj)}
+                                                    {renderIf(obj.photo_dir===null, <Image source={require('../assets/images/photoForPosts.png')} style={styleLightMode.activityImage}/>)}
+                                                    {renderIf(obj.photo_dir!==null,<Image source={{uri: `${BASE_URL}`+`${obj.photo_dir}`+`${obj.photo_name}`}}
+                                                                                          style={styleLightMode.activityImage}/>)}
+
                                                 </View>
                                                 <View style={{flexDirection: 'row'}}>
                                                     <TouchableOpacity onPress={async () => {await this.handleLike(obj.id)}}
