@@ -137,8 +137,6 @@ export default class HomePage extends Component{
                     console.log(jsonRes)
                     if (res.status !== 200) {
                         store.dispatch(userRegistrationFailed());
-                        await this.handleRemoveLike(id)
-                        alert('Successfully removed like')
                     } else {
                         alert('Successfully liked')
                         store.dispatch(userRegistrationSuccess());
@@ -217,8 +215,6 @@ export default class HomePage extends Component{
                     console.log(jsonRes)
                     if (res.status !== 200) {
                         store.dispatch(userRegistrationFailed());
-                        await this.handleRemoveDislike(id)
-                        alert('Successfully removed dislike.')
                     } else {
                         alert('Successfully disliked activity')
                         store.dispatch(userRegistrationSuccess());
@@ -267,6 +263,15 @@ export default class HomePage extends Component{
             })
     }
 
+    singleActivity(){
+        Actions.singleActivity()
+    }
+
+    async showMore(id) {
+        await AsyncStorage.setItem('id', JSON.stringify(id))
+        console.log(id)
+        this.singleActivity()
+    }
 
     render() {
 
@@ -385,17 +390,54 @@ export default class HomePage extends Component{
 
                                                 </View>
                                                 <View style={{flexDirection: 'row'}}>
-                                                    <TouchableOpacity onPress={async () => {await this.handleLike(obj.id)}}
-                                                                      style={styleLightMode.greenCircle}>
-                                                            <Image source={require('../assets/images/rodjoImage.png')}
-                                                                   style={styleLightMode.like}/>
-                                                    </TouchableOpacity>
-                                                    <TouchableHighlight onPress={async () => {await this.handleDislike(obj.id)}}
-                                                                        style={styleLightMode.redCircle}
-                                                                        underlayColor={'red'}>
-                                                            <Image source={require('../assets/images/rodjoImage.png')}
-                                                                   style={styleLightMode.dislike}/>
-                                                    </TouchableHighlight>
+                                                    {renderIf(obj.liked===null,
+                                                        <>
+                                                            <TouchableHighlight onPress={async () => {await this.handleLike(obj.id)}}
+                                                                                style={styleLightMode.greenCircle}>
+                                                                <Image source={require('../assets/images/rodjoImage.png')}
+                                                                       style={styleLightMode.like}/>
+                                                            </TouchableHighlight>
+                                                            <TouchableHighlight onPress={async () => {await this.handleDislike(obj.id)}}
+                                                                                style={styleLightMode.redCircle}
+                                                                                underlayColor={'red'}>
+                                                                <Image source={require('../assets/images/rodjoImage.png')}
+                                                                style={styleLightMode.dislike}/>
+                                                            </TouchableHighlight>
+                                                        </>
+                                                    )}
+                                                    {renderIf(obj.liked===1,
+                                                        <>
+                                                            <TouchableHighlight onPress={async () => {await this.handleRemoveLike(obj.id)}}
+                                                                              style={styleLightMode.greenCircle}>
+                                                                <Image source={require('../assets/images/rodjoImage.png')}
+                                                                       style={styleLightMode.like}/>
+                                                            </TouchableHighlight>
+                                                            <TouchableHighlight onPress={async () => {await this.handleDislike(obj.id)}}
+                                                                                style={styleLightMode.redCircle}
+                                                                                underlayColor={'red'}
+                                                                                disabled={true}>
+                                                                <Image source={require('../assets/images/rodjoImage.png')}
+                                                                       style={styleLightMode.dislike}/>
+                                                            </TouchableHighlight>
+                                                        </>
+                                                    )}
+                                                    {renderIf(obj.liked===0,
+                                                        <>
+                                                            <TouchableHighlight onPress={async () => {await this.handleLike(obj.id)}}
+                                                                                style={styleLightMode.greenCircle}
+                                                                                disabled={true}>
+                                                                <Image source={require('../assets/images/rodjoImage.png')}
+                                                                       style={styleLightMode.like}/>
+                                                            </TouchableHighlight>
+                                                            <TouchableHighlight onPress={async () => {await this.handleRemoveDislike(obj.id)}}
+                                                                                style={styleLightMode.redCircle}
+                                                                                underlayColor={'red'}>
+                                                                <Image source={require('../assets/images/rodjoImage.png')}
+                                                                       style={styleLightMode.dislike}/>
+                                                            </TouchableHighlight>
+                                                        </>
+                                                    )}
+
                                                     <FontAwesome5 name={'comment'}
                                                                   size={29}
                                                                   color={'#000000'}
@@ -407,8 +449,7 @@ export default class HomePage extends Component{
                                                 </Text>
                                                 <CardAction>
                                                     <TouchableOpacity style={styleLightMode.button}
-                                                                      // onPress={()=>this.props.navigation.navigate("singleActivity")}
-                                                                      key={i}>
+                                                                      onPress={async () => {await this.showMore(obj.id)}}>
                                                         <Text style={styleLightMode.buttonText}>Show more</Text>
                                                     </TouchableOpacity>
                                                 </CardAction>
