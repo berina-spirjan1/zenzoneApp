@@ -11,7 +11,8 @@ export const USER = `${API_URL}/user`;
 export const USER_UPDATE = `${USER}/update`;
 
 //activity
-export const ACTIVITY = `${API_URL}/activity?page=4`;
+export const ACTIVITY = `${API_URL}/activity`;
+export const SINGLE_ACTIVITY = `${API_URL}/activity`
 
 //category
 export const CATEGORY = `${API_URL}/category`;
