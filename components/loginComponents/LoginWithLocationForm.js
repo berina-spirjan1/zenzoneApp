@@ -14,13 +14,14 @@ import {
 import BackgroundForLoginLocation from "../../components/backgrounds/BackgroundForLoginLocation";
 import { FontAwesome5 } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { LOGIN } from "../../configuration/config";
+import {LOGIN, LOGOUT} from "../../configuration/config";
 import store from "../../redux/store";
 import {
     authFailed,
     authStarted,
-    authSuccess
+    authSuccess, userLogoutFailed, userLogoutStarted, userLogoutSuccess
 } from "../../redux/actions";
+import {Actions} from "react-native-router-flux";
 
 
 export const LoginWithLocationForm = () =>{
@@ -29,6 +30,18 @@ export const LoginWithLocationForm = () =>{
 
     const [email, setEmail] = useState('');
     const [password, setPassword] =  useState('');
+
+    const goToUserInfo = () =>{
+        Actions.goToUserInfo()
+    }
+
+    const forgotPassword = () =>{
+        Actions.forgotPassword()
+    }
+
+    const signup = () =>{
+        Actions.signup()
+    }
 
     const onLoginHandler = () =>{
 
@@ -53,11 +66,15 @@ export const LoginWithLocationForm = () =>{
 
                     console.log(jsonRes)
                     console.log(jsonRes.data.token)
+                    token=jsonRes.data.token
                     if(res.status!==200){
                         store.dispatch(authFailed());
                     }
                     else{
-                        await AsyncStorage.setItem('jwt', jsonRes.data.token)
+                        if(jsonRes.data.token){
+                            await AsyncStorage.setItem('jwt', JSON.stringify(token))
+                        }
+                        goToUserInfo();
                         store.dispatch(authSuccess());
                     }
                 }
@@ -67,11 +84,41 @@ export const LoginWithLocationForm = () =>{
             })
     };
 
-    const handleLogout = () =>{
-        AsyncStorage.removeItem('jws')
-        Alert.alert('userLogout')
-    }
+    const onLogoutHandler = async () => {
 
+        console.log("OVO JE TOKEN", token)
+
+        fetch(`${LOGOUT}`, {
+            method: 'POST',
+            mode: 'no-cors',
+            cache: 'default',
+            credentials: 'same-origin',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + token
+            },
+        })
+            .then(async res => {
+                try {
+                    store.dispatch(userLogoutStarted());
+
+                    const jsonRes = await res.json();
+
+                    console.log(jsonRes)
+                    if (res.status !== 200) {
+                        store.dispatch(userLogoutFailed());
+                        console.log("greska", res.status)
+                    } else {
+                        await AsyncStorage.removeItem('jwt')
+                        console.log("Successfully logout")
+                        store.dispatch(userLogoutSuccess());
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            })
+    };
 
     return(
         <View>

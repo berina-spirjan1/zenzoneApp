@@ -24,8 +24,6 @@ import {
 
 export const SignUpWithLocationForm = () =>{
 
-    const screenHeight = Dimensions.get('window').height
-
     const [name, setName] = useState('');
     const [first_name, setFirstName] =  useState('');
     const [last_name, setLastName] =  useState('');
@@ -35,9 +33,29 @@ export const SignUpWithLocationForm = () =>{
     const [password, setPassword] =  useState('');
     const [confirm_password, setConfirmPassword] =  useState('');
 
-    const login = () => {
+    const screenHeight = Dimensions.get('window').height
+
+    const login = () =>{
         Actions.login()
     }
+
+
+    const validate = (text) => {
+        console.log(text);
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/.com;
+        if (reg.test(text) === false) {
+            this.setState({ email: text })
+            return false;
+        }
+        else {
+            this.setState({ email: text })
+            return true;
+        }
+    }
+
+    // const redirectToLogin = () =>{
+    //     Actions.login()
+    // }
 
     const onSubmitHandler = () =>{
 
