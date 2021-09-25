@@ -57,7 +57,7 @@ export const CreateNewActivityForm = () => {
         }
 
     };
-    const getCategories = () =>{
+    useEffect(()=>{
         fetch(`${CATEGORY}`, {
             method: 'GET',
             headers: {
@@ -73,7 +73,9 @@ export const CreateNewActivityForm = () => {
             .catch((error) => {
                 console.error(error);
             });
-    }
+
+    }, [])
+
 
 
     const postNewActivity = async () => {
