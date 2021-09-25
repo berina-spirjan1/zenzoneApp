@@ -137,6 +137,10 @@ export const CreateNewActivityForm = () => {
         console.log(i)
     }
 
+    const seeAllCategories = () =>{
+        Actions.seeAllCategories()
+    }
+
     return (
         <View style={styles.container}>
             <SafeAreaView>
@@ -144,7 +148,7 @@ export const CreateNewActivityForm = () => {
                     <View style={{flexDirection: 'row'}}>
                         <Text style={styles.chooseCategory}>choose category</Text>
                         <Text style={styles.seeAll}
-                            // onPress={(e) => this.onTextPress(e, 'See all')}
+                              onPress={seeAllCategories}
                         >See all</Text>
                     </View>
                     {console.log("HEREEEEEEEEEEEEEEEE",data)}
