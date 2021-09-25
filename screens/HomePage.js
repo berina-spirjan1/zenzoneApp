@@ -31,19 +31,20 @@ import store from "../redux/store";
 import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../redux/actions";
 import {isIphoneX} from "react-native-iphone-x-helper";
 
+let current_page = 1;
+
 export default class HomePage extends Component{
     constructor(props) {
         super();
     }
     state = {
         data: [],
-        // current_page: '',
-        // per_page: '',
         searchText: '',
         noData: false,
         noDataCategory: false,
         categories: [],
-        isLoading: false,
+        isLoading: true,
+        isLoadingCategories: true,
         isActiveLike: false,
         isActiveDislike: false
     }
@@ -70,8 +71,7 @@ export default class HomePage extends Component{
     }
 
     componentDidMount() {
-
-        fetch(`${ACTIVITY}`, {
+        fetch(`${ACTIVITY}?page=${current_page}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -82,8 +82,10 @@ export default class HomePage extends Component{
             .then((responseJson) => {
                 console.log(responseJson.data.data);
                 this.setState({
-                    data: responseJson.data.data
+                    data: responseJson.data.data,
+                    isLoading: false
                 })
+                current_page+=1
             })
             .catch((error) => {
                 console.error(error);
@@ -99,7 +101,8 @@ export default class HomePage extends Component{
                     .then((response) => response.json())
                     .then((responseJson) => {
                         this.setState({
-                            categories: responseJson.data.data
+                            categories: responseJson.data.data,
+                            isLoadingCategories: false
                         })
                         console.log(responseJson)
                     })
@@ -392,12 +395,12 @@ export default class HomePage extends Component{
                                                 <View style={{flexDirection: 'row'}}>
                                                     {renderIf(obj.liked===null,
                                                         <>
-                                                            <TouchableHighlight onPress={async () => {await this.handleLike(obj.id)}}
+                                                            <TouchableHighlight onPress={async () => {await this.handleRemoveLike(obj.id)}}
                                                                                 style={styleLightMode.greenCircle}>
                                                                 <Image source={require('../assets/images/rodjoImage.png')}
                                                                        style={styleLightMode.like}/>
                                                             </TouchableHighlight>
-                                                            <TouchableHighlight onPress={async () => {await this.handleDislike(obj.id)}}
+                                                            <TouchableHighlight onPress={async () => {await this.handleRemoveDislike(obj.id)}}
                                                                                 style={styleLightMode.redCircle}
                                                                                 underlayColor={'red'}>
                                                                 <Image source={require('../assets/images/rodjoImage.png')}
@@ -408,7 +411,7 @@ export default class HomePage extends Component{
                                                     {renderIf(obj.liked===1,
                                                         <>
                                                             <TouchableHighlight onPress={async () => {await this.handleRemoveLike(obj.id)}}
-                                                                              style={styleLightMode.greenCircle}>
+                                                                                style={styleLightMode.greenCircle}>
                                                                 <Image source={require('../assets/images/rodjoImage.png')}
                                                                        style={styleLightMode.like}/>
                                                             </TouchableHighlight>
