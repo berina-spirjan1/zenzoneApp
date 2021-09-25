@@ -13,9 +13,11 @@ import {
     useFonts
 } from '@expo-google-fonts/roboto';
 
-import ForgotPassword from "./screens/ForgotPassword";
 import {NavigationContainer} from "@react-navigation/native";
 import BottomNavigationBar from "./components/bottomNavigationBar/BottomNavigationBar";
+import MyProfileInfo from "./screens/userProfile/MyProfileInfo";
+import Splash from "./screens/Splash";
+import RouterMain from "./routes/RouterMain";
 
 const Stack = createStackNavigator();
 
@@ -35,13 +37,14 @@ export default function App() {
     }
 
     return (
-        <NavigationContainer>
-             <BottomNavigationBar/>
-         </NavigationContainer>
+        // <NavigationContainer>
+        //      <BottomNavigationBar/>
+        //  </NavigationContainer>
         // <PrizePage/>
         // <LocationPage/>
         // <SignUp/>
         // <ForgotPassword/>
+        <RouterMain/>
     );
 }
 
