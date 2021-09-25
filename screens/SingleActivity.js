@@ -2,11 +2,19 @@ import React, {Component} from "react";
 import {
     View,
     StyleSheet,
-    StatusBar, AsyncStorage, Image, ScrollView,
-    SafeAreaView, Dimensions, Text, ImageBackground, TouchableOpacity, TextInput
+    StatusBar,
+    AsyncStorage,
+    Image,
+    ScrollView,
+    SafeAreaView,
+    Dimensions,
+    Text,
+    ImageBackground,
+    TouchableOpacity,
+    TextInput
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
-import {ACTIVITY, SINGLE_ACTIVITY, USER} from "../configuration/config";
+import {SINGLE_ACTIVITY} from "../configuration/config";
 import {isIphoneX} from "react-native-iphone-x-helper";
 import {renderIf} from "../utilities/CommonMethods";
 import {Actions} from "react-native-router-flux";
@@ -97,8 +105,7 @@ export default class SingleActivity extends Component{
                                 <Image source={require('../assets/images/user_photo.png')}
                                        style={styles.userProfilePicture}/>
                                 <TextInput placeholder={'Create new comment'}
-                                           style={styles.createNewComment}
-                                           maxLength = {50}/>
+                                           style={styles.createNewComment}/>
                                 <View style={{flexDirection: 'row'}}>
                                     <TouchableOpacity style={styles.postButton}>
                                         <Text style={styles.postButtonText}>POST</Text>
@@ -110,9 +117,27 @@ export default class SingleActivity extends Component{
                                     </TouchableOpacity>
                                 </View>
                                 <View style={styles.listOfComments}>
-                                    <View style={{flexDirection: 'row'}}>
-
+                                    <Text style={styles.allComments}>ALL COMMENTS</Text>
+                                    <View style={styles.singleComment}>
+                                        <Image source={require('../assets/images/user_photo.png')}
+                                               style={styles.userPhotoComment}/>
+                                        <Text style={styles.commentDescription}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et magna auctor risus aliquet porttitor quis sit amet augue. Cras</Text>
                                     </View>
+                                    <View style={styles.singleComment}>
+                                        <Image source={require('../assets/images/user_photo.png')}
+                                               style={styles.userPhotoComment}/>
+                                        <Text style={styles.commentDescription}>Lorem ipsum dolor sit amet t augue. Cras</Text>
+                                    </View>
+                                    <View style={styles.commentWithImage}>
+                                        <View style={styles.singleCommentWithImage}>
+                                            <Image source={require('../assets/images/user_photo.png')}
+                                                   style={styles.userPhotoComment}/>
+                                            <Text style={styles.commentDescription}>Lorem ipsum dolor sit amet t augue. Cras</Text>
+                                        </View>
+                                        <Image source={require('../assets/images/goetheburg.png')}
+                                                         style={styles.commentImage}/>
+                                    </View>
+
                                 </View>
                             </View>
                         </View>
@@ -185,7 +210,7 @@ const styles = StyleSheet.create({
         marginTop: 30,
         height: 250,
         borderRadius: 25,
-        marginBottom:150
+        marginBottom:1000
     },
     userProfilePicture:{
         height: 50,
@@ -244,8 +269,55 @@ const styles = StyleSheet.create({
     listOfComments:{
         backgroundColor:  'rgba(171, 194,233, 0.8)',
         marginTop: 30,
-        height: 250,
+        height: 1000,
         borderRadius: 25,
-        marginBottom:150
+        marginBottom:600
+    },
+    allComments:{
+        textAlign: 'center',
+        fontSize: 16,
+        marginTop: 20,
+        fontWeight: 'bold'
+    },
+    singleComment:{
+        flexDirection: 'row',
+        backgroundColor:  'rgba(255, 255, 255, 0.2)',
+        borderRadius: 25,
+        marginTop: 20,
+        padding:10,
+        paddingTop: 20,
+        marginLeft: 20,
+        marginRight: 20
+    },
+    userPhotoComment:{
+        height: 50,
+        width: 50,
+        marginLeft: 20
+    },
+    commentDescription:{
+        padding:20,
+        marginRight: 50,
+        marginTop: -20
+    },
+    commentImage:{
+        height: 250,
+        width:250,
+        marginTop: 20,
+        marginLeft: 35,
+        borderRadius:25,
+        marginBottom: 40
+    },
+    commentWithImage:{
+        backgroundColor:  'rgba(255, 255, 255, 0.2)',
+        borderRadius: 25,
+        marginTop: 20,
+        marginLeft: 20,
+        marginRight: 20
+    },
+    singleCommentWithImage:{
+        flexDirection: 'row',
+        marginTop: 20,
+        padding:10,
+        paddingTop: 20,
     }
 })
