@@ -5,7 +5,7 @@ import ZenZoneTitle from "../assets/icons/ZenZoneTitle";
 import {Actions} from "react-native-router-flux";
 
 
-const duration = 5 * 1000;
+const duration = 3 * 1000;
 export default class Splash extends Component{
 
     componentDidMount() {
@@ -36,7 +36,7 @@ export default class Splash extends Component{
 
 const styles={
     container:{
-        backgroundColor: '#93B4E5',
+        backgroundColor: '#CBDBF2',
         flex: 1
     },
     lottie:{
