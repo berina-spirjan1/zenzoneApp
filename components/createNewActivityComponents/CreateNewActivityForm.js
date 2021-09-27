@@ -84,17 +84,21 @@ export const CreateNewActivityForm = () => {
 
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
-        const imageType = image.type
-        setExtension(imageUri.split('.').pop())
         const activity = new FormData();
         activity.append('category_id',category_id);
 
         activity.append('title', title);
-        activity.append('image', {
-            name: `${imageType}.${extension}`,
-            type:  `${imageType}/${extension}`,
-            uri: imageUri
-        });
+
+        if(image!==null){
+            const imageType = image.type
+            setExtension(imageUri.split('.').pop())
+            activity.append('image', {
+                name: `${imageType}.${extension}`,
+                type:  `${imageType}/${extension}`,
+                uri: imageUri
+            });
+        }
+
         activity.append('description', description)
         fetch(`${ACTIVITY}`, {
             method: 'POST',
