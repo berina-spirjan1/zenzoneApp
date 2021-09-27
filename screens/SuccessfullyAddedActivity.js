@@ -9,6 +9,8 @@ import {
 import LottieView from "lottie-react-native";
 import {Toolbar} from "react-native-material-ui";
 import {Actions} from "react-native-router-flux";
+import {renderIf} from "../utilities/CommonMethods";
+import {isIphoneX} from "react-native-iphone-x-helper";
 
 export default class SuccessfullyAddedActivity extends Component{
 
@@ -22,8 +24,10 @@ export default class SuccessfullyAddedActivity extends Component{
                 <StatusBar
                     animated={true}
                     backgroundColor="#6285B3"/>
-                <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                         centerElement="Successfully added activity."/>
+                {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
+                                                centerElement="Successfully added activity."/>)}
+                {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                                 centerElement="Successfully added activity."/>)}
                 <LottieView
                     style={styles.lottie}
                     source={require("../assets/images/successfullyAddedActivity.json")}
