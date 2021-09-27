@@ -14,7 +14,7 @@ import {
     TextInput
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
-import {BASE_URL, COMMENT, SINGLE_ACTIVITY} from "../configuration/config";
+import {BASE_URL, COMMENT, SINGLE_ACTIVITY, USER} from "../configuration/config";
 import {isIphoneX} from "react-native-iphone-x-helper";
 import {renderIf} from "../utilities/CommonMethods";
 import {Actions} from "react-native-router-flux";
@@ -31,14 +31,18 @@ export default class SingleActivity extends Component{
     state = {
         data: [],
         isLoading: true,
-        userInfo: []
+        userInfo: [],
+        userData: [],
+        commentArray: []
     }
 
     async componentDidMount() {
 
         let id = await AsyncStorage.getItem("id")
         id = JSON.parse(id)
-        console.log("OVO JE NESTO", id)
+
+        let token = await AsyncStorage.getItem('jwt')
+        token = JSON.parse(token)
 
         fetch(`${SINGLE_ACTIVITY}/${id}`, {
             method: 'GET',
@@ -52,9 +56,27 @@ export default class SingleActivity extends Component{
                 console.log(responseJson);
                 this.setState({
                     data: responseJson.data[0],
-                    userInfo: responseJson.data[0].user
+                    userInfo: responseJson.data[0].user,
+                    commentArray: responseJson.data[0].comments
                 })
-                console.log(this.state.data)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+
+        fetch(`${USER}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    userData: responseJson
+                })
             })
             .catch((error) => {
                 console.error(error);
@@ -69,6 +91,9 @@ export default class SingleActivity extends Component{
         const comment = new FormData();
         comment.append('activity_id', activity_id);
         comment.append('description', "ĆAO SVIMA");
+        comment.append('image',null);
+
+        console.log(comment)
 
         fetch(`${COMMENT}`,{
             method: 'POST',
@@ -89,7 +114,6 @@ export default class SingleActivity extends Component{
                     if (res.status !== 200) {
                         store.dispatch(userRegistrationFailed());
                     } else {
-                        console.log("errorrrrrr")
                         store.dispatch(userRegistrationSuccess());
                     }
                 } catch (err) {
@@ -115,11 +139,11 @@ export default class SingleActivity extends Component{
                     backgroundColor="#6285B3"/>
                 {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
                                                 leftElement="arrow-back"
-                                                centerElement={"Activity title"}
+                                                centerElement={this.state.data.title}
                                                 onLeftElementPress={this.homePageActivities}/>)}
                 {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                                                         leftElement="arrow-back"
-                                                        centerElement="Activity title"
+                                                        centerElement={this.state.data.title}
                                                         onLeftElementPress={this.homePageActivities}/> )}
                 <SafeAreaView style={styles.safeArea}
                               style={{height: screenHeight}}>
@@ -139,7 +163,7 @@ export default class SingleActivity extends Component{
                                                style={styles.likeImage}/>)}
                                     {renderIf(this.state.userInfo.photo_dir===null,
                                         <Image source={require('../assets/images/user_photo.png')}
-                                               style={styles.likeImage}/>)}
+                                               style={styles.userWithoutImage}/>)}
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.activityInfoWrapper}>
@@ -149,7 +173,7 @@ export default class SingleActivity extends Component{
                                 <Text style={styles.createdDate}>{this.state.data.created_at}</Text>
                             </View>
                             <View style={styles.userWrapper}>
-                                <Image source={require('../assets/images/user_photo.png')}
+                                <Image source={{uri: `${BASE_URL}`+`${this.state.userData.photo_dir}`+`${this.state.userData.photo_name}`}}
                                        style={styles.userProfilePicture}/>
                                 <TextInput placeholder={'Create new comment'}
                                            style={styles.createNewComment}/>
@@ -222,6 +246,12 @@ const styles = StyleSheet.create({
         height: 60,
         width: 60,
         borderRadius: 60
+    },
+    userWithoutImage:{
+        height: 60,
+        width: 60,
+        borderRadius: 60,
+        marginTop: -60
     },
     likeWrapper:{
         position: 'absolute',
