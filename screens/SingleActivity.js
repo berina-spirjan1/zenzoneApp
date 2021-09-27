@@ -31,6 +31,7 @@ import {
     userRegistrationSuccess
 } from "../redux/actions";
 import * as ImagePicker from "expo-image-picker";
+import ConvertDate from "../components/ConvertDate";
 
 export default class SingleActivity extends Component{
     constructor(props) {
@@ -223,7 +224,7 @@ export default class SingleActivity extends Component{
                                 <Text style={styles.activityTitle}>{this.state.data.title}</Text>
                                 <Text style={styles.activityDescription}>{this.state.data.description}</Text>
                                 <Text style={styles.username}>{this.state.userInfo.name}</Text>
-                                <Text style={styles.createdDate}>{this.state.data.created_at}</Text>
+                                <Text style={styles.createdDate}>{ConvertDate(this.state.data.created_at)}</Text>
                             </View>
 
                             <View style={styles.userWrapper}>
