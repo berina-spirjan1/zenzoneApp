@@ -7,6 +7,8 @@ import {
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 import LottieView from "lottie-react-native";
+import {isIphoneX} from "react-native-iphone-x-helper";
+import {renderIf} from "../utilities/CommonMethods";
 
 
 export default class WaitingToPostActivity extends Component{
@@ -15,8 +17,10 @@ export default class WaitingToPostActivity extends Component{
             <View style={styles.container}>
                 <StatusBar animated={true}
                            backgroundColor="#6285B3"/>
-                <Toolbar style={{ container: { backgroundColor: '#93B4E5' }}}
-                         centerElement="All categories"/>
+                {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 }}}
+                                                centerElement="Sorry"/>)}
+                {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' }}}
+                                                 centerElement="Sorry"/>)}
                 <LottieView
                     style={styles.lottie}
                     source={require("../assets/images/waitingToPostActivity.json")}
