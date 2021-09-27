@@ -14,7 +14,7 @@ import {
     TextInput
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
-import {COMMENT, SINGLE_ACTIVITY} from "../configuration/config";
+import {BASE_URL, COMMENT, SINGLE_ACTIVITY} from "../configuration/config";
 import {isIphoneX} from "react-native-iphone-x-helper";
 import {renderIf} from "../utilities/CommonMethods";
 import {Actions} from "react-native-router-flux";
@@ -30,7 +30,8 @@ export default class SingleActivity extends Component{
 
     state = {
         data: [],
-        isLoading: true
+        isLoading: true,
+        userInfo: []
     }
 
     async componentDidMount() {
@@ -51,10 +52,9 @@ export default class SingleActivity extends Component{
                 console.log(responseJson);
                 this.setState({
                     data: responseJson.data[0],
-
+                    userInfo: responseJson.data[0].user
                 })
                 console.log(this.state.data)
-                // console.log(this.state.data.title)
             })
             .catch((error) => {
                 console.error(error);
@@ -62,7 +62,6 @@ export default class SingleActivity extends Component{
     }
 
     postComment = async (activity_id) => {
-
         let tokenHelper = await AsyncStorage.getItem('jwt')
         tokenHelper = JSON.parse(tokenHelper)
         console.log(tokenHelper)
@@ -70,8 +69,6 @@ export default class SingleActivity extends Component{
         const comment = new FormData();
         comment.append('activity_id', activity_id);
         comment.append('description', "ĆAO SVIMA");
-
-        console.log(comment)
 
         fetch(`${COMMENT}`,{
             method: 'POST',
@@ -128,20 +125,27 @@ export default class SingleActivity extends Component{
                               style={{height: screenHeight}}>
                     <ScrollView vertical={true}
                                 style={styles.scrollView}>
-                        <ImageBackground source={require('../assets/images/taj_mahal.jpg')}
-                                         style={styles.activityImage}>
-                        </ImageBackground>
+                        {renderIf(this.state.data.photo_dir!==null,
+                            <ImageBackground source={{uri: `${BASE_URL}` + `${this.state.data.photo_dir}` + `${this.state.data.photo_name}`}}
+                                             style={styles.activityImage}/>)}
+                        {renderIf(this.state.data.photo_dir===null,
+                            <ImageBackground source={require('../assets/images/photoForPosts.png')}
+                                             style={styles.activityImage}/>)}
                         <View style={styles.activityWrapper}>
                             <View style={styles.likeWrapper}>
                                 <TouchableOpacity>
-                                    <Image source={require('../assets/images/rodjoImage.png')}
-                                           style={styles.likeImage}/>
+                                    {renderIf(this.state.userInfo.photo_dir!==0,
+                                        <Image source={{uri: `${BASE_URL}`+`${this.state.userInfo.photo_dir}`+`${this.state.userInfo.photo_name}`}}
+                                               style={styles.likeImage}/>)}
+                                    {renderIf(this.state.userInfo.photo_dir===null,
+                                        <Image source={require('../assets/images/user_photo.png')}
+                                               style={styles.likeImage}/>)}
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.activityInfoWrapper}>
                                 <Text style={styles.activityTitle}>{this.state.data.title}</Text>
                                 <Text style={styles.activityDescription}>{this.state.data.description}</Text>
-                                {/*<Text style={styles.username}>{this.state.data.user.name}</Text>*/}
+                                <Text style={styles.username}>{this.state.userInfo.name}</Text>
                                 <Text style={styles.createdDate}>{this.state.data.created_at}</Text>
                             </View>
                             <View style={styles.userWrapper}>
@@ -215,9 +219,9 @@ const styles = StyleSheet.create({
         borderRadius: 25
     },
     likeImage:{
-        height: 32,
-        width: 32,
-        borderRadius: 32
+        height: 60,
+        width: 60,
+        borderRadius: 60
     },
     likeWrapper:{
         position: 'absolute',
