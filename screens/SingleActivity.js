@@ -48,7 +48,7 @@ export default class SingleActivity extends Component{
         image: '',
         imageUri: '',
         imageExtension: '',
-        refresh: true
+        refresh: false
     }
 
 
@@ -135,12 +135,13 @@ export default class SingleActivity extends Component{
         const comment = new FormData();
         comment.append('activity_id', activity_id);
         comment.append('description', this.state.descriptionForComment);
-        comment.append('image',{
-            name: `${imageType}.${extension}`,
-            type:  `${imageType}/${extension}`,
-            uri: this.state.imageUri
-        });
-
+        if(this.state.image!==''){
+            comment.append('image',{
+                name: `${imageType}.${extension}`,
+                type:  `${imageType}/${extension}`,
+                uri: this.state.imageUri
+            });
+        }
 
         console.log(comment)
 
@@ -324,7 +325,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#93B4E5',
         marginTop: -50,
         borderRadius: 25,
-        flex: 1
+        height: 5000
     },
     likeImage:{
         height: 60,
