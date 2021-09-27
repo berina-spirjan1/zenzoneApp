@@ -11,16 +11,26 @@ import {
     Text,
     ImageBackground,
     TouchableOpacity,
-    TextInput
+    TextInput, Platform
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
-import {BASE_URL, COMMENT, SINGLE_ACTIVITY, USER} from "../configuration/config";
-import {isIphoneX} from "react-native-iphone-x-helper";
-import {renderIf} from "../utilities/CommonMethods";
-import {Actions} from "react-native-router-flux";
-import {FontAwesome5} from "@expo/vector-icons";
+import {
+    BASE_URL,
+    COMMENT,
+    SINGLE_ACTIVITY,
+    USER
+} from "../configuration/config";
+import { isIphoneX } from "react-native-iphone-x-helper";
+import { renderIf } from "../utilities/CommonMethods";
+import { Actions } from "react-native-router-flux";
+import { FontAwesome5 } from "@expo/vector-icons";
 import store from "../redux/store";
-import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../redux/actions";
+import {
+    userRegistrationFailed,
+    userRegistrationStarted,
+    userRegistrationSuccess
+} from "../redux/actions";
+import * as ImagePicker from "expo-image-picker";
 
 export default class SingleActivity extends Component{
     constructor(props) {
@@ -34,8 +44,32 @@ export default class SingleActivity extends Component{
         userInfo: [],
         userData: [],
         commentArray: [],
-        descriptionForComment: ''
+        descriptionForComment: '',
+        image: '',
+        imageUri: '',
+        imageExtension: ''
     }
+
+
+     pickImage = async() =>{
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 4],
+            quality: 0.5
+        });
+
+
+        this.setState({ image: result})
+
+        this.setState({ imageUri: Platform.OS === "android" ? this.state.image.uri : this.state.image.uri.replace("file:///", "")})
+
+        if (!result.cancelled) {
+            this.setState({image: ''})
+        }
+        this.setState({imageExtension: this.state.imageUri.split('.').pop()})
+
+    };
 
     async componentDidMount() {
 
@@ -90,9 +124,17 @@ export default class SingleActivity extends Component{
         token = JSON.parse(token)
         console.log(token)
 
+        const imageType = this.state.image.type
+        const extension = this.state.imageExtension
+
         const comment = new FormData();
         comment.append('activity_id', activity_id);
         comment.append('description', this.state.descriptionForComment);
+        comment.append('image',{
+            name: `${imageType}.${extension}`,
+            type:  `${imageType}/${extension}`,
+            uri: this.state.imageUri
+        });
 
 
         console.log(comment)
@@ -173,27 +215,38 @@ export default class SingleActivity extends Component{
                                 <Text style={styles.username}>{this.state.userInfo.name}</Text>
                                 <Text style={styles.createdDate}>{this.state.data.created_at}</Text>
                             </View>
+
                             <View style={styles.userWrapper}>
-                                <Image source={{uri: `${BASE_URL}`+`${this.state.userData.photo_dir}`+`${this.state.userData.photo_name}`}}
-                                       style={styles.userProfilePicture}/>
-                                <TextInput placeholder={'Create new comment'}
-                                           style={styles.createNewComment}
-                                           onChangeText={text => this.setState({descriptionForComment: text })}/>
-                                <View style={{flexDirection: 'row'}}>
-                                    <TouchableOpacity style={styles.postButton}>
-                                        <Text style={styles.postButtonText}
-                                              onPress={async()=>{await this.postComment(this.state.data.id)}}>POST</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={styles.cameraButton}>
-                                        <FontAwesome5 name={'camera'}
-                                                      color={'#616C75'}
-                                                      size={20}/>
-                                    </TouchableOpacity>
-                                </View>
+                                {renderIf(this.state.userData.photo_dir!==null,
+                                    <Image source={{uri: `${BASE_URL}`+`${this.state.userData.photo_dir}`+`${this.state.userData.photo_name}`}}
+                                           style={styles.userProfilePicture}/>
+                                )}
+                                {renderIf(this.state.userData.photo_dir===null,
+                                    <Image source={require('../assets/images/user_photo.png')}
+                                           style={styles.userProfilePicture}/>
+                                )}
+                                {renderIf(this.state.userData.length!==0,
+                                    <>
+                                        <TextInput placeholder={'Create new comment'}
+                                                   style={styles.createNewComment}
+                                                   onChangeText={text => this.setState({descriptionForComment: text })}/>
+                                        <View style={{flexDirection: 'row'}}>
+                                            <TouchableOpacity style={styles.postButton}>
+                                                <Text style={styles.postButtonText}
+                                                      onPress={async()=>{await this.postComment(this.state.data.id)}}>POST</Text>
+                                            </TouchableOpacity>
+                                            <TouchableOpacity style={styles.cameraButton}
+                                                              onPress={this.pickImage}>
+                                                <FontAwesome5 name={'camera'}
+                                                              color={'#616C75'}
+                                                              size={20}/>
+                                            </TouchableOpacity>
+                                        </View>
+                                    </>
+                                )}
                                 <View style={styles.listOfComments}>
                                     <Text style={styles.allComments}>ALL COMMENTS</Text>
                                     {renderIf(this.state.commentArray.length,
-
                                         <>
                                             {this.state.commentArray.map(function(obj,i) {
                                                 return (
@@ -224,11 +277,10 @@ export default class SingleActivity extends Component{
                                                                     )}
                                                                     <Text style={styles.commentDescription}>{obj.description}</Text>
                                                                 </View>
-                                                                <Image source={require('../assets/images/goetheburg.png')}
+                                                                <Image source={{uri: `${BASE_URL}`+`${obj.photo_dir}`+`${obj.photo_name}`}}
                                                                        style={styles.commentImage}/>
                                                             </View>
                                                         )}
-
                                                     </>
                                                 )
                                             },this)}
@@ -238,7 +290,6 @@ export default class SingleActivity extends Component{
                         </View>
                     </ScrollView>
                 </SafeAreaView>
-
             </View>
         )
     }
@@ -263,7 +314,8 @@ const styles = StyleSheet.create({
     activityWrapper:{
         backgroundColor: '#93B4E5',
         marginTop: -50,
-        borderRadius: 25
+        borderRadius: 25,
+        flex: 1
     },
     likeImage:{
         height: 60,
