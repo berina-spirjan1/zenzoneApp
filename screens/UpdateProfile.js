@@ -18,6 +18,8 @@ import { Actions } from "react-native-router-flux";
 import { Toolbar } from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {UpdateProfileForm} from "../components/userProfileComponents/UpdateProfileForm";
+import {renderIf} from "../utilities/CommonMethods";
+import {isIphoneX} from "react-native-iphone-x-helper";
 
 
 export default class UpdateProfile extends Component{
@@ -66,9 +68,12 @@ export default class UpdateProfile extends Component{
                 <StatusBar
                     animated={true}
                     backgroundColor="#334A6D"/>
-                <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                         leftElement="arrow-back"
-                         centerElement="Update profile"/>
+                {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
+                                                leftElement="arrow-back"
+                                                centerElement="Update profile"/>)}
+                {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                                 leftElement="arrow-back"
+                                                 centerElement="Update profile"/>)}
                 <ImageBackground source={require('../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
                 <UpdateProfileForm/>
