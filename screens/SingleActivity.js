@@ -33,7 +33,8 @@ export default class SingleActivity extends Component{
         isLoading: true,
         userInfo: [],
         userData: [],
-        commentArray: []
+        commentArray: [],
+        descriptionForComment: ''
     }
 
     async componentDidMount() {
@@ -59,6 +60,7 @@ export default class SingleActivity extends Component{
                     userInfo: responseJson.data[0].user,
                     commentArray: responseJson.data[0].comments
                 })
+                console.log(this.state.commentArray)
             })
             .catch((error) => {
                 console.error(error);
@@ -90,7 +92,7 @@ export default class SingleActivity extends Component{
 
         const comment = new FormData();
         comment.append('activity_id', activity_id);
-        comment.append('description', "ĆAO SVIMA");
+        comment.append('description', this.state.descriptionForComment);
 
 
         console.log(comment)
@@ -175,7 +177,8 @@ export default class SingleActivity extends Component{
                                 <Image source={{uri: `${BASE_URL}`+`${this.state.userData.photo_dir}`+`${this.state.userData.photo_name}`}}
                                        style={styles.userProfilePicture}/>
                                 <TextInput placeholder={'Create new comment'}
-                                           style={styles.createNewComment}/>
+                                           style={styles.createNewComment}
+                                           onChangeText={text => this.setState({descriptionForComment: text })}/>
                                 <View style={{flexDirection: 'row'}}>
                                     <TouchableOpacity style={styles.postButton}>
                                         <Text style={styles.postButtonText}
@@ -189,26 +192,47 @@ export default class SingleActivity extends Component{
                                 </View>
                                 <View style={styles.listOfComments}>
                                     <Text style={styles.allComments}>ALL COMMENTS</Text>
-                                    <View style={styles.singleComment}>
-                                        <Image source={require('../assets/images/user_photo.png')}
-                                               style={styles.userPhotoComment}/>
-                                        <Text style={styles.commentDescription}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et magna auctor risus aliquet porttitor quis sit amet augue. Cras</Text>
-                                    </View>
-                                    <View style={styles.singleComment}>
-                                        <Image source={require('../assets/images/user_photo.png')}
-                                               style={styles.userPhotoComment}/>
-                                        <Text style={styles.commentDescription}>Lorem ipsum dolor sit amet t augue. Cras</Text>
-                                    </View>
-                                    <View style={styles.commentWithImage}>
-                                        <View style={styles.singleCommentWithImage}>
-                                            <Image source={require('../assets/images/user_photo.png')}
-                                                   style={styles.userPhotoComment}/>
-                                            <Text style={styles.commentDescription}>Lorem ipsum dolor sit amet t augue. Cras</Text>
-                                        </View>
-                                        <Image source={require('../assets/images/goetheburg.png')}
-                                                         style={styles.commentImage}/>
-                                    </View>
+                                    {renderIf(this.state.commentArray.length,
 
+                                        <>
+                                            {this.state.commentArray.map(function(obj,i) {
+                                                return (
+                                                    <>
+                                                        {renderIf(obj.photo_dir===null,
+                                                            <View style={styles.singleComment}>
+                                                                {renderIf(obj.user.photo===null,
+                                                                    <Image source={require('../assets/images/user_photo.png')}
+                                                                           style={styles.userPhotoComment}/>
+                                                                )}
+                                                                {renderIf(obj.user.photo!==null,
+                                                                    <Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
+                                                                           style={styles.userPhotoComment}/>
+                                                                )}
+                                                                <Text style={styles.commentDescription}>{obj.description}</Text>
+                                                            </View>
+                                                        )}
+                                                        {renderIf(obj.photo_dir!==null,
+                                                            <View style={styles.commentWithImage}>
+                                                                <View style={styles.singleCommentWithImage}>
+                                                                    {renderIf(obj.user.photo===null,
+                                                                        <Image source={require('../assets/images/user_photo.png')}
+                                                                               style={styles.userPhotoComment}/>
+                                                                    )}
+                                                                    {renderIf(obj.user.photo!==null,
+                                                                        <Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
+                                                                               style={styles.userPhotoComment}/>
+                                                                    )}
+                                                                    <Text style={styles.commentDescription}>{obj.description}</Text>
+                                                                </View>
+                                                                <Image source={require('../assets/images/goetheburg.png')}
+                                                                       style={styles.commentImage}/>
+                                                            </View>
+                                                        )}
+
+                                                    </>
+                                                )
+                                            },this)}
+                                        </>)}
                                 </View>
                             </View>
                         </View>
@@ -369,7 +393,8 @@ const styles = StyleSheet.create({
     userPhotoComment:{
         height: 50,
         width: 50,
-        marginLeft: 20
+        marginLeft: 20,
+        borderRadius: 50
     },
     commentDescription:{
         padding:20,
