@@ -18,7 +18,7 @@ export default class ForgotPassword extends Component{
             <Provider store={store}>
                 {renderIf(isIphoneX(),  <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 }}}
                                                  centerElement=" Forgot password"/>)}
-                {renderIf(isIphoneX()===false,  <Toolbar style={{ container: { backgroundColor: '#93B4E5' }}}
+                {renderIf(!isIphoneX(),  <Toolbar style={{ container: { backgroundColor: '#93B4E5' }}}
                                                          centerElement=" Forgot password"/>)}
                 <ForgotPasswordForm/>
             </Provider>
