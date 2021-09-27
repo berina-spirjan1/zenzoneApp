@@ -21,6 +21,9 @@ export const CATEGORY = `${API_URL}/category`;
 export const LIKE = `${API_URL}/activity/like`;
 export const DISLIKE = `${API_URL}/activity/dislike`
 
+//comments
+export const COMMENT = `${ACTIVITY}/comment`;
+
 export const CHANGE_PASSWORD = `${API_URL}/change-password`;
 export const FORGOT_PASSWORD = `${API_URL}/forget-password`;
 
