@@ -14,50 +14,94 @@ import {
     TextInput
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
-import {SINGLE_ACTIVITY} from "../configuration/config";
+import {COMMENT, SINGLE_ACTIVITY} from "../configuration/config";
 import {isIphoneX} from "react-native-iphone-x-helper";
 import {renderIf} from "../utilities/CommonMethods";
 import {Actions} from "react-native-router-flux";
 import {FontAwesome5} from "@expo/vector-icons";
+import store from "../redux/store";
+import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../redux/actions";
 
 export default class SingleActivity extends Component{
     constructor(props) {
         super();
+
     }
-    state:{
-        data: '',
+
+    state = {
+        data: [],
+        isLoading: true
     }
 
     async componentDidMount() {
-        let id = AsyncStorage.getItem('id')
-        console.log("ovo je id ", id)
-        id = JSON.stringify(id)
 
-        let tokenHelper = await AsyncStorage.getItem('jwt')
-        tokenHelper = JSON.parse(tokenHelper)
-        console.log("OVO JE TOKEN", tokenHelper)
+        let id = await AsyncStorage.getItem("id")
+        id = JSON.parse(id)
+        console.log("OVO JE NESTO", id)
 
-        console.log("----------", id)
-
-        fetch(`${SINGLE_ACTIVITY}/21`, {
+        fetch(`${SINGLE_ACTIVITY}/${id}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json",
-                'Authorization': 'Bearer ' + tokenHelper
+                "Accept": "application/json"
             }
         })
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log(responseJson);
                 this.setState({
-                    data: responseJson
+                    data: responseJson.data[0],
+
                 })
+                console.log(this.state.data)
+                // console.log(this.state.data.title)
             })
             .catch((error) => {
                 console.error(error);
             });
     }
+
+    postComment = async (activity_id) => {
+
+        let tokenHelper = await AsyncStorage.getItem('jwt')
+        tokenHelper = JSON.parse(tokenHelper)
+        console.log(tokenHelper)
+
+        const comment = new FormData();
+        comment.append('activity_id', activity_id);
+        comment.append('description', "ĆAO SVIMA");
+
+        console.log(comment)
+
+        fetch(`${COMMENT}`,{
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + tokenHelper
+            },
+            body: comment
+        })
+            .then(async res => {
+                try {
+                    store.dispatch(userRegistrationStarted());
+
+                    const jsonRes = await res.json();
+
+                    console.log(jsonRes)
+                    if (res.status !== 200) {
+                        store.dispatch(userRegistrationFailed());
+                    } else {
+                        console.log("errorrrrrr")
+                        store.dispatch(userRegistrationSuccess());
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            })
+
+    }
+
 
     homePageActivities(){
         Actions.homePageActivities()
@@ -74,7 +118,7 @@ export default class SingleActivity extends Component{
                     backgroundColor="#6285B3"/>
                 {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
                                                 leftElement="arrow-back"
-                                                centerElement="Activity title"
+                                                centerElement={"Activity title"}
                                                 onLeftElementPress={this.homePageActivities}/>)}
                 {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                                                         leftElement="arrow-back"
@@ -95,11 +139,10 @@ export default class SingleActivity extends Component{
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.activityInfoWrapper}>
-                                <Text style={styles.activityTitle}>activity title</Text>
-                                <Text style={styles.activityDescription}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent et magna auctor risus aliquet porttitor quis sit amet augue. Cras at ligula risus. Vivamus nec nisl maximus erat fermentum porta non id nulla. Vivamus ac magna vitae est consectetur sollicitudin at eget arcu. Nunc nec porta purus. Quisque lacinia varius accumsan. Suspendisse scelerisque justo mattis nunc viverra, a ornare elit bibendum. Ut laoreet ipsum non nibh semper, at congue mi consectetur. Pellentesque sit amet rutrum eros. Morbi id consectetur erat. Phasellus at mi vitae diam egestas sagittis. Suspendisse eu egestas tortor, non maximus dolor. In nec eros nulla.</Text>
-                                <Text style={styles.username}>angel_traveler</Text>
-                                <Text style={styles.createdDate}>Created at: 2021-08-27T14:16:41.000000Z</Text>
-
+                                <Text style={styles.activityTitle}>{this.state.data.title}</Text>
+                                <Text style={styles.activityDescription}>{this.state.data.description}</Text>
+                                {/*<Text style={styles.username}>{this.state.data.user.name}</Text>*/}
+                                <Text style={styles.createdDate}>{this.state.data.created_at}</Text>
                             </View>
                             <View style={styles.userWrapper}>
                                 <Image source={require('../assets/images/user_photo.png')}
@@ -108,7 +151,8 @@ export default class SingleActivity extends Component{
                                            style={styles.createNewComment}/>
                                 <View style={{flexDirection: 'row'}}>
                                     <TouchableOpacity style={styles.postButton}>
-                                        <Text style={styles.postButtonText}>POST</Text>
+                                        <Text style={styles.postButtonText}
+                                              onPress={async()=>{await this.postComment(this.state.data.id)}}>POST</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={styles.cameraButton}>
                                         <FontAwesome5 name={'camera'}
