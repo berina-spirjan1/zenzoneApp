@@ -9,7 +9,7 @@ import {
     Dimensions,
     Image,
     TouchableOpacity,
-    Alert, AsyncStorage, TouchableHighlight
+    Alert, AsyncStorage, TouchableHighlight, RefreshControl
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 
@@ -31,7 +31,7 @@ import store from "../redux/store";
 import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../redux/actions";
 import {isIphoneX} from "react-native-iphone-x-helper";
 
-let current_page = 1;
+let current_page = 2;
 
 export default class HomePage extends Component{
     constructor(props) {
@@ -46,7 +46,8 @@ export default class HomePage extends Component{
         isLoading: true,
         isLoadingCategories: true,
         isActiveLike: false,
-        isActiveDislike: false
+        isActiveDislike: false,
+        refresh: false
     }
 
     //added navigations to another component or pages
@@ -71,6 +72,7 @@ export default class HomePage extends Component{
     }
 
     componentDidMount() {
+        this.setState({ refresh: true})
         fetch(`${ACTIVITY}?page=${current_page}`, {
             method: 'GET',
             headers: {
@@ -83,7 +85,8 @@ export default class HomePage extends Component{
                 console.log(responseJson.data.data);
                 this.setState({
                     data: responseJson.data.data,
-                    isLoading: false
+                    isLoading: false,
+                    refresh: false
                 })
                 current_page+=1
             })
@@ -102,7 +105,8 @@ export default class HomePage extends Component{
                     .then((responseJson) => {
                         this.setState({
                             categories: responseJson.data.data,
-                            isLoadingCategories: false
+                            isLoadingCategories: false,
+                            refresh: false
                         })
                         console.log(responseJson)
                     })
@@ -128,8 +132,7 @@ export default class HomePage extends Component{
                 "Content-Type": "application/json",
                 "Accept": "application/json",
                 'Authorization': 'Bearer ' + tokenHelper
-            },
-            body: JSON.stringify(likeObject)
+            }
         })
             .then(async res => {
                 try {
@@ -272,7 +275,6 @@ export default class HomePage extends Component{
 
     async showMore(id) {
         await AsyncStorage.setItem('id', JSON.stringify(id))
-        console.log(id)
         this.singleActivity()
     }
 
@@ -296,7 +298,7 @@ export default class HomePage extends Component{
                                                    // onSearchCloseRequested: () => setName(nameList),
                                                }}
                                                onLeftElementPress={this.sideMenu}/>)}
-                {renderIf(isIphoneX()===false,<Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                {renderIf(!isIphoneX(),<Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                                                 leftElement="menu"
                                                 centerElement="Activities"
                                                 searchable={{
@@ -310,7 +312,12 @@ export default class HomePage extends Component{
                 {this.state.isLoading ? <Loader show={true} loading={this.state.isLoading} /> : null}
                 <SafeAreaView>
                     <ScrollView style={screenHeight}
-                                style={styleLightMode.scrollView}>
+                                style={styleLightMode.scrollView}
+                                refreshControl={
+                                    <RefreshControl
+                                        refreshing={this.state.refresh}
+                                        onRefresh={this.componentDidMount}
+                                    />}>
                         <View style={{flexDirection: 'row'}}>
                             <Text style={styleLightMode.titleCategories}>Categories</Text>
                             <Text style={styleLightMode.seeAll}
@@ -382,7 +389,7 @@ export default class HomePage extends Component{
                                                     {renderIf(obj.user.photo_dir!==null,<Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
                                                            style={styleLightMode.profilePicture}/>)}
                                                     <Text style={styleLightMode.username}
-                                                         numberOfLines={3}>{obj.user.name}</Text>
+                                                         numberOfLines={1}>{obj.user.name}</Text>
                                                 </View>
                                                 <Text style={styleLightMode.activityTitle}
                                                       numberOfLines={3}>{"\n"}{obj.title}</Text>
