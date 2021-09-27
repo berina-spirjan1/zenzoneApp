@@ -31,7 +31,7 @@ import {
     userRegistrationSuccess
 } from "../redux/actions";
 import * as ImagePicker from "expo-image-picker";
-import ConvertDate from "../components/ConvertDate";
+import ConvertDate from "../utilities/ConvertDate";
 
 export default class SingleActivity extends Component{
     constructor(props) {
