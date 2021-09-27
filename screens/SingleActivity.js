@@ -11,7 +11,7 @@ import {
     Text,
     ImageBackground,
     TouchableOpacity,
-    TextInput, Platform
+    TextInput, Platform, RefreshControl
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 import {
@@ -47,7 +47,8 @@ export default class SingleActivity extends Component{
         descriptionForComment: '',
         image: '',
         imageUri: '',
-        imageExtension: ''
+        imageExtension: '',
+        refresh: true
     }
 
 
@@ -73,6 +74,8 @@ export default class SingleActivity extends Component{
 
     async componentDidMount() {
 
+        this.setState({refresh: true})
+
         let id = await AsyncStorage.getItem("id")
         id = JSON.parse(id)
 
@@ -92,7 +95,8 @@ export default class SingleActivity extends Component{
                 this.setState({
                     data: responseJson.data[0],
                     userInfo: responseJson.data[0].user,
-                    commentArray: responseJson.data[0].comments
+                    commentArray: responseJson.data[0].comments,
+                    refresh: false
                 })
                 console.log(this.state.commentArray)
             })
@@ -111,7 +115,8 @@ export default class SingleActivity extends Component{
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
-                    userData: responseJson
+                    userData: responseJson,
+                    refresh: false
                 })
             })
             .catch((error) => {
@@ -166,7 +171,6 @@ export default class SingleActivity extends Component{
             })
     }
 
-
     homePageActivities(){
         Actions.homePageActivities()
     }
@@ -191,7 +195,12 @@ export default class SingleActivity extends Component{
                 <SafeAreaView style={styles.safeArea}
                               style={{height: screenHeight}}>
                     <ScrollView vertical={true}
-                                style={styles.scrollView}>
+                                style={styles.scrollView}
+                                refreshControl={
+                                    <RefreshControl
+                                        refreshing={this.state.refresh}
+                                        onRefresh={this.componentDidMount}
+                                    />}>
                         {renderIf(this.state.data.photo_dir!==null,
                             <ImageBackground source={{uri: `${BASE_URL}` + `${this.state.data.photo_dir}` + `${this.state.data.photo_name}`}}
                                              style={styles.activityImage}/>)}
