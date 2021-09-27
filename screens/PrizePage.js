@@ -6,6 +6,8 @@ import {
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 import LottieView from "lottie-react-native";
+import {renderIf} from "../utilities/CommonMethods";
+import {isIphoneX} from "react-native-iphone-x-helper";
 
 
 
@@ -15,8 +17,11 @@ function PrizePage(){
             <StatusBar
                 animated={true}
                 backgroundColor="#6285B3"/>
-            <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                     centerElement="Surprise"/>
+            {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
+                                            centerElement="Surprise"/>)}
+            {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                             centerElement="Surprise"/>)}
+
             <LottieView
                 style={styles.lottie}
                 source={require("../assets/images/wonPrize.json")}
