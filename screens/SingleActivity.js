@@ -83,24 +83,24 @@ export default class SingleActivity extends Component{
             });
     }
 
-    postComment = async (activity_id) => {
-        let tokenHelper = await AsyncStorage.getItem('jwt')
-        tokenHelper = JSON.parse(tokenHelper)
-        console.log(tokenHelper)
+    async postComment(activity_id){
+        let token = await AsyncStorage.getItem('jwt')
+        token = JSON.parse(token)
+        console.log(token)
 
         const comment = new FormData();
         comment.append('activity_id', activity_id);
         comment.append('description', "ĆAO SVIMA");
-        comment.append('image',null);
+
 
         console.log(comment)
 
         fetch(`${COMMENT}`,{
             method: 'POST',
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "multipart/form-data",
                 "Accept": "application/json",
-                'Authorization': 'Bearer ' + tokenHelper
+                'Authorization': 'Bearer ' + token
             },
             body: comment
         })
@@ -120,7 +120,6 @@ export default class SingleActivity extends Component{
                     console.log(err);
                 }
             })
-
     }
 
 
