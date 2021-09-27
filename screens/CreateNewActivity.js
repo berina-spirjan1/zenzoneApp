@@ -19,7 +19,7 @@ export default class CreateNewActivity extends Component{
                     backgroundColor="#6285B3"/>
                 {renderIf(isIphoneX(),<Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
                                                centerElement="Activities"/> )}
-                {renderIf(isIphoneX()===false, <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                                                         centerElement="Activities"/>)}
                 <CreateNewActivityForm/>
 
