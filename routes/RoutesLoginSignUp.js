@@ -14,6 +14,7 @@ import CheckEmail from "../screens/CheckEmail";
 import RoutesProfile from "./RoutesProfile";
 import {LoginWithLocationForm} from "../components/loginComponents/LoginWithLocationForm";
 import {SignUpWithLocationForm} from "../components/signUpComponents/SignUpWithLocationForm";
+import {onLogoutHandler} from "../components/logout/Logout";
 
 
 export default class RoutesLoginSignUp extends Component {

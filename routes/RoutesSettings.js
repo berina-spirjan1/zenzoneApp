@@ -5,6 +5,14 @@ import Language from "../screens/Language";
 import UserHelp from "../screens/userProfile/UserHelp";
 import MyProfileInfo from "../screens/userProfile/MyProfileInfo";
 import UserProfile from "../screens/userProfile/UserProfile";
+import RoutesLoginSignUp from "./RoutesLoginSignUp";
+import RoutesCreateActivity from "./RoutesCreateActivity";
+import RoutesLeaderboardUser from "./RoutesLeaderboardUser";
+import RoutesMyActivity from "./RoutesMyActivity";
+import RoutesForChallenge from "./RoutesForChallenge";
+import RoutesMyProfileInfo from "./RoutesMyProfileInfo";
+import RoutesProfile from "./RoutesProfile";
+import RoutesHomePage from "./RoutesHomePage";
 
 
 export default class RoutesSettings extends Component{
@@ -12,6 +20,16 @@ export default class RoutesSettings extends Component{
         return(
             <Router>
                 <Stack key={"root"} hideNavBar={true}>
+
+                    <Scene key={"routesLogin"} component={RoutesLoginSignUp}/>
+                    <Scene key={"routesCreateActivity"} component={RoutesCreateActivity}/>
+                    <Scene key={"routesLeaderboardUser"} component={RoutesLeaderboardUser}/>
+                    <Scene key={"routesMyActivity"} component={RoutesMyActivity}/>
+                    <Scene key={"daily"} component={RoutesForChallenge}/>
+                    <Scene key={"routesMyProfileInfo"} component={RoutesMyProfileInfo}/>
+                    <Scene key={"routesProfile"} component={RoutesProfile}/>
+                    <Scene key={"routesHomePage"} component={RoutesHomePage}/>
+
                     <Scene key={"switchToSettings"} component={Settings} title={"switchToSettings"} initial={true}/>
                     <Scene key={"toLanguage"} component={Language} title={"toLanguage"}/>
                     <Scene key={"toHelp"} component={UserHelp} title={"toHelp"}/>
