@@ -283,22 +283,23 @@ const styles = StyleSheet.create({
         top: 0,
         flexDirection: 'row',
         paddingLeft: 80,
-        height: 60,
-
+        height: 60
     },
     menuItem2:{
         marginTop:2,
         marginLeft: 45,
         fontFamily: 'Roboto_700Bold_Italic',
         fontWeight: 'bold',
-        color: '#616C75'
+        color: '#616C75',
+        width: 300
     },
     menuItem:{
         marginTop:-40,
         marginLeft: 45,
         fontFamily: 'Roboto_700Bold_Italic',
         fontWeight: 'bold',
-        color: '#616C75'
+        color: '#616C75',
+        width: 300
     },
     bottomTabBar:{
         backgroundColor: '#93B4E5',

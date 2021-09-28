@@ -251,7 +251,8 @@ const styles = StyleSheet.create({
         marginLeft: 45,
         fontFamily: 'Roboto_700Bold_Italic',
         fontWeight: 'bold',
-        color: '#616C75'
+        color: '#616C75',
+        width: 300
     },
     bottomTabBar:{
         backgroundColor: '#93B4E5',
