@@ -3,7 +3,7 @@ import Moment from "moment";
 
 
 function ConvertDate(date){
-    Moment.locale('bs');
+    Moment.locale('en');
     return Moment(date).format('MMM Do YY');
 }
 
