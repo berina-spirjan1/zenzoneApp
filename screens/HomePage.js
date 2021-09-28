@@ -70,6 +70,32 @@ export default class HomePage extends Component{
     seeAll() {
         Actions.seeAll()
     }
+    componentWillMount(pageCategories=1) {
+        fetch(`${CATEGORY}?page=${pageCategories}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+
+                this.setState({
+                    categories: [...this.state.categories, ...responseJson.data.data],
+                    isLoadingCategories: false,
+                    refresh: false
+                })
+                if(responseJson.data.data.length!==0){
+                    pageCategories++;
+                    return this.componentWillMount(pageCategories)
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
 
     componentDidMount(page=1) {
 
@@ -96,24 +122,7 @@ export default class HomePage extends Component{
                 console.error(error);
             });
 
-        fetch(`${CATEGORY}`, {
-                    method: 'GET',
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Accept": "application/json"
-                    }
-                })
-                    .then((response) => response.json())
-                    .then((responseJson) => {
-                        this.setState({
-                            categories: responseJson.data.data,
-                            isLoadingCategories: false,
-                            refresh: false
-                        })
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    });
+
     }
 
     async handleLike(id) {
@@ -282,7 +291,6 @@ export default class HomePage extends Component{
     async isLogin(){
         let login = await AsyncStorage.getItem('isLogin')
         login = JSON.parse(login)
-        console.log("---------------------------------------------", login)
         return login;
     }
 
@@ -389,9 +397,9 @@ export default class HomePage extends Component{
                                                       }
                                                   }}>
                                                 <View style={styleLightMode.header}>
-                                                    {renderIf(obj.user.photo_dir===null && this.isLogin, <Image source={require('../assets/images/user_photo.png')}
+                                                    {renderIf(obj.user.photo_dir===null, <Image source={require('../assets/images/user_photo.png')}
                                                                                                          style={styleLightMode.profilePicture}/>)}
-                                                    {renderIf(obj.user.photo_dir!==null && this.isLogin,<Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
+                                                    {renderIf(obj.user.photo_dir!==null,<Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
                                                            style={styleLightMode.profilePicture}/>)}
                                                     {renderIf(!this.isLogin,
                                                         <Image source={require('../assets/images/user_photo.png')}
