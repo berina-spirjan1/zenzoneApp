@@ -5,6 +5,8 @@ import {
 } from "react-native";
 import LottieView from 'lottie-react-native';
 import {Toolbar} from "react-native-material-ui";
+import {renderIf} from "../../utilities/CommonMethods";
+import {isIphoneX} from "react-native-iphone-x-helper";
 
 function Congratulations(){
         return(
@@ -12,8 +14,10 @@ function Congratulations(){
                 <StatusBar
                     animated={true}
                     backgroundColor="#6285B3"/>
-                <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                         centerElement="Congratulations"/>
+                {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
+                                                centerElement="Congratulations"/>)}
+                {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                                 centerElement="Congratulations"/>)}
                 <View style={styles.container}>
                     <Text style={styles.title}>congratulations</Text>
                     <LottieView
