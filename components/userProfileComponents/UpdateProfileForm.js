@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import * as ImagePicker from "expo-image-picker";
-import {ACTIVITY, USER_UPDATE} from "../../configuration/config";
+import {ACTIVITY, USER, USER_UPDATE} from "../../configuration/config";
 import store from "../../redux/store";
 import {failedAddingActivity, startedAddingActivity, successfullyAddedActivity} from "../../redux/actions";
 import {Actions} from "react-native-router-flux";
@@ -29,6 +29,14 @@ export const UpdateProfileForm = () =>{
     const [work_position, setWorkPosition] = useState('')
     const [imageUri, setImageUri] = useState('')
     const [extension, setExtension] = useState('')
+    const [nameInitial, setNameInitial] = useState('')
+    const [firstNameInitial, setFirstNameInitial] = useState('')
+    const [lastNameInitial, setLastNameInitial] = useState('')
+    const [emailInitial, setEmailInitial] = useState('')
+    const [officeLocationInitial, setOfficeLocationInitial] = useState('')
+    const [workPositionInitial, setWorkPositionInitial] = useState('')
+    const [followers, setFollowers] = useState('');
+    const [following, setFollowing] = useState('')
 
     useEffect(() => {
         (async () => {
@@ -108,6 +116,35 @@ export const UpdateProfileForm = () =>{
             })
     }
 
+    useEffect(async ()=>{
+        let token = await AsyncStorage.getItem('jwt')
+        token = JSON.parse(token)
+
+        fetch(`${USER}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson);
+                setNameInitial(responseJson.name);
+                setFirstNameInitial(responseJson.first_name);
+                setLastNameInitial(responseJson.last_name);
+                setEmailInitial(responseJson.email);
+                setOfficeLocationInitial(responseJson.office_location);
+                setWorkPositionInitial(responseJson.work_position);
+                setFollowers(responseJson.followers);
+                setFollowing(responseJson.following);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    })
+
     const switchToMyProfileInfo = () =>{
         Actions.switchToMyProfileInfo()
     }
@@ -128,14 +165,14 @@ export const UpdateProfileForm = () =>{
                               color={'#505760'}
                               style={styles.cameraIcon}/>
             </TouchableOpacity>
-            <Text style={styles.username}>angel_traveler</Text>
+            <Text style={styles.username}>{nameInitial}</Text>
             <View style={styles.followersFollowing}>
                 <Text style={styles.followers}>Followers</Text>
                 <Text style={styles.following}>Following</Text>
             </View>
             <View style={styles.counters}>
-                <Text style={styles.counterFollowers}>0</Text>
-                <Text style={styles.following}>0</Text>
+                <Text style={styles.counterFollowers}>{followers}</Text>
+                <Text style={styles.following}>{following}</Text>
             </View>
             <SafeAreaView style={styles.safeArea}
                           style={{height: screenHeight}}>
@@ -147,7 +184,7 @@ export const UpdateProfileForm = () =>{
                                           size={16}
                                           color={'#616C75'}
                                           style={styles.icon}/>
-                            <Text style={styles.menuItem2}>angel_traveler</Text>
+                            <Text style={styles.menuItem2}>{nameInitial}</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.items}>
@@ -157,6 +194,7 @@ export const UpdateProfileForm = () =>{
                                           color={'#616C75'}
                                           style={styles.icon}/>
                             <TextInput style={styles.menuItem}
+                                       placeholder={firstNameInitial}
                                        onChangeText={setFirstName}/>
                         </View>
                     </TouchableOpacity>
@@ -167,6 +205,7 @@ export const UpdateProfileForm = () =>{
                                           color={'#616C75'}
                                           style={styles.icon}/>
                             <TextInput style={styles.menuItem}
+                                       placeholder={lastNameInitial}
                                        onChangeText={setLastName}/>
                         </View>
                     </TouchableOpacity>
@@ -177,6 +216,7 @@ export const UpdateProfileForm = () =>{
                                           color={'#616C75'}
                                           style={styles.icon}/>
                             <TextInput style={styles.menuItem}
+                                       placeholder={emailInitial}
                                        onChangeText={setEmail}/>
                         </View>
                     </TouchableOpacity>
@@ -186,6 +226,7 @@ export const UpdateProfileForm = () =>{
                                           size={20}
                                           color={'#616C75'}/>
                             <TextInput style={styles.menuItem}
+                                       placeholder={officeLocationInitial}
                                        onChangeText={setOfficeLocation}/>
                         </View>
                     </TouchableOpacity>
@@ -195,6 +236,7 @@ export const UpdateProfileForm = () =>{
                                           size={20}
                                           color={'#616C75'}/>
                             <TextInput style={styles.menuItem}
+                                       placeholder={workPositionInitial}
                                        onChangeText={setWorkPosition}/>
                         </View>
                     </TouchableOpacity>
