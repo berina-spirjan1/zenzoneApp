@@ -10,6 +10,8 @@ import {
 import LottieView from "lottie-react-native";
 import { Toolbar } from "react-native-material-ui";
 import { Actions } from "react-native-router-flux";
+import {renderIf} from "../../utilities/CommonMethods";
+import {isIphoneX} from "react-native-iphone-x-helper";
 
 
 export default class DailyChallengeCounter extends Component{
@@ -30,9 +32,10 @@ export default class DailyChallengeCounter extends Component{
                 <StatusBar
                     animated={true}
                     backgroundColor="#6285B3"/>
-                <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                         centerElement="Waiting for challenge"/>
-
+                {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
+                                                centerElement="Waiting for challenge"/>)}
+                {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                                 centerElement="Waiting for challenge"/>)}
                 <CountDown
                     //we count the remaining time until the daily challenge to be announced at 7 p.m.
                     until={((23-hours+7)%24)*60*60+(60-min)*60+sec}
