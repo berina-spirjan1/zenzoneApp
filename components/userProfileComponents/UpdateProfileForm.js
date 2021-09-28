@@ -13,10 +13,11 @@ import {
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import * as ImagePicker from "expo-image-picker";
-import {ACTIVITY, USER, USER_UPDATE} from "../../configuration/config";
+import {ACTIVITY, BASE_URL, USER, USER_UPDATE} from "../../configuration/config";
 import store from "../../redux/store";
 import {failedAddingActivity, startedAddingActivity, successfullyAddedActivity} from "../../redux/actions";
 import {Actions} from "react-native-router-flux";
+import {renderIf} from "../../utilities/CommonMethods";
 
 
 export const UpdateProfileForm = () =>{
@@ -35,8 +36,10 @@ export const UpdateProfileForm = () =>{
     const [emailInitial, setEmailInitial] = useState('')
     const [officeLocationInitial, setOfficeLocationInitial] = useState('')
     const [workPositionInitial, setWorkPositionInitial] = useState('')
-    const [followers, setFollowers] = useState('');
-    const [following, setFollowing] = useState('')
+    const [followersInitial, setFollowersInitial] = useState('');
+    const [followingInitial, setFollowingInitial] = useState('');
+    const [photoDirInitial, setPhotoDirInitial] = useState('');
+    const [photoNameInitial, setPhotoNameInitial] = useState('');
 
     useEffect(() => {
         (async () => {
@@ -116,34 +119,39 @@ export const UpdateProfileForm = () =>{
             })
     }
 
-    useEffect(async ()=>{
-        let token = await AsyncStorage.getItem('jwt')
-        token = JSON.parse(token)
+    useEffect(()=>{
+        (async () =>{
+            let token = await AsyncStorage.getItem('jwt')
+            token = JSON.parse(token)
 
-        fetch(`${USER}`, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                'Authorization': 'Bearer ' + token
-            }
-        })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log(responseJson);
-                setNameInitial(responseJson.name);
-                setFirstNameInitial(responseJson.first_name);
-                setLastNameInitial(responseJson.last_name);
-                setEmailInitial(responseJson.email);
-                setOfficeLocationInitial(responseJson.office_location);
-                setWorkPositionInitial(responseJson.work_position);
-                setFollowers(responseJson.followers);
-                setFollowing(responseJson.following);
+            fetch(`${USER}`, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    'Authorization': 'Bearer ' + token
+                }
             })
-            .catch((error) => {
-                console.error(error);
-            });
-    })
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    console.log(responseJson);
+                    setNameInitial(responseJson.name);
+                    setFirstNameInitial(responseJson.first_name);
+                    setLastNameInitial(responseJson.last_name);
+                    setEmailInitial(responseJson.email);
+                    setOfficeLocationInitial(responseJson.office_location);
+                    setWorkPositionInitial(responseJson.work_position);
+                    setFollowersInitial(responseJson.followers_counter);
+                    setFollowingInitial(responseJson.following_counter);
+                    setPhotoDirInitial(responseJson.photo_dir);
+                    setPhotoNameInitial(responseJson.photo_name);
+
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        })();
+    }, []);
 
     const switchToMyProfileInfo = () =>{
         Actions.switchToMyProfileInfo()
@@ -156,8 +164,15 @@ export const UpdateProfileForm = () =>{
                               onPress={pickImage}>
 
                 {/*<Text style={styles.upload}>Upload photo</Text>*/}
-                <Image source={require('../../assets/images/user_photo.png')}
-                       style={styles.userImageDefault}/>
+                {renderIf(photoDirInitial===null,
+                    <Image source={require('../../assets/images/user_photo.png')}
+                              style={styles.userImageDefault}/>
+                )}
+                {renderIf(photoDirInitial!==null,
+
+                    <Image source={{uri: `${BASE_URL}`+`${photoDirInitial}`+`${photoNameInitial}`}}
+                           style={styles.userImageDefault}/>
+                )}
             </TouchableOpacity>
             <TouchableOpacity style={styles.littleCamera}>
                 <FontAwesome5 name={'camera'}
@@ -171,8 +186,8 @@ export const UpdateProfileForm = () =>{
                 <Text style={styles.following}>Following</Text>
             </View>
             <View style={styles.counters}>
-                <Text style={styles.counterFollowers}>{followers}</Text>
-                <Text style={styles.following}>{following}</Text>
+                <Text style={styles.counterFollowers}>{followersInitial}</Text>
+                <Text style={styles.following}>{followingInitial}</Text>
             </View>
             <SafeAreaView style={styles.safeArea}
                           style={{height: screenHeight}}>
@@ -223,7 +238,7 @@ export const UpdateProfileForm = () =>{
                     <TouchableOpacity style={styles.items}>
                         <View style={styles.itemRow}>
                             <FontAwesome5 name={'map-marker-alt'}
-                                          size={20}
+                                          size={26}
                                           color={'#616C75'}/>
                             <TextInput style={styles.menuItem}
                                        placeholder={officeLocationInitial}

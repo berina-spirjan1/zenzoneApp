@@ -26,42 +26,12 @@ export default class UpdateProfile extends Component{
     constructor(props) {
         super();
     }
-    state = {
-        data: '',
-    }
-
-
-    componentDidMount = async () => {
-
-        let token = await AsyncStorage.getItem('jwt')
-        token = JSON.parse(token)
-
-        fetch(`${USER}`, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                'Authorization': 'Bearer ' + token
-            }
-        })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log(responseJson);
-                this.setState({
-                    data: responseJson
-                })
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }
 
     switchToChangePassword(){
         Actions.switchToChangePassword()
     }
 
     render(){
-
 
         return(
             <View style={styles.container}>
