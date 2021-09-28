@@ -14,9 +14,6 @@ import {isIphoneX} from "react-native-iphone-x-helper";
 
 export default class AllCategories extends Component{
     state = {
-        data: [],
-        // current_page: '',
-        // per_page: '',
         noDataCategory: false,
         categories: []
     }
@@ -32,7 +29,7 @@ export default class AllCategories extends Component{
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
-                    categories: responseJson.data.data
+                    categories: [...this.state.categories, ...responseJson.data.data]
                 })
                 if(responseJson.data.data.length!==0){
                     page++;
