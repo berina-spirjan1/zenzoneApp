@@ -25,13 +25,11 @@ import {
 import {Card, CardAction, CardContent} from "react-native-card-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {renderIf} from "../utilities/CommonMethods";
-import SideMenu from "../components/sideMenu/SideMenu";
 import Loader from "../utilities/Loader";
 import store from "../redux/store";
 import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../redux/actions";
 import {isIphoneX} from "react-native-iphone-x-helper";
 
-let current_page = 2;
 
 export default class HomePage extends Component{
     constructor(props) {
@@ -47,7 +45,9 @@ export default class HomePage extends Component{
         isLoadingCategories: true,
         isActiveLike: false,
         isActiveDislike: false,
-        refresh: false
+        refresh: true,
+        currentPage: 0,
+        lastPage: 1
     }
 
     //added navigations to another component or pages
@@ -71,9 +71,9 @@ export default class HomePage extends Component{
         Actions.seeAll()
     }
 
-    componentDidMount() {
-        this.setState({ refresh: true})
-        fetch(`${ACTIVITY}?page=${current_page}`, {
+    componentDidMount(page=1) {
+
+        fetch(`${ACTIVITY}?page=${page}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -82,13 +82,15 @@ export default class HomePage extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log(responseJson.data.data);
-                this.setState({
-                    data: responseJson.data.data,
-                    isLoading: false,
-                    refresh: false
-                })
-                current_page+=1
+                    this.setState({
+                        data: [...this.state.data, ...responseJson.data.data],
+                        isLoading: false,
+                        refresh: false,
+                    })
+                    if(responseJson.data.data.length!==0){
+                        page++;
+                        return this.componentDidMount(page)
+                    }
             })
             .catch((error) => {
                 console.error(error);
@@ -108,7 +110,6 @@ export default class HomePage extends Component{
                             isLoadingCategories: false,
                             refresh: false
                         })
-                        console.log(responseJson)
                     })
                     .catch((error) => {
                         console.error(error);
@@ -278,10 +279,16 @@ export default class HomePage extends Component{
         this.singleActivity()
     }
 
+    async isLogin(){
+        let login = await AsyncStorage.getItem('isLogin')
+        login = JSON.parse(login)
+        console.log("---------------------------------------------", login)
+        return login;
+    }
+
     render() {
 
         const screenHeight = Dimensions.get('window').height
-
 
         return(
             <View style={styleLightMode.container}>
@@ -343,13 +350,11 @@ export default class HomePage extends Component{
                                                         shadowRadius: 3,
                                                         elevation: 5
                                                     }}}>
-
                                                     <View style={styleLightMode.icon2}>
                                                         <FontAwesome5 name={obj.icon}
                                                                       size={35}
                                                                       color={'#000000'}/>
                                                     </View>
-
                                                     <CardContent>
                                                         <Text style={styleLightMode.categoryName}>{obj.title}</Text>
                                                     </CardContent>
@@ -384,12 +389,22 @@ export default class HomePage extends Component{
                                                       }
                                                   }}>
                                                 <View style={styleLightMode.header}>
-                                                    {renderIf(obj.user.photo_dir===null, <Image source={require('../assets/images/user_photo.png')}
+                                                    {renderIf(obj.user.photo_dir===null && this.isLogin, <Image source={require('../assets/images/user_photo.png')}
                                                                                                          style={styleLightMode.profilePicture}/>)}
-                                                    {renderIf(obj.user.photo_dir!==null,<Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
+                                                    {renderIf(obj.user.photo_dir!==null && this.isLogin,<Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
                                                            style={styleLightMode.profilePicture}/>)}
-                                                    <Text style={styleLightMode.username}
-                                                         numberOfLines={1}>{obj.user.name}</Text>
+                                                    {renderIf(!this.isLogin,
+                                                        <Image source={require('../assets/images/user_photo.png')}
+                                                               style={styleLightMode.profilePicture}/>
+                                                    )}
+                                                    {renderIf(this.isLogin()!==null,
+                                                        <Text style={styleLightMode.username}
+                                                              numberOfLines={1}>{obj.user.name}</Text>
+                                                    )}
+                                                    {renderIf(this.isLogin()===null,
+                                                        <Text style={styleLightMode.username}
+                                                              numberOfLines={1}>anonymous user</Text>
+                                                    )}
                                                 </View>
                                                 <Text style={styleLightMode.activityTitle}
                                                       numberOfLines={3}>{"\n"}{obj.title}</Text>
