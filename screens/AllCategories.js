@@ -9,6 +9,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {CATEGORY} from "../configuration/config";
 import {Toolbar} from "react-native-material-ui";
 import {Actions} from "react-native-router-flux";
+import {isIphoneX} from "react-native-iphone-x-helper";
 
 
 export default class AllCategories extends Component{
@@ -20,8 +21,8 @@ export default class AllCategories extends Component{
         categories: []
     }
 
-    componentDidMount() {
-        fetch(`${CATEGORY}`, {
+    componentDidMount(page=1) {
+        fetch(`${CATEGORY}?page=${page}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -33,6 +34,10 @@ export default class AllCategories extends Component{
                 this.setState({
                     categories: responseJson.data.data
                 })
+                if(responseJson.data.data.length!==0){
+                    page++;
+                    return this.componentDidMount(page)
+                }
                 console.log(responseJson)
             })
             .catch((error) => {
@@ -50,10 +55,14 @@ export default class AllCategories extends Component{
             <View style={styles.container}>
                 <StatusBar animated={true}
                            backgroundColor="#6285B3"/>
-                <Toolbar style={{ container: { backgroundColor: '#93B4E5' }}}
-                         leftElement={'arrow-back'}
-                         centerElement="All categories"
-                         onLeftElementPress={this.homePageActivities}/>
+                {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 }}}
+                                                leftElement={'arrow-back'}
+                                                centerElement="All categories"
+                                                onLeftElementPress={this.homePageActivities}/>)}
+                {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' }}}
+                                                 leftElement={'arrow-back'}
+                                                 centerElement="All categories"
+                                                 onLeftElementPress={this.homePageActivities}/>)}
                 {renderIf(this.state.noDataCategory, <Text style={{textAlign: 'center'}}>No data found.</Text>)}
                 {renderIf(this.state.categories.length,
                     <ScrollView horizontal={true}
