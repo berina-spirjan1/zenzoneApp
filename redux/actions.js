@@ -225,3 +225,193 @@ export function previouslyDislikedActivity(){
         type: actions.PREVIOUSLY_DISLIKED
     }
 }
+
+//action for started removing like
+export function startedRemovingLike(){
+    return{
+        type:actions.STARTED_REMOVING_LIKE
+    }
+}
+
+//action that means something went wrong at removing like
+export function failedRemovingLike(){
+    return{
+        type:actions.FAILED_REMOVING_LIKE
+    }
+}
+
+//action for successfully removed like
+export function successfullyRemovedLike(){
+    return{
+        type:actions.SUCCESSFULLY_REMOVED_LIKE
+    }
+}
+
+//action for starting removing dislike
+export function startedRemovingDislike(){
+    return{
+        type: actions.STARTED_REMOVING_DISLIKE
+    }
+}
+
+//action that means something went wrong at removing dislike
+export function failedRemovingDislike(){
+    return{
+        type: actions.FAILED_REMOVING_DISLIKE
+    }
+}
+
+//action for successfully removed dislike
+export function successfullyRemovedDislike(){
+    return{
+        type: actions.SUCCESSFULLY_REMOVED_DISLIKE
+    }
+}
+
+//action for started getting information's about user
+export function startedGettingUserInfo(){
+    return{
+        type: actions.STARTED_GETTING_USER_INFO
+    }
+}
+
+//action that means something went wrong at getting user information's
+export function failedGettingUserInfo(){
+    return{
+        type: actions.FAILED_GETTING_USER_INFO
+    }
+}
+
+//action for successfully got information's about user
+export function successfullyGotUserInfo(){
+    return{
+        type: actions.SUCCESSFULLY_GOT_USER_INFO
+    }
+}
+
+//action for started updating user info
+export function startedUpdatingUserInfo(){
+    return{
+        type: actions.STARTED_UPDATING_USER_INFO
+    }
+}
+
+//action that means something went wrong at updating user information's
+export function failedUpdatingUserInfo() {
+    return{
+        type: actions.FAILED_UPDATING_USER_INFO
+    }
+}
+
+//action for successfully updated user info
+export function successfullyUpdatedUserInfo(){
+    return{
+        type: actions.SUCCESSFULLY_UPDATED_USER_INFO
+    }
+}
+
+//action for started getting information's about activity
+export function startedGettingActivityInfo(){
+    return{
+        type: actions.STARTED_GETING_ACTIVITY_INFO
+    }
+}
+
+//action that means something went wrong at getting information's about activity
+export function failedAtGettingActivityInfo(){
+    return{
+        type: actions.FAILED_GETTING_ACTIVITY_INFO
+    }
+}
+
+//action for successfully got information's about activity
+export function successfullyGettingActivityInfo(){
+    return{
+        type: actions.SUCCESSFULLY_GOT_ACTIVITY_INFO
+    }
+}
+
+//action for started posting comment
+export function startedPostingComment(){
+    return{
+        type: actions.STARTED_POSTING_COMMENT
+    }
+}
+
+//action that means something went wrong at posting new comment
+export function failedPostingComment(){
+    return{
+        type: actions.FAILED_POSTING_COMMENT
+    }
+}
+
+//action for successfully posted comment
+export function successfullyPostedComment(){
+    return{
+        type: actions.SUCCESSFULLY_POSTED_COMMENT
+    }
+}
+
+//action for started deleting comment
+export function startedDeletingComment(){
+    return{
+        type: actions.STARTED_DELETING_COMMENT
+    }
+}
+
+//action that means something went wrong at deleting comment
+export function failedDeletingComment(){
+    return{
+        type: actions.FAILED_DELETING_COMMENT
+    }
+}
+
+//action for successfully deleted comment
+export function successfullyDeletedComment(){
+    return{
+        type: actions.SUCCESSFULLY_DELETED_COMMENT
+    }
+}
+
+//action for started getting information's about daily challenge
+export function staredGettingDailyInfo(){
+    return{
+        type: actions.STARTED_GETTING_DAILY_INFO
+    }
+}
+
+//action that means something went wrong at getting information's about daily challenge4
+export function failedAtGettingDailyInfo(){
+    return{
+        type: actions. FAILED_GETTING_DAILY_INFO
+    }
+}
+
+//actions for successfully got information's about daily challenge
+export function successfullyGotDailyInfo(){
+    return{
+        type: actions.SUCCESSFULLY_GOT_DAILY_INFO
+    }
+}
+
+//action for started sending report for daily challenge
+export function startedSendingReportDaily(){
+    return{
+        type: actions.STARTED_SENDING_REPORT_DAILY
+    }
+}
+
+//action that means something went wrong at sending report for daily challenge
+export function failedSendingReportDaily(){
+    return{
+        type: actions.FAILED_SENDING_REPORT_DAILY
+    }
+}
+
+//action for successfully sent report for daily challenge
+export function successfullySentReportDaily(){
+    return{
+        type: actions.SUCCESSFULLY_SENT_REPORT_DAILY
+    }
+}
+

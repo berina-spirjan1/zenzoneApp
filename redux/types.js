@@ -66,7 +66,49 @@ export const STARTED_SENDING_REPORT_FOR_CHALLENGE = 'started_sending_report_for_
 export const FAILED_AT_SENDING_REPORT_FOR_CHALLENGE = 'failed_at_sending_report_for_challenge';
 export const SENDING_REPORT_FOR_CHALLENGE_SUCCESS = 'sending_report_for_challenge_success';
 
+//remove like
+export const STARTED_REMOVING_LIKE = 'started_removing_like';
+export const FAILED_REMOVING_LIKE = 'failed_removing_like';
+export const SUCCESSFULLY_REMOVED_LIKE = 'successfully_removed_like';
 
-export const STARTED_UPDATING_USER_INFORMATIONS = 'started_updating_user_informations';
-export const FAILED_UPDATING_USER_INFORMATIONS = 'failed_updating_user_informations';
+//remove dislike
+export const STARTED_REMOVING_DISLIKE = 'started_removing_dislike';
+export const FAILED_REMOVING_DISLIKE = 'failed_removing_dislike';
+export const SUCCESSFULLY_REMOVED_DISLIKE = 'successfully_removed_dislike';
+
+//user information
+export const STARTED_GETTING_USER_INFO = 'started_getting_user_info';
+export const FAILED_GETTING_USER_INFO = 'failed_getting_user_info';
+export const SUCCESSFULLY_GOT_USER_INFO = 'successfully_got_user_info';
+
+//user update
+export const STARTED_UPDATING_USER_INFO = 'started_updating_user_info';
+export const FAILED_UPDATING_USER_INFO = 'failed_updating_user_info';
+export const SUCCESSFULLY_UPDATED_USER_INFO = 'successfully_updated_user_info';
+
+//single activity
+export const STARTED_GETING_ACTIVITY_INFO = 'started_getting_activity_info';
+export const FAILED_GETTING_ACTIVITY_INFO = 'failed_getting_activity_info';
+export const SUCCESSFULLY_GOT_ACTIVITY_INFO = 'successfully_got_activity_info';
+
+//post comment
+export const STARTED_POSTING_COMMENT = 'started_posting_comment';
+export const FAILED_POSTING_COMMENT = 'failed_posting_comment';
+export const SUCCESSFULLY_POSTED_COMMENT = 'successfully_posted_comment';
+
+//delete comment
+export const STARTED_DELETING_COMMENT = 'started_deleting_comment';
+export const FAILED_DELETING_COMMENT = 'failed_deleting_comment';
+export const SUCCESSFULLY_DELETED_COMMENT = 'successfully_deleted_comment';
+
+//daily challenge info
+export const STARTED_GETTING_DAILY_INFO = 'started_getting_daily_info';
+export const FAILED_GETTING_DAILY_INFO = 'failed_getting_daily_info';
+export const SUCCESSFULLY_GOT_DAILY_INFO = 'successfully_got_daily_info';
+
+//report for daily challenge
+export const STARTED_SENDING_REPORT_DAILY = 'started_sending_report_daily';
+export const FAILED_SENDING_REPORT_DAILY = 'failed_sending_report_daily';
+export const SUCCESSFULLY_SENT_REPORT_DAILY = 'successfully_sent_report_daily';
+
 
