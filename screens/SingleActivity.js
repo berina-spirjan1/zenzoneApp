@@ -73,6 +73,16 @@ export default class SingleActivity extends Component{
 
     };
 
+    goToAboutUserWhoCreatedActivity(){
+        Actions.goToAboutUserWhoCreatedActivity()
+    }
+
+    async showUser(user_id){
+        await AsyncStorage.setItem('user_id',JSON.stringify(user_id))
+        console.log("OVO JE ID", user_id)
+        this.goToAboutUserWhoCreatedActivity()
+    }
+
     async componentDidMount() {
 
         this.setState({refresh: true})
@@ -136,13 +146,18 @@ export default class SingleActivity extends Component{
         const comment = new FormData();
         comment.append('activity_id', activity_id);
         comment.append('description', this.state.descriptionForComment);
-        if(this.state.image!==''){
+        // if(this.state.image!==''){
+        //     comment.append('image',{
+        //         name: `${imageType}.${extension}`,
+        //         type:  `${imageType}/${extension}`,
+        //         uri: this.state.imageUri
+        //     });
+        // }
             comment.append('image',{
                 name: `${imageType}.${extension}`,
                 type:  `${imageType}/${extension}`,
                 uri: this.state.imageUri
             });
-        }
 
         console.log(comment)
 
@@ -211,7 +226,7 @@ export default class SingleActivity extends Component{
                                              style={styles.activityImage}/>)}
                         <View style={styles.activityWrapper}>
                             <View style={styles.likeWrapper}>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={async () => {await this.showUser(this.state.userInfo.id)}}>
                                     {renderIf(this.state.userInfo.photo_dir!==0,
                                         <Image source={{uri: `${BASE_URL}`+`${this.state.userInfo.photo_dir}`+`${this.state.userInfo.photo_name}`}}
                                                style={styles.likeImage}/>)}
