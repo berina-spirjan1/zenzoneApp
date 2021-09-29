@@ -332,8 +332,8 @@ export default class HomePage extends Component{
                                                searchable={{
                                                    autoFocus: true,
                                                    placeholder: 'Search',
-                                                   // onChangeText: text => searchFilterFunction(text),
-                                                   // onSearchCloseRequested: () => setName(nameList),
+                                                   onChangeText: text => this.updateSearch(text),
+                                                   onSearchCloseRequested: (page=1) => this.componentDidMount(page),
                                                }}
                                                onLeftElementPress={this.sideMenu}/>)}
                 {renderIf(!isIphoneX(),<Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
@@ -343,7 +343,7 @@ export default class HomePage extends Component{
                                                     autoFocus: true,
                                                     placeholder: 'Search',
                                                     onChangeText: text => this.updateSearch(text),
-                                                    // onSearchCloseRequested: () => setName(nameList),
+                                                    onSearchCloseRequested: (page=1) => this.componentDidMount(page),
                                                 }}
                                                 onLeftElementPress={this.sideMenu}/>)}
 
