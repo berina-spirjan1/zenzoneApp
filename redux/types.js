@@ -53,13 +53,13 @@ export const SUCCESSFULLY_DELETED_ACTIVITY = 'successfully_deleted_activity';
 export const STARTED_LIKING_ACTIVITY = 'started_liking_activity';
 export const SUCCESSFULLY_LIKED_ACTIVITY = 'successfully_liked_activity';
 export const FAILED_LIKING_ACTIVITY = 'failed_liking_activity';
-export const ALREADY_LIKED = 'already_liked';
+export const PREVIOUSLY_LIKED = 'previously_liked';
 
 //dislike activity
 export const STARTED_DISLIKING_ACTIVITY = 'started_disliking_activity';
 export const SUCCESSFULLY_DISLIKED_ACTIVITY = 'successfully_disliked_activity';
 export const FAILED_DISLIKING_ACTIVITY = 'failed_disliking_activity';
-export const ALREADY_DISLIKED = 'already_disliked';
+export const PREVIOUSLY_DISLIKED = 'previously_disliked';
 
 //sending report for daily challenge
 export const STARTED_SENDING_REPORT_FOR_CHALLENGE = 'started_sending_report_for_challenge';
