@@ -127,8 +127,7 @@ export default class SingleActivity extends Component{
             .then((responseJson) => {
                 this.setState({
                     userData: responseJson,
-                    refresh: false,
-                    my_id: responseJson.data.id
+                    refresh: false
                 })
             })
             .catch((error) => {
@@ -188,17 +187,24 @@ export default class SingleActivity extends Component{
                 }
             })
     }
-    async deleteComment(category_id){
+    async deleteComment(comment_id){
+
+        console.log("HERE I AM")
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
 
-        fetch(`${COMMENT}/${category_id}`,{
+        const commentObject = {
+            id: comment_id
+        }
+
+        fetch(`${COMMENT}/${comment_id}`,{
             method: 'DELETE',
             headers: {
-                "Content-Type": "multipart/form-data",
+                "Content-Type": "application/json",
                 "Accept": "application/json",
                 'Authorization': 'Bearer ' + token
-            }
+            },
+            body: commentObject
         })
             .then(async res => {
                 try {
@@ -319,6 +325,12 @@ export default class SingleActivity extends Component{
                                                                            style={styles.userPhotoComment}/>
                                                                 )}
                                                                 <Text style={styles.commentDescription}>{obj.description}</Text>
+                                                                <TouchableOpacity style={styles.deleteButtonInSingle}
+                                                                                  onPress={async () => {await this.deleteComment(obj.id)}}>
+                                                                    <FontAwesome5 name={'trash-alt'}
+                                                                                  color={'#616C75'}
+                                                                                  size={15}/>
+                                                                </TouchableOpacity>
                                                             </View>
                                                         )}
                                                         {renderIf(obj.photo_dir!==null,
@@ -333,9 +345,26 @@ export default class SingleActivity extends Component{
                                                                                style={styles.userPhotoComment}/>
                                                                     )}
                                                                     <Text style={styles.commentDescription}>{obj.description}</Text>
+                                                                    {renderIf(this.state.userData.id===obj.user.id,
+                                                                        <TouchableOpacity style={styles.deleteButton}
+                                                                                          onPress={async () => {await this.deleteComment(obj.id)}}>
+                                                                            <FontAwesome5 name={'trash-alt'}
+                                                                                          color={'#616C75'}
+                                                                                          size={15}/>
+                                                                        </TouchableOpacity>
+                                                                    )}
                                                                 </View>
                                                                 <Image source={{uri: `${BASE_URL}`+`${obj.photo_dir}`+`${obj.photo_name}`}}
                                                                        style={styles.commentImage}/>
+                                                                {renderIf(this.state.userData.id===obj.user.id,
+                                                                    <TouchableOpacity style={styles.deleteButton}
+                                                                                      onPress={async () => {await this.deleteComment(obj.id)}}>
+                                                                        <FontAwesome5 name={'trash-alt'}
+                                                                                      color={'#616C75'}
+                                                                                      size={15}/>
+                                                                    </TouchableOpacity>
+                                                                )}
+
                                                             </View>
                                                         )}
                                                     </>
@@ -530,5 +559,27 @@ const styles = StyleSheet.create({
         marginTop: 20,
         padding:10,
         paddingTop: 20,
+    },
+    deleteButton:{
+        backgroundColor:  'rgba(98, 133, 179, 0.5)',
+        height: 30,
+        marginTop: -20,
+        width: 30,
+        borderRadius: 20,
+        padding: 5,
+        marginLeft: 255,
+        paddingLeft: 8,
+        paddingTop: 7,
+        marginBottom: 10
+    },
+    deleteButtonInSingle:{
+        backgroundColor:  'rgba(98, 133, 179, 0.5)',
+        height: 30,
+        width: 30,
+        borderRadius: 20,
+        padding: 5,
+        paddingLeft: 8,
+        paddingTop: 7,
+        marginBottom: 10
     }
 })
