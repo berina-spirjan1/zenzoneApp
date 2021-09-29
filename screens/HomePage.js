@@ -317,6 +317,25 @@ export default class HomePage extends Component{
         return login;
     }
 
+    filterActivitiesUsingCategory(category_id){
+        fetch(`${ACTIVITY}?category=${category_id}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    data: responseJson.data.data
+                })
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
     render() {
 
         const screenHeight = Dimensions.get('window').height
@@ -369,7 +388,7 @@ export default class HomePage extends Component{
                                     {this.state.categories.map(function(obj,i) {
                                         return (
                                             <TouchableOpacity style={styleLightMode.categoryCard}
-                                                              onPress={() => console.log(obj.id)}>
+                                                              onPress={() => this.filterActivitiesUsingCategory(obj.id)}>
                                                 <Card  styles={{ card: { backgroundColor: obj.color,
                                                         borderRadius:30,
                                                         shadowColor: "#000000",
