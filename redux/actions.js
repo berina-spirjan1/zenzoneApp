@@ -144,7 +144,7 @@ export function failedAtLoadingActivities(){
 //action for successfully loaded activities
 export function successfullyLoadedActivities(){
     return{
-        type: actions.SUCCESSFULLY_LOADED_CATEGORIES
+        type: actions.SUCCESSFULLY_LOADED_ACTIVITIES
     }
 }
 
