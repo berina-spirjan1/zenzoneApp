@@ -9,7 +9,9 @@ import {
     Dimensions,
     Image,
     TouchableOpacity,
-    Alert, AsyncStorage, TouchableHighlight, RefreshControl
+    AsyncStorage,
+    TouchableHighlight,
+    RefreshControl
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 
@@ -70,6 +72,28 @@ export default class HomePage extends Component{
     seeAll() {
         Actions.seeAll()
     }
+
+    updateSearch = (searchText) => {
+        this.setState({ searchText });
+        fetch(`${ACTIVITY}?searchKey=${this.state.searchText}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+
+                this.setState({
+                    data: responseJson.data.data
+                })
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
     componentWillMount(pageCategories=1) {
         fetch(`${CATEGORY}?page=${pageCategories}`, {
             method: 'GET',
@@ -121,7 +145,6 @@ export default class HomePage extends Component{
             .catch((error) => {
                 console.error(error);
             });
-
 
     }
 
@@ -319,7 +342,7 @@ export default class HomePage extends Component{
                                                 searchable={{
                                                     autoFocus: true,
                                                     placeholder: 'Search',
-                                                    // onChangeText: text => searchFilterFunction(text),
+                                                    onChangeText: text => this.updateSearch(text),
                                                     // onSearchCloseRequested: () => setName(nameList),
                                                 }}
                                                 onLeftElementPress={this.sideMenu}/>)}
@@ -393,7 +416,8 @@ export default class HomePage extends Component{
                                                           },
                                                           shadowOpacity: 0.44,
                                                           shadowRadius: 10.84,
-                                                          elevation: 16
+                                                          elevation: 16,
+                                                          alignItems: 'center'
                                                       }
                                                   }}>
                                                 <View style={styleLightMode.header}>
@@ -427,14 +451,17 @@ export default class HomePage extends Component{
                                                         <>
                                                             <TouchableHighlight onPress={async () => {await this.handleRemoveLike(obj.id)}}
                                                                                 style={styleLightMode.greenCircle}>
-                                                                <Image source={require('../assets/images/rodjoImage.png')}
-                                                                       style={styleLightMode.like}/>
+                                                                <FontAwesome5 name={'thumbs-up'}
+                                                                              size={17}
+                                                                              color={'black'}
+                                                                              style={styleLightMode.likeDislikeIcon}/>
                                                             </TouchableHighlight>
                                                             <TouchableHighlight onPress={async () => {await this.handleRemoveDislike(obj.id)}}
-                                                                                style={styleLightMode.redCircle}
-                                                                                underlayColor={'red'}>
-                                                                <Image source={require('../assets/images/rodjoImage.png')}
-                                                                style={styleLightMode.dislike}/>
+                                                                                style={styleLightMode.redCircle}>
+                                                                <FontAwesome5 name={'thumbs-down'}
+                                                                              size={17}
+                                                                              color={'black'}
+                                                                              style={styleLightMode.likeDislikeIcon}/>
                                                             </TouchableHighlight>
                                                         </>
                                                     )}
@@ -442,15 +469,18 @@ export default class HomePage extends Component{
                                                         <>
                                                             <TouchableHighlight onPress={async () => {await this.handleRemoveLike(obj.id)}}
                                                                                 style={styleLightMode.greenCircle}>
-                                                                <Image source={require('../assets/images/rodjoImage.png')}
-                                                                       style={styleLightMode.like}/>
+                                                                <FontAwesome5 name={'thumbs-up'}
+                                                                              size={17}
+                                                                              color={'black'}
+                                                                              style={styleLightMode.likeDislikeIcon}/>
                                                             </TouchableHighlight>
                                                             <TouchableHighlight onPress={async () => {await this.handleDislike(obj.id)}}
                                                                                 style={styleLightMode.redCircle}
-                                                                                underlayColor={'red'}
                                                                                 disabled={true}>
-                                                                <Image source={require('../assets/images/rodjoImage.png')}
-                                                                       style={styleLightMode.dislike}/>
+                                                                <FontAwesome5 name={'thumbs-down'}
+                                                                              size={17}
+                                                                              color={'black'}
+                                                                              style={styleLightMode.likeDislikeIcon}/>
                                                             </TouchableHighlight>
                                                         </>
                                                     )}
@@ -459,14 +489,18 @@ export default class HomePage extends Component{
                                                             <TouchableHighlight onPress={async () => {await this.handleLike(obj.id)}}
                                                                                 style={styleLightMode.greenCircle}
                                                                                 disabled={true}>
-                                                                <Image source={require('../assets/images/rodjoImage.png')}
-                                                                       style={styleLightMode.like}/>
+                                                                <FontAwesome5 name={'thumbs-up'}
+                                                                              size={17}
+                                                                              color={'black'}
+                                                                              style={styleLightMode.likeDislikeIcon}/>
                                                             </TouchableHighlight>
                                                             <TouchableHighlight onPress={async () => {await this.handleRemoveDislike(obj.id)}}
                                                                                 style={styleLightMode.redCircle}
                                                                                 underlayColor={'red'}>
-                                                                <Image source={require('../assets/images/rodjoImage.png')}
-                                                                       style={styleLightMode.dislike}/>
+                                                                <FontAwesome5 name={'thumbs-down'}
+                                                                              size={17}
+                                                                              color={'black'}
+                                                                              style={styleLightMode.likeDislikeIcon}/>
                                                             </TouchableHighlight>
                                                         </>
                                                     )}
@@ -653,15 +687,19 @@ const styleLightMode = StyleSheet.create({
         marginTop: 7,
         left:-65,
         zIndex: 10,
-        elevation:10
+        elevation:10,
+        padding: 5
     },
     redCircle:{
         backgroundColor: '#FD0628',
-        height:30,
+        height: 30,
         width:30,
         borderRadius:30,
-        marginTop:7,
-        left:-60
+        marginTop: 7,
+        left:-60,
+        zIndex: 10,
+        elevation:10,
+        padding: 5
     },
     categoryName:{
         textTransform: 'uppercase',
@@ -673,6 +711,11 @@ const styleLightMode = StyleSheet.create({
     icon2:{
         justifyContent:'center',
         marginTop:20
+    },
+    likeDislikeIcon:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 2
     }
 })
 
