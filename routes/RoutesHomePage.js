@@ -22,6 +22,7 @@ import RoutesMyActivity from "./RoutesMyActivity";
 import RoutesMyProfileInfo from "./RoutesMyProfileInfo";
 import RoutesProfile from "./RoutesProfile";
 import RoutesSettings from "./RoutesSettings";
+import AboutUserWhoCreatedActivity from "../screens/AboutUserWhoCreatedActivity";
 
 
 export default class RoutesHomePage extends Component{
@@ -41,6 +42,7 @@ export default class RoutesHomePage extends Component{
 
                     <Scene key={"homePageActivities"} component={HomePage} title={"Activities"} initial={true}/>
                     <Scene key={"singleActivity"} component={SingleActivity}/>
+                    <Scene key={"goToAboutUserWhoCreatedActivity"} component={AboutUserWhoCreatedActivity}/>
                     <Scene key={"seeAll"} component={AllCategories} title={"seeAll"}/>
                     <Scene key={"userProfile"} component={UserProfile} title={"User profile"}/>
                     <Scene key={"sideMenu"} component={SideMenu} title={"sideMenu"}/>
