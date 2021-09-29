@@ -49,7 +49,8 @@ export default class SingleActivity extends Component{
         image: '',
         imageUri: '',
         imageExtension: '',
-        refresh: false
+        refresh: false,
+        my_id: ''
     }
 
 
@@ -79,7 +80,6 @@ export default class SingleActivity extends Component{
 
     async showUser(user_id){
         await AsyncStorage.setItem('user_id',JSON.stringify(user_id))
-        console.log("OVO JE ID", user_id)
         this.goToAboutUserWhoCreatedActivity()
     }
 
@@ -127,7 +127,8 @@ export default class SingleActivity extends Component{
             .then((responseJson) => {
                 this.setState({
                     userData: responseJson,
-                    refresh: false
+                    refresh: false,
+                    my_id: responseJson.data.id
                 })
             })
             .catch((error) => {
@@ -187,6 +188,36 @@ export default class SingleActivity extends Component{
                 }
             })
     }
+    async deleteComment(category_id){
+        let token = await AsyncStorage.getItem('jwt')
+        token = JSON.parse(token)
+
+        fetch(`${COMMENT}/${category_id}`,{
+            method: 'DELETE',
+            headers: {
+                "Content-Type": "multipart/form-data",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + token
+            }
+        })
+            .then(async res => {
+                try {
+                    store.dispatch(userRegistrationStarted());
+
+                    const jsonRes = await res.json();
+
+                    console.log(jsonRes)
+                    if (res.status !== 200) {
+                        store.dispatch(userRegistrationFailed());
+                    } else {
+                        store.dispatch(userRegistrationSuccess());
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            })
+    }
+
 
     homePageActivities(){
         Actions.homePageActivities()
