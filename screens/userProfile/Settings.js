@@ -68,7 +68,6 @@ export default class Settings extends Component{
                     data: responseJson,
                     theme: responseJson.theme
                 })
-                console.log("TEMA JE",this.state.theme)
 
             })
             .catch((error) => {
@@ -133,10 +132,9 @@ export default class Settings extends Component{
                     console.log(err);
                 }
             })
-        await AsyncStorage.setItem('theme',this.state.theme);
+        await AsyncStorage.setItem('theme',JSON.stringify(this.state.theme));
+        await AsyncStorage.setItem('theme_binary',JSON.stringify(this.state.lightThemeIsOn));
     }
-
-
 
     render() {
 
