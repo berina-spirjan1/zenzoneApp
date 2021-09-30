@@ -6,10 +6,10 @@ import { NavigationContainer } from "@react-navigation/native";
 import RoutesHomePage from "./RoutesHomePage";
 import RoutesForChallenge from "./RoutesForChallenge";
 import RoutesCreateActivity from "./RoutesCreateActivity";
-import DailyChallengeCounter from "../screens/dailyChallenge/DailyChallengeCounter";
 import RoutesLoginSignUp from "./RoutesLoginSignUp";
 import CustomTabBar from "../components/bottomNavigationBar/CustomTabBar";
 import TabBarCustomButton from "../components/bottomNavigationBar/TabBarCustomButton";
+import PrizePage from "../screens/PrizePage";
 
 
 const Tab = createBottomTabNavigator();
@@ -18,13 +18,14 @@ function BottomNavigationBar(){
     return(
         <NavigationContainer>
             <Tab.Navigator
-                tabBarOptions={{
+                screenOptions={{
                     showLabel: false,
                     style:{
                         borderTopWidth: 0,
                         backgroundColor: 'transparent',
                         elevation: 0
-                }
+                },
+                    tabBarShowLabel: false
             }}
                 tabBar={(props) => (
                     <CustomTabBar props={props}/>
@@ -69,7 +70,7 @@ function BottomNavigationBar(){
                                 )
                             }}/>
                 <Tab.Screen name={'Ranking'}
-                            component={DailyChallengeCounter}
+                            component={PrizePage}
                             options={{
                                 headerShown: false,
                                 tabBarIcon: ({focused}) => (
