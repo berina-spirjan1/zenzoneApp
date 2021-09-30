@@ -123,7 +123,7 @@ export const CreateNewActivityForm = () => {
                         store.dispatch(failedAddingActivity());
                     } else {
                         store.dispatch(successfullyAddedActivity());
-                        Activities()
+                        switchSuccessfullyAddedCreateActivity()
                     }
                 } catch (err) {
                     console.log(err);
@@ -147,9 +147,6 @@ export const CreateNewActivityForm = () => {
         Actions.seeAllCategories()
     }
 
-    const Activities = () =>{
-        Actions.Activities()
-    }
 
     return (
         <View style={styles.container}>
