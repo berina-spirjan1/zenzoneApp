@@ -18,6 +18,7 @@ import {
     USER
 } from "../configuration/config";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import {Actions} from "react-native-router-flux";
 
 export default class AboutUserWhoCreatedActivity extends Component{
 
@@ -51,6 +52,10 @@ export default class AboutUserWhoCreatedActivity extends Component{
 
     }
 
+    singleActivity(){
+        Actions.singleActivity()
+    }
+
     render() {
 
         const screenHeight = Dimensions.get('window').height
@@ -63,25 +68,11 @@ export default class AboutUserWhoCreatedActivity extends Component{
                 {renderIf(isIphoneX(),<Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
                                                leftElement="arrow-back"
                                                centerElement={this.state.data.name}
-                                               rightElement={{
-                                                   menu: {
-                                                       icon: "more-vert",
-                                                       labels: ["Update profile","Logout"],
-                                                   }
-                                               }}
-                                               onRightElementPress={(label) => {this.onMenuItemClick(label)}}
-                                               onLeftElementPress={this.backToProfile}/>)}
+                                               onLeftElementPress={this.singleActivity}/>)}
                 {renderIf(!isIphoneX(),<Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                                                 leftElement="arrow-back"
                                                 centerElement={this.state.data.name}
-                                                rightElement={{
-                                                    menu: {
-                                                        icon: "more-vert",
-                                                        labels: ["Update profile","Logout"],
-                                                    }
-                                                }}
-                                                onRightElementPress={(label) => {this.onMenuItemClick(label)}}
-                                                onLeftElementPress={this.backToProfile}/> )}
+                                                onLeftElementPress={this.singleActivity}/>)}
 
                 <ImageBackground source={require('../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
@@ -153,15 +144,6 @@ export default class AboutUserWhoCreatedActivity extends Component{
                                               size={20}
                                               color={'#616C75'}/>
                                 <Text style={styles.menuItem}>{this.state.data.work_position}</Text>
-                            </View>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.bottomTabBar}
-                                          onPress={this.switchToChangePassword}>
-                            <View style={styles.itemRow}>
-                                <FontAwesome5 name={'lock'}
-                                              size={20}
-                                              color={'#3B495E'}/>
-                                <Text style={styles.menuItem}>Change password</Text>
                             </View>
                         </TouchableOpacity>
                         <View style={{marginBottom:50}}/>

@@ -20,7 +20,7 @@ export default class RoutesMyActivity extends Component{
     render() {
         return(
             <Router>
-                <Stack key={"root"} hideNavBar={true}>
+                <Stack key={"RoutesMyActivity"} hideNavBar={true}>
                     <Scene key={"routesLogin"} component={RoutesLoginSignUp}/>
                     <Scene key={"routesCreateActivity"} component={RoutesCreateActivity}/>
                     <Scene key={"routesLeaderboardUser"} component={RoutesLeaderboardUser}/>

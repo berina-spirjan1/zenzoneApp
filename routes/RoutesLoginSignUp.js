@@ -21,7 +21,7 @@ export default class RoutesLoginSignUp extends Component {
     render() {
         return(
             <Router>
-                <Stack key="root" hideNavBar={true}>
+                <Stack key="RoutesLoginSignUp" hideNavBar={true}>
                     <Scene key="loginForm" component={LoginForm} title="login" />
                     <Scene key={"switchLoginToUser"} component={RoutesProfile} title={"userProfile"}/>
                     <Scene key="signup" component={SignUp} title="Register" />

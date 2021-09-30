@@ -19,7 +19,7 @@ export default class RoutesSettings extends Component{
     render() {
         return(
             <Router>
-                <Stack key={"root"} hideNavBar={true}>
+                <Stack key={"RoutesSettings"} hideNavBar={true}>
 
                     <Scene key={"routesLogin"} component={RoutesLoginSignUp}/>
                     <Scene key={"routesCreateActivity"} component={RoutesCreateActivity}/>

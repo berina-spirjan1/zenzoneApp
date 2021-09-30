@@ -13,7 +13,6 @@ import RoutesForChallenge from "./RoutesForChallenge";
 import Settings from "../screens/userProfile/Settings";
 import AllCategories from "../screens/AllCategories";
 import SingleActivity from "../screens/SingleActivity";
-import BottomNavigationBar from "../components/bottomNavigationBar/BottomNavigationBar";
 import RoutesLoginSignUp from "./RoutesLoginSignUp";
 import RoutesCreateActivity from "./RoutesCreateActivity";
 import {SceneView} from "react-navigation";
@@ -23,13 +22,14 @@ import RoutesMyProfileInfo from "./RoutesMyProfileInfo";
 import RoutesProfile from "./RoutesProfile";
 import RoutesSettings from "./RoutesSettings";
 import AboutUserWhoCreatedActivity from "../screens/AboutUserWhoCreatedActivity";
+import BottomNavigationBar from "./BottomNavigationBar";
 
 
 export default class RoutesHomePage extends Component{
     render() {
         return(
             <Router>
-                <Stack key={"root"} hideNavBar={true}>
+                <Stack key={"RoutesHomePage"} hideNavBar={true}>
 
                     <Scene key={"routesLogin"} component={RoutesLoginSignUp}/>
                     <Scene key={"routesCreateActivity"} component={RoutesCreateActivity}/>
@@ -39,6 +39,7 @@ export default class RoutesHomePage extends Component{
                     <Scene key={"routesMyProfileInfo"} component={RoutesMyProfileInfo}/>
                     <Scene key={"routesProfile"} component={RoutesProfile}/>
                     <Scene key={"routesSettings"} component={RoutesSettings}/>
+                    <Scene key={"bottom"} component={BottomNavigationBar}/>
 
                     <Scene key={"homePageActivities"} component={HomePage} title={"Activities"} initial={true}/>
                     <Scene key={"singleActivity"} component={SingleActivity}/>

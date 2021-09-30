@@ -84,9 +84,10 @@ export const CreateNewActivityForm = () => {
 
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
+
+
         const activity = new FormData();
         activity.append('category_id',category_id);
-
         activity.append('title', title);
 
         if(image!==null){
@@ -100,6 +101,7 @@ export const CreateNewActivityForm = () => {
         }
 
         activity.append('description', description)
+
         fetch(`${ACTIVITY}`, {
             method: 'POST',
             headers: {
@@ -121,7 +123,7 @@ export const CreateNewActivityForm = () => {
                         store.dispatch(failedAddingActivity());
                     } else {
                         store.dispatch(successfullyAddedActivity());
-                        switchSuccessfullyAddedCreateActivity()
+                        Activities()
                     }
                 } catch (err) {
                     console.log(err);
@@ -145,6 +147,10 @@ export const CreateNewActivityForm = () => {
         Actions.seeAllCategories()
     }
 
+    const Activities = () =>{
+        Actions.Activities()
+    }
+
     return (
         <View style={styles.container}>
             <SafeAreaView>
@@ -155,7 +161,6 @@ export const CreateNewActivityForm = () => {
                               onPress={seeAllCategories}
                         >See all</Text>
                     </View>
-                    {console.log("HEREEEEEEEEEEEEEEEE",data)}
                     {renderIf(data.length,
                         <ScrollView horizontal={true}
                                     showsHorizontalScrollIndicator={false}>

@@ -18,7 +18,7 @@ export default class RoutesMyProfileInfo extends Component{
     render() {
         return(
             <Router>
-                <Stack key={"root"} hideNavBar={true}>
+                <Stack key={"RoutesMyProfileInfo"} hideNavBar={true}>
                     <Scene key={"routesLogin"} component={RoutesLoginSignUp}/>
                     <Scene key={"routesCreateActivity"} component={RoutesCreateActivity}/>
                     <Scene key={"routesLeaderboardUser"} component={RoutesLeaderboardUser}/>

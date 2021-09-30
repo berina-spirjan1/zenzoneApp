@@ -23,7 +23,7 @@ export default class RoutesCreateActivity extends Component {
     render() {
         return(
             <Router>
-                <Stack key={"root"} hideNavBar={true}>
+                <Stack key={"RoutesCreateActivity"} hideNavBar={true}>
                     <Scene key={"routesLogin"} component={RoutesLoginSignUp}/>
                     <Scene key={"routesForChallenge"} component={RoutesForChallenge}/>
                     <Scene key={"routesLeaderboardUser"} component={RoutesLeaderboardUser}/>

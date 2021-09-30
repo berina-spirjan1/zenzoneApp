@@ -8,8 +8,7 @@ import {
 import Badges from "../screens/Badges";
 import Leaderboard from "../screens/Leaderboard";
 import UserProfile from "../screens/userProfile/UserProfile";
-import MyProfileInfo from "../screens/userProfile/MyProfileInfo";
-import Settings from "../screens/userProfile/Settings";
+
 import MyActivities from "../screens/MyActivities";
 import RoutesMyProfileInfo from "./RoutesMyProfileInfo";
 import RoutesSettings from "./RoutesSettings";
@@ -19,13 +18,15 @@ import RoutesLeaderboardUser from "./RoutesLeaderboardUser";
 import RoutesMyActivity from "./RoutesMyActivity";
 import RoutesForChallenge from "./RoutesForChallenge";
 import RoutesHomePage from "./RoutesHomePage";
+import SingleActivity from "../screens/SingleActivity";
+
 
 
 export default class RoutesProfile extends Component{
     render() {
         return(
             <Router>
-                <Stack key={"root"} hideNavBar={true}>
+                <Stack key={"RoutesProfile"} hideNavBar={true}>
                     <Scene key={"routesLogin"} component={RoutesLoginSignUp}/>
                     <Scene key={"routesCreateActivity"} component={RoutesCreateActivity}/>
                     <Scene key={"routesLeaderboardUser"} component={RoutesLeaderboardUser}/>
@@ -40,6 +41,7 @@ export default class RoutesProfile extends Component{
                     <Scene key={"leaderboard"} component={Leaderboard} title={"leaderboard"}/>
                     <Scene key={"activities"} component={MyActivities} title={"activities"}/>
                     <Scene key={"settings"} component={RoutesSettings} title={"settings"}/>
+                    <Scene key={"goToSingleActivity"} component={SingleActivity}/>
                 </Stack>
             </Router>
         )
