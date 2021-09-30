@@ -12,9 +12,15 @@ import UserInfoComponent from "../../components/userProfileComponents/UserInfoCo
 import BackgroundForIconsUserProfile from "../../components/backgrounds/BackgroundForIconsUserProfile";
 import NextButton from "../../components/buttons/NextButton";
 import {Actions} from "react-native-router-flux";
-import {USER} from "../../configuration/config";
+import {USER, USER_UPDATE} from "../../configuration/config";
 import {renderIf} from "../../utilities/CommonMethods";
 import {isIphoneX} from "react-native-iphone-x-helper";
+import store from "../../redux/store";
+import {
+    failedAddingActivity,
+    startedAddingActivity,
+    successfullyAddedActivity
+} from "../../redux/actions";
 
 
 export default class Settings extends Component{
@@ -23,7 +29,9 @@ export default class Settings extends Component{
     }
 
     state = {
-        data: ''
+        data: '',
+        theme: 'light',
+        lightThemeIsOn: true
     }
 
     toLanguage(){
@@ -37,6 +45,7 @@ export default class Settings extends Component{
     toInfoMain(){
         Actions.toInfoMain()
     }
+
 
 
     componentDidMount = async () => {
@@ -56,13 +65,75 @@ export default class Settings extends Component{
             .then((responseJson) => {
                 console.log(responseJson);
                 this.setState({
-                    data: responseJson
+                    data: responseJson,
+                    theme: responseJson.theme
                 })
-                // console.log(this.state.data)
+                console.log("TEMA JE",this.state.theme)
+
             })
             .catch((error) => {
                 console.error(error);
             });
+        if(this.state.theme==='dark'){
+            this.setState({lightThemeIsOn: false})
+        }
+        console.log("TEMA JE",this.state.lightThemeIsOn)
+    }
+
+    checkIsOn(change_thema){
+        if(change_thema===true)
+            return false
+        else return true
+    }
+
+    async updateUser(change_theme) {
+        if (change_theme === true) {
+            this.setState({
+                theme: 'dark',
+                lightThemeIsOn: false
+            })
+        } else if (change_theme === false) {
+            this.setState({
+                theme: 'light',
+                lightThemeIsOn: true
+            })
+        }
+        console.log("ovo -------------", this.state.theme)
+        console.log("ovo -------------", this.state.lightThemeIsOn)
+
+        let token = await AsyncStorage.getItem('jwt')
+        token = JSON.parse(token)
+
+        const user = new FormData();
+        user.append('theme', this.state.theme);
+
+        fetch(`${USER_UPDATE}`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "multipart/form-data",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + token
+            },
+            body: user
+        })
+            .then(async res => {
+                try {
+                    store.dispatch(startedAddingActivity());
+
+                    const jsonRes = await res.json();
+
+                    console.log(jsonRes)
+                    if (res.status !== 200) {
+                        console.log(res.status)
+                        store.dispatch(failedAddingActivity());
+                    } else {
+                        store.dispatch(successfullyAddedActivity());
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            })
+        await AsyncStorage.setItem('theme',this.state.theme);
     }
 
 
@@ -103,12 +174,12 @@ export default class Settings extends Component{
                                   style={styles.icon}/>
                     <Text style={styles.titleSection}> Dark/Light mode</Text>
                     <ToggleSwitch
-                        isOn={false}
+                        isOn={this.checkIsOn(this.state.lightThemeIsOn)}
                         onColor="#FFFDFD"
                         offColor="#393f48"
                         labelStyle={{ color: "black", fontWeight: "900" }}
                         size="medium"
-                        onToggle={isOn => console.log("changed to : ", isOn)}
+                        onToggle={async(isOn) => {await this.updateUser(isOn)}}
                         style={styles.toggleButton}
                     />
                 </View>
