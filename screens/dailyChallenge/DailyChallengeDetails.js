@@ -45,9 +45,11 @@ export default class DailyChallengeDetails extends Component{
             });
     }
 
-    waiting(){
-        Actions.waiting()
+    waitingForChallenge(){
+        Actions.waitingForChallenge()
     }
+
+
     render(){
 
         const screenHeight = Dimensions.get('window').height
@@ -55,7 +57,7 @@ export default class DailyChallengeDetails extends Component{
         return (
             <View style={stylesLightMode.container}>
 
-                {renderIf(this.state.data.length,
+                {/*{renderIf(this.state.data.length,*/}
                     <View>
                         <Image style={stylesLightMode.image}
                                source={require('../../assets/images/img_1.png')}/>
@@ -79,10 +81,10 @@ export default class DailyChallengeDetails extends Component{
                             </ScrollView>
                         </SafeAreaView>
                     </View>
-                )}
-                {renderIf(!this.state.data.length,
-                    this.waiting()
-                )}
+                {/*)}*/}
+                {/*{renderIf(!this.state.data.length,*/}
+                {/*    this.waitingForChallenge()*/}
+                {/*)}*/}
             </View>
         )
     }

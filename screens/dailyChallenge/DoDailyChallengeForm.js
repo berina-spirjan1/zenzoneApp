@@ -2,19 +2,27 @@ import React, {useEffect, useState} from "react";
 import {
     Platform,
     SafeAreaView, ScrollView, StatusBar, Text, TextInput, TouchableOpacity,
-    View, StyleSheet, Dimensions
+    View, StyleSheet, Dimensions, AsyncStorage
 } from "react-native";
 
 import DoChallengeIconDarkMode from "../../assets/icons/DoChallengeIconDarkMode";
 import * as ImagePicker from "expo-image-picker";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {Actions} from "react-native-router-flux";
+import {ACTIVITY} from "../../configuration/config";
+import store from "../../redux/store";
+import {failedAddingActivity, startedAddingActivity, successfullyAddedActivity} from "../../redux/actions";
 
 
 export function DoDailyChallengeForm(){
 
-    const [image, setImage] = useState(null);
     const screenHeight = Dimensions.get('window').height
+
+    let [image, setImage] = useState(null);
+    const [imageUri, setImageUri] = useState('');
+    const [extension, setExtension] = useState('');
+    const [description, setDescription] = useState('');
+
 
     const congratulations = () =>{
         Actions.congratulations()
@@ -23,7 +31,7 @@ export function DoDailyChallengeForm(){
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
-                const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+                const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();
                 if (status !== 'granted') {
                     alert('Sorry, we need camera roll permissions to make this work!');
                 }
@@ -35,17 +43,71 @@ export function DoDailyChallengeForm(){
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
-            aspect: [4, 3],
-            quality: 1,
+            aspect: [3, 3],
+            quality: 0.5
         });
-
+        image = result
         console.log(result);
+        setImageUri(Platform.OS === "android" ? image.uri : image.uri.replace("file:///", ""))
 
         if (!result.cancelled) {
             setImage('');
         }
+
     };
 
+    const sendReportForDailyChallenge = async () => {
+        console.log("OVO JE FAJL", image)
+
+        let token = await AsyncStorage.getItem('jwt')
+        token = JSON.parse(token)
+
+
+        const dailyChallenge = new FormData();
+        dailyChallenge.append('category_id', 32);
+        dailyChallenge.append('title', 'Daily challenge');
+
+        if (image !== null) {
+            const imageType = image.type
+            setExtension(imageUri.split('.').pop())
+            dailyChallenge.append('image', {
+                name: `${imageType}.${extension}`,
+                type: `${imageType}/${extension}`,
+                uri: imageUri
+            });
+        }
+
+        dailyChallenge.append('description', description)
+
+        fetch(`${ACTIVITY}`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "multipart/form-data",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + token
+            },
+            body: dailyChallenge
+        })
+            .then(async res => {
+                try {
+                    store.dispatch(startedAddingActivity());
+
+                    const jsonRes = await res.json();
+
+                    console.log(jsonRes)
+                    if (res.status !== 200) {
+                        console.log(res.status)
+                        store.dispatch(failedAddingActivity());
+                    } else {
+                        store.dispatch(successfullyAddedActivity());
+                        congratulations()
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            })
+        console.log("OVO JE OPIS", description)
+    }
 
     return(
         <View>
@@ -74,10 +136,11 @@ export function DoDailyChallengeForm(){
                     <TextInput numberOfLines={10}
                                placeholder={'Enter description for activity'}
                                style={styles.activityDescription}
+                               onChangeText={setDescription}
                                multiline={true}/>
                     <DoChallengeIconDarkMode style={{ marginTop: 10 }}/>
                     <TouchableOpacity style={styles.finishButton}
-                                      onPress={congratulations}>
+                                      onPress={sendReportForDailyChallenge}>
                         <Text style={styles.finishText}>finish</Text>
                     </TouchableOpacity>
                 </ScrollView>

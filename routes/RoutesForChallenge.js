@@ -35,7 +35,7 @@ export default class RoutesForChallenge extends Component{
                     <Scene key={"doDaily"} component={DoDailyChallenge} title={"doDaily"}/>
                     <Scene key={"fromFormDaily"} component={DoDailyChallengeForm}/>
                     <Scene key={"congratulations"} component={Congratulations} title={"congratulations"}/>
-                    <Scene key={"waiting"} component={DailyChallengeCounter} title={"waiting"}/>
+                    <Scene key={"waitingForChallenge"} component={DailyChallengeCounter} title={"waiting"}/>
                 </Stack>
             </Router>
         )
