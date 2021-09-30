@@ -57,7 +57,7 @@ export default class DailyChallengeDetails extends Component{
         return (
             <View style={stylesLightMode.container}>
 
-                {/*{renderIf(this.state.data.length,*/}
+                {renderIf(this.state.data.length,
                     <View>
                         <Image style={stylesLightMode.image}
                                source={require('../../assets/images/img_1.png')}/>
@@ -81,10 +81,10 @@ export default class DailyChallengeDetails extends Component{
                             </ScrollView>
                         </SafeAreaView>
                     </View>
-                {/*)}*/}
-                {/*{renderIf(!this.state.data.length,*/}
-                {/*    this.waitingForChallenge()*/}
-                {/*)}*/}
+                )}
+                {renderIf(!this.state.data.length,
+                    this.waitingForChallenge()
+                )}
             </View>
         )
     }
