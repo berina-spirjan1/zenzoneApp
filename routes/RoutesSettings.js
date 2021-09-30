@@ -13,6 +13,7 @@ import RoutesForChallenge from "./RoutesForChallenge";
 import RoutesMyProfileInfo from "./RoutesMyProfileInfo";
 import RoutesProfile from "./RoutesProfile";
 import RoutesHomePage from "./RoutesHomePage";
+import PrizePage from "../screens/PrizePage";
 
 
 export default class RoutesSettings extends Component{

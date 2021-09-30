@@ -76,13 +76,11 @@ export default class Settings extends Component{
         if(this.state.theme==='dark'){
             this.setState({lightThemeIsOn: false})
         }
-        console.log("TEMA JE",this.state.lightThemeIsOn)
+        console.log(this.state.theme)
     }
 
-    checkIsOn(change_thema){
-        if(change_thema===true)
-            return false
-        else return true
+    checkIsOn(change_theme){
+        return change_theme !== true;
     }
 
     async updateUser(change_theme) {
@@ -132,8 +130,6 @@ export default class Settings extends Component{
                     console.log(err);
                 }
             })
-        await AsyncStorage.setItem('theme',JSON.stringify(this.state.theme));
-        await AsyncStorage.setItem('theme_binary',JSON.stringify(this.state.lightThemeIsOn));
     }
 
     render() {
