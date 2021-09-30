@@ -24,6 +24,9 @@ export const DISLIKE = `${API_URL}/activity/dislike`
 //comments
 export const COMMENT = `${ACTIVITY}/comment`;
 
+//my activities
+export const MY_ACTIVITIES = `${API_URL}/myactivities`;
+
 export const CHANGE_PASSWORD = `${API_URL}/change-password`;
 export const FORGOT_PASSWORD = `${API_URL}/forget-password`;
 
