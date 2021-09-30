@@ -79,13 +79,13 @@ export const UpdateProfileForm = () =>{
         token = JSON.parse(token)
         const imageType = image.type
         setExtension(imageUri.split('.').pop())
-        const activity = new FormData();
-        activity.append('first_name',first_name);
-        activity.append('last_name',last_name);
-        activity.append('email',email);
-        activity.append('office_location', office_location);
-        activity.append('work_position', work_position);
-        activity.append('avatar', {
+        const user = new FormData();
+        user.append('first_name',first_name);
+        user.append('last_name',last_name);
+        user.append('email',email);
+        user.append('office_location', office_location);
+        user.append('work_position', work_position);
+        user.append('avatar', {
             name: `${imageType}.${extension}`,
             type:  `${imageType}/${extension}`,
             uri: imageUri
@@ -97,7 +97,7 @@ export const UpdateProfileForm = () =>{
                 "Accept": "application/json",
                 'Authorization': 'Bearer ' + token
             },
-            body: activity
+            body: user
         })
             .then(async res => {
                 try {
