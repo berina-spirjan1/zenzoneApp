@@ -61,11 +61,6 @@ export const SUCCESSFULLY_DISLIKED_ACTIVITY = 'successfully_disliked_activity';
 export const FAILED_DISLIKING_ACTIVITY = 'failed_disliking_activity';
 export const PREVIOUSLY_DISLIKED = 'previously_disliked';
 
-//sending report for daily challenge
-export const STARTED_SENDING_REPORT_FOR_CHALLENGE = 'started_sending_report_for_challenge';
-export const FAILED_AT_SENDING_REPORT_FOR_CHALLENGE = 'failed_at_sending_report_for_challenge';
-export const SENDING_REPORT_FOR_CHALLENGE_SUCCESS = 'sending_report_for_challenge_success';
-
 //remove like
 export const STARTED_REMOVING_LIKE = 'started_removing_like';
 export const FAILED_REMOVING_LIKE = 'failed_removing_like';
