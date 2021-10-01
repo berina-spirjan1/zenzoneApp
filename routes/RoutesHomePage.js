@@ -39,7 +39,7 @@ export default class RoutesHomePage extends Component{
                     <Scene key={"routesMyProfileInfo"} component={RoutesMyProfileInfo}/>
                     <Scene key={"routesProfile"} component={RoutesProfile}/>
                     <Scene key={"routesSettings"} component={RoutesSettings}/>
-                    <Scene key={"bottom"} component={BottomNavigationBar}/>
+
 
                     <Scene key={"homePageActivities"} component={HomePage} title={"Activities"} initial={true}/>
 
@@ -50,6 +50,7 @@ export default class RoutesHomePage extends Component{
                     <Scene key={"leaderboard2"} component={Leaderboard} title={"leaderboard"}/>
                     <Scene key={"singleActivity"} component={SingleActivity}/>
                     <Scene key={"settings"} component={Settings} title={"settings"}/>
+                    <Scene key={"bottom"} component={BottomNavigationBar}/>
                 </Stack>
             </Router>
         )
