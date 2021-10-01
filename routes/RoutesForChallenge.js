@@ -27,7 +27,6 @@ export default class RoutesForChallenge extends Component{
                     <Scene key={"routesMyActivity"} component={RoutesMyActivity}/>
                     <Scene key={"routesHomePage"} component={RoutesHomePage}/>
                     <Scene key={"routesMyProfileInfo"} component={RoutesMyProfileInfo}/>
-                    <Scene key={"routesProfile"} component={RoutesProfile}/>
                     <Scene key={"routesSettings"} component={RoutesSettings}/>
 
 
