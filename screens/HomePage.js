@@ -11,7 +11,7 @@ import {
     TouchableOpacity,
     AsyncStorage,
     TouchableHighlight,
-    RefreshControl
+    RefreshControl, Alert
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 
@@ -138,6 +138,7 @@ export default class HomePage extends Component{
                         isLoading: false,
                         refresh: false,
                     })
+                    console.log(responseJson)
                     if(responseJson.data.data.length!==0){
                         page++;
                         return this.componentDidMount(page)
@@ -177,7 +178,11 @@ export default class HomePage extends Component{
                     console.log(jsonRes)
                     if (res.status !== 200) {
                         store.dispatch(userRegistrationFailed());
-                    } else {
+                    }
+                    if(res.status===401){
+                        Alert.alert('Please login')
+                    }
+                    else {
                         alert('Successfully liked')
                         store.dispatch(userRegistrationSuccess());
                     }
@@ -216,7 +221,11 @@ export default class HomePage extends Component{
                     console.log(jsonRes)
                     if (res.status !== 200) {
                         store.dispatch(userRegistrationFailed());
-                    } else {
+                    }
+                    if(res.status===401){
+                        Alert.alert('Please login')
+                    }
+                    else {
                         console.log('removed like')
                         store.dispatch(userRegistrationSuccess());
                     }
@@ -255,8 +264,11 @@ export default class HomePage extends Component{
                     console.log(jsonRes)
                     if (res.status !== 200) {
                         store.dispatch(userRegistrationFailed());
-                    } else {
-                        alert('Successfully disliked activity')
+                    }
+                    if(res.status===401){
+                        Alert.alert('Please login')
+                    }
+                    else {
                         store.dispatch(userRegistrationSuccess());
                     }
                 } catch (err) {
@@ -290,10 +302,14 @@ export default class HomePage extends Component{
 
                     const jsonRes = await res.json();
 
-                    console.log(jsonRes)
+                    console.log(res.status)
                     if (res.status !== 200) {
                         store.dispatch(userRegistrationFailed());
-                    } else {
+                    }
+                    if(res.status===401){
+                        Alert.alert('Please login')
+                    }
+                    else {
                         console.log('dislike')
                         store.dispatch(userRegistrationSuccess());
                     }
@@ -450,11 +466,11 @@ export default class HomePage extends Component{
                                                         <Image source={require('../assets/images/user_photo.png')}
                                                                style={styleLightMode.profilePicture}/>
                                                     )}
-                                                    {renderIf(this.isLogin()!==null,
+                                                    {renderIf(this.isLogin(),
                                                         <Text style={styleLightMode.username}
                                                               numberOfLines={1}>{obj.user.name}</Text>
                                                     )}
-                                                    {renderIf(this.isLogin()===null,
+                                                    {renderIf(!this.isLogin(),
                                                         <Text style={styleLightMode.username}
                                                               numberOfLines={1}>anonymous user</Text>
                                                     )}
@@ -470,64 +486,49 @@ export default class HomePage extends Component{
                                                 <View style={{flexDirection: 'row'}}>
                                                     {renderIf(obj.liked===null,
                                                         <>
-                                                            <TouchableHighlight onPress={async () => {await this.handleRemoveLike(obj.id)}}
-                                                                                style={styleLightMode.greenCircle}>
                                                                 <FontAwesome5 name={'thumbs-up'}
-                                                                              size={17}
-                                                                              color={'black'}
-                                                                              style={styleLightMode.likeDislikeIcon}/>
-                                                            </TouchableHighlight>
-                                                            <TouchableHighlight onPress={async () => {await this.handleRemoveDislike(obj.id)}}
-                                                                                style={styleLightMode.redCircle}>
+                                                                              size={25}
+                                                                              color={'green'}
+                                                                              style={styleLightMode.likeIcon}
+                                                                              onPress={async () => {await this.handleRemoveLike(obj.id)}}/>
                                                                 <FontAwesome5 name={'thumbs-down'}
-                                                                              size={17}
-                                                                              color={'black'}
-                                                                              style={styleLightMode.likeDislikeIcon}/>
-                                                            </TouchableHighlight>
+                                                                              size={25}
+                                                                              color={'red'}
+                                                                              style={styleLightMode.dislikeIcon}
+                                                                              onPress={async () => {await this.handleRemoveDislike(obj.id)}}/>
                                                         </>
                                                     )}
                                                     {renderIf(obj.liked===1,
                                                         <>
-                                                            <TouchableHighlight onPress={async () => {await this.handleRemoveLike(obj.id)}}
-                                                                                style={styleLightMode.greenCircle}>
                                                                 <FontAwesome5 name={'thumbs-up'}
-                                                                              size={17}
+                                                                              size={25}
                                                                               color={'black'}
-                                                                              style={styleLightMode.likeDislikeIcon}/>
-                                                            </TouchableHighlight>
-                                                            <TouchableHighlight onPress={async () => {await this.handleDislike(obj.id)}}
-                                                                                style={styleLightMode.redCircle}
-                                                                                disabled={true}>
+                                                                              style={styleLightMode.likeIcon}
+                                                                              onPress={async () => {await this.handleRemoveLike(obj.id)}}/>
                                                                 <FontAwesome5 name={'thumbs-down'}
-                                                                              size={17}
+                                                                              size={25}
                                                                               color={'black'}
-                                                                              style={styleLightMode.likeDislikeIcon}/>
-                                                            </TouchableHighlight>
+                                                                              style={styleLightMode.dislikeIcon}
+                                                                              onPress={async () => {await this.handleDislike(obj.id)}}/>
                                                         </>
                                                     )}
                                                     {renderIf(obj.liked===0,
                                                         <>
-                                                            <TouchableHighlight onPress={async () => {await this.handleLike(obj.id)}}
-                                                                                style={styleLightMode.greenCircle}
-                                                                                disabled={true}>
                                                                 <FontAwesome5 name={'thumbs-up'}
-                                                                              size={17}
+                                                                              size={25}
                                                                               color={'black'}
-                                                                              style={styleLightMode.likeDislikeIcon}/>
-                                                            </TouchableHighlight>
-                                                            <TouchableHighlight onPress={async () => {await this.handleRemoveDislike(obj.id)}}
-                                                                                style={styleLightMode.redCircle}
-                                                                                underlayColor={'red'}>
+                                                                              style={styleLightMode.likeIcon}
+                                                                              onPress={async () => {await this.handleLike(obj.id)}}/>
                                                                 <FontAwesome5 name={'thumbs-down'}
-                                                                              size={17}
-                                                                              color={'black'}
-                                                                              style={styleLightMode.likeDislikeIcon}/>
-                                                            </TouchableHighlight>
+                                                                              size={25}
+                                                                              color={'red'}
+                                                                              style={styleLightMode.dislikeIcon}
+                                                                              onPress={async () => {await this.handleRemoveDislike(obj.id)}}/>
                                                         </>
                                                     )}
 
                                                     <FontAwesome5 name={'comment'}
-                                                                  size={29}
+                                                                  size={25}
                                                                   color={'#000000'}
                                                                   style={styleLightMode.commentIcon}/>
                                                 </View>
@@ -699,10 +700,10 @@ const styleLightMode = StyleSheet.create({
         marginBottom: 10
     },
     commentIcon:{
-        left:60,top:5
+        left:130,top:5
     },
     greenCircle:{
-        backgroundColor: '#06FD37',
+        // backgroundColor: '#06FD37',
         height: 30,
         width:30,
         borderRadius:30,
@@ -713,7 +714,7 @@ const styleLightMode = StyleSheet.create({
         padding: 5
     },
     redCircle:{
-        backgroundColor: '#FD0628',
+        // backgroundColor: '#FD0628',
         height: 30,
         width:30,
         borderRadius:30,
@@ -734,10 +735,17 @@ const styleLightMode = StyleSheet.create({
         justifyContent:'center',
         marginTop:20
     },
-    likeDislikeIcon:{
+    likeIcon:{
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: 2
+        marginLeft: -110,
+        marginTop: 5,
+        marginRight: 10
+    },
+    dislikeIcon:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 5
     }
 })
 
