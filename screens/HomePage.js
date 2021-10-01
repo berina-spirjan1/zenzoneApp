@@ -437,7 +437,8 @@ export default class HomePage extends Component{
                                                           shadowOpacity: 0.44,
                                                           shadowRadius: 10.84,
                                                           elevation: 16,
-                                                          alignItems: 'center'
+                                                          alignItems: 'center',
+                                                          justifyContent: 'center'
                                                       }
                                                   }}>
                                                 <View style={styleLightMode.header}>
@@ -595,7 +596,8 @@ const styleLightMode = StyleSheet.create({
         height: 550,
         width: 300,
         marginTop: 10,
-        marginLeft:27,
+        justifyContent: 'center',
+        marginLeft: 35,
         borderRadius: 50,
         marginBottom: 20
     },
