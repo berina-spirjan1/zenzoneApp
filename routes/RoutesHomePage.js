@@ -30,17 +30,6 @@ export default class RoutesHomePage extends Component{
         return(
             <Router>
                 <Stack key={"RoutesHomePage"} hideNavBar={true}>
-
-                    <Scene key={"routesLogin"} component={RoutesLoginSignUp}/>
-                    <Scene key={"routesCreateActivity"} component={RoutesCreateActivity}/>
-                    <Scene key={"routesLeaderboardUser"} component={RoutesLeaderboardUser}/>
-                    <Scene key={"routesMyActivity"} component={RoutesMyActivity}/>
-                    <Scene key={"daily"} component={RoutesForChallenge}/>
-                    <Scene key={"routesMyProfileInfo"} component={RoutesMyProfileInfo}/>
-                    <Scene key={"routesProfile"} component={RoutesProfile}/>
-                    <Scene key={"routesSettings"} component={RoutesSettings}/>
-
-
                     <Scene key={"homePageActivities"} component={HomePage} title={"Activities"} initial={true}/>
 
                     <Scene key={"goToAboutUserWhoCreatedActivity"} component={AboutUserWhoCreatedActivity}/>
