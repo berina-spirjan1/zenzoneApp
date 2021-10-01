@@ -18,6 +18,7 @@ function BottomNavigationBar(){
     return(
         <NavigationContainer>
             <Tab.Navigator
+                initialRouteName="Activities"
                 screenOptions={{
                     showLabel: false,
                     style:{
