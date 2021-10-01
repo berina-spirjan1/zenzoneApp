@@ -94,6 +94,7 @@ export default class HomePage extends Component{
             });
     };
 
+
     componentWillMount(pageCategories=1) {
         fetch(`${CATEGORY}?page=${pageCategories}`, {
             method: 'GET',
