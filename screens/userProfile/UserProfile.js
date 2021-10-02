@@ -10,13 +10,15 @@ import {
     SafeAreaView,
     ScrollView, Dimensions, AsyncStorage
 } from "react-native";
-import {Toolbar} from "react-native-material-ui";
+import { Toolbar } from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import {Actions} from "react-native-router-flux";
-import {BASE_URL, USER} from "../../configuration/config";
-import {onLogoutHandler} from "../../components/logout/Logout";
-import {renderIf} from "../../utilities/CommonMethods";
-import {isIphoneX} from "react-native-iphone-x-helper";
+import { Actions } from "react-native-router-flux";
+import {
+    BASE_URL,
+    USER} from "../../configuration/config";
+import { onLogoutHandler } from "../../components/logout/Logout";
+import { renderIf } from "../../utilities/CommonMethods";
+import { isIphoneX } from "react-native-iphone-x-helper";
 
 export default class UserProfile extends Component{
     constructor(props) {
@@ -67,7 +69,6 @@ export default class UserProfile extends Component{
                 this.setState({
                     data: responseJson
                 })
-                // console.log(this.state.data)
             })
             .catch((error) => {
                 console.error(error);
@@ -76,6 +77,10 @@ export default class UserProfile extends Component{
 
     login(){
         Actions.login()
+    }
+
+    switchToLogoutPage(){
+        Actions.switchToLogoutPage()
     }
 
 
