@@ -32,6 +32,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native-autocomplete-input": "^5.0.2",
     "react-native-collapsingtoolbar": "^1.0.3",
     "react-native-countdown-component": "^2.7.1",
     "react-native-dialog": "^9.1.0",

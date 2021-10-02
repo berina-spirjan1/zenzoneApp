@@ -8,17 +8,19 @@ import {
     Text,
     TouchableOpacity,
     SafeAreaView,
-    ScrollView, Dimensions, AsyncStorage
+    ScrollView, Dimensions, AsyncStorage, Alert
 } from "react-native";
 import { Toolbar } from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { Actions } from "react-native-router-flux";
 import {
-    BASE_URL,
-    USER} from "../../configuration/config";
-import { onLogoutHandler } from "../../components/logout/Logout";
+    BASE_URL, LOGOUT,
+    USER
+} from "../../configuration/config";
 import { renderIf } from "../../utilities/CommonMethods";
 import { isIphoneX } from "react-native-iphone-x-helper";
+import store from "../../redux/store";
+import {userLogoutFailed, userLogoutStarted, userLogoutSuccess} from "../../redux/actions";
 
 export default class UserProfile extends Component{
     constructor(props) {
@@ -82,6 +84,44 @@ export default class UserProfile extends Component{
     switchToLogoutPage(){
         Actions.switchToLogoutPage()
     }
+
+
+    onLogoutHandler = async () => {
+
+        let token = await AsyncStorage.getItem('jwt')
+        token = JSON.parse(token)
+
+        fetch(`${LOGOUT}`, {
+            method: 'POST',
+            mode: 'no-cors',
+            cache: 'default',
+            credentials: 'same-origin',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + token
+            },
+        })
+            .then(async res => {
+                try {
+                    store.dispatch(userLogoutStarted());
+
+                    const jsonRes = await res.json();
+
+                    console.log(jsonRes)
+                    if (res.status !== 200) {
+                        store.dispatch(userLogoutFailed());
+                        console.log("greska", res.status)
+                    } else {
+                        await AsyncStorage.clear()
+                        this.switchToLogoutPage()
+                        store.dispatch(userLogoutSuccess());
+                    }
+                } catch (err) {
+                    console.log(err);
+                }
+            })
+    };
 
 
     render() {
@@ -160,7 +200,7 @@ export default class UserProfile extends Component{
                             </View>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.items}
-                                          onPress={onLogoutHandler}>
+                                          onPress={this.onLogoutHandler}>
                             <View style={styles.itemRow}>
                                 <FontAwesome5 name={'sign-out-alt'}
                                               size={20}
