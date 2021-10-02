@@ -50,7 +50,8 @@ export default class SingleActivity extends Component{
         imageUri: '',
         imageExtension: '',
         refresh: false,
-        my_id: ''
+        my_id: '',
+        token: null
     }
 
 
@@ -80,7 +81,9 @@ export default class SingleActivity extends Component{
 
     async showUser(user_id){
         await AsyncStorage.setItem('user_id',JSON.stringify(user_id))
-        this.goToAboutUserWhoCreatedActivity()
+        if(this.state.token!==null){
+            this.goToAboutUserWhoCreatedActivity()
+        }
     }
 
     async componentDidMount() {
@@ -92,6 +95,8 @@ export default class SingleActivity extends Component{
 
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
+
+        this.setState({token: token})
 
         fetch(`${SINGLE_ACTIVITY}/${id}`, {
             method: 'GET',
@@ -264,10 +269,10 @@ export default class SingleActivity extends Component{
                         <View style={styles.activityWrapper}>
                             <View style={styles.likeWrapper}>
                                 <TouchableOpacity onPress={async () => {await this.showUser(this.state.userInfo.id)}}>
-                                    {renderIf(this.state.userInfo.photo_dir!==0,
+                                    {renderIf(this.state.userInfo.photo_dir!==0 && this.state.token!==null,
                                         <Image source={{uri: `${BASE_URL}`+`${this.state.userInfo.photo_dir}`+`${this.state.userInfo.photo_name}`}}
                                                style={styles.likeImage}/>)}
-                                    {renderIf(this.state.userInfo.photo_dir===null,
+                                    {renderIf(this.state.userInfo.photo_dir===null || this.state.token===null,
                                         <Image source={require('../assets/images/user_photo.png')}
                                                style={styles.userWithoutImage}/>)}
                                 </TouchableOpacity>
@@ -275,7 +280,12 @@ export default class SingleActivity extends Component{
                             <View style={styles.activityInfoWrapper}>
                                 <Text style={styles.activityTitle}>{this.state.data.title}</Text>
                                 <Text style={styles.activityDescription}>{this.state.data.description}</Text>
-                                <Text style={styles.username}>{this.state.userInfo.name}</Text>
+                                {renderIf(this.state.token===null,
+                                    <Text style={styles.username}>{this.state.userInfo.name}</Text>
+                                )}
+                                {renderIf(this.state.token!==null,
+                                    <Text style={styles.username}>{this.state.userInfo.first_name}</Text>
+                                )}
                                 <Text style={styles.createdDate}>{ConvertDate(this.state.data.created_at)}</Text>
                             </View>
 
@@ -288,7 +298,7 @@ export default class SingleActivity extends Component{
                                     <Image source={require('../assets/images/user_photo.png')}
                                            style={styles.userProfilePicture}/>
                                 )}
-                                {renderIf(this.state.userData.length!==0,
+                                {renderIf(this.state.token!==null,
                                     <>
                                         <TextInput placeholder={'Create new comment'}
                                                    style={styles.createNewComment}
@@ -316,11 +326,11 @@ export default class SingleActivity extends Component{
                                                     <>
                                                         {renderIf(obj.photo_dir===null,
                                                             <View style={styles.singleComment}>
-                                                                {renderIf(obj.user.photo===null,
+                                                                {renderIf(obj.user.photo===null || this.state.token===null,
                                                                     <Image source={require('../assets/images/user_photo.png')}
                                                                            style={styles.userPhotoComment}/>
                                                                 )}
-                                                                {renderIf(obj.user.photo!==null,
+                                                                {renderIf(obj.user.photo!==null && this.state.token!==null,
                                                                     <Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
                                                                            style={styles.userPhotoComment}/>
                                                                 )}
@@ -336,11 +346,12 @@ export default class SingleActivity extends Component{
                                                         {renderIf(obj.photo_dir!==null,
                                                             <View style={styles.commentWithImage}>
                                                                 <View style={styles.singleCommentWithImage}>
-                                                                    {renderIf(obj.user.photo===null,
+                                                                    {renderIf(this.state.token)}
+                                                                    {renderIf(obj.user.photo===null || this.state.token===null,
                                                                         <Image source={require('../assets/images/user_photo.png')}
                                                                                style={styles.userPhotoComment}/>
                                                                     )}
-                                                                    {renderIf(obj.user.photo!==null,
+                                                                    {renderIf(obj.user.photo!==null && this.state.token!==null,
                                                                         <Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
                                                                                style={styles.userPhotoComment}/>
                                                                     )}
@@ -412,7 +423,7 @@ const styles = StyleSheet.create({
         height: 60,
         width: 60,
         borderRadius: 60,
-        marginTop: -60
+        marginTop: 0
     },
     likeWrapper:{
         position: 'absolute',
