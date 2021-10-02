@@ -30,7 +30,7 @@ export default function LocationPage() {
     }
 
     return (
-        [latitude, longitude]
+        {latitude, longitude}
     );
 }
 
