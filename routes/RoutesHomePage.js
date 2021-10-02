@@ -30,14 +30,17 @@ export default class RoutesHomePage extends Component{
         return(
             <Router>
                 <Stack key={"RoutesHomePage"} hideNavBar={true}>
-                    <Scene key={"homePageActivities"} component={HomePage} title={"Activities"} initial={true}/>
+                    <Stack hideNavBar={true}>
+                        <Scene key={"homePageActivities"} component={HomePage} initial={true}/>
+                        <Scene key={"singleActivity"} component={SingleActivity}/>
+                    </Stack>
 
                     <Scene key={"goToAboutUserWhoCreatedActivity"} component={AboutUserWhoCreatedActivity}/>
                     <Scene key={"seeAll"} component={AllCategories} title={"seeAll"}/>
                     <Scene key={"userProfile"} component={UserProfile} title={"User profile"}/>
                     <Scene key={"sideMenu"} component={SideMenu} title={"sideMenu"}/>
                     <Scene key={"leaderboard2"} component={Leaderboard} title={"leaderboard"}/>
-                    <Scene key={"singleActivity"} component={SingleActivity}/>
+
                     <Scene key={"settings"} component={Settings} title={"settings"}/>
                     <Scene key={"bottom"} component={BottomNavigationBar}/>
                 </Stack>
