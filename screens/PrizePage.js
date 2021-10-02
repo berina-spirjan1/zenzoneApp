@@ -1,34 +1,32 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {
     View,
     StyleSheet,
-    Text, StatusBar
+    Text, StatusBar, AsyncStorage
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 import LottieView from "lottie-react-native";
 import {renderIf} from "../utilities/CommonMethods";
 import {isIphoneX} from "react-native-iphone-x-helper";
 
+const PrizePage = () => {
 
-
-function PrizePage(){
-    return(
+    return (
         <View style={styles.container}>
-            <StatusBar
-                animated={true}
-                backgroundColor="#6285B3"/>
-            {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
+            <StatusBar animated={true}
+                       backgroundColor="#334A6D"/>
+            {renderIf(isIphoneX(), <Toolbar style={{container: {backgroundColor: '#93B4E5', marginTop: 50}}}
                                             centerElement="Surprise"/>)}
-            {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+            {renderIf(!isIphoneX(), <Toolbar style={{container: {backgroundColor: '#93B4E5'}}}
                                              centerElement="Surprise"/>)}
-
             <LottieView
                 style={styles.lottie}
                 source={require("../assets/images/wonPrize.json")}
                 autoPlay={true}
                 loop={true}/>
             <Text style={styles.title}>Congrats!</Text>
-            <Text style={styles.information}>You won a prize. To get it, contact your HR manager and the information about the award itself is a surprise.</Text>
+            <Text style={styles.information}>You won a prize. To get it, contact your HR manager and the information
+                about the award itself is a surprise.</Text>
         </View>
     )
 }
