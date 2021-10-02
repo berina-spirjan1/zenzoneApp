@@ -66,13 +66,12 @@ export const LoginWithLocationForm = () =>{
 
                     console.log(jsonRes)
                     console.log(jsonRes.data.token)
-                    token=jsonRes.data.token
                     if(res.status!==200){
                         store.dispatch(authFailed());
                     }
                     else{
                         if(jsonRes.data.token){
-                            await AsyncStorage.setItem('jwt', JSON.stringify(token))
+                            await AsyncStorage.setItem('jwt', JSON.stringify(jsonRes.data.token))
                         }
                         goToUserInfo();
                         store.dispatch(authSuccess());
@@ -84,41 +83,6 @@ export const LoginWithLocationForm = () =>{
             })
     };
 
-    const onLogoutHandler = async () => {
-
-        console.log("OVO JE TOKEN", token)
-
-        fetch(`${LOGOUT}`, {
-            method: 'POST',
-            mode: 'no-cors',
-            cache: 'default',
-            credentials: 'same-origin',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                'Authorization': 'Bearer ' + token
-            },
-        })
-            .then(async res => {
-                try {
-                    store.dispatch(userLogoutStarted());
-
-                    const jsonRes = await res.json();
-
-                    console.log(jsonRes)
-                    if (res.status !== 200) {
-                        store.dispatch(userLogoutFailed());
-                        console.log("greska", res.status)
-                    } else {
-                        await AsyncStorage.removeItem('jwt')
-                        console.log("Successfully logout")
-                        store.dispatch(userLogoutSuccess());
-                    }
-                } catch (err) {
-                    console.log(err);
-                }
-            })
-    };
 
     return(
         <View>
@@ -135,20 +99,15 @@ export const LoginWithLocationForm = () =>{
                         <Text style={styles.hintText}>E-mail</Text>
                         <TextInput style={styles.inputLabel}
                                    onChangeText={setEmail}>
-                            {/*<FontAwesome5 name={'envelope'}*/}
-                            {/*              size={18}*/}
-                            {/*              color={'#000000'}/>*/}
                         </TextInput>
                         <Text style={styles.hintText}>Password</Text>
                         <TextInput style={styles.inputLabel}
                                    secureTextEntry={true}
                                    onChangeText={setPassword}>
-                            {/*<FontAwesome5 name="lock"*/}
-                            {/*              size={20}*/}
-                            {/*              color={"#000000"}/>*/}
                         </TextInput>
                         <Text style={styles.forgotLoginDetails}>Forgot your login details?
-                            <Text style={styles.helpLogin}> Get help logging in</Text>
+                            <Text style={styles.helpLogin}
+                                  onPress={forgotPassword}> Get help logging in</Text>
                         </Text>
                         <TouchableOpacity style={styles.button}
                                           onPress={onLoginHandler}>

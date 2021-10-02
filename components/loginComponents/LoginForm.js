@@ -12,15 +12,12 @@ import LottieView from "lottie-react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import Icon from "../../assets/icons/Icon";
 import React, { useState } from "react";
-import {LOGIN, LOGOUT} from "../../configuration/config";
+import { LOGIN } from "../../configuration/config";
 import store from "../../redux/store";
 import {
     authFailed,
     authStarted,
     authSuccess,
-    userLogoutFailed,
-    userLogoutStarted,
-    userLogoutSuccess
 } from "../../redux/actions";
 import {Actions} from "react-native-router-flux";
 
@@ -67,55 +64,18 @@ export const LoginForm = () =>{
 
                     console.log(jsonRes)
                     console.log(jsonRes.data.token)
-                    token=jsonRes.data.token
                     if(res.status!==200){
                         store.dispatch(authFailed());
                     }
                     else{
                         if(jsonRes.data.token){
-                            await AsyncStorage.setItem('jwt', JSON.stringify(token))
+                            await AsyncStorage.setItem('jwt', JSON.stringify(jsonRes.data.token))
                         }
                         goToUserInfo();
                         store.dispatch(authSuccess());
                     }
                 }
                 catch (err){
-                    console.log(err);
-                }
-            })
-    };
-
-    const onLogoutHandler = async () => {
-
-        console.log("OVO JE TOKEN", token)
-
-        fetch(`${LOGOUT}`, {
-            method: 'POST',
-            mode: 'no-cors',
-            cache: 'default',
-            credentials: 'same-origin',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                'Authorization': 'Bearer ' + token
-            },
-        })
-            .then(async res => {
-                try {
-                    store.dispatch(userLogoutStarted());
-
-                    const jsonRes = await res.json();
-
-                    console.log(jsonRes)
-                    if (res.status !== 200) {
-                        store.dispatch(userLogoutFailed());
-                        console.log("greska", res.status)
-                    } else {
-                        await AsyncStorage.removeItem('jwt')
-                        console.log("Successfully logout")
-                        store.dispatch(userLogoutSuccess());
-                    }
-                } catch (err) {
                     console.log(err);
                 }
             })
@@ -137,17 +97,11 @@ export const LoginForm = () =>{
                     <Text style={stylesDarkMode.username}>E-mail</Text>
                     <TextInput style={stylesDarkMode.inputUsername}
                                onChangeText={setEmail}>
-                        {/*<FontAwesome5 name="user"*/}
-                        {/*              size={20}*/}
-                        {/*              color={"#000000"}/>*/}
                     </TextInput>
                     <Text style={stylesDarkMode.password}>Password</Text>
                     <TextInput style={stylesDarkMode.inputPassword}
                                secureTextEntry={true}
                                onChangeText={setPassword}>
-                        {/*<FontAwesome5 name="lock"*/}
-                        {/*              size={20}*/}
-                        {/*              color={"#000000"}/>*/}
                     </TextInput>
                 </SafeAreaView>
                 <Text style={stylesDarkMode.forgotLoginDetails}>Forgot your login details?
