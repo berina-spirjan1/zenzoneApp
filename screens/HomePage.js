@@ -24,13 +24,21 @@ import {
     LIKE,
 
 } from "../configuration/config";
-import {Card, CardAction, CardContent} from "react-native-card-view";
+import {
+    Card,
+    CardAction,
+    CardContent
+} from "react-native-card-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import {renderIf} from "../utilities/CommonMethods";
+import { renderIf } from "../utilities/CommonMethods";
 import Loader from "../utilities/Loader";
 import store from "../redux/store";
-import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../redux/actions";
-import {isIphoneX} from "react-native-iphone-x-helper";
+import {
+    userRegistrationFailed,
+    userRegistrationStarted,
+    userRegistrationSuccess
+} from "../redux/actions";
+import { isIphoneX } from "react-native-iphone-x-helper";
 
 
 export default class HomePage extends Component{
@@ -122,27 +130,31 @@ export default class HomePage extends Component{
     }
 
 
-    componentDidMount(page=1) {
+    async componentDidMount(page = 1) {
+
+        let tokenHelper = await AsyncStorage.getItem('jwt')
+        tokenHelper = JSON.parse(tokenHelper)
 
         fetch(`${ACTIVITY}?page=${page}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
+                'Authorization': 'Bearer ' + tokenHelper
             }
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                    this.setState({
-                        data: [...this.state.data, ...responseJson.data.data],
-                        isLoading: false,
-                        refresh: false,
-                    })
-                    console.log(responseJson)
-                    if(responseJson.data.data.length!==0){
-                        page++;
-                        return this.componentDidMount(page)
-                    }
+                this.setState({
+                    data: [...this.state.data, ...responseJson.data.data],
+                    isLoading: false,
+                    refresh: false,
+                })
+                console.log(responseJson)
+                if (responseJson.data.data.length !== 0) {
+                    page++;
+                    return this.componentDidMount(page)
+                }
             })
             .catch((error) => {
                 console.error(error);
@@ -502,7 +514,7 @@ export default class HomePage extends Component{
                                                         <>
                                                                 <FontAwesome5 name={'thumbs-up'}
                                                                               size={25}
-                                                                              color={'black'}
+                                                                              color={'green'}
                                                                               style={styleLightMode.likeIcon}
                                                                               onPress={async () => {await this.handleRemoveLike(obj.id)}}/>
                                                                 <FontAwesome5 name={'thumbs-down'}
