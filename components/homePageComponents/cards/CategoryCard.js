@@ -19,28 +19,27 @@ export default class CategoryCard extends Component{
         data: ''
     }
 
-
-    componentDidMount = () => {
-
-        fetch(`${CATEGORY}`, {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            }
-        })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log(responseJson);
-                this.setState({
-                    data: responseJson
-                })
-                console.log(this.state.data)
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }
+    // componentDidMount = () => {
+    //
+    //     fetch(`${CATEGORY}`, {
+    //         method: 'GET',
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "Accept": "application/json"
+    //         }
+    //     })
+    //         .then((response) => response.json())
+    //         .then((responseJson) => {
+    //             // console.log(responseJson);
+    //             this.setState({
+    //                 data: responseJson
+    //             })
+    //             console.log(this.state.data.data)
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         });
+    // }
 
     render() {
         return(
