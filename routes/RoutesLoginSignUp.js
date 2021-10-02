@@ -15,6 +15,8 @@ import RoutesProfile from "./RoutesProfile";
 import {LoginWithLocationForm} from "../components/loginComponents/LoginWithLocationForm";
 import {SignUpWithLocationForm} from "../components/signUpComponents/SignUpWithLocationForm";
 import {onLogoutHandler} from "../components/logout/Logout";
+import LogoutSplashScreen from "../screens/LogoutSplashScreen";
+import SingleActivity from "../screens/SingleActivity";
 
 
 export default class RoutesLoginSignUp extends Component {
@@ -22,16 +24,19 @@ export default class RoutesLoginSignUp extends Component {
         return(
             <Router>
                 <Stack key="RoutesLoginSignUp" hideNavBar={true}>
-                    <Scene key="loginForm" component={LoginForm} title="login" />
-                    <Scene key={"switchLoginToUser"} component={RoutesProfile} title={"userProfile"}/>
+
+                    <Scene key={"login"} component={Login} title={"Login"} />
+
+
+                    <Scene key={"switchLoginToUser"} component={RoutesProfile} title={"userProfile"} initial={true}/>
                     <Scene key="signup" component={SignUp} title="Register" />
                     <Scene key="signupForm" component={SignUpForm} title={"SignUpForm"}/>
                     <Scene key="forgotPassword" component={ForgotPassword} title={"forgotPassword"}/>
                     <Scene key={"checkEmail"} component={CheckEmail} title={"checkEmail"}/>
-                    <Scene key={"login"} component={Login} title={"Login"}/>
                     <Scene key={"goToUserInfo"} component={RoutesProfile}/>
-                    <Scene key={"loginWithLocationForm"} component={LoginWithLocationForm} initial={true}/>
+                    <Scene key={"loginWithLocationForm"} component={LoginWithLocationForm} />
                     <Scene key={"signUpWithLocationForm"} component={SignUpWithLocationForm}/>
+                    <Scene key="loginForm" component={LoginForm} title="login" initial={true}  />
                 </Stack>
             </Router>
         )
