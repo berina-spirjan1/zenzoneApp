@@ -39,6 +39,7 @@ import {
     userRegistrationSuccess
 } from "../redux/actions";
 import { isIphoneX } from "react-native-iphone-x-helper";
+import SingleActivity from "./SingleActivity";
 
 
 export default class HomePage extends Component{
@@ -57,7 +58,8 @@ export default class HomePage extends Component{
         isActiveDislike: false,
         refresh: true,
         currentPage: 0,
-        lastPage: 1
+        lastPage: 1,
+        token: null
     }
 
     //added navigations to another component or pages
@@ -135,6 +137,8 @@ export default class HomePage extends Component{
         let tokenHelper = await AsyncStorage.getItem('jwt')
         tokenHelper = JSON.parse(tokenHelper)
 
+        this.setState({token: tokenHelper})
+
         fetch(`${ACTIVITY}?page=${page}`, {
             method: 'GET',
             headers: {
@@ -150,7 +154,6 @@ export default class HomePage extends Component{
                     isLoading: false,
                     refresh: false,
                 })
-                console.log(responseJson)
                 if (responseJson.data.data.length !== 0) {
                     page++;
                     return this.componentDidMount(page)
@@ -159,7 +162,6 @@ export default class HomePage extends Component{
             .catch((error) => {
                 console.error(error);
             });
-
     }
 
     async handleLike(id) {
@@ -273,7 +275,6 @@ export default class HomePage extends Component{
 
                     const jsonRes = await res.json();
 
-                    console.log(jsonRes)
                     if (res.status !== 200) {
                         store.dispatch(userRegistrationFailed());
                     }
@@ -331,13 +332,18 @@ export default class HomePage extends Component{
             })
     }
 
-    singleActivity(){
+    singleActivity() {
+        // Actions.push("singleActivity",SingleActivity)
         Actions.singleActivity()
+        console.log(Actions.singleActivity())
+
     }
 
     async showMore(id) {
+        console.log("IN SHOW MORE")
         await AsyncStorage.setItem('id', JSON.stringify(id))
-        this.singleActivity()
+        Actions.push("singleActivity",SingleActivity)
+        console.log("SAMO PROSAO")
     }
 
     async isLogin(){
@@ -470,21 +476,26 @@ export default class HomePage extends Component{
                                                       }
                                                   }}>
                                                 <View style={styleLightMode.header}>
-                                                    {renderIf(obj.user.photo_dir===null, <Image source={require('../assets/images/user_photo.png')}
-                                                                                                         style={styleLightMode.profilePicture}/>)}
-                                                    {renderIf(obj.user.photo_dir!==null,<Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
-                                                           style={styleLightMode.profilePicture}/>)}
-                                                    {renderIf(!this.isLogin,
+                                                    {renderIf(this.state.token!==null,
+                                                        <>
+                                                            {renderIf(obj.user.photo_dir===null, <Image source={require('../assets/images/user_photo.png')}
+                                                                                                        style={styleLightMode.profilePicture}/>)}
+                                                            {renderIf(obj.user.photo_dir!==null,<Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
+                                                                                                       style={styleLightMode.profilePicture}/>)}
+                                                        </>
+                                                    )}
+
+                                                    {renderIf(this.state.token===null,
                                                         <Image source={require('../assets/images/user_photo.png')}
                                                                style={styleLightMode.profilePicture}/>
                                                     )}
-                                                    {renderIf(this.isLogin(),
+                                                    {renderIf(this.state.token!==null,
+                                                        <Text style={styleLightMode.username}
+                                                              numberOfLines={1}>{obj.user.first_name}</Text>
+                                                    )}
+                                                    {renderIf(this.state.token===null,
                                                         <Text style={styleLightMode.username}
                                                               numberOfLines={1}>{obj.user.name}</Text>
-                                                    )}
-                                                    {renderIf(!this.isLogin(),
-                                                        <Text style={styleLightMode.username}
-                                                              numberOfLines={1}>anonymous user</Text>
                                                     )}
                                                 </View>
                                                 <Text style={styleLightMode.activityTitle}
