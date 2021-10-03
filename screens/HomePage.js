@@ -40,7 +40,6 @@ import {
 import { isIphoneX } from "react-native-iphone-x-helper";
 import SingleActivity from "./SingleActivity";
 
-
 export default class HomePage extends Component{
     constructor(props) {
         super();
@@ -333,10 +332,7 @@ export default class HomePage extends Component{
     }
 
     singleActivity() {
-        // Actions.push("singleActivity",SingleActivity)
         Actions.singleActivity()
-        console.log(Actions.singleActivity())
-
     }
 
     async showMore(id) {
@@ -666,22 +662,21 @@ const styleLightMode = StyleSheet.create({
         fontFamily:'Roboto_400Regular'
     },
     header:{
-        marginLeft: -110,
-        marginTop:10,
+        justifyContent:'center',
         flexDirection: 'row'
     },
     profilePicture:{
         width: 50,
         height: 50,
         borderRadius:70,
-        justifyContent: 'flex-start'
+        justifyContent: 'flex-end'
     },
     username:{
         marginLeft:30,
         fontWeight: 'bold',
         fontStyle: 'italic',
         color: '#616C75',
-        marginTop: 20
+        marginTop: 15
     },
     activityTitle:{
         marginLeft: 25,
