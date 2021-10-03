@@ -7,8 +7,14 @@ import LottieView from 'lottie-react-native';
 import {Toolbar} from "react-native-material-ui";
 import {renderIf} from "../../utilities/CommonMethods";
 import {isIphoneX} from "react-native-iphone-x-helper";
+import {Actions} from "react-native-router-flux";
+
+function challengeDetails(){
+    Actions.challengeDetails()
+}
 
 function Congratulations(){
+
         return(
             <>
                 <StatusBar
@@ -26,10 +32,10 @@ function Congratulations(){
                         autoPlay={true}
                         loop={true}/>
                     <Text style={styles.informationBox}>Thank you for participating in the daily challenge. You will soon receive feedback from the administration and the possibility of winning a badge.</Text>
-                {/*<TouchableOpacity style={styles.button}*/}
-                {/*                  onPress={this.goHome}>*/}
-                {/*    <Text style={styles.buttonText}>GO BACK</Text>*/}
-                {/*</TouchableOpacity>*/}
+                <TouchableOpacity style={styles.button}
+                                  onPress={challengeDetails}>
+                    <Text style={styles.buttonText}>GO BACK</Text>
+                </TouchableOpacity>
                 </View>
             </>
 
@@ -47,7 +53,7 @@ const styles = StyleSheet.create({
         fontFamily: 'Roboto_700Bold',
         fontSize: 20,
         padding: 20,
-        marginTop: 300
+        marginTop: 250
     },
     lottie:{
         flex:1,
@@ -67,11 +73,11 @@ const styles = StyleSheet.create({
     },
     button:{
         backgroundColor: '#5a28ff',
-        height: 50,
+        height: 40,
         width: 100,
         borderRadius: 25,
-        marginLeft: 250,
-        padding:15
+        marginLeft: 220,
+        padding:10
     },
     buttonText:{
         textAlign: 'center',
