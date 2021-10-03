@@ -11,7 +11,7 @@ import {
     Text,
     ImageBackground,
     TouchableOpacity,
-    TextInput, Platform, RefreshControl
+    TextInput, Platform, RefreshControl, Alert
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 import {
@@ -189,7 +189,6 @@ export default class SingleActivity extends Component{
     }
     async deleteComment(comment_id){
 
-        console.log("HERE I AM")
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
 
@@ -216,6 +215,7 @@ export default class SingleActivity extends Component{
                     if (res.status !== 200) {
                         store.dispatch(userRegistrationFailed());
                     } else {
+                        Alert.alert('Successfully deleted comment')
                         store.dispatch(userRegistrationSuccess());
                     }
                 } catch (err) {
@@ -320,22 +320,26 @@ export default class SingleActivity extends Component{
                                                 return (
                                                     <>
                                                         {renderIf(obj.photo_dir===null,
-                                                            <View style={styles.singleComment}>
-                                                                {renderIf(obj.user.photo===null || this.state.token===null,
-                                                                    <Image source={require('../assets/images/user_photo.png')}
-                                                                           style={styles.userPhotoComment}/>
-                                                                )}
-                                                                {renderIf(obj.user.photo!==null && this.state.token!==null,
-                                                                    <Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
-                                                                           style={styles.userPhotoComment}/>
-                                                                )}
-                                                                <Text style={styles.commentDescription}>{obj.description}</Text>
-                                                                <TouchableOpacity style={styles.deleteButtonInSingle}
-                                                                                  onPress={async () => {await this.deleteComment(obj.id)}}>
-                                                                    <FontAwesome5 name={'trash-alt'}
-                                                                                  color={'#616C75'}
-                                                                                  size={15}/>
-                                                                </TouchableOpacity>
+                                                            <View style={styles.singleCommentContainer}>
+                                                                <View style={styles.singleComment}>
+                                                                    {renderIf(obj.user.photo===null || this.state.token===null,
+                                                                        <Image source={require('../assets/images/user_photo.png')}
+                                                                               style={styles.userPhotoComment}/>
+                                                                    )}
+                                                                    {renderIf(obj.user.photo!==null && this.state.token!==null,
+                                                                        <Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
+                                                                               style={styles.userPhotoComment}/>
+                                                                    )}
+                                                                    <Text style={styles.commentDescription}>{obj.description}</Text>
+
+                                                                </View>
+                                                                    <TouchableOpacity style={styles.deleteButtonInSingle}
+                                                                                      onPress={this.deleteComment(obj.id)}>
+                                                                        <FontAwesome5 name={'trash-alt'}
+                                                                                      color={'#616C75'}
+                                                                                      size={15}
+                                                                                      style={styles.iconDelete}/>
+                                                                    </TouchableOpacity>
                                                             </View>
                                                         )}
                                                         {renderIf(obj.photo_dir!==null,
@@ -524,8 +528,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         fontWeight: 'bold'
     },
-    singleComment:{
-        flexDirection: 'row',
+    singleCommentContainer:{
         backgroundColor:  'rgba(255, 255, 255, 0.2)',
         borderRadius: 25,
         marginTop: 20,
@@ -533,6 +536,9 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         marginLeft: 20,
         marginRight: 20
+    },
+    singleComment:{
+        flexDirection: 'row',
     },
     userPhotoComment:{
         height: 50,
@@ -586,6 +592,10 @@ const styles = StyleSheet.create({
         padding: 5,
         paddingLeft: 8,
         paddingTop: 7,
-        marginBottom: 10
+        marginBottom: 10,
+        left: 250
+    },
+    iconDelete:{
+        justifyContent: 'center'
     }
 })
