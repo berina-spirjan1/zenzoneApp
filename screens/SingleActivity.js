@@ -140,6 +140,10 @@ export default class SingleActivity extends Component{
             });
     }
 
+    singleActivity(){
+        Actions.singleActivity()
+    }
+
     async postComment(activity_id){
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
@@ -180,6 +184,8 @@ export default class SingleActivity extends Component{
                     if (res.status !== 200) {
                         store.dispatch(userRegistrationFailed());
                     } else {
+                        // Alert.alert('Successfully posted comment')
+                        this.singleActivity()
                         store.dispatch(userRegistrationSuccess());
                     }
                 } catch (err) {
@@ -187,42 +193,51 @@ export default class SingleActivity extends Component{
                 }
             })
     }
-    async deleteComment(comment_id){
+    deleteFunction(comment_id){
 
-        let token = await AsyncStorage.getItem('jwt')
-        token = JSON.parse(token)
+        (async () => {
+            await this.deleteComment(comment_id)
+        })();
+    }
+
+    async deleteComment(comment_id){
 
         const commentObject = {
             id: comment_id
         }
+        console.log(commentObject)
+         let token = await AsyncStorage.getItem('jwt')
+         token = JSON.parse(token)
 
-        fetch(`${COMMENT}/${comment_id}`,{
-            method: 'DELETE',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                'Authorization': 'Bearer ' + token
-            },
-            body: commentObject
-        })
-            .then(async res => {
-                try {
-                    store.dispatch(userRegistrationStarted());
+         console.log("USAO U FUNKCIJU")
 
-                    const jsonRes = await res.json();
+         fetch(`${COMMENT}/${comment_id}`, {
+             method: 'DELETE',
+             headers: {
+                 "Content-Type": "application/json",
+                 "Accept": "application/json",
+                 'Authorization': 'Bearer ' + token
+             },
+             body: JSON.stringify(commentObject)
+         })
+             .then(async res => {
+                 try {
+                     store.dispatch(userRegistrationStarted());
 
-                    console.log(jsonRes)
-                    if (res.status !== 200) {
-                        store.dispatch(userRegistrationFailed());
-                    } else {
-                        Alert.alert('Successfully deleted comment')
-                        store.dispatch(userRegistrationSuccess());
-                    }
-                } catch (err) {
-                    console.log(err);
-                }
-            })
-    }
+                     const jsonRes = await res.json();
+
+                     console.log(jsonRes)
+                     if (res.status !== 200) {
+                         store.dispatch(userRegistrationFailed());
+                     } else {
+                         Alert.alert('Successfully deleted comment')
+                         store.dispatch(userRegistrationSuccess());
+                     }
+                 } catch (err) {
+                     console.log(err);
+                 }
+             })
+     }
 
 
     homePageActivities(){
@@ -299,9 +314,9 @@ export default class SingleActivity extends Component{
                                                    style={styles.createNewComment}
                                                    onChangeText={text => this.setState({descriptionForComment: text })}/>
                                         <View style={{flexDirection: 'row'}}>
-                                            <TouchableOpacity style={styles.postButton}>
-                                                <Text style={styles.postButtonText}
-                                                      onPress={async()=>{await this.postComment(this.state.data.id)}}>POST</Text>
+                                            <TouchableOpacity style={styles.postButton}
+                                                              onPress={async()=>{await this.postComment(this.state.data.id)}}>
+                                                <Text style={styles.postButtonText}>POST</Text>
                                             </TouchableOpacity>
                                             <TouchableOpacity style={styles.cameraButton}
                                                               onPress={this.pickImage}>
@@ -314,13 +329,13 @@ export default class SingleActivity extends Component{
                                 )}
                                 <View style={styles.listOfComments}>
                                     <Text style={styles.allComments}>ALL COMMENTS</Text>
-                                    {renderIf(this.state.commentArray.length,
+                                    {renderIf(this.state.commentArray.length!==0,
                                         <>
                                             {this.state.commentArray.map(function(obj,i) {
                                                 return (
                                                     <>
                                                         {renderIf(obj.photo_dir===null,
-                                                            <View style={styles.singleCommentContainer}>
+                                                            <TouchableOpacity style={styles.singleCommentContainer}>
                                                                 <View style={styles.singleComment}>
                                                                     {renderIf(obj.user.photo===null || this.state.token===null,
                                                                         <Image source={require('../assets/images/user_photo.png')}
@@ -331,16 +346,19 @@ export default class SingleActivity extends Component{
                                                                                style={styles.userPhotoComment}/>
                                                                     )}
                                                                     <Text style={styles.commentDescription}>{obj.description}</Text>
-
                                                                 </View>
+                                                                {renderIf(this.state.userData.id===obj.user.id,
                                                                     <TouchableOpacity style={styles.deleteButtonInSingle}
-                                                                                      onPress={this.deleteComment(obj.id)}>
+                                                                                      >
                                                                         <FontAwesome5 name={'trash-alt'}
                                                                                       color={'#616C75'}
                                                                                       size={15}
+                                                                                      onPress={async () => {await this.deleteComment(obj.id)}}
                                                                                       style={styles.iconDelete}/>
                                                                     </TouchableOpacity>
-                                                            </View>
+                                                                )}
+
+                                                            </TouchableOpacity>
                                                         )}
                                                         {renderIf(obj.photo_dir!==null,
                                                             <View style={styles.commentWithImage}>
@@ -374,7 +392,6 @@ export default class SingleActivity extends Component{
                                                                                       size={15}/>
                                                                     </TouchableOpacity>
                                                                 )}
-
                                                             </View>
                                                         )}
                                                     </>
@@ -422,7 +439,7 @@ const styles = StyleSheet.create({
         height: 60,
         width: 60,
         borderRadius: 60,
-        marginTop: 0
+        marginTop: -60
     },
     likeWrapper:{
         position: 'absolute',
