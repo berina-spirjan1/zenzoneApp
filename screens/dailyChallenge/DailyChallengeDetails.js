@@ -7,19 +7,32 @@ import {
     StyleSheet,
     Text,
     View,
-    TouchableOpacity, RefreshControl, ImageBackground, TextInput, AsyncStorage
+    TouchableOpacity,
+    RefreshControl,
+    ImageBackground,
+    TextInput,
+    AsyncStorage
 } from "react-native";
 import {SafeAreaView} from "react-navigation";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {Actions} from "react-native-router-flux";
-import {BASE_URL, COMMENT, DAILY_CHALLENGE, USER} from "../../configuration/config";
-import {renderIf} from "../../utilities/CommonMethods";
-import DailyChallengeCounter from "./DailyChallengeCounter";
-import {isIphoneX} from "react-native-iphone-x-helper";
-import {Toolbar} from "react-native-material-ui";
+import {
+    BASE_URL,
+    COMMENT,
+    DAILY_CHALLENGE,
+    USER
+} from "../../configuration/config";
+import { renderIf } from "../../utilities/CommonMethods";
+import { isIphoneX } from "react-native-iphone-x-helper";
+import { Toolbar } from "react-native-material-ui";
 import ConvertDate from "../../utilities/ConvertDate";
 import store from "../../redux/store";
-import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../../redux/actions";
+import {
+    userRegistrationFailed,
+    userRegistrationStarted,
+    userRegistrationSuccess
+} from "../../redux/actions";
+import DailyChallengeCounter from "./DailyChallengeCounter";
 
 export default class DailyChallengeDetails extends Component{
     constructor(props) {
@@ -29,7 +42,7 @@ export default class DailyChallengeDetails extends Component{
     state={
         data:[],
         descriptionForComment: '',
-        image: '',
+        image: null,
         imageUri: '',
         imageExtension: '',
         userData: [],
@@ -48,14 +61,19 @@ export default class DailyChallengeDetails extends Component{
 
 
         fetch(`${DAILY_CHALLENGE}`, {
-            method: 'GET'
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
         })
             .then((response) => response.json())
             .then((responseJson) => {
                 console.log(responseJson);
                 this.setState({
-                    data: responseJson
+                    data: responseJson.data[0]
                 })
+                console.log(responseJson.data[0])
             })
             .catch((error) => {
                 console.error(error);
@@ -82,6 +100,10 @@ export default class DailyChallengeDetails extends Component{
 
     }
 
+    congratulations(){
+        Actions.congratulations()
+    }
+
     waitingForChallenge(){
         Actions.waitingForChallenge()
     }
@@ -91,24 +113,19 @@ export default class DailyChallengeDetails extends Component{
         token = JSON.parse(token)
         console.log(token)
 
-        const imageType = this.state.image.type
-        const extension = this.state.imageExtension
-
         const comment = new FormData();
         comment.append('activity_id', activity_id);
         comment.append('description', this.state.descriptionForComment);
-        // if(this.state.image!==''){
-        //     comment.append('image',{
-        //         name: `${imageType}.${extension}`,
-        //         type:  `${imageType}/${extension}`,
-        //         uri: this.state.imageUri
-        //     });
-        // }
-        comment.append('image',{
-            name: `${imageType}.${extension}`,
-            type:  `${imageType}/${extension}`,
-            uri: this.state.imageUri
-        });
+        if(this.state.image!=null){
+            const imageType = this.state.image.type
+            const extension = this.state.imageExtension
+
+            comment.append('image',{
+                name: `${imageType}.${extension}`,
+                type:  `${imageType}/${extension}`,
+                uri: this.state.imageUri
+            });
+        }
 
         console.log(comment)
 
@@ -131,6 +148,7 @@ export default class DailyChallengeDetails extends Component{
                     if (res.status !== 200) {
                         store.dispatch(userRegistrationFailed());
                     } else {
+                        this.congratulations();
                         store.dispatch(userRegistrationSuccess());
                     }
                 } catch (err) {
@@ -182,19 +200,17 @@ export default class DailyChallengeDetails extends Component{
         const screenHeight = Dimensions.get('window').height
 
         return (
-            <>
-                <View style={styles.container}>
+            <View style={styles.container}>
+                {renderIf(this.state.data.length!==0,
+
+                <>
                     <StatusBar
                         animated={true}
                         backgroundColor="#6285B3"/>
                     {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
-                                                    leftElement="arrow-back"
-                                                    centerElement={this.state.data.title}
-                                                    onLeftElementPress={this.homePageActivities}/>)}
+                                                    centerElement={this.state.data.title}/>)}
                     {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                                                     leftElement="arrow-back"
-                                                     centerElement={this.state.data.title}
-                                                     onLeftElementPress={this.homePageActivities}/> )}
+                                                     centerElement={this.state.data.title}/> )}
                     <SafeAreaView style={styles.safeArea}
                                   style={{height: screenHeight}}>
                         <ScrollView vertical={true}
@@ -208,14 +224,10 @@ export default class DailyChallengeDetails extends Component{
                                                  style={styles.activityImage}/>
                             <View style={styles.activityWrapper}>
                                 <View style={styles.likeWrapper}>
-                                    <TouchableOpacity onPress={async () => {await this.showUser(this.state.userInfo.id)}}>
-                                        {renderIf(this.state.userInfo.photo_dir!==0,
-                                            <Image source={{uri: `${BASE_URL}`+`${this.state.userInfo.photo_dir}`+`${this.state.userInfo.photo_name}`}}
-                                                   style={styles.likeImage}/>)}
-                                        {renderIf(this.state.userInfo.photo_dir===null,
+                                    <View>
                                             <Image source={require('../../assets/images/user_photo.png')}
-                                                   style={styles.userWithoutImage}/>)}
-                                    </TouchableOpacity>
+                                                   style={styles.userWithoutImage}/>
+                                    </View>
                                 </View>
                                 <View style={styles.activityInfoWrapper}>
                                     <Text style={styles.activityTitle}>{this.state.data.title}</Text>
@@ -321,11 +333,12 @@ export default class DailyChallengeDetails extends Component{
                             </View>
                         </ScrollView>
                     </SafeAreaView>
-                </View>
-                {/*{renderIf(!this.state.data.length,*/}
-                {/*    <DailyChallengeCounter/>*/}
-                {/*    )}*/}
-            </>
+                </>
+                )}
+                {renderIf(!this.state.data.length===0,
+                    <DailyChallengeCounter/>
+                    )}
+            </View>
         )
     }
 }
@@ -333,59 +346,18 @@ export default class DailyChallengeDetails extends Component{
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: "#CBDBF2",
-        fontWeight: "bold"
-    },
-    title:{
-        fontSize:27,
-        textTransform: "uppercase",
-        textAlign: "center",
-        justifyContent: "center",
-        marginTop:20,
-        marginBottom:20,
-        fontFamily: 'Roboto_700Bold_Italic'
-    },
-    image:{
-        width:360,
-        height:340
-    },
-    safeArea:{
-        flex: 1,
-        paddingTop: StatusBar.currentHeight,
-        paddingVertical: 20
-    },
-    text:{
-        fontSize:20,
-        shadowColor: '#727272',
-        elevation: 5,
-        shadowOffset: {width: 20, height: 2},
-        shadowOpacity: 1,
-        shadowRadius: 10,
-        textAlign:"justify",
-        padding: 10
-    },
-    button:{
-        backgroundColor: "#384674",
-        height: 50,
-        width: 50,
-        borderRadius: 60,
-        padding: 15,
-        marginLeft: 270,
-        marginBottom: 100
-    },
-    scrollView:{
-        alignSelf: 'stretch',
-        marginTop: 0,
-        marginBottom:0,
-        padding:10
-    },
-    buttonIcon:{
-        textAlign: 'center',
-        justifyContent: 'center'
+        backgroundColor: '#CBDBF2',
+        flex: 1
     },
     activityImage:{
         height: Dimensions.get('window').height * 0.6,
         width: 380
+    },
+    safeArea:{
+
+    },
+    scrollView:{
+        alignSelf: 'stretch',
     },
     activityWrapper:{
         backgroundColor: '#93B4E5',
@@ -402,7 +374,7 @@ const styles = StyleSheet.create({
         height: 60,
         width: 60,
         borderRadius: 60,
-        marginTop: -60
+        marginTop: 0
     },
     likeWrapper:{
         position: 'absolute',
@@ -508,8 +480,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         fontWeight: 'bold'
     },
-    singleComment:{
-        flexDirection: 'row',
+    singleCommentContainer:{
         backgroundColor:  'rgba(255, 255, 255, 0.2)',
         borderRadius: 25,
         marginTop: 20,
@@ -517,6 +488,9 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         marginLeft: 20,
         marginRight: 20
+    },
+    singleComment:{
+        flexDirection: 'row',
     },
     userPhotoComment:{
         height: 50,
@@ -570,6 +544,10 @@ const styles = StyleSheet.create({
         padding: 5,
         paddingLeft: 8,
         paddingTop: 7,
-        marginBottom: 10
+        marginBottom: 10,
+        left: 250
+    },
+    iconDelete:{
+        justifyContent: 'center'
     }
 })
