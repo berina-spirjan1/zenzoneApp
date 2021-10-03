@@ -10,7 +10,6 @@ import {
     Image,
     TouchableOpacity,
     AsyncStorage,
-    TouchableHighlight,
     RefreshControl, Alert
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
@@ -59,7 +58,8 @@ export default class HomePage extends Component{
         refresh: true,
         currentPage: 0,
         lastPage: 1,
-        token: null
+        token: null,
+        isActiveCategory: false
     }
 
     //added navigations to another component or pages
@@ -84,7 +84,7 @@ export default class HomePage extends Component{
     }
 
     updateSearch = (searchText) => {
-        this.setState({ searchText });
+        this.setState({ searchText: searchText });
         fetch(`${ACTIVITY}?searchKey=${this.state.searchText}`, {
             method: 'GET',
             headers: {
@@ -342,7 +342,8 @@ export default class HomePage extends Component{
     async showMore(id) {
         console.log("IN SHOW MORE")
         await AsyncStorage.setItem('id', JSON.stringify(id))
-        Actions.push("singleActivity",SingleActivity)
+        Actions.push('singleActivity',SingleActivity)
+        this.singleActivity()
         console.log("SAMO PROSAO")
     }
 
@@ -363,7 +364,8 @@ export default class HomePage extends Component{
             .then((response) => response.json())
             .then((responseJson) => {
                 this.setState({
-                    data: responseJson.data.data
+                    data: responseJson.data.data,
+                    isActiveCategory: true
                 })
             })
             .catch((error) => {
@@ -458,102 +460,102 @@ export default class HomePage extends Component{
                                     {this.state.data.map(function(obj,i) {
                                         return (
                                             <View style={styleLightMode.activityCard}>
-                                            <Card style={styleLightMode.card}
-                                                  styles={{
-                                                      card: {
-                                                          backgroundColor: '#93B4E5',
-                                                          borderRadius: 30,
-                                                          shadowColor: "#000000",
-                                                          shadowOffset: {
-                                                              width: 0,
-                                                              height: 8,
-                                                          },
-                                                          shadowOpacity: 0.44,
-                                                          shadowRadius: 10.84,
-                                                          elevation: 16,
-                                                          alignItems: 'center',
-                                                          justifyContent: 'center'
-                                                      }
-                                                  }}>
-                                                <View style={styleLightMode.header}>
-                                                    {renderIf(this.state.token!==null,
-                                                        <>
-                                                            {renderIf(obj.user.photo_dir===null, <Image source={require('../assets/images/user_photo.png')}
-                                                                                                        style={styleLightMode.profilePicture}/>)}
-                                                            {renderIf(obj.user.photo_dir!==null,<Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
-                                                                                                       style={styleLightMode.profilePicture}/>)}
-                                                        </>
-                                                    )}
+                                                <Card style={styleLightMode.card}
+                                                      styles={{
+                                                          card: {
+                                                              backgroundColor: '#93B4E5',
+                                                              borderRadius: 30,
+                                                              shadowColor: "#000000",
+                                                              shadowOffset: {
+                                                                  width: 0,
+                                                                  height: 8,
+                                                              },
+                                                              shadowOpacity: 0.44,
+                                                              shadowRadius: 10.84,
+                                                              elevation: 16,
+                                                              alignItems: 'center',
+                                                              justifyContent: 'center'
+                                                          }
+                                                      }}>
+                                                    <View style={styleLightMode.header}>
+                                                        {renderIf(this.state.token!==null,
+                                                            <>
+                                                                {renderIf(obj.user.photo_dir===null, <Image source={require('../assets/images/user_photo.png')}
+                                                                                                            style={styleLightMode.profilePicture}/>)}
+                                                                {renderIf(obj.user.photo_dir!==null,<Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
+                                                                                                           style={styleLightMode.profilePicture}/>)}
+                                                            </>
+                                                        )}
 
-                                                    {renderIf(this.state.token===null,
-                                                        <Image source={require('../assets/images/user_photo.png')}
-                                                               style={styleLightMode.profilePicture}/>
-                                                    )}
-                                                    {renderIf(this.state.token!==null,
-                                                        <Text style={styleLightMode.username}
-                                                              numberOfLines={1}>{obj.user.first_name}</Text>
-                                                    )}
-                                                    {renderIf(this.state.token===null,
-                                                        <Text style={styleLightMode.username}
-                                                              numberOfLines={1}>{obj.user.name}</Text>
-                                                    )}
-                                                </View>
-                                                <Text style={styleLightMode.activityTitle}
-                                                      numberOfLines={3}>{"\n"}{obj.title}</Text>
-                                                <View>
-                                                    {renderIf(obj.photo_dir===null, <Image source={require('../assets/images/photoForPosts.png')} style={styleLightMode.activityImage}/>)}
-                                                    {renderIf(obj.photo_dir!==null,<Image source={{uri: `${BASE_URL}`+`${obj.photo_dir}`+`${obj.photo_name}`}}
-                                                                                          style={styleLightMode.activityImage}/>)}
+                                                        {renderIf(this.state.token===null,
+                                                            <Image source={require('../assets/images/user_photo.png')}
+                                                                   style={styleLightMode.profilePicture}/>
+                                                        )}
+                                                        {renderIf(this.state.token!==null,
+                                                            <Text style={styleLightMode.username}
+                                                                  numberOfLines={1}>{obj.user.first_name}</Text>
+                                                        )}
+                                                        {renderIf(this.state.token===null,
+                                                            <Text style={styleLightMode.username}
+                                                                  numberOfLines={1}>{obj.user.name}</Text>
+                                                        )}
+                                                    </View>
+                                                    <Text style={styleLightMode.activityTitle}
+                                                          numberOfLines={3}>{"\n"}{obj.title}</Text>
+                                                    <View>
+                                                        {renderIf(obj.photo_dir===null, <Image source={require('../assets/images/photoForPosts.png')} style={styleLightMode.activityImage}/>)}
+                                                        {renderIf(obj.photo_dir!==null,<Image source={{uri: `${BASE_URL}`+`${obj.photo_dir}`+`${obj.photo_name}`}}
+                                                                                              style={styleLightMode.activityImage}/>)}
 
-                                                </View>
-                                                <View style={{flexDirection: 'row'}}>
-                                                    {renderIf(obj.liked===null,
-                                                        <>
-                                                                <FontAwesome5 name={'thumbs-up'}
-                                                                              size={25}
-                                                                              color={'green'}
-                                                                              style={styleLightMode.likeIcon}
-                                                                              onPress={async () => {await this.handleRemoveLike(obj.id)}}/>
-                                                                <FontAwesome5 name={'thumbs-down'}
-                                                                              size={25}
-                                                                              color={'red'}
-                                                                              style={styleLightMode.dislikeIcon}
-                                                                              onPress={async () => {await this.handleRemoveDislike(obj.id)}}/>
-                                                        </>
-                                                    )}
-                                                    {renderIf(obj.liked===1,
-                                                        <>
-                                                                <FontAwesome5 name={'thumbs-up'}
-                                                                              size={25}
-                                                                              color={'green'}
-                                                                              style={styleLightMode.likeIcon}
-                                                                              onPress={async () => {await this.handleRemoveLike(obj.id)}}/>
-                                                                <FontAwesome5 name={'thumbs-down'}
-                                                                              size={25}
-                                                                              color={'black'}
-                                                                              style={styleLightMode.dislikeIcon}
-                                                                              onPress={async () => {await this.handleDislike(obj.id)}}/>
-                                                        </>
-                                                    )}
-                                                    {renderIf(obj.liked===0,
-                                                        <>
-                                                                <FontAwesome5 name={'thumbs-up'}
-                                                                              size={25}
-                                                                              color={'black'}
-                                                                              style={styleLightMode.likeIcon}
-                                                                              onPress={async () => {await this.handleLike(obj.id)}}/>
-                                                                <FontAwesome5 name={'thumbs-down'}
-                                                                              size={25}
-                                                                              color={'red'}
-                                                                              style={styleLightMode.dislikeIcon}
-                                                                              onPress={async () => {await this.handleRemoveDislike(obj.id)}}/>
-                                                        </>
-                                                    )}
+                                                    </View>
+                                                    <View style={{flexDirection: 'row'}}>
+                                                        {renderIf(obj.liked===null,
+                                                            <>
+                                                                    <FontAwesome5 name={'thumbs-up'}
+                                                                                  size={25}
+                                                                                  color={'green'}
+                                                                                  style={styleLightMode.likeIcon}
+                                                                                  onPress={async () => {await this.handleRemoveLike(obj.id)}}/>
+                                                                    <FontAwesome5 name={'thumbs-down'}
+                                                                                  size={25}
+                                                                                  color={'red'}
+                                                                                  style={styleLightMode.dislikeIcon}
+                                                                                  onPress={async () => {await this.handleRemoveDislike(obj.id)}}/>
+                                                            </>
+                                                        )}
+                                                        {renderIf(obj.liked===1,
+                                                            <>
+                                                                    <FontAwesome5 name={'thumbs-up'}
+                                                                                  size={25}
+                                                                                  color={'green'}
+                                                                                  style={styleLightMode.likeIcon}
+                                                                                  onPress={async () => {await this.handleRemoveLike(obj.id)}}/>
+                                                                    <FontAwesome5 name={'thumbs-down'}
+                                                                                  size={25}
+                                                                                  color={'black'}
+                                                                                  style={styleLightMode.dislikeIcon}
+                                                                                  onPress={async () => {await this.handleDislike(obj.id)}}/>
+                                                            </>
+                                                        )}
+                                                        {renderIf(obj.liked===0,
+                                                            <>
+                                                                    <FontAwesome5 name={'thumbs-up'}
+                                                                                  size={25}
+                                                                                  color={'black'}
+                                                                                  style={styleLightMode.likeIcon}
+                                                                                  onPress={async () => {await this.handleLike(obj.id)}}/>
+                                                                    <FontAwesome5 name={'thumbs-down'}
+                                                                                  size={25}
+                                                                                  color={'red'}
+                                                                                  style={styleLightMode.dislikeIcon}
+                                                                                  onPress={async () => {await this.handleRemoveDislike(obj.id)}}/>
+                                                            </>
+                                                        )}
 
-                                                    <FontAwesome5 name={'comment'}
-                                                                  size={25}
-                                                                  color={'#000000'}
-                                                                  style={styleLightMode.commentIcon}/>
+                                                        <FontAwesome5 name={'comment'}
+                                                                      size={25}
+                                                                      color={'#000000'}
+                                                                      style={styleLightMode.commentIcon}/>
                                                 </View>
                                                 <Text style={styleLightMode.activityText}
                                                       numberOfLines={3}>
@@ -664,22 +666,22 @@ const styleLightMode = StyleSheet.create({
         fontFamily:'Roboto_400Regular'
     },
     header:{
-        marginTop:17,
+        marginLeft: -110,
+        marginTop:10,
         flexDirection: 'row'
     },
     profilePicture:{
         width: 50,
         height: 50,
         borderRadius:70,
-        marginLeft: -50
+        justifyContent: 'flex-start'
     },
     username:{
         marginLeft:30,
         fontWeight: 'bold',
-        justifyContent: 'center',
         fontStyle: 'italic',
         color: '#616C75',
-        marginTop: 15
+        marginTop: 20
     },
     activityTitle:{
         marginLeft: 25,
