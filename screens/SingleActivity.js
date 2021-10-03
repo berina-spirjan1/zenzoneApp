@@ -46,7 +46,7 @@ export default class SingleActivity extends Component{
         userData: [],
         commentArray: [],
         descriptionForComment: '',
-        image: '',
+        image: null,
         imageUri: '',
         imageExtension: '',
         refresh: false,
@@ -145,24 +145,19 @@ export default class SingleActivity extends Component{
         token = JSON.parse(token)
         console.log(token)
 
-        const imageType = this.state.image.type
-        const extension = this.state.imageExtension
-
         const comment = new FormData();
         comment.append('activity_id', activity_id);
         comment.append('description', this.state.descriptionForComment);
-        // if(this.state.image!==''){
-        //     comment.append('image',{
-        //         name: `${imageType}.${extension}`,
-        //         type:  `${imageType}/${extension}`,
-        //         uri: this.state.imageUri
-        //     });
-        // }
+
+        if(this.state.image!==null){
+            const imageType = this.state.image.type
+            const extension = this.state.imageExtension
             comment.append('image',{
                 name: `${imageType}.${extension}`,
                 type:  `${imageType}/${extension}`,
                 uri: this.state.imageUri
             });
+        }
 
         console.log(comment)
 
