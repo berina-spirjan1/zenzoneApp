@@ -71,10 +71,12 @@ export default class UserProfile extends Component{
                 this.setState({
                     data: responseJson
                 })
+                AsyncStorage.setItem('city',JSON.stringify(this.state.data.office_location))
             })
             .catch((error) => {
                 console.error(error);
             });
+
     }
 
     login(){
@@ -111,7 +113,6 @@ export default class UserProfile extends Component{
                     console.log(jsonRes)
                     if (res.status !== 200) {
                         store.dispatch(userLogoutFailed());
-                        console.log("greska", res.status)
                     } else {
                         await AsyncStorage.clear()
                         this.switchToLogoutPage()
