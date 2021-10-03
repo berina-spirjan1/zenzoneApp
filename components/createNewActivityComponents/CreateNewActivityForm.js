@@ -10,15 +10,23 @@ import {
     TouchableOpacity,
     View
 } from "react-native";
-import CategoryCard from "../homePageComponents/cards/CategoryCard";
+
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import {Actions} from "react-native-router-flux";
-import {ACTIVITY, CATEGORY} from "../../configuration/config";
+import { Actions } from "react-native-router-flux";
+import {
+    ACTIVITY,
+    CATEGORY
+} from "../../configuration/config";
 import store from "../../redux/store";
-import {failedAddingActivity, startedAddingActivity, successfullyAddedActivity,} from "../../redux/actions";
+import {
+    failedAddingActivity,
+    startedAddingActivity,
+    successfullyAddedActivity
+} from "../../redux/actions";
 import * as ImagePicker from "expo-image-picker";
 import {renderIf} from "../../utilities/CommonMethods";
 import {Card, CardAction, CardContent} from "react-native-card-view";
+import AutocompleteInput from "react-native-autocomplete-input";
 
 export const CreateNewActivityForm = () => {
 
@@ -29,6 +37,9 @@ export const CreateNewActivityForm = () => {
     const [extension, setExtension] = useState('')
     let [data,setData] = useState([])
     const [category_id, setCategoryId] = useState(1)
+    const [searchText, setSearchText] = useState('')
+    const [searchCategory, setSearchCategory] = useState('')
+    const [activitiesData, setActivitiesData] = useState([])
 
     useEffect(() => {
         (async () => {
@@ -76,6 +87,25 @@ export const CreateNewActivityForm = () => {
 
     }, [])
 
+    //todo popraviti sutra kada se napravi endpoint
+    const updateSearch = (searchText) => {
+        setSearchText(searchText)
+        fetch(`${ACTIVITY}?searchKey=${searchText}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                setActivitiesData(responseJson.data.data)
+                console.log("TUUUUU",responseJson.data.data)
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
 
 
     const postNewActivity = async () => {
@@ -198,10 +228,17 @@ export const CreateNewActivityForm = () => {
                         </ScrollView>
                     )}
                     <Text style={styles.title}>Title</Text>
-                    <TextInput numberOfLines={2}
-                               placeholder={'Activity title'}
-                               onChangeText={setTitle}
-                               style={styles.titleInput}/>
+                    {/*<View style={styles.titleInput}>*/}
+                        {/*<AutocompleteInput placeholder={'Activity title'}*/}
+                        {/*                   autoCapitalize="none"*/}
+                        {/*                   autoCorrect={false}*/}
+                        {/*                   onChangeText={(search) => updateSearch(search)}*/}
+                        {/*                   data={activitiesData}*/}
+                        {/*                   renderItem={(item) => (<Text>{item}</Text>)}/>*/}
+                        <TextInput placeholder={'Activity title'}
+                                   style={styles.titleInput}
+                                   onChangeText={setTitle}/>
+                    {/*</View>*/}
                     <View style={{flexDirection: 'row'}}>
                         <Text style={styles.comment}>Description</Text>
                         <Text style={styles.counter}>0/1000</Text>
