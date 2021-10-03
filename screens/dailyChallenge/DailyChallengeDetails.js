@@ -11,7 +11,7 @@ import {
     RefreshControl,
     ImageBackground,
     TextInput,
-    AsyncStorage
+    AsyncStorage, Platform
 } from "react-native";
 import {SafeAreaView} from "react-navigation";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -19,7 +19,7 @@ import {Actions} from "react-native-router-flux";
 import {
     BASE_URL,
     COMMENT,
-    DAILY_CHALLENGE,
+    DAILY_CHALLENGE, SINGLE_ACTIVITY,
     USER
 } from "../../configuration/config";
 import { renderIf } from "../../utilities/CommonMethods";
@@ -33,6 +33,8 @@ import {
     userRegistrationSuccess
 } from "../../redux/actions";
 import DailyChallengeCounter from "./DailyChallengeCounter";
+import * as ImagePicker from "expo-image-picker";
+
 
 export default class DailyChallengeDetails extends Component{
     constructor(props) {
@@ -47,7 +49,8 @@ export default class DailyChallengeDetails extends Component{
         imageExtension: '',
         userData: [],
         commentArray: [],
-        userInfo: []
+        userInfo: [],
+        id: null
     }
 
     doDaily(){
@@ -71,13 +74,32 @@ export default class DailyChallengeDetails extends Component{
             .then((responseJson) => {
                 console.log(responseJson);
                 this.setState({
-                    data: responseJson.data[0]
+                    data: responseJson.data[0],
+                    id: responseJson.data[0].id
                 })
-                console.log(responseJson.data[0])
+                fetch(`${SINGLE_ACTIVITY}/${this.state.id}`, {
+                    method: 'GET',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Accept": "application/json"
+                    }
+                })
+                    .then((response) => response.json())
+                    .then((responseJson) => {
+                        console.log(responseJson);
+                        this.setState({
+                            commentArray: responseJson.data[0].comments
+                        })
+                        console.log("OVO SU KOMENTARI", this.state.commentArray)
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    });
             })
             .catch((error) => {
                 console.error(error);
             });
+
 
         fetch(`${USER}`, {
             method: 'GET',
@@ -99,6 +121,26 @@ export default class DailyChallengeDetails extends Component{
             });
 
     }
+
+    pickImage = async() =>{
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 4],
+            quality: 0.5
+        });
+
+
+        this.setState({ image: result})
+
+        this.setState({ imageUri: Platform.OS === "android" ? this.state.image.uri : this.state.image.uri.replace("file:///", "")})
+
+        if (!result.cancelled) {
+            this.setState({image: ''})
+        }
+        this.setState({imageExtension: this.state.imageUri.split('.').pop()})
+
+    };
 
     congratulations(){
         Actions.congratulations()
@@ -193,8 +235,6 @@ export default class DailyChallengeDetails extends Component{
             })
     }
 
-
-
     render(){
 
         const screenHeight = Dimensions.get('window').height
@@ -266,30 +306,34 @@ export default class DailyChallengeDetails extends Component{
                                     )}
                                     <View style={styles.listOfComments}>
                                         <Text style={styles.allComments}>ALL COMMENTS</Text>
-                                        {renderIf(this.state.commentArray.length,
+                                        {renderIf(this.state.commentArray.length!==0,
                                             <>
                                                 {this.state.commentArray.map(function(obj,i) {
                                                     return (
                                                         <>
-                                                            {renderIf(obj.photo_dir===null,
+                                                            <TouchableOpacity style={styles.singleCommentContainer}>
                                                                 <View style={styles.singleComment}>
-                                                                    {renderIf(obj.user.photo===null,
+                                                                    {renderIf(obj.user.photo===null || this.state.token===null,
                                                                         <Image source={require('../../assets/images/user_photo.png')}
                                                                                style={styles.userPhotoComment}/>
                                                                     )}
-                                                                    {renderIf(obj.user.photo!==null,
+                                                                    {renderIf(obj.user.photo!==null && this.state.token!==null,
                                                                         <Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
                                                                                style={styles.userPhotoComment}/>
                                                                     )}
                                                                     <Text style={styles.commentDescription}>{obj.description}</Text>
-                                                                    <TouchableOpacity style={styles.deleteButtonInSingle}
-                                                                                      onPress={async () => {await this.deleteComment(obj.id)}}>
+                                                                </View>
+                                                                {renderIf(this.state.userData.id===obj.user.id,
+                                                                    <TouchableOpacity style={styles.deleteButtonInSingle}>
                                                                         <FontAwesome5 name={'trash-alt'}
                                                                                       color={'#616C75'}
-                                                                                      size={15}/>
+                                                                                      size={15}
+                                                                                      onPress={async () => {await this.deleteComment(obj.id)}}
+                                                                                      style={styles.iconDelete}/>
                                                                     </TouchableOpacity>
-                                                                </View>
-                                                            )}
+                                                                )}
+
+                                                            </TouchableOpacity>
                                                             {renderIf(obj.photo_dir!==null,
                                                                 <View style={styles.commentWithImage}>
                                                                     <View style={styles.singleCommentWithImage}>
