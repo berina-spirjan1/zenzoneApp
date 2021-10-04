@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {AsyncStorage} from "react-native";
-import  {USER} from "../configuration/config";
+import {USER} from "../configuration/config";
 
 
 export async function getTheme (){

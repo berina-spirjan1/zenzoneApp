@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-    Text,
-    View,
-    StyleSheet,
-    Image
-} from "react-native";
+import {Image, StyleSheet, View} from "react-native";
 
 
 function FollowerCard(){

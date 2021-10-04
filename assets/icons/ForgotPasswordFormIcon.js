@@ -1,5 +1,6 @@
 import * as React from "react"
-import Svg, { Defs, G, Path } from "react-native-svg"
+import Svg, {Defs, G, Path} from "react-native-svg"
+
 /* SVGR has dropped some elements not supported by react-native-svg: filter */
 
 function ForgotPasswordFormIcon(props) {

@@ -1,10 +1,5 @@
 import React from "react";
-import {
-    Image,
-    Text, TouchableOpacity,
-    View,
-    StyleSheet
-} from "react-native";
+import {Image, StyleSheet, Text, TouchableOpacity} from "react-native";
 
 
 function FamilyCard(){
