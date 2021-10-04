@@ -1,16 +1,6 @@
 import React from "react";
-import {
-    Card,
-    CardAction
-} from "react-native-card-view";
-import {
-    Alert,
-    Image,
-    Text,
-    TouchableOpacity,
-    View,
-    StyleSheet
-} from "react-native";
+import {Card, CardAction} from "react-native-card-view";
+import {Alert, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
 
 function MyActivityCard(){
