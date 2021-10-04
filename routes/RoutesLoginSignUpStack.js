@@ -8,6 +8,7 @@ import { LoginWithLocationForm } from "../components/loginComponents/LoginWithLo
 import { SignUpWithLocationForm } from "../components/signUpComponents/SignUpWithLocationForm";
 import { LoginForm} from "../components/loginComponents/LoginForm";
 import { RoutesProfileStack } from "./RoutesProfileStack";
+import Login from "../screens/login/Login";
 
 
 const Stack = createNativeStackNavigator()
@@ -52,6 +53,11 @@ export const RoutesLoginSignUpStack = () =>{
                               }}/>
                 <Stack.Screen name={"loginForm"}
                               component={LoginForm}
+                              options={{
+                                  headerShown: false
+                              }}/>
+                <Stack.Screen name={"login"}
+                              component={Login}
                               options={{
                                   headerShown: false
                               }}/>
