@@ -1,13 +1,6 @@
 import React from "react";
-import {
-    Alert,
-    TouchableOpacity,
-    StyleSheet,
-    Text,
-    View
-} from "react-native";
+import {Alert, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import RobotPictureDarkMode from "../../assets/icons/RobotPictureDarkMode";
-
 
 
 function ErrorPage(){
@@ -15,7 +8,6 @@ function ErrorPage(){
     return(
         <View>
             <RobotPictureDarkMode style={stylesDarkMode.robotPicture}/>
-            {/*<RobotPictureLightMode style={stylesLightMode.robotPicture}/>*/}
             <Text style={stylesDarkMode.title}>Something went wrong</Text>
             <Text style={stylesDarkMode.text}>Sorry, we can't find the page you're looking for.</Text>
                 <TouchableOpacity
