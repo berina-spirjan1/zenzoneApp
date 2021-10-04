@@ -1,11 +1,8 @@
 import React, {Component} from "react";
-import {
-    View,
-    StyleSheet, SafeAreaView, ScrollView, Dimensions, StatusBar
-} from "react-native";
+import {Dimensions, SafeAreaView, ScrollView, StatusBar, StyleSheet, View} from "react-native";
 import YourFamilyLightModeIcon from "../assets/icons/YourFamilyLightModeIcon";
 import FamilyCard from "../components/followerComponents/cards/FamilyCard";
-import { Toolbar } from "react-native-material-ui";
+import {Toolbar} from "react-native-material-ui";
 import {renderIf} from "../utilities/CommonMethods";
 import {isIphoneX} from "react-native-iphone-x-helper";
 

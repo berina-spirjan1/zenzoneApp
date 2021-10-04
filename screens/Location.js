@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import * as Location from 'expo-location';
 
 export default function LocationPage() {
