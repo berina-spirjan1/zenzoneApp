@@ -1,22 +1,7 @@
 import React, {Component} from "react";
-import {
-    AsyncStorage,
-    Dimensions,
-    Image,
-    ImageBackground,
-    SafeAreaView,
-    ScrollView,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
-    TextInput
-} from "react-native";
-import { USER } from "../configuration/config";
-import { Actions } from "react-native-router-flux";
-import { Toolbar } from "react-native-material-ui";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import {ImageBackground, StatusBar, StyleSheet, View} from "react-native";
+import {Actions} from "react-native-router-flux";
+import {Toolbar} from "react-native-material-ui";
 import {UpdateProfileForm} from "../components/userProfileComponents/UpdateProfileForm";
 import {renderIf} from "../utilities/CommonMethods";
 import {isIphoneX} from "react-native-iphone-x-helper";
@@ -25,10 +10,6 @@ import {isIphoneX} from "react-native-iphone-x-helper";
 export default class UpdateProfile extends Component{
     constructor(props) {
         super();
-    }
-
-    switchToChangePassword(){
-        Actions.switchToChangePassword()
     }
 
     render(){
@@ -40,10 +21,12 @@ export default class UpdateProfile extends Component{
                     backgroundColor="#334A6D"/>
                 {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
                                                 leftElement="arrow-back"
-                                                centerElement="Update profile"/>)}
+                                                centerElement="Update profile"
+                                                onLeftElementPress={() => this.props.navigation.navigate("switchToMyProfileInfo")}/>)}
                 {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                                                  leftElement="arrow-back"
-                                                 centerElement="Update profile"/>)}
+                                                 centerElement="Update profile"
+                                                 onLeftElementPress={() => this.props.navigation.navigate("switchToMyProfileInfo")}/>)}
                 <ImageBackground source={require('../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
                 <UpdateProfileForm/>
