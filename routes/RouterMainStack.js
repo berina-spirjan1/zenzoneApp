@@ -1,6 +1,5 @@
 import React from "react";
 import {createNativeStackNavigator} from "react-native-screens/native-stack";
-import {NavigationContainer} from "@react-navigation/native";
 import Splash from "../screens/Splash";
 import BottomNavigationBar from "./BottomNavigationBar";
 
