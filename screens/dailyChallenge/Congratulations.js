@@ -1,48 +1,39 @@
 import React, {Component} from "react";
-import {
-    View,
-    StyleSheet, Text, StatusBar, TouchableOpacity
-} from "react-native";
+import {StatusBar, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import LottieView from 'lottie-react-native';
 import {Toolbar} from "react-native-material-ui";
 import {renderIf} from "../../utilities/CommonMethods";
 import {isIphoneX} from "react-native-iphone-x-helper";
-import {Actions} from "react-native-router-flux";
 
-function challengeDetails(){
-    Actions.challengeDetails()
-}
-
-function Congratulations(){
-
-        return(
-            <>
-                <StatusBar
-                    animated={true}
-                    backgroundColor="#6285B3"/>
-                {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
-                                                centerElement="Congratulations"/>)}
-                {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                                                 centerElement="Congratulations"/>)}
-                <View style={styles.container}>
-                    <Text style={styles.title}>congratulations</Text>
-                    <LottieView
-                        style={styles.lottie}
-                        source={require("../../assets/images/congratulationsStar.json")}
-                        autoPlay={true}
-                        loop={true}/>
-                    <Text style={styles.informationBox}>Thank you for participating in the daily challenge. You will soon receive feedback from the administration and the possibility of winning a badge.</Text>
+export default class Congratulations extends Component{
+render() {
+    return(
+        <>
+            <StatusBar
+                animated={true}
+                backgroundColor="#6285B3"/>
+            {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
+                                            centerElement="Congratulations"/>)}
+            {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                             centerElement="Congratulations"/>)}
+            <View style={styles.container}>
+                <Text style={styles.title}>congratulations</Text>
+                <LottieView
+                    style={styles.lottie}
+                    source={require("../../assets/images/congratulationsStar.json")}
+                    autoPlay={true}
+                    loop={true}/>
+                <Text style={styles.informationBox}>Thank you for participating in the daily challenge. You will soon receive feedback from the administration and the possibility of winning a badge.</Text>
                 <TouchableOpacity style={styles.button}
-                                  onPress={challengeDetails}>
+                                  onPress={()=>this.props.navigation.navigate("challengeDetails")}>
                     <Text style={styles.buttonText}>GO BACK</Text>
                 </TouchableOpacity>
-                </View>
-            </>
+            </View>
+        </>
 
-        )
+    )
 }
-
-export default Congratulations;
+}
 
 const styles = StyleSheet.create({
     container:{
