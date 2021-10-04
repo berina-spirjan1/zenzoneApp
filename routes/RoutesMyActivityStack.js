@@ -3,12 +3,12 @@ import {createNativeStackNavigator} from "react-native-screens/native-stack";
 import {NavigationContainer} from "@react-navigation/native";
 import MyActivities from "../screens/MyActivities";
 import UserProfile from "../screens/userProfile/UserProfile";
+import {RoutesProfileStack} from "./RoutesProfileStack";
 
 const Stack = createNativeStackNavigator()
 
 export const RoutesMyActivityStack = () =>{
     return(
-        <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name={"myActivities"}
                               component={MyActivities}
@@ -16,11 +16,10 @@ export const RoutesMyActivityStack = () =>{
                                   headerShown: false
                               }}/>
                 <Stack.Screen name={"myProfileInfoBack"}
-                              component={UserProfile}
+                              component={RoutesProfileStack}
                               options={{
                                   headerShown: false
                               }}/>
             </Stack.Navigator>
-        </NavigationContainer>
     )
 }
