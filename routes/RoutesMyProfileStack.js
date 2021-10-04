@@ -12,7 +12,7 @@ const Stack = createNativeStackNavigator()
 
 export const RoutesMyProfileStack = () =>{
     return(
-            <Stack.Navigator>
+            <Stack.Navigator initialRouteName={"backToProfile"}>
                 <Stack.Screen name={"switchToMyProfileInfo"}
                               component={MyProfileInfo}
                               options={{

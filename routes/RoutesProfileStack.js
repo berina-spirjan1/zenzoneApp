@@ -9,6 +9,7 @@ import MyActivities from "../screens/MyActivities";
 import {RoutesSettingsStack} from "./RoutesSettingsStack";
 import SingleActivity from "../screens/SingleActivity";
 import LogoutSplashScreen from "../screens/LogoutSplashScreen";
+import MyProfileInfo from "../screens/userProfile/MyProfileInfo";
 
 
 const Stack = createNativeStackNavigator()
@@ -17,12 +18,12 @@ export const RoutesProfileStack = () =>{
     return(
             <Stack.Navigator>
                 <Stack.Screen name={"profile"}
-                              component={UserProfile}
+                              component={RoutesMyProfileStack}
                               options={{
                                   headerShown: false
                               }}/>
                 <Stack.Screen name={"myProfile"}
-                              component={RoutesMyProfileStack}
+                              component={MyProfileInfo}
                               options={{
                                   headerShown: false
                               }}/>
