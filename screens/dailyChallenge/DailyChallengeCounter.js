@@ -1,24 +1,16 @@
 import React, {Component} from "react";
 import CountDown from "react-native-countdown-component";
 
-import {
-    View,
-    Text,
-    StyleSheet,
-    StatusBar
-} from "react-native";
+import {StatusBar, StyleSheet, Text, View} from "react-native";
 import LottieView from "lottie-react-native";
-import { Toolbar } from "react-native-material-ui";
-import { Actions } from "react-native-router-flux";
+import {Toolbar} from "react-native-material-ui";
 import {renderIf} from "../../utilities/CommonMethods";
 import {isIphoneX} from "react-native-iphone-x-helper";
 
 
 export default class DailyChallengeCounter extends Component{
 
-    waiting(){
-        Actions.waiting()
-    }
+    waiting = () => this.props.navigation.navigate("waitingForChallenge");
 
     render() {
 
