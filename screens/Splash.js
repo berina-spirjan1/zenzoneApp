@@ -11,10 +11,6 @@ export default class Splash extends Component{
         setTimeout(() => this.props.navigation.navigate("toBottomNavigationBar"), duration)
     }
 
-    // toBottomNavigationBar(){
-    //     Actions.toBottomNavigationBar()
-    // }
-
     render() {
 
         return(
