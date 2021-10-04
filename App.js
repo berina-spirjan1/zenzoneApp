@@ -12,7 +12,8 @@ import {
     useFonts
 } from '@expo-google-fonts/roboto';
 
-import RouterMain from "./routes/RouterMain";
+import {RouterMainStack} from "./routes/RouterMainStack";
+import {NavigationContainer} from "@react-navigation/native";
 
 
 export default function App() {
@@ -30,16 +31,9 @@ export default function App() {
     }
 
     return (
-        // <NavigationContainer>
-        //      <BottomNavigationBar/>
-        //  </NavigationContainer>
-        // <PrizePage/>
-        // <LocationPage/>
-        // <SignUp/>
-        // <ForgotPassword/>
-        <RouterMain/>
-        // <LocationPage/>
-        // <LogoutSplashScreen/>
+        <NavigationContainer>
+             <RouterMainStack/>
+         </NavigationContainer>
     );
 }
 
