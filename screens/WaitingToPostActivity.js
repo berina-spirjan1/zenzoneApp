@@ -1,10 +1,5 @@
 import React, {Component} from "react";
-import {
-    View,
-    StyleSheet,
-    StatusBar,
-    Text
-} from "react-native";
+import {StatusBar, StyleSheet, Text, View} from "react-native";
 import {Toolbar} from "react-native-material-ui";
 import LottieView from "lottie-react-native";
 import {isIphoneX} from "react-native-iphone-x-helper";
