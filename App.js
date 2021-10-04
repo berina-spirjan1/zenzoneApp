@@ -1,15 +1,14 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { createStackNavigator } from "@react-navigation/stack";
+import {StyleSheet} from "react-native";
 
 import AppLoading from 'expo-app-loading';
 import {
     Roboto_100Thin_Italic,
-    Roboto_400Regular,
-    Roboto_700Bold_Italic,
     Roboto_300Light,
+    Roboto_400Regular,
     Roboto_500Medium,
     Roboto_700Bold,
+    Roboto_700Bold_Italic,
     useFonts
 } from '@expo-google-fonts/roboto';
 
@@ -39,6 +38,8 @@ export default function App() {
         // <SignUp/>
         // <ForgotPassword/>
         <RouterMain/>
+        // <LocationPage/>
+        // <LogoutSplashScreen/>
     );
 }
 
