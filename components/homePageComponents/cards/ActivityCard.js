@@ -1,17 +1,7 @@
 import React from "react";
-import {
-    Card,
-    CardAction
-} from 'react-native-card-view';
+import {Card, CardAction} from 'react-native-card-view';
 
-import {
-    Text,
-    StyleSheet,
-    Image,
-    View,
-    TouchableOpacity,
-    Alert
-} from "react-native";
+import {Alert, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
