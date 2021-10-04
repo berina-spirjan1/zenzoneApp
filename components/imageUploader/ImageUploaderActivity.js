@@ -1,14 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import {
-    Button,
-    Image,
-    View,
-    Platform,
-    Alert,
-    Text,
-    TouchableOpacity,
-    StyleSheet
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Image, Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
