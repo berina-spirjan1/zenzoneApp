@@ -81,7 +81,6 @@ export const CreateNewActivityForm = () => {
             .then((response) => response.json())
             .then((responseJson) => {
                 setData(responseJson.data.data)
-                console.log("--------------------------",data)
             })
             .catch((error) => {
                 console.error(error);
