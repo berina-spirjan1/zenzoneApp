@@ -1,37 +1,29 @@
 import React, {Component} from "react";
 import {
+    Alert,
+    AsyncStorage,
     Dimensions,
     Image,
+    ImageBackground,
+    Platform,
+    RefreshControl,
     ScrollView,
     StatusBar,
     StyleSheet,
     Text,
-    View,
-    TouchableOpacity,
-    RefreshControl,
-    ImageBackground,
     TextInput,
-    AsyncStorage, Platform
+    TouchableOpacity,
+    View
 } from "react-native";
 import {SafeAreaView} from "react-navigation";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import {Actions} from "react-native-router-flux";
-import {
-    BASE_URL,
-    COMMENT,
-    DAILY_CHALLENGE, SINGLE_ACTIVITY,
-    USER
-} from "../../configuration/config";
-import { renderIf } from "../../utilities/CommonMethods";
-import { isIphoneX } from "react-native-iphone-x-helper";
-import { Toolbar } from "react-native-material-ui";
+import {BASE_URL, COMMENT, DAILY_CHALLENGE, SINGLE_ACTIVITY, USER} from "../../configuration/config";
+import {renderIf} from "../../utilities/CommonMethods";
+import {isIphoneX} from "react-native-iphone-x-helper";
+import {Toolbar} from "react-native-material-ui";
 import ConvertDate from "../../utilities/ConvertDate";
 import store from "../../redux/store";
-import {
-    userRegistrationFailed,
-    userRegistrationStarted,
-    userRegistrationSuccess
-} from "../../redux/actions";
+import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../../redux/actions";
 import DailyChallengeCounter from "./DailyChallengeCounter";
 import * as ImagePicker from "expo-image-picker";
 
@@ -50,12 +42,11 @@ export default class DailyChallengeDetails extends Component{
         userData: [],
         commentArray: [],
         userInfo: [],
-        id: null
+        id: null,
+        token: null
     }
 
-    doDaily(){
-        Actions.doDaily()
-    }
+    doDaily = () => this.props.navigation.navigate("doDaily")
 
     componentDidMount = async () => {
 
@@ -90,7 +81,6 @@ export default class DailyChallengeDetails extends Component{
                         this.setState({
                             commentArray: responseJson.data[0].comments
                         })
-                        console.log("OVO SU KOMENTARI", this.state.commentArray)
                     })
                     .catch((error) => {
                         console.error(error);
@@ -142,18 +132,13 @@ export default class DailyChallengeDetails extends Component{
 
     };
 
-    congratulations(){
-        Actions.congratulations()
-    }
-
-    waitingForChallenge(){
-        Actions.waitingForChallenge()
-    }
+    congratulations = () => this.props.navigation.navigate("congratulations")
 
     async postComment(activity_id){
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
         console.log(token)
+        this.setState({token: token})
 
         const comment = new FormData();
         comment.append('activity_id', activity_id);
@@ -189,7 +174,11 @@ export default class DailyChallengeDetails extends Component{
                     console.log(jsonRes)
                     if (res.status !== 200) {
                         store.dispatch(userRegistrationFailed());
-                    } else {
+                    }
+                    if(res.status===401){
+                        Alert.alert("Please login to add comment.")
+                    }
+                    else {
                         this.congratulations();
                         store.dispatch(userRegistrationSuccess());
                     }
@@ -198,6 +187,7 @@ export default class DailyChallengeDetails extends Component{
                 }
             })
     }
+
     async deleteComment(comment_id){
 
         console.log("HERE I AM")
@@ -226,6 +216,7 @@ export default class DailyChallengeDetails extends Component{
                     console.log(jsonRes)
                     if (res.status !== 200) {
                         store.dispatch(userRegistrationFailed());
+
                     } else {
                         store.dispatch(userRegistrationSuccess());
                     }
@@ -240,149 +231,146 @@ export default class DailyChallengeDetails extends Component{
         const screenHeight = Dimensions.get('window').height
 
         return (
-            <View style={styles.container}>
+            <>
                 {renderIf(this.state.data.length!==0,
+                    <View style={styles.container}>
 
-                <>
-                    <StatusBar
-                        animated={true}
-                        backgroundColor="#6285B3"/>
-                    {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
-                                                    centerElement={this.state.data.title}/>)}
-                    {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                                                     centerElement={this.state.data.title}/> )}
-                    <SafeAreaView style={styles.safeArea}
-                                  style={{height: screenHeight}}>
-                        <ScrollView vertical={true}
-                                    style={styles.scrollView}
-                                    refreshControl={
-                                        <RefreshControl
-                                            refreshing={this.state.refresh}
-                                            onRefresh={this.componentDidMount}
-                                        />}>
-                                <ImageBackground source={require('../../assets/images/img_1.png')}
-                                                 style={styles.activityImage}/>
-                            <View style={styles.activityWrapper}>
-                                <View style={styles.likeWrapper}>
-                                    <View>
-                                            <Image source={require('../../assets/images/user_photo.png')}
-                                                   style={styles.userWithoutImage}/>
-                                    </View>
-                                </View>
-                                <View style={styles.activityInfoWrapper}>
-                                    <Text style={styles.activityTitle}>{this.state.data.title}</Text>
-                                    <Text style={styles.activityDescription}>{this.state.data.description}</Text>
-                                    <Text style={styles.username}>{this.state.userInfo.name}</Text>
-                                    <Text style={styles.createdDate}>{ConvertDate(this.state.data.created_at)}</Text>
-                                </View>
-
-                                <View style={styles.userWrapper}>
-                                    {renderIf(this.state.userData.photo_dir!==null,
-                                        <Image source={{uri: `${BASE_URL}`+`${this.state.userData.photo_dir}`+`${this.state.userData.photo_name}`}}
-                                               style={styles.userProfilePicture}/>
-                                    )}
-                                    {renderIf(this.state.userData.photo_dir===null,
-                                        <Image source={require('../../assets/images/user_photo.png')}
-                                               style={styles.userProfilePicture}/>
-                                    )}
-                                    {renderIf(this.state.userData.length!==0,
-                                        <>
-                                            <TextInput placeholder={'Create new comment'}
-                                                       style={styles.createNewComment}
-                                                       onChangeText={text => this.setState({descriptionForComment: text })}/>
-                                            <View style={{flexDirection: 'row'}}>
-                                                <TouchableOpacity style={styles.postButton}>
-                                                    <Text style={styles.postButtonText}
-                                                          onPress={async()=>{await this.postComment(this.state.data.id)}}>POST</Text>
-                                                </TouchableOpacity>
-                                                <TouchableOpacity style={styles.cameraButton}
-                                                                  onPress={this.pickImage}>
-                                                    <FontAwesome5 name={'camera'}
-                                                                  color={'#616C75'}
-                                                                  size={20}/>
-                                                </TouchableOpacity>
+                                <StatusBar
+                                    animated={true}
+                                    backgroundColor="#6285B3"/>
+                                {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
+                                                                centerElement={this.state.data.title}/>)}
+                                {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                                                 centerElement={this.state.data.title}/> )}
+                                <SafeAreaView style={styles.safeArea}
+                                              style={{height: screenHeight}}>
+                                    <ScrollView vertical={true}
+                                                style={styles.scrollView}
+                                                refreshControl={
+                                                    <RefreshControl
+                                                        refreshing={this.state.refresh}
+                                                        onRefresh={this.componentDidMount}
+                                                    />}>
+                                            <ImageBackground source={require('../../assets/images/img_1.png')}
+                                                             style={styles.activityImage}/>
+                                        <View style={styles.activityWrapper}>
+                                            <View style={styles.likeWrapper}>
+                                                <View>
+                                                        <Image source={require('../../assets/images/user_photo.png')}
+                                                               style={styles.userWithoutImage}/>
+                                                </View>
                                             </View>
-                                        </>
-                                    )}
-                                    <View style={styles.listOfComments}>
-                                        <Text style={styles.allComments}>ALL COMMENTS</Text>
-                                        {renderIf(this.state.commentArray.length!==0,
-                                            <>
-                                                {this.state.commentArray.map(function(obj,i) {
-                                                    return (
-                                                        <>
-                                                            <TouchableOpacity style={styles.singleCommentContainer}>
-                                                                <View style={styles.singleComment}>
-                                                                    {renderIf(obj.user.photo===null || this.state.token===null,
-                                                                        <Image source={require('../../assets/images/user_photo.png')}
-                                                                               style={styles.userPhotoComment}/>
-                                                                    )}
-                                                                    {renderIf(obj.user.photo!==null && this.state.token!==null,
-                                                                        <Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
-                                                                               style={styles.userPhotoComment}/>
-                                                                    )}
-                                                                    <Text style={styles.commentDescription}>{obj.description}</Text>
-                                                                </View>
-                                                                {renderIf(this.state.userData.id===obj.user.id,
-                                                                    <TouchableOpacity style={styles.deleteButtonInSingle}>
-                                                                        <FontAwesome5 name={'trash-alt'}
-                                                                                      color={'#616C75'}
-                                                                                      size={15}
-                                                                                      onPress={async () => {await this.deleteComment(obj.id)}}
-                                                                                      style={styles.iconDelete}/>
-                                                                    </TouchableOpacity>
-                                                                )}
+                                            <View style={styles.activityInfoWrapper}>
+                                                <Text style={styles.activityTitle}>{this.state.data.title}</Text>
+                                                <Text style={styles.activityDescription}>{this.state.data.description}</Text>
+                                                <Text style={styles.createdDate}>Start date: {ConvertDate(this.state.data.start_date)}</Text>
+                                                <Text style={styles.createdDate}>End date: {ConvertDate(this.state.data.end_date)}</Text>
+                                            </View>
 
+                                            <View style={styles.userWrapper}>
+                                                {renderIf(this.state.userData.photo_dir!==null,
+                                                    <Image source={{uri: `${BASE_URL}`+`${this.state.userData.photo_dir}`+`${this.state.userData.photo_name}`}}
+                                                           style={styles.userProfilePicture}/>
+                                                )}
+                                                {renderIf(this.state.userData.photo_dir===null,
+                                                    <Image source={require('../../assets/images/user_photo.png')}
+                                                           style={styles.userProfilePicture}/>
+                                                )}
+                                                        <TextInput placeholder={'Create new comment'}
+                                                                   style={styles.createNewComment}
+                                                                   onChangeText={text => this.setState({descriptionForComment: text })}/>
+                                                        <View style={{flexDirection: 'row'}}>
+                                                            <TouchableOpacity style={styles.postButton}>
+                                                                <Text style={styles.postButtonText}
+                                                                      onPress={async()=>{await this.postComment(this.state.data.id)}}>POST</Text>
                                                             </TouchableOpacity>
-                                                            {renderIf(obj.photo_dir!==null,
-                                                                <View style={styles.commentWithImage}>
-                                                                    <View style={styles.singleCommentWithImage}>
-                                                                        {renderIf(obj.user.photo===null,
-                                                                            <Image source={require('../../assets/images/user_photo.png')}
-                                                                                   style={styles.userPhotoComment}/>
-                                                                        )}
-                                                                        {renderIf(obj.user.photo!==null,
-                                                                            <Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
-                                                                                   style={styles.userPhotoComment}/>
-                                                                        )}
-                                                                        <Text style={styles.commentDescription}>{obj.description}</Text>
-                                                                        {renderIf(this.state.userData.id===obj.user.id,
-                                                                            <TouchableOpacity style={styles.deleteButton}
-                                                                                              onPress={async () => {await this.deleteComment(obj.id)}}>
-                                                                                <FontAwesome5 name={'trash-alt'}
-                                                                                              color={'#616C75'}
-                                                                                              size={15}/>
-                                                                            </TouchableOpacity>
-                                                                        )}
-                                                                    </View>
-                                                                    <Image source={{uri: `${BASE_URL}`+`${obj.photo_dir}`+`${obj.photo_name}`}}
-                                                                           style={styles.commentImage}/>
-                                                                    {renderIf(this.state.userData.id===obj.user.id,
-                                                                        <TouchableOpacity style={styles.deleteButton}
-                                                                                          onPress={async () => {await this.deleteComment(obj.id)}}>
-                                                                            <FontAwesome5 name={'trash-alt'}
-                                                                                          color={'#616C75'}
-                                                                                          size={15}/>
-                                                                        </TouchableOpacity>
-                                                                    )}
+                                                            <TouchableOpacity style={styles.cameraButton}
+                                                                              onPress={this.pickImage}>
+                                                                <FontAwesome5 name={'camera'}
+                                                                              color={'#616C75'}
+                                                                              size={20}/>
+                                                            </TouchableOpacity>
+                                                        </View>
+                                                <View style={styles.listOfComments}>
+                                                    <Text style={styles.allComments}>ALL COMMENTS</Text>
+                                                    {renderIf(this.state.commentArray.length!==0,
+                                                        <>
+                                                            {this.state.commentArray.map(function(obj,i) {
+                                                                return (
+                                                                    <>
+                                                                        <TouchableOpacity style={styles.singleCommentContainer}>
+                                                                            <View style={styles.singleComment}>
+                                                                                {renderIf(obj.user.photo===null || this.state.token===null,
+                                                                                    <Image source={require('../../assets/images/user_photo.png')}
+                                                                                           style={styles.userPhotoComment}/>
+                                                                                )}
+                                                                                {renderIf(obj.user.photo!==null && this.state.token!==null,
+                                                                                    <Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
+                                                                                           style={styles.userPhotoComment}/>
+                                                                                )}
+                                                                                <Text style={styles.commentDescription}>{obj.description}</Text>
+                                                                            </View>
+                                                                            {renderIf(this.state.userData.id===obj.user.id,
+                                                                                <TouchableOpacity style={styles.deleteButtonInSingle}>
+                                                                                    <FontAwesome5 name={'trash-alt'}
+                                                                                                  color={'#616C75'}
+                                                                                                  size={15}
+                                                                                                  onPress={async () => {await this.deleteComment(obj.id)}}
+                                                                                                  style={styles.iconDelete}/>
+                                                                                </TouchableOpacity>
+                                                                            )}
 
-                                                                </View>
-                                                            )}
-                                                        </>
-                                                    )
-                                                },this)}
-                                            </>)}
-                                    </View>
-                                </View>
-                            </View>
-                        </ScrollView>
-                    </SafeAreaView>
-                </>
+                                                                        </TouchableOpacity>
+                                                                        {renderIf(obj.photo_dir!==null,
+                                                                            <View style={styles.commentWithImage}>
+                                                                                <View style={styles.singleCommentWithImage}>
+                                                                                    {renderIf(obj.user.photo===null,
+                                                                                        <Image source={require('../../assets/images/user_photo.png')}
+                                                                                               style={styles.userPhotoComment}/>
+                                                                                    )}
+                                                                                    {renderIf(obj.user.photo!==null,
+                                                                                        <Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
+                                                                                               style={styles.userPhotoComment}/>
+                                                                                    )}
+                                                                                    <Text style={styles.commentDescription}>{obj.description}</Text>
+                                                                                    {renderIf(this.state.userData.id===obj.user.id,
+                                                                                        <TouchableOpacity style={styles.deleteButton}
+                                                                                                          onPress={async () => {await this.deleteComment(obj.id)}}>
+                                                                                            <FontAwesome5 name={'trash-alt'}
+                                                                                                          color={'#616C75'}
+                                                                                                          size={15}/>
+                                                                                        </TouchableOpacity>
+                                                                                    )}
+                                                                                </View>
+                                                                                <Image source={{uri: `${BASE_URL}`+`${obj.photo_dir}`+`${obj.photo_name}`}}
+                                                                                       style={styles.commentImage}/>
+                                                                                {renderIf(this.state.userData.id===obj.user.id,
+                                                                                    <TouchableOpacity style={styles.deleteButton}
+                                                                                                      onPress={async () => {await this.deleteComment(obj.id)}}>
+                                                                                        <FontAwesome5 name={'trash-alt'}
+                                                                                                      color={'#616C75'}
+                                                                                                      size={15}/>
+                                                                                    </TouchableOpacity>
+                                                                                )}
+
+                                                                            </View>
+                                                                        )}
+                                                                    </>
+                                                                )
+                                                            },this)}
+                                                        </>)}
+                                                </View>
+                                            </View>
+                                        </View>
+                                    </ScrollView>
+                                </SafeAreaView>
+                    </View>
                 )}
-                {renderIf(!this.state.data.length===0,
+                {renderIf(this.state.data.length===0,
                     <DailyChallengeCounter/>
-                    )}
-            </View>
+                )}
+            </>
+
         )
     }
 }
@@ -474,13 +462,12 @@ const styles = StyleSheet.create({
         fontSize: 12,
         marginLeft: 20,
         fontStyle: 'italic',
-        color: '#616C75',
-        marginBottom: 20
+        color: '#616C75'
     },
     createNewComment:{
         marginLeft: 20,
         marginRight: 20,
-        marginTop: 20,
+        marginTop: 40,
         borderRadius: 20,
         height: 60,
         padding: 10,
