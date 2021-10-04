@@ -1,20 +1,20 @@
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import {NavigationContainer} from "@react-navigation/native";
+import {createDrawerNavigator} from "@react-navigation/drawer";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import { Image } from 'react-native';
 
-
-import HomePage from "../../screens/HomePage";
 import Login from "../../screens/login/Login";
 import SignUp from "../../screens/signUp/SignUp";
-import DailyChallengeDetails from "../../screens/dailyChallenge/DailyChallengeDetails";
+
+import {RouterHomePageStack} from "../../routes/RoutesHomePageStack";
+import {RoutesLoginSignUpStack} from "../../routes/RoutesLoginSignUpStack";
+import {RoutesForChallengeStack} from "../../routes/RoutesForChallengeStack";
 
 const Drawer = createDrawerNavigator();
 
 function SideMenu(){
     return (
-        <NavigationContainer>
+        <NavigationContainer independent={true}>
             <Drawer.Navigator initialRouteName={'Activities'}
                               drawerPosition={'left'}
                               drawerType={'slide'}
@@ -27,8 +27,8 @@ function SideMenu(){
                               }}
                               screenOptions={{
                                   drawerActiveTintColor: '#93B4E5',
-                                  headerShown: true,
-                                  swipeEnabled: false,
+                                  headerShown: false,
+                                  swipeEnabled: true,
                                   gestureEnabled: true,
                                   headerTitleAlign: 'left',
                                   headerStyle:{
@@ -40,7 +40,7 @@ function SideMenu(){
                                   }
                               }}>
                <Drawer.Screen name={'Activities'}
-                              component={HomePage}
+                              component={RouterHomePageStack}
                               options={{
                                   title: 'Activities',
                                   drawerIcon: ({focused}) =>(
@@ -50,7 +50,7 @@ function SideMenu(){
                                   )
                               }}/>
                 <Drawer.Screen name={'Login'}
-                               component={Login}
+                               component={RoutesLoginSignUpStack}
                                options={{
                                    headerShown: false,
                                    title: 'Login',
@@ -72,7 +72,7 @@ function SideMenu(){
                                   )
                               }}/>
                 <Drawer.Screen name={"Today's challenge"}
-                               component={DailyChallengeDetails}
+                               component={RoutesForChallengeStack}
                                options={{
                                    headerShown: false,
                                    title: "Today's challenge",

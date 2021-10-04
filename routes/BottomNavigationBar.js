@@ -2,8 +2,6 @@ import React from "react";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {FontAwesome5} from "@expo/vector-icons";
 
-import {NavigationContainer} from "@react-navigation/native";
-import RoutesLoginSignUp from "./RoutesLoginSignUp";
 import CustomTabBar from "../components/bottomNavigationBar/CustomTabBar";
 import TabBarCustomButton from "../components/bottomNavigationBar/TabBarCustomButton";
 import LogoutSplashScreen from "../screens/LogoutSplashScreen";
