@@ -1,10 +1,5 @@
 import React, {Component} from "react";
-import {
-    Image,
-    Text,
-    View,
-    StyleSheet, AsyncStorage
-} from "react-native";
+import {AsyncStorage, Image, StyleSheet, Text, View} from "react-native";
 import NextButton from "../buttons/NextButton";
 import {BASE_URL, USER} from "../../configuration/config";
 import {Actions} from "react-native-router-flux";
@@ -40,9 +35,7 @@ export default class UserInfoComponent extends Component{
             });
     }
 
-    profileInfo(){
-        Actions.profileInfo()
-    }
+    profileInfo = () => this.props.navigation.navigate("profileInfo")
 
     render() {
         return(
