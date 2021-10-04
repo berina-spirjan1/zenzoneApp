@@ -1,43 +1,27 @@
 import React, {Component} from "react";
 import {
-    View,
-    StyleSheet,
-    StatusBar,
-    Text,
-    SafeAreaView,
-    ScrollView,
+    Alert,
+    AsyncStorage,
     Dimensions,
     Image,
+    RefreshControl,
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+    StyleSheet,
+    Text,
     TouchableOpacity,
-    AsyncStorage,
-    RefreshControl, Alert
+    View
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
-
-import { Actions } from "react-native-router-flux";
-import {
-    ACTIVITY,
-    BASE_URL,
-    CATEGORY,
-    DISLIKE,
-    LIKE,
-
-} from "../configuration/config";
-import {
-    Card,
-    CardAction,
-    CardContent
-} from "react-native-card-view";
+import {ACTIVITY, BASE_URL, CATEGORY, DISLIKE, LIKE,} from "../configuration/config";
+import {Card, CardAction, CardContent} from "react-native-card-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import { renderIf } from "../utilities/CommonMethods";
+import {renderIf} from "../utilities/CommonMethods";
 import Loader from "../utilities/Loader";
 import store from "../redux/store";
-import {
-    userRegistrationFailed,
-    userRegistrationStarted,
-    userRegistrationSuccess
-} from "../redux/actions";
-import { isIphoneX } from "react-native-iphone-x-helper";
+import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../redux/actions";
+import {isIphoneX} from "react-native-iphone-x-helper";
 
 export default class HomePage extends Component{
     constructor(props) {
