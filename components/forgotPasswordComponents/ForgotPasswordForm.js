@@ -1,17 +1,8 @@
-import {
-    Alert,
-    StatusBar,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View
-} from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
+import {Alert, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import ForgotPasswordFormIcon from "../../assets/icons/ForgotPasswordFormIcon";
 import ForgotPasswordWomenIcon from "../../assets/icons/ForgotPasswordWomenIcon";
-import React, { useState } from "react";
-import { FORGOT_PASSWORD } from "../../configuration/config";
+import React, {useState} from "react";
+import {FORGOT_PASSWORD} from "../../configuration/config";
 import store from "../../redux/store";
 import {
     forgotPasswordChangedSuccess,
@@ -19,15 +10,14 @@ import {
     forgotPasswordChangingStarted,
 } from "../../redux/actions";
 import {Actions} from "react-native-router-flux";
+import {useNavigation} from "@react-navigation/native";
 
 
 export const ForgotPasswordForm = () =>{
-
+    const navigation = useNavigation();
     const [email, setEmail] = useState('');
 
-    const checkEmail = () =>{
-        Actions.checkEmail()
-    }
+    const checkEmail = () => navigation.navigate("checkEmail")
 
     const onResetHandler = () =>{
 
@@ -53,7 +43,10 @@ export const ForgotPasswordForm = () =>{
                     if(res.status!==200){
                         store.dispatch(forgotPasswordChangingFailed());
                     }
-                    else{
+                    if(res.status===401){
+                        Alert.alert("Incorrect email address.")
+                    }
+                    if(res.status===200){
                         store.dispatch(forgotPasswordChangedSuccess());
                         checkEmail();
                     }

@@ -1,13 +1,12 @@
 import React from "react";
 import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import LottieView from "lottie-react-native";
-import {Actions} from "react-native-router-flux";
+
+import {useNavigation} from "@react-navigation/native";
 
 function CheckEmail (){
-
-    const login = () =>{
-        Actions.login()
-    }
+    const navigation = useNavigation();
+    const login = () => navigation.navigate("login")
 
     return(
         <View style={styles.container}>
