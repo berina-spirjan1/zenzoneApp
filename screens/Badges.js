@@ -43,16 +43,13 @@ export default class Badges extends Component{
                 this.setState({
                     data: responseJson
                 })
-                // console.log(this.state.data)
             })
             .catch((error) => {
                 console.error(error);
             });
     }
 
-    profile(){
-        Actions.profile()
-    }
+    profile = () => this.props.navigation.navigate("profile")
 
     render() {
 
