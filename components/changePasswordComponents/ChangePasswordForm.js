@@ -1,27 +1,19 @@
-import {
-    Alert, AsyncStorage,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View
-} from "react-native";
+import {AsyncStorage, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
 import ChangePasswordLightIcon from "../../assets/icons/ChangePasswordLightIcon";
-import React, { useState } from "react";
-import { CHANGE_PASSWORD } from "../../configuration/config";
+import React, {useState} from "react";
+import {CHANGE_PASSWORD} from "../../configuration/config";
 import store from "../../redux/store";
-import {
-    changePasswordFailed,
-    changePasswordStarted,
-    changePasswordSuccess,
-} from "../../redux/actions";
+import {changePasswordFailed, changePasswordStarted, changePasswordSuccess,} from "../../redux/actions";
+import {useNavigation} from "@react-navigation/native";
 
 
 export const ChangePasswordForm = () =>{
-
+    const navigation = useNavigation();
     const [current_password, setCurrentPassword] = useState('')
     const [new_password, setNewPassword] = useState('')
     const [confirm_new_password, setConfirmNewPassword] = useState('')
+
+    const login = () => navigation.navigate("login")
 
     const onChangePasswordHandler = async () => {
 
@@ -53,6 +45,7 @@ export const ChangePasswordForm = () =>{
                     if (res.status !== 200) {
                         store.dispatch(changePasswordFailed());
                     } else {
+                        login();
                         store.dispatch(changePasswordSuccess());
                     }
                 } catch (err) {
@@ -67,25 +60,16 @@ export const ChangePasswordForm = () =>{
             <TextInput style={styles.inputOldPassword}
                        onChangeText={setCurrentPassword}
                        secureTextEntry={true}>
-                {/*<FontAwesome5 name={'lock'}*/}
-                {/*              size={18}*/}
-                {/*              color={'#000000'}/>*/}
             </TextInput>
             <Text style={styles.newPassword}>New password</Text>
             <TextInput style={styles.inputNewPassword}
                        onChangeText={setNewPassword}
                        secureTextEntry={true}>
-                {/*<FontAwesome5 name={'key'}*/}
-                {/*              size={18}*/}
-                {/*              color={'#000000'}/>*/}
             </TextInput>
             <Text style={styles.confirmPassword}>Confirm password</Text>
             <TextInput style={styles.inputConfirmPassword}
                        onChangeText={setConfirmNewPassword}
                        secureTextEntry={true}>
-                {/*<FontAwesome5 name={'lock-open'}*/}
-                {/*              size={18}*/}
-                {/*              color={'#000000'}/>*/}
             </TextInput>
             <View>
                 <TouchableOpacity style={styles.button}
