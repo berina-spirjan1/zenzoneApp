@@ -14,6 +14,8 @@ import {
 
 import {RouterMainStack} from "./routes/RouterMainStack";
 import {NavigationContainer} from "@react-navigation/native";
+import store from "./redux/store";
+import {Provider} from "react-redux";
 
 
 export default function App() {
@@ -31,9 +33,11 @@ export default function App() {
     }
 
     return (
-        <NavigationContainer>
-             <RouterMainStack/>
-         </NavigationContainer>
+        <Provider store={store}>
+            <NavigationContainer>
+                 <RouterMainStack/>
+            </NavigationContainer>
+        </Provider>
     );
 }
 
