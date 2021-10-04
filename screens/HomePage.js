@@ -41,7 +41,8 @@ export default class HomePage extends Component{
         currentPage: 0,
         lastPage: 1,
         token: null,
-        isActiveCategory: false
+        isActiveCategory: false,
+        currentCategory: ''
     }
 
     updateSearch = (searchText) => {
@@ -319,8 +320,9 @@ export default class HomePage extends Component{
             .then((responseJson) => {
                 this.setState({
                     data: responseJson.data.data,
-                    isActiveCategory: true
+                    currentCategory: responseJson.data.data[0].category.title
                 })
+                console.log(responseJson.data.data[0].category.title)
             })
             .catch((error) => {
                 console.error(error);
@@ -378,35 +380,38 @@ export default class HomePage extends Component{
                                 <View style={{flexDirection: 'row'}}>
                                     {this.state.categories.map(function(obj,i) {
                                         return (
-                                            <TouchableOpacity style={styleLightMode.categoryCard}
-                                                              onPress={() => this.filterActivitiesUsingCategory(obj.id)}>
-                                                <Card  styles={{ card: { backgroundColor: obj.color,
-                                                        borderRadius:30,
-                                                        shadowColor: "#000000",
-                                                        shadowOffset: {
-                                                            width: 0,
-                                                            height: 2,
-                                                        },
-                                                        shadowOpacity: 0.44,
-                                                        shadowRadius: 3,
-                                                        elevation: 5
-                                                    }}}>
-                                                    <View style={styleLightMode.icon2}>
-                                                        <FontAwesome5 name={obj.icon}
-                                                                      size={35}
-                                                                      color={'#000000'}/>
-                                                    </View>
-                                                    <CardContent>
-                                                        <Text style={styleLightMode.categoryName}>{obj.title}</Text>
-                                                    </CardContent>
-                                                </Card>
-                                            </TouchableOpacity>
+                                            <>
+                                                <TouchableOpacity style={styleLightMode.categoryCard}
+                                                                  onPress={() => this.filterActivitiesUsingCategory(obj.id)}>
+                                                    <Card  styles={{ card: { backgroundColor: obj.color,
+                                                            borderRadius:30,
+                                                            shadowColor: "#000000",
+                                                            shadowOffset: {
+                                                                width: 0,
+                                                                height: 2,
+                                                            },
+                                                            shadowOpacity: 0.44,
+                                                            shadowRadius: 3,
+                                                            elevation: 5
+                                                        }}}>
+                                                        <View style={styleLightMode.icon2}>
+                                                            <FontAwesome5 name={obj.icon}
+                                                                          size={35}
+                                                                          color={'#000000'}/>
+                                                        </View>
+                                                        <CardContent>
+                                                            <Text style={styleLightMode.categoryName}>{obj.title}</Text>
+                                                        </CardContent>
+                                                    </Card>
+                                                </TouchableOpacity>
+                                            </>
                                         )
                                     },this)}
                                 </View>
                             </ScrollView>
                         )}
-                        <Text style={styleLightMode.singleCategoryName}>Travel</Text>
+
+                        <Text style={styleLightMode.singleCategoryName}>{this.state.currentCategory}</Text>
                         {renderIf(this.state.noData, <Text style={{textAlign: 'center'}}>No data found.</Text>)}
                         {renderIf(this.state.data.length,
                             <ScrollView vertical>
