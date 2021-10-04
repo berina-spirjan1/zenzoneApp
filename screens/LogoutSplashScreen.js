@@ -1,10 +1,5 @@
 import React, {Component} from "react";
-import {
-    View,
-    StyleSheet,
-    Image,
-    Text
-} from "react-native";
+import {Image, StyleSheet, Text, View} from "react-native";
 import {isIphoneX} from "react-native-iphone-x-helper";
 import {renderIf} from "../utilities/CommonMethods";
 
