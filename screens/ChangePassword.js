@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { StatusBar } from 'react-native';
-import { Toolbar } from "react-native-material-ui";
-import { ChangePasswordForm } from "../components/changePasswordComponents/ChangePasswordForm";
+import React, {Component} from 'react';
+import {StatusBar} from 'react-native';
+import {Toolbar} from "react-native-material-ui";
+import {ChangePasswordForm} from "../components/changePasswordComponents/ChangePasswordForm";
 import {isIphoneX} from "react-native-iphone-x-helper";
 import {renderIf} from "../utilities/CommonMethods";
 
