@@ -1,4 +1,4 @@
-import { createTheme } from 'react-native-theming'
+import {createTheme} from 'react-native-theming'
 
 export const themes = [
     createTheme({

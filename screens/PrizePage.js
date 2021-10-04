@@ -1,9 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {
-    View,
-    StyleSheet,
-    Text, StatusBar, AsyncStorage
-} from "react-native";
+import React from "react";
+import {StatusBar, StyleSheet, Text, View} from "react-native";
 import {Toolbar} from "react-native-material-ui";
 import LottieView from "lottie-react-native";
 import {renderIf} from "../utilities/CommonMethods";
