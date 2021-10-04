@@ -38,7 +38,6 @@ import {
     userRegistrationSuccess
 } from "../redux/actions";
 import { isIphoneX } from "react-native-iphone-x-helper";
-import SingleActivity from "./SingleActivity";
 
 export default class HomePage extends Component{
     constructor(props) {
@@ -59,27 +58,6 @@ export default class HomePage extends Component{
         lastPage: 1,
         token: null,
         isActiveCategory: false
-    }
-
-    //added navigations to another component or pages
-    sideMenu(){
-        Actions.sideMenu()
-    }
-
-    leaderboard2(){
-        Actions.leaderboard2()
-    }
-
-    daily(){
-        Actions.daily()
-    }
-
-    settings(){
-        Actions.settings()
-    }
-
-    seeAll() {
-        Actions.seeAll()
     }
 
     updateSearch = (searchText) => {
@@ -331,16 +309,12 @@ export default class HomePage extends Component{
             })
     }
 
-    singleActivity() {
-        Actions.singleActivity()
-    }
+    singleActivity = () => this.props.navigation.navigate("singleActivity")
+
 
     async showMore(id) {
-        console.log("IN SHOW MORE")
         await AsyncStorage.setItem('id', JSON.stringify(id))
-        Actions.push('singleActivity',SingleActivity)
         this.singleActivity()
-        console.log("SAMO PROSAO")
     }
 
     async isLogin(){
@@ -387,7 +361,7 @@ export default class HomePage extends Component{
                                                    onChangeText: text => this.updateSearch(text),
                                                    onSearchCloseRequested: (page=1) => this.componentDidMount(page),
                                                }}
-                                               onLeftElementPress={this.sideMenu}/>)}
+                                               onLeftElementPress={() => this.props.navigation.navigate("sideMenu")}/>)}
                 {renderIf(!isIphoneX(),<Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                                                 leftElement="menu"
                                                 centerElement="Activities"
@@ -397,7 +371,7 @@ export default class HomePage extends Component{
                                                     onChangeText: text => this.updateSearch(text),
                                                     onSearchCloseRequested: (page=1) => this.componentDidMount(page),
                                                 }}
-                                                onLeftElementPress={this.sideMenu}/>)}
+                                                onLeftElementPress={() => this.props.navigation.navigate("sideMenu")}/>)}
 
                 {this.state.isLoading ? <Loader show={true} loading={this.state.isLoading} /> : null}
                 <SafeAreaView>
@@ -411,7 +385,7 @@ export default class HomePage extends Component{
                         <View style={{flexDirection: 'row'}}>
                             <Text style={styleLightMode.titleCategories}>Categories</Text>
                             <Text style={styleLightMode.seeAll}
-                                  onPress={this.seeAll}>See all</Text>
+                                  onPress={()=>this.props.navigation.navigate("seeAll")}>See all</Text>
                         </View>
                         {renderIf(this.state.noDataCategory, <Text style={{textAlign: 'center'}}>No data found.</Text>)}
                         {renderIf(this.state.categories.length,
