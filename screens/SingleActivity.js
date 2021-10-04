@@ -1,35 +1,29 @@
 import React, {Component} from "react";
 import {
-    View,
-    StyleSheet,
-    StatusBar,
+    Alert,
     AsyncStorage,
-    Image,
-    ScrollView,
-    SafeAreaView,
     Dimensions,
-    Text,
+    Image,
     ImageBackground,
+    Platform,
+    RefreshControl,
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    TextInput,
     TouchableOpacity,
-    TextInput, Platform, RefreshControl, Alert
+    View
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
-import {
-    BASE_URL,
-    COMMENT,
-    SINGLE_ACTIVITY,
-    USER
-} from "../configuration/config";
-import { isIphoneX } from "react-native-iphone-x-helper";
-import { renderIf } from "../utilities/CommonMethods";
-import { Actions } from "react-native-router-flux";
-import { FontAwesome5 } from "@expo/vector-icons";
+import {BASE_URL, COMMENT, SINGLE_ACTIVITY, USER} from "../configuration/config";
+import {isIphoneX} from "react-native-iphone-x-helper";
+import {renderIf} from "../utilities/CommonMethods";
+import {Actions} from "react-native-router-flux";
+import {FontAwesome5} from "@expo/vector-icons";
 import store from "../redux/store";
-import {
-    userRegistrationFailed,
-    userRegistrationStarted,
-    userRegistrationSuccess
-} from "../redux/actions";
+import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../redux/actions";
 import * as ImagePicker from "expo-image-picker";
 import ConvertDate from "../utilities/ConvertDate";
 
@@ -75,9 +69,7 @@ export default class SingleActivity extends Component{
 
     };
 
-    goToAboutUserWhoCreatedActivity(){
-        Actions.goToAboutUserWhoCreatedActivity()
-    }
+    goToAboutUserWhoCreatedActivity = () => this.props.navigation.navigate("goToAboutUserWhoCreatedActivity")
 
     async showUser(user_id){
         await AsyncStorage.setItem('user_id',JSON.stringify(user_id))
@@ -140,9 +132,7 @@ export default class SingleActivity extends Component{
             });
     }
 
-    singleActivity(){
-        Actions.singleActivity()
-    }
+    singleActivity = () => this.props.navigation.navigate("singleActivity")
 
     async postComment(activity_id){
         let token = await AsyncStorage.getItem('jwt')
@@ -184,7 +174,6 @@ export default class SingleActivity extends Component{
                     if (res.status !== 200) {
                         store.dispatch(userRegistrationFailed());
                     } else {
-                        // Alert.alert('Successfully posted comment')
                         this.singleActivity()
                         store.dispatch(userRegistrationSuccess());
                     }
@@ -194,7 +183,6 @@ export default class SingleActivity extends Component{
             })
     }
     deleteFunction(comment_id){
-
         (async () => {
             await this.deleteComment(comment_id)
         })();
@@ -240,10 +228,6 @@ export default class SingleActivity extends Component{
      }
 
 
-    homePageActivities(){
-        Actions.homePageActivities()
-    }
-
     render() {
 
         const screenHeight = Dimensions.get('window').height
@@ -256,11 +240,11 @@ export default class SingleActivity extends Component{
                 {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
                                                 leftElement="arrow-back"
                                                 centerElement={this.state.data.title}
-                                                onLeftElementPress={this.homePageActivities}/>)}
+                                                onLeftElementPress={()=>this.props.navigation.navigate("homePageActivities")}/>)}
                 {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                                                         leftElement="arrow-back"
                                                         centerElement={this.state.data.title}
-                                                        onLeftElementPress={this.homePageActivities}/> )}
+                                                        onLeftElementPress={()=>this.props.navigation.navigate("homePageActivities")}/> )}
                 <SafeAreaView style={styles.safeArea}
                               style={{height: screenHeight}}>
                     <ScrollView vertical={true}
