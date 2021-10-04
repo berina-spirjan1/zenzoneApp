@@ -1,41 +1,32 @@
 import React, {Component} from "react";
 import {
-    View,
-    SafeAreaView,
-    StyleSheet,
-    ScrollView,
-    Dimensions,
-    ImageBackground,
-    Image,
-    Text,
     AsyncStorage,
+    Dimensions,
+    Image,
+    ImageBackground,
     RefreshControl,
+    SafeAreaView,
+    ScrollView,
+    StyleSheet,
+    Text,
     TouchableOpacity,
-    Alert
+    View
 } from "react-native";
 
-import { Toolbar } from "react-native-material-ui";
-import { Actions } from "react-native-router-flux";
-import {
-    BASE_URL,
-    MY_ACTIVITIES, USER
-} from "../configuration/config";
-import { isIphoneX } from "react-native-iphone-x-helper";
-import { renderIf } from "../utilities/CommonMethods";
+import {Toolbar} from "react-native-material-ui";
+import {Actions} from "react-native-router-flux";
+import {BASE_URL, MY_ACTIVITIES, USER} from "../configuration/config";
+import {isIphoneX} from "react-native-iphone-x-helper";
+import {renderIf} from "../utilities/CommonMethods";
 import Loader from "../utilities/Loader";
-import {
-    Card,
-    CardAction
-} from "react-native-card-view";
+import {Card} from "react-native-card-view";
 
 export default class MyActivities extends Component{
     constructor(props) {
         super();
     }
 
-    myProfileInfoBack(){
-        Actions.myProfileInfoBack()
-    }
+    myProfileInfoBack = () => this.props.navigation.navigate("myProfileInfoBack")
 
     state = {
         data: [],
@@ -101,9 +92,7 @@ export default class MyActivities extends Component{
 
     }
 
-    goToSingleActivity(){
-        Actions.goToSingleActivity()
-    }
+    goToSingleActivity = () => this.props.navigation.navigate("goToSingleActivity")
 
 
     async showMore(id) {
