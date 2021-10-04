@@ -12,7 +12,7 @@ import {
 } from "react-native";
 
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import { Actions } from "react-native-router-flux";
+
 import {
     ACTIVITY,
     CATEGORY
@@ -26,10 +26,11 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import {renderIf} from "../../utilities/CommonMethods";
 import {Card, CardAction, CardContent} from "react-native-card-view";
-import AutocompleteInput from "react-native-autocomplete-input";
+
+import { useNavigation } from '@react-navigation/native';
 
 export const CreateNewActivityForm = () => {
-
+    const navigation = useNavigation();
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     let [image, setImage] = useState(null);
@@ -40,6 +41,7 @@ export const CreateNewActivityForm = () => {
     const [searchText, setSearchText] = useState('')
     const [searchCategory, setSearchCategory] = useState('')
     const [activitiesData, setActivitiesData] = useState([])
+    const [token, setToken] = useState(null)
 
     useEffect(() => {
         (async () => {
@@ -114,7 +116,7 @@ export const CreateNewActivityForm = () => {
 
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
-
+        setToken(token)
 
         const activity = new FormData();
         activity.append('category_id',category_id);
@@ -164,19 +166,14 @@ export const CreateNewActivityForm = () => {
 
 
 
-    const switchSuccessfullyAddedCreateActivity = () => {
-        Actions.switchSuccessfullyAddedCreateActivity()
-    }
+    const switchSuccessfullyAddedCreateActivity = () => navigation.navigate("switchSuccessfullyAddedCreateActivity")
 
     const saveCategoryId = (i) =>{
         setCategoryId(i)
         console.log(i)
     }
 
-    const seeAllCategories = () =>{
-        Actions.seeAllCategories()
-    }
-
+    const seeAllCategories = () => navigation.navigate("seeAllCategories")
 
     return (
         <View style={styles.container}>
@@ -241,7 +238,6 @@ export const CreateNewActivityForm = () => {
                     {/*</View>*/}
                     <View style={{flexDirection: 'row'}}>
                         <Text style={styles.comment}>Description</Text>
-                        <Text style={styles.counter}>0/1000</Text>
                     </View>
 
                     <TextInput numberOfLines={10}
@@ -281,7 +277,6 @@ export const CreateNewActivityForm = () => {
 
                 </ScrollView>
             </SafeAreaView>
-
         </View>
     )
 }
