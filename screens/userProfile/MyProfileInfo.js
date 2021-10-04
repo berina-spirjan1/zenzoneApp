@@ -1,18 +1,18 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import {
-    View,
-    StyleSheet,
-    StatusBar,
-    ImageBackground,
+    AsyncStorage,
+    Dimensions,
     Image,
-    Text,
+    ImageBackground,
     SafeAreaView,
     ScrollView,
+    StatusBar,
+    StyleSheet,
+    Text,
     TouchableOpacity,
-    Dimensions,
-    AsyncStorage
+    View
 } from "react-native";
-import { Toolbar } from "react-native-material-ui";
+import {Toolbar} from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import {onLogoutHandler} from "../../components/logout/Logout";
@@ -33,6 +33,7 @@ export default class MyProfileInfo extends Component{
 
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
+        console.log(token)
 
         fetch(`${USER}`, {
             method: 'GET',
@@ -53,26 +54,18 @@ export default class MyProfileInfo extends Component{
             .catch((error) => {
                 console.error(error);
             });
+        await AsyncStorage.setItem('theme',JSON.stringify(this.state.data.theme));
     }
 
-    switchToChangePassword(){
-        Actions.switchToChangePassword()
-    }
+    switchToChangePassword = () => this.props.navigation.navigate("switchToChangePassword")
 
-    backToProfile(){
-        Actions.backToProfile()
-    }
+    backToProfile = () => this.props.navigation.navigate("backToProfile")
 
-    goToDailyChallenge(){
-        Actions.goToDailyChallenge()
-    }
+    goToDailyChallenge = () => this.props.navigation.navigate("goToDailyChallenge")
 
-    goToLeaderboard(){
-        Actions.goToLeaderboard()
-    }
-    updateProfile(){
-        Actions.updateProfile()
-    }
+    goToLeaderboard = () => this.props.navigation.navigate("goToLeaderboard")
+
+    updateProfile = () => this.props.navigation.navigate("updateProfile")
 
     onMenuItemClick(label){
         if(label.index===0){
