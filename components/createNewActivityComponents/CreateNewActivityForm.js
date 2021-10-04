@@ -13,21 +13,14 @@ import {
 
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-import {
-    ACTIVITY,
-    CATEGORY
-} from "../../configuration/config";
+import {ACTIVITY, CATEGORY} from "../../configuration/config";
 import store from "../../redux/store";
-import {
-    failedAddingActivity,
-    startedAddingActivity,
-    successfullyAddedActivity
-} from "../../redux/actions";
+import {failedAddingActivity, startedAddingActivity, successfullyAddedActivity} from "../../redux/actions";
 import * as ImagePicker from "expo-image-picker";
 import {renderIf} from "../../utilities/CommonMethods";
 import {Card, CardAction, CardContent} from "react-native-card-view";
 
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 export const CreateNewActivityForm = () => {
     const navigation = useNavigation();
