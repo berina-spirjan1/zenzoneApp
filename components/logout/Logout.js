@@ -1,10 +1,6 @@
-import { LOGOUT } from "../../configuration/config";
+import {LOGOUT} from "../../configuration/config";
 import store from "../../redux/store";
-import {
-    userLogoutFailed,
-    userLogoutStarted,
-    userLogoutSuccess
-} from "../../redux/actions";
+import {userLogoutFailed, userLogoutStarted, userLogoutSuccess} from "../../redux/actions";
 import {Alert, AsyncStorage} from "react-native";
 
 export const onLogoutHandler = async () => {
