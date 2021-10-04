@@ -1,9 +1,5 @@
-import React, { Component } from "react";
-import {
-    View,
-    StyleSheet,
-    Text, StatusBar, AsyncStorage
-} from "react-native";
+import React, {Component} from "react";
+import {AsyncStorage, StatusBar, StyleSheet, Text, View} from "react-native";
 import {Toolbar} from "react-native-material-ui";
 
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -16,11 +12,7 @@ import {USER, USER_UPDATE} from "../../configuration/config";
 import {renderIf} from "../../utilities/CommonMethods";
 import {isIphoneX} from "react-native-iphone-x-helper";
 import store from "../../redux/store";
-import {
-    failedAddingActivity,
-    startedAddingActivity,
-    successfullyAddedActivity
-} from "../../redux/actions";
+import {failedAddingActivity, startedAddingActivity, successfullyAddedActivity} from "../../redux/actions";
 
 
 export default class Settings extends Component{
@@ -34,17 +26,11 @@ export default class Settings extends Component{
         lightThemeIsOn: true
     }
 
-    toLanguage(){
-        Actions.toLanguage()
-    }
+    toLanguage = () => this.props.navigation.navigate("toLanguage")
 
-    toHelp(){
-        Actions.toHelp()
-    }
+    toHelp = () => this.props.navigation.navigate("toHelp")
 
-    toInfoMain(){
-        Actions.toInfoMain()
-    }
+    toInfoMain = () => this.props.navigation.navigate("toInfoMain")
 
 
 
