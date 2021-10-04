@@ -1,21 +1,19 @@
 import React, {Component} from 'react';
-import {AsyncStorage, View} from "react-native";
+import {View} from "react-native";
 import LottieView from 'lottie-react-native';
 import ZenZoneTitle from "../assets/icons/ZenZoneTitle";
-import {Actions} from "react-native-router-flux";
-import {renderIf} from "../utilities/CommonMethods";
 import {getTheme} from "../utilities/GetTheme";
 
 const duration = 3 * 1000;
 export default class Splash extends Component{
 
     componentDidMount() {
-        setTimeout(() => this.toBottomNavigationBar(), duration)
+        setTimeout(() => this.props.navigation.navigate("toBottomNavigationBar"), duration)
     }
 
-    toBottomNavigationBar(){
-        Actions.toBottomNavigationBar()
-    }
+    // toBottomNavigationBar(){
+    //     Actions.toBottomNavigationBar()
+    // }
 
     render() {
 
@@ -36,7 +34,7 @@ export default class Splash extends Component{
     }
 }
 
-const styles={
+const styles = {
     container:{
         backgroundColor: '#CBDBF2',
         flex: 1

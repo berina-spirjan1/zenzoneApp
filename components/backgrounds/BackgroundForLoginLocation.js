@@ -1,5 +1,5 @@
 import * as React from "react";
-import Svg, { G, Rect } from "react-native-svg";
+import Svg, {G, Rect} from "react-native-svg";
 
 function BackgroundForLoginLocation(props) {
     return (

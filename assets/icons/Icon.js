@@ -1,5 +1,5 @@
 import * as React from "react";
-import Svg, { Defs, RadialGradient, Stop, G, Path } from "react-native-svg";
+import Svg, {G, Path} from "react-native-svg";
 
 function Icon(props) {
     return (

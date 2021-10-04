@@ -1,5 +1,5 @@
 import * as React from "react"
-import Svg, { G, Path, Ellipse, Rect } from "react-native-svg"
+import Svg, {Ellipse, G, Path, Rect} from "react-native-svg"
 
 function DoChallengeIconLightMode(props) {
     return (

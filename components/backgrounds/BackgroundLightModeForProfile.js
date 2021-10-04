@@ -1,12 +1,5 @@
 import * as React from "react"
-import Svg, {
-    Defs,
-    RadialGradient,
-    Stop,
-    G,
-    Ellipse,
-    Rect,
-} from "react-native-svg"
+import Svg, {Defs, Ellipse, G, RadialGradient, Rect, Stop,} from "react-native-svg"
 
 function BackgroundLightModeForProfile(props) {
     return (

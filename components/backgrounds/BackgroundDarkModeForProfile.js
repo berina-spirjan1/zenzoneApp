@@ -1,5 +1,5 @@
 import * as React from "react"
-import Svg, { Defs, G, Path, Ellipse, Rect } from "react-native-svg"
+import Svg, {Defs, Ellipse, G, Path, Rect} from "react-native-svg"
 
 function BackgroundDarkModeForProfile(props) {
     return (

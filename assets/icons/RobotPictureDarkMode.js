@@ -1,5 +1,5 @@
 import * as React from "react";
-import Svg, { Defs, G, Path, Ellipse } from "react-native-svg";
+import Svg, {Defs, Ellipse, G, Path} from "react-native-svg";
 
 function RobotPictureDarkMode(props) {
     return (

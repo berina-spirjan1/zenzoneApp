@@ -1,5 +1,5 @@
 import * as React from "react"
-import Svg, { Path, G, Ellipse } from "react-native-svg"
+import Svg, {Ellipse, G, Path} from "react-native-svg"
 
 function YourFamilyDarkModeIcon(props) {
     return (
