@@ -1,24 +1,23 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import {
-    View,
-    StyleSheet,
-    StatusBar,
-    ImageBackground,
+    AsyncStorage,
+    Dimensions,
     Image,
+    ImageBackground,
+    SafeAreaView,
+    ScrollView,
+    StatusBar,
+    StyleSheet,
     Text,
     TouchableOpacity,
-    SafeAreaView,
-    ScrollView, Dimensions, AsyncStorage, Alert
+    View
 } from "react-native";
-import { Toolbar } from "react-native-material-ui";
+import {Toolbar} from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import { Actions } from "react-native-router-flux";
-import {
-    BASE_URL, LOGOUT,
-    USER
-} from "../../configuration/config";
-import { renderIf } from "../../utilities/CommonMethods";
-import { isIphoneX } from "react-native-iphone-x-helper";
+import {Actions} from "react-native-router-flux";
+import {BASE_URL, LOGOUT, USER} from "../../configuration/config";
+import {renderIf} from "../../utilities/CommonMethods";
+import {isIphoneX} from "react-native-iphone-x-helper";
 import store from "../../redux/store";
 import {userLogoutFailed, userLogoutStarted, userLogoutSuccess} from "../../redux/actions";
 
@@ -27,25 +26,15 @@ export default class UserProfile extends Component{
         super();
     }
 
-    myProfile(){
-        Actions.myProfile()
-    }
+    myProfile = () => this.props.navigation.navigate("myProfile")
 
-    badges(){
-        Actions.badges()
-    }
+    badges = () => this.props.navigation.navigate("badges")
 
-    leaderboard(){
-        Actions.leaderboard()
-    }
+    leaderboard = () => this.props.navigation.navigate("leaderboard")
 
-    activities(){
-        Actions.activities()
-    }
+    activities = () => this.props.navigation.navigate("activities")
 
-    settings(){
-        Actions.settings()
-    }
+    settings = () => this.props.navigation.navigate("settings")
 
 
     state = {
@@ -79,13 +68,7 @@ export default class UserProfile extends Component{
 
     }
 
-    login(){
-        Actions.login()
-    }
-
-    switchToLogoutPage(){
-        Actions.switchToLogoutPage()
-    }
+    switchToLogoutPage = () => this.props.navigation.navigate("switchToLogoutPage")
 
 
     onLogoutHandler = async () => {

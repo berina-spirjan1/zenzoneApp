@@ -8,6 +8,7 @@ import Leaderboard from "../screens/Leaderboard";
 import MyActivities from "../screens/MyActivities";
 import {RoutesSettingsStack} from "./RoutesSettingsStack";
 import SingleActivity from "../screens/SingleActivity";
+import LogoutSplashScreen from "../screens/LogoutSplashScreen";
 
 
 const Stack = createNativeStackNavigator()
@@ -47,6 +48,11 @@ export const RoutesProfileStack = () =>{
                               }}/>
                 <Stack.Screen name={"goToSingleActivity"}
                               component={SingleActivity}
+                              options={{
+                                  headerShown: false
+                              }}/>
+                <Stack.Screen name={"switchToLogoutPage"}
+                              component={LogoutSplashScreen}
                               options={{
                                   headerShown: false
                               }}/>

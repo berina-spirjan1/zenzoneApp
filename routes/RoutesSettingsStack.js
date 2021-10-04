@@ -11,7 +11,6 @@ const Stack = createNativeStackNavigator()
 
 export const RoutesSettingsStack = () =>{
     return(
-        <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name={"switchToSettings"}
                               component={Settings}
@@ -39,6 +38,5 @@ export const RoutesSettingsStack = () =>{
                                   headerShown: false
                               }}/>
             </Stack.Navigator>
-        </NavigationContainer>
     )
 }

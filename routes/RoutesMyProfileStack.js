@@ -12,7 +12,6 @@ const Stack = createNativeStackNavigator()
 
 export const RoutesMyProfileStack = () =>{
     return(
-        <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name={"switchToMyProfileInfo"}
                               component={MyProfileInfo}
@@ -45,6 +44,5 @@ export const RoutesMyProfileStack = () =>{
                                   headerShown: false
                               }}/>
             </Stack.Navigator>
-        </NavigationContainer>
     )
 }
