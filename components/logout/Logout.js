@@ -30,7 +30,7 @@ export const onLogoutHandler = async () => {
                     store.dispatch(userLogoutFailed());
                     console.log("greska", res.status)
                 } else {
-                    await AsyncStorage.clear('jwt')
+                    await AsyncStorage.clear()
                     console.log("Successfully logout")
                     Alert.alert('You have been successfully logged out.')
                     store.dispatch(userLogoutSuccess());
