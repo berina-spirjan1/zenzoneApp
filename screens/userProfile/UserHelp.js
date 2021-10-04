@@ -1,15 +1,5 @@
-import React, { Component } from "react";
-import {
-    StatusBar,
-    StyleSheet,
-    View,
-    Text,
-    Image,
-    TouchableOpacity,
-    SafeAreaView,
-    ScrollView,
-    Dimensions
-} from "react-native";
+import React, {Component} from "react";
+import {Dimensions, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, View} from "react-native";
 import {Toolbar} from "react-native-material-ui";
 import UserInfoComponent from "../../components/userProfileComponents/UserInfoComponent";
 import {Actions} from "react-native-router-flux";
@@ -21,9 +11,7 @@ export default class UserHelp extends Component{
         super();
     }
 
-    switchToSettings(){
-        Actions.switchToSettings()
-    }
+    switchToSettings = () => this.props.navigation.navigate("switchToSettings")
 
     render(){
 
