@@ -1,11 +1,13 @@
 import React, {Component} from "react";
 import {
-    AsyncStorage, Dimensions,
+    AsyncStorage,
+    Dimensions,
     Image,
     ImageBackground,
     SafeAreaView,
     ScrollView,
-    StatusBar, StyleSheet,
+    StatusBar,
+    StyleSheet,
     Text,
     TouchableOpacity,
     View
@@ -13,12 +15,8 @@ import {
 import {renderIf} from "../utilities/CommonMethods";
 import {isIphoneX} from "react-native-iphone-x-helper";
 import {Toolbar} from "react-native-material-ui";
-import {
-    BASE_URL,
-    USER
-} from "../configuration/config";
+import {BASE_URL, USER} from "../configuration/config";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import {Actions} from "react-native-router-flux";
 
 export default class AboutUserWhoCreatedActivity extends Component{
 
@@ -52,9 +50,7 @@ export default class AboutUserWhoCreatedActivity extends Component{
 
     }
 
-    singleActivity(){
-        Actions.singleActivity()
-    }
+    singleActivity = () => this.props.navigation.navigate("singleActivity")
 
     render() {
 
