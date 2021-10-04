@@ -13,6 +13,7 @@ export const USER_UPDATE = `${USER}/update`;
 //activity
 export const ACTIVITY = `${API_URL}/activity`;
 export const SINGLE_ACTIVITY = `${API_URL}/activity`
+export const SEARCH_ACTIVITIES_BY_TITLE = `${ACTIVITY}/titles`
 
 //category
 export const CATEGORY = `${API_URL}/category`;
