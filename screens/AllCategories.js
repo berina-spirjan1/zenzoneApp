@@ -1,8 +1,5 @@
 import React, {Component} from "react";
-import {
-    View,
-    StyleSheet, Text, ScrollView, StatusBar
-} from "react-native";
+import {ScrollView, StatusBar, StyleSheet, Text, View} from "react-native";
 import {renderIf} from "../utilities/CommonMethods";
 import {Card, CardAction, CardContent} from "react-native-card-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
@@ -42,9 +39,7 @@ export default class AllCategories extends Component{
             });
     }
 
-    homePageActivities(){
-        Actions.homePageActivities()
-    }
+    homePageActivities = () => this.props.navigation.navigate("homePageActivities")
 
 
     render() {
@@ -55,11 +50,11 @@ export default class AllCategories extends Component{
                 {renderIf(isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 }}}
                                                 leftElement={'arrow-back'}
                                                 centerElement="All categories"
-                                                onLeftElementPress={this.homePageActivities}/>)}
+                                                onLeftElementPress={() => this.props.navigation.navigate("homePageActivities")}/>)}
                 {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' }}}
                                                  leftElement={'arrow-back'}
                                                  centerElement="All categories"
-                                                 onLeftElementPress={this.homePageActivities}/>)}
+                                                 onLeftElementPress={() => this.props.navigation.navigate("homePageActivities")}/>)}
                 {renderIf(this.state.noDataCategory, <Text style={{textAlign: 'center'}}>No data found.</Text>)}
                 {renderIf(this.state.categories.length,
                     <ScrollView horizontal={true}
