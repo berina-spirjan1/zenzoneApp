@@ -1,26 +1,31 @@
 import React, {useEffect, useState} from "react";
 import {
+    AsyncStorage,
+    Dimensions,
     Image,
+    Platform,
     SafeAreaView,
     ScrollView,
     StatusBar,
+    StyleSheet,
     Text,
     TextInput,
     TouchableOpacity,
-    View,
-    StyleSheet,
-    Dimensions, Platform, AsyncStorage
+    View
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import * as ImagePicker from "expo-image-picker";
-import {ACTIVITY, BASE_URL, USER, USER_UPDATE} from "../../configuration/config";
+import {BASE_URL, USER, USER_UPDATE} from "../../configuration/config";
 import store from "../../redux/store";
 import {failedAddingActivity, startedAddingActivity, successfullyAddedActivity} from "../../redux/actions";
 import {Actions} from "react-native-router-flux";
 import {renderIf} from "../../utilities/CommonMethods";
+import {useNavigation} from "@react-navigation/native";
 
 
 export const UpdateProfileForm = () =>{
+
+    const navigation = useNavigation();
     const screenHeight = Dimensions.get('window').height
     let [image, setImage] = useState(null)
     const [first_name, setFirstName] = useState('')
@@ -153,17 +158,13 @@ export const UpdateProfileForm = () =>{
         })();
     }, []);
 
-    const switchToMyProfileInfo = () =>{
-        Actions.switchToMyProfileInfo()
-    }
+    const switchToMyProfileInfo = () => this.props.navigation.navigate("switchToMyProfileInfo")
 
 
     return(
         <View>
             <TouchableOpacity style={styles.uploadImage}
                               onPress={pickImage}>
-
-                {/*<Text style={styles.upload}>Upload photo</Text>*/}
                 {renderIf(photoDirInitial===null,
                     <Image source={require('../../assets/images/user_photo.png')}
                               style={styles.userImageDefault}/>
