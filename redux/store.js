@@ -1,5 +1,5 @@
-import { createStore } from "redux";
-import { reducer } from "./reducer";
+import {createStore} from "redux";
+import {reducer} from "./reducer";
 
 //we are holding our states in store
 const store = createStore(reducer);
