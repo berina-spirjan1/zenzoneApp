@@ -1,5 +1,5 @@
 import {
-    Alert, AsyncStorage,
+    AsyncStorage,
     Dimensions,
     Image,
     SafeAreaView,
@@ -12,36 +12,26 @@ import {
     View
 } from "react-native";
 import BackgroundForLoginLocation from "../../components/backgrounds/BackgroundForLoginLocation";
-import { FontAwesome5 } from "@expo/vector-icons";
-import React, { useState } from "react";
-import {LOGIN, LOGOUT} from "../../configuration/config";
+import React, {useState} from "react";
+import {LOGIN} from "../../configuration/config";
 import store from "../../redux/store";
-import {
-    authFailed,
-    authStarted,
-    authSuccess, userLogoutFailed, userLogoutStarted, userLogoutSuccess
-} from "../../redux/actions";
+import {authFailed, authStarted, authSuccess} from "../../redux/actions";
 import {Actions} from "react-native-router-flux";
+import {useNavigation} from "@react-navigation/native";
 
 
 export const LoginWithLocationForm = () =>{
 
     const screenHeight = Dimensions.get('window').height
-
+    const navigation = useNavigation();
     const [email, setEmail] = useState('');
     const [password, setPassword] =  useState('');
 
-    const goToUserInfo = () =>{
-        Actions.goToUserInfo()
-    }
+    const goToUserInfo = () => navigation.navigate("switchLoginToUser")
 
-    const forgotPassword = () =>{
-        Actions.forgotPassword()
-    }
+    const forgotPassword = () => navigation.navigate("forgotPassword")
 
-    const signup = () =>{
-        Actions.signup()
-    }
+    const signUpWithLocationForm = () => navigation.navigate("signUpWithLocationForm")
 
     const onLoginHandler = () =>{
 
