@@ -12,9 +12,7 @@ export default class Language extends Component{
         super();
     }
 
-    switchToSettings(){
-        Actions.switchToSettings()
-    }
+    switchToSettings = () => this.props.navigation.navigate("switchToSettings")
 
     render() {
 
