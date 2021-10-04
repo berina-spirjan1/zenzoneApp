@@ -1,29 +1,26 @@
 import {
-    Alert,
     Dimensions,
     Image,
     SafeAreaView,
-    ScrollView, StatusBar, StyleSheet,
+    ScrollView,
+    StatusBar,
+    StyleSheet,
     Text,
     TextInput,
     TouchableOpacity,
     View
 } from "react-native";
 import BackgroundForLoginLocation from "../../components/backgrounds/BackgroundForLoginLocation";
-import { FontAwesome5 } from "@expo/vector-icons";
-import React, { useState } from "react";
-import { Actions } from "react-native-router-flux";
-import { REGISTER } from "../../configuration/config";
+import React, {useState} from "react";
+import {Actions} from "react-native-router-flux";
+import {REGISTER} from "../../configuration/config";
 import store from "../../redux/store";
-import {
-    userRegistrationFailed,
-    userRegistrationStarted,
-    userRegistrationSuccess
-} from "../../redux/actions";
+import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../../redux/actions";
+import {useNavigation} from "@react-navigation/native";
 
 
 export const SignUpWithLocationForm = () =>{
-
+    const navigation = useNavigation();
     const [name, setName] = useState('');
     const [first_name, setFirstName] =  useState('');
     const [last_name, setLastName] =  useState('');
@@ -35,9 +32,7 @@ export const SignUpWithLocationForm = () =>{
 
     const screenHeight = Dimensions.get('window').height
 
-    const login = () =>{
-        Actions.login()
-    }
+    const loginWithLocationForm = () => navigation.navigate("loginWithLocationForm")
 
 
     const validate = (text) => {
@@ -52,10 +47,6 @@ export const SignUpWithLocationForm = () =>{
             return true;
         }
     }
-
-    // const redirectToLogin = () =>{
-    //     Actions.login()
-    // }
 
     const onSubmitHandler = () =>{
 
@@ -113,64 +104,40 @@ export const SignUpWithLocationForm = () =>{
                         <Text style={styles.hintText}>Username</Text>
                         <TextInput style={styles.inputLabel}
                                    onChangeText={setName}>
-                            {/*<FontAwesome5 name="user"*/}
-                            {/*              size={18}*/}
-                            {/*              color={"#000000"}/>*/}
                         </TextInput>
                         <Text style={styles.hintText}>First name</Text>
                         <TextInput style={styles.inputLabel}
                                    onChangeText={setFirstName}>
-                            {/*<FontAwesome5 name={'user'}*/}
-                            {/*              size={18}*/}
-                            {/*              color={'#000000'}/>*/}
                         </TextInput>
                         <Text style={styles.hintText}>Last name</Text>
                         <TextInput style={styles.inputLabel}
                                    onChangeText={setLastName}>
-                            {/*<FontAwesome5 name={'user'}*/}
-                            {/*              size={18}*/}
-                            {/*              color={'#000000'}/>*/}
                         </TextInput>
                         <Text style={styles.hintText}>E-mail</Text>
                         <TextInput style={styles.inputLabel}
                                    onChangeText={setEmail}>
-                            {/*<FontAwesome5 name={'envelope'}*/}
-                            {/*              size={18}*/}
-                            {/*              color={'#000000'}/>*/}
                         </TextInput>
                         <Text style={styles.hintText}>Office location</Text>
                         <TextInput style={styles.inputLabel}
                                    onChangeText={setOfficeLocation}>
-                            {/*<FontAwesome5 name={'map-marker-alt'}*/}
-                            {/*              size={18}*/}
-                            {/*              color={'#000000'}/>*/}
                         </TextInput>
                         <Text style={styles.hintText}>Work position</Text>
                         <TextInput style={styles.inputLabel}
                                    onChangeText={setWorkPosition}>
-                            {/*<FontAwesome5 name={'briefcase'}*/}
-                            {/*              size={18}*/}
-                            {/*              color={'#000000'}/>*/}
                         </TextInput>
                         <Text style={styles.hintText}>Password</Text>
                         <TextInput style={styles.inputLabel}
                                    secureTextEntry={true}
                                    onChangeText={setPassword}>
-                            {/*<FontAwesome5 name="lock"*/}
-                            {/*              size={20}*/}
-                            {/*              color={"#000000"}/>*/}
                         </TextInput>
                         <Text style={styles.hintText}>Confirm password</Text>
                         <TextInput style={styles.inputLabel}
                                    secureTextEntry={true}
                                    onChangeText={setConfirmPassword}>
-                            {/*<FontAwesome5 name={'lock'}*/}
-                            {/*              size={18}*/}
-                            {/*              color={'#000000'}/>*/}
                         </TextInput>
                         <Text style={styles.forgotLoginDetails}>Already have your ZenZone account?
                             <Text style={styles.helpLogin}
-                                  onPress={(e) => this.onTextPress(e, 'Get help logging in')}> Login</Text>
+                                  onPress={loginWithLocationForm}> Login</Text>
                         </Text>
                         <TouchableOpacity style={styles.button}
                                           onPress={onSubmitHandler}>
