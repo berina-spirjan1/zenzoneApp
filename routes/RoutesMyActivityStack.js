@@ -4,6 +4,7 @@ import {NavigationContainer} from "@react-navigation/native";
 import MyActivities from "../screens/MyActivities";
 import UserProfile from "../screens/userProfile/UserProfile";
 import {RoutesProfileStack} from "./RoutesProfileStack";
+import SingleActivity from "../screens/SingleActivity";
 
 const Stack = createNativeStackNavigator()
 
@@ -12,6 +13,11 @@ export const RoutesMyActivityStack = () =>{
             <Stack.Navigator>
                 <Stack.Screen name={"myActivities"}
                               component={MyActivities}
+                              options={{
+                                  headerShown: false
+                              }}/>
+                <Stack.Screen name={"goToSingleActivity"}
+                              component={SingleActivity}
                               options={{
                                   headerShown: false
                               }}/>
