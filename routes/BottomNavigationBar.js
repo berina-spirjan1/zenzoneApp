@@ -1,30 +1,32 @@
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { FontAwesome5 } from "@expo/vector-icons";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import {FontAwesome5} from "@expo/vector-icons";
 
-import { NavigationContainer } from "@react-navigation/native";
-import RoutesHomePage from "./RoutesHomePage";
-import RoutesForChallenge from "./RoutesForChallenge";
-import RoutesCreateActivity from "./RoutesCreateActivity";
+import {NavigationContainer} from "@react-navigation/native";
 import RoutesLoginSignUp from "./RoutesLoginSignUp";
 import CustomTabBar from "../components/bottomNavigationBar/CustomTabBar";
 import TabBarCustomButton from "../components/bottomNavigationBar/TabBarCustomButton";
-import PrizePage from "../screens/PrizePage";
+import LogoutSplashScreen from "../screens/LogoutSplashScreen";
+import {RouterHomePageStack} from "./RoutesHomePageStack";
+import {RoutesCreateActivityStack} from "./RoutesCreateActivityStack";
+import {RoutesForChallengeStack} from "./RoutesForChallengeStack";
+import {RoutesLoginSignUpStack} from "./RoutesLoginSignUpStack";
 
 
 const Tab = createBottomTabNavigator();
 
 function BottomNavigationBar(){
     return(
-        <NavigationContainer>
             <Tab.Navigator
+                backBehavior={"Activities"}
                 initialRouteName="Activities"
                 screenOptions={{
                     showLabel: false,
                     style:{
                         borderTopWidth: 0,
                         backgroundColor: 'transparent',
-                        elevation: 0
+                        elevation: 0,
+                        lazy: true
                 },
                     tabBarShowLabel: false
             }}
@@ -32,7 +34,7 @@ function BottomNavigationBar(){
                     <CustomTabBar props={props}/>
                 )}>
                 <Tab.Screen name={'Activities'}
-                            component={RoutesHomePage}
+                            component={RouterHomePageStack}
                             options={{
                                 headerShown: false,
                                 tabBarIcon: ({focused}) => (
@@ -45,7 +47,7 @@ function BottomNavigationBar(){
                                 )
                             }}/>
                 <Tab.Screen name={'Challenge'}
-                            component={RoutesForChallenge}
+                            component={RoutesForChallengeStack}
                             options={{
                                 headerShown: false,
                                 tabBarIcon: ({focused}) => (
@@ -58,7 +60,7 @@ function BottomNavigationBar(){
                                 )
                             }}/>
                 <Tab.Screen name={'New activity'}
-                            component={RoutesCreateActivity}
+                            component={RoutesCreateActivityStack}
                             options={{
                                 headerShown: false,
                                 tabBarIcon: ({focused}) => (
@@ -71,7 +73,7 @@ function BottomNavigationBar(){
                                 )
                             }}/>
                 <Tab.Screen name={'Ranking'}
-                            component={PrizePage}
+                            component={LogoutSplashScreen}
                             options={{
                                 headerShown: false,
                                 tabBarIcon: ({focused}) => (
@@ -84,7 +86,7 @@ function BottomNavigationBar(){
                                 )
                             }}/>
                 <Tab.Screen name={'Login'}
-                            component={RoutesLoginSignUp}
+                            component={RoutesLoginSignUpStack}
                             options={{
                                 headerShown: false,
                                 tabBarIcon: ({focused}) => (
@@ -98,7 +100,6 @@ function BottomNavigationBar(){
                             }}/>
 
             </Tab.Navigator>
-        </NavigationContainer>
     )
 }
 

@@ -9,7 +9,6 @@ const Stack = createNativeStackNavigator()
 
 export const RouterMainStack = () =>{
     return(
-        <NavigationContainer>
             <Stack.Navigator>
                 <Stack.Screen name={"fromSplashScreen"}
                               component={Splash}
@@ -22,6 +21,5 @@ export const RouterMainStack = () =>{
                                   headerShown: false
                               }}/>
             </Stack.Navigator>
-        </NavigationContainer>
     )
 }
