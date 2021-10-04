@@ -1,10 +1,6 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import store from "../../redux/store";
-import {
-    userRegistrationFailed,
-    userRegistrationStarted,
-    userRegistrationSuccess
-} from "../../redux/actions";
+import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../../redux/actions";
 import {
     Dimensions,
     SafeAreaView,
@@ -14,15 +10,12 @@ import {
     Text,
     TextInput,
     TouchableOpacity,
-    View,
-    Alert
+    View
 } from "react-native";
 import Cload from "../../assets/icons/Cload";
 import Icon from "../../assets/icons/Icon";
-import { Actions } from "react-native-router-flux";
-import { REGISTER } from "../../configuration/config";
-import { useNavigation } from "@react-navigation/core";
-import validate from "react-native-web/dist/exports/StyleSheet/validate";
+import {Actions} from "react-native-router-flux";
+import {REGISTER} from "../../configuration/config";
 
 
 export const SignUpForm = () =>{
@@ -101,93 +94,69 @@ export const SignUpForm = () =>{
     };
 
     return(
-    <View style={stylesLightMode.backgroundStyle}>
-        <Cload style={stylesLightMode.cloads}/>
-        <Text style={stylesLightMode.welcomeTitle}>WELCOME TO </Text>
-        <Text style={stylesLightMode.zenzoneTitle}>ZENZONE</Text>
-        <SafeAreaView style={stylesLightMode.container}
-                      style={{height: screenHeight}}>
-            <ScrollView vertical={true}
-                        style={stylesLightMode.scrollView}>
-                <Text style={stylesLightMode.hintText}>Username</Text>
-                <TextInput style={stylesLightMode.inputLabel}
-                           onChangeText={setName}>
-                    {/*<FontAwesome5 name={'signature'}*/}
-                    {/*              size={18}*/}
-                    {/*              color={'#000000'}/>*/}
-                </TextInput>
-                <Text style={stylesLightMode.formValidation}>The name field is required.</Text>
-                <Text style={stylesLightMode.hintText}>First name</Text>
-                <TextInput style={stylesLightMode.inputLabel}
-                           onChangeText={setFirstName}>
-                    {/*<FontAwesome5 name={'user'}*/}
-                    {/*              size={18}*/}
-                    {/*              color={'#000000'}/>*/}
-                </TextInput>
-                <Text style={stylesLightMode.formValidation}>The first name field is required.</Text>
-                <Text style={stylesLightMode.hintText}>Last name</Text>
-                <TextInput style={stylesLightMode.inputLabel}
-                           onChangeText={setLastName}>
-                    {/*<FontAwesome5 name={'user'}*/}
-                    {/*              size={18}*/}
-                    {/*              color={'#000000'}/>*/}
-                </TextInput>
-                <Text style={stylesLightMode.formValidation}>The last name field is required.</Text>
-                <Text style={stylesLightMode.hintText}>E-mail</Text>
-                <TextInput style={stylesLightMode.inputLabel}
-                    // onChangeText={(text) => this.validate(text)}
-                           onChangeText={setEmail}>
-                    {/*<FontAwesome5 name={'envelope'}*/}
-                    {/*              size={18}*/}
-                    {/*              color={'#000000'}/>*/}
-                </TextInput>
-                <Text style={stylesLightMode.formValidation}>The email has already been taken.</Text>
-                <Text style={stylesLightMode.hintText}>Office location</Text>
-                <TextInput style={stylesLightMode.inputLabel}
-                           onChangeText={setOfficeLocation}>
-                    {/*<FontAwesome5 name={'map-marker-alt'}*/}
-                    {/*              size={18}*/}
-                    {/*              color={'#000000'}/>*/}
-                </TextInput>
-                <Text style={stylesLightMode.formValidation}>The office location field is required.</Text>
-                <Text style={stylesLightMode.hintText}>Work position</Text>
-                <TextInput style={stylesLightMode.inputLabel}
-                           onChangeText={setWorkPosition}>
-                    {/*<FontAwesome5 name={'briefcase'}*/}
-                    {/*              size={18}*/}
-                    {/*              color={'#000000'}/>*/}
-                </TextInput>
-                <Text style={stylesLightMode.formValidation}>The work position field is required.</Text>
-                <Text style={stylesLightMode.hintText}>Password</Text>
-                <TextInput style={stylesLightMode.inputLabel}
-                           secureTextEntry={true}
-                           onChangeText={setPassword}>
-                    {/*<FontAwesome5 name={'key'}*/}
-                    {/*              size={18}*/}
-                    {/*              color={'#000000'}/>*/}
-                </TextInput>
-                <Text style={stylesLightMode.formValidation}>The password field is required.</Text>
-                <Text style={stylesLightMode.hintText}>Confirm password</Text>
-                <TextInput style={stylesLightMode.inputLabel}
-                           secureTextEntry={true}
-                           onChangeText={setConfirmPassword}>
-                    {/*<FontAwesome5 name={'lock'}*/}
-                    {/*              size={18}*/}
-                    {/*              color={'#000000'}/>*/}
-                </TextInput>
-                <Text style={stylesLightMode.formValidation}>The confirm password field is required.</Text>
-                <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
-                    <Text style={{color: "#334A6D", fontWeight: 'bold'}}
-                          onPress={login}
-                    > Login</Text></Text>
-                <TouchableOpacity style={stylesLightMode.button}
-                                  onPress={onSubmitHandler}>
-                    <Text style={stylesDarkMode.buttonText}>SIGN UP</Text>
-                </TouchableOpacity>
-                <Icon style={stylesLightMode.icon}/>
-            </ScrollView>
-        </SafeAreaView>
-    </View>
+        <View style={stylesLightMode.backgroundStyle}>
+            <Cload style={stylesLightMode.cloads}/>
+            <Text style={stylesLightMode.welcomeTitle}>WELCOME TO </Text>
+            <Text style={stylesLightMode.zenzoneTitle}>ZENZONE</Text>
+            <SafeAreaView style={stylesLightMode.container}
+                          style={{height: screenHeight}}>
+                <ScrollView vertical={true}
+                            style={stylesLightMode.scrollView}>
+                    <Text style={stylesLightMode.hintText}>Username</Text>
+                    <TextInput style={stylesLightMode.inputLabel}
+                               onChangeText={setName}>
+                    </TextInput>
+                    <Text style={stylesLightMode.formValidation}>The name field is required.</Text>
+                    <Text style={stylesLightMode.hintText}>First name</Text>
+                    <TextInput style={stylesLightMode.inputLabel}
+                               onChangeText={setFirstName}>
+                    </TextInput>
+                    <Text style={stylesLightMode.formValidation}>The first name field is required.</Text>
+                    <Text style={stylesLightMode.hintText}>Last name</Text>
+                    <TextInput style={stylesLightMode.inputLabel}
+                               onChangeText={setLastName}>
+                    </TextInput>
+                    <Text style={stylesLightMode.formValidation}>The last name field is required.</Text>
+                    <Text style={stylesLightMode.hintText}>E-mail</Text>
+                    <TextInput style={stylesLightMode.inputLabel}
+                        // onChangeText={(text) => this.validate(text)}
+                               onChangeText={setEmail}>
+                    </TextInput>
+                    <Text style={stylesLightMode.formValidation}>The email has already been taken.</Text>
+                    <Text style={stylesLightMode.hintText}>Office location</Text>
+                    <TextInput style={stylesLightMode.inputLabel}
+                               onChangeText={setOfficeLocation}>
+                    </TextInput>
+                    <Text style={stylesLightMode.formValidation}>The office location field is required.</Text>
+                    <Text style={stylesLightMode.hintText}>Work position</Text>
+                    <TextInput style={stylesLightMode.inputLabel}
+                               onChangeText={setWorkPosition}>
+                    </TextInput>
+                    <Text style={stylesLightMode.formValidation}>The work position field is required.</Text>
+                    <Text style={stylesLightMode.hintText}>Password</Text>
+                    <TextInput style={stylesLightMode.inputLabel}
+                               secureTextEntry={true}
+                               onChangeText={setPassword}>
+                    </TextInput>
+                    <Text style={stylesLightMode.formValidation}>The password field is required.</Text>
+                    <Text style={stylesLightMode.hintText}>Confirm password</Text>
+                    <TextInput style={stylesLightMode.inputLabel}
+                               secureTextEntry={true}
+                               onChangeText={setConfirmPassword}>
+                    </TextInput>
+                    <Text style={stylesLightMode.formValidation}>The confirm password field is required.</Text>
+                    <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
+                        <Text style={{color: "#334A6D", fontWeight: 'bold'}}
+                              onPress={login}
+                        > Login</Text></Text>
+                    <TouchableOpacity style={stylesLightMode.button}
+                                      onPress={onSubmitHandler}>
+                        <Text style={stylesDarkMode.buttonText}>SIGN UP</Text>
+                    </TouchableOpacity>
+                    <Icon style={stylesLightMode.icon}/>
+                </ScrollView>
+            </SafeAreaView>
+        </View>
     )
 }
 

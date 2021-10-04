@@ -1,18 +1,9 @@
 import React, {Component} from "react";
-import {
-    Card,
-    CardContent,
-    CardAction
-} from 'react-native-card-view';
+import {Card, CardAction, CardContent} from 'react-native-card-view';
 
-import {
-    Text,
-    StyleSheet,
-    View, AsyncStorage
-} from "react-native";
+import {StyleSheet, Text, View} from "react-native";
 
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import {CATEGORY} from "../../../configuration/config";
 
 export default class CategoryCard extends Component{
     state={
