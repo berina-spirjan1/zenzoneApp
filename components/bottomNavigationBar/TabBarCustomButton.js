@@ -1,6 +1,10 @@
 import React from "react";
-import {StyleSheet, TouchableOpacity, View} from "react-native";
-import Svg, {Path} from "react-native-svg";
+import {
+    StyleSheet,
+    TouchableOpacity,
+    View
+} from "react-native";
+import Svg, { Path } from "react-native-svg";
 
 
 function TabBarCustomButton({accessibilityState, children, onPress}){
