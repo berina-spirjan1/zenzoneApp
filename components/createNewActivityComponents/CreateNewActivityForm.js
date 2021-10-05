@@ -22,7 +22,12 @@ import {
     SEARCH_ACTIVITIES_BY_TITLE
 } from "../../configuration/config";
 import store from "../../redux/store";
-import {failedAddingActivity, startedAddingActivity, successfullyAddedActivity} from "../../redux/actions";
+import {
+    failedAddingActivity,
+    failedAtLoadingActivities, failedAtLoadingCategories,
+    startedAddingActivity, startedLoadingActivities, startedLoadingCategories,
+    successfullyAddedActivity, successfullyLoadedActivities, successfullyLoadedCategories
+} from "../../redux/actions";
 import * as ImagePicker from "expo-image-picker";
 import {renderIf} from "../../utilities/CommonMethods";
 import {Card, CardAction, CardContent} from "react-native-card-view";
@@ -31,7 +36,11 @@ import {useNavigation} from '@react-navigation/native';
 import AutocompleteInput from "react-native-autocomplete-input";
 
 export const CreateNewActivityForm = () => {
+
+    //defining hook that allows us to access to navigation objects
     const navigation = useNavigation();
+
+    //allowing to state variables in this functional component
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     let [image, setImage] = useState(null);
@@ -40,11 +49,11 @@ export const CreateNewActivityForm = () => {
     let [data,setData] = useState([])
     const [category_id, setCategoryId] = useState(1)
     const [searchText, setSearchText] = useState('')
-    const [searchCategory, setSearchCategory] = useState('')
     const [activitiesData, setActivitiesData] = useState([])
     const [token, setToken] = useState(null)
     const [closeList, setCloseList] = useState(false)
 
+    //hook for adding side effect for allowing access to gallery
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
@@ -56,6 +65,8 @@ export const CreateNewActivityForm = () => {
         })();
     }, []);
 
+
+    //taking image from gallery and cropping it
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -63,8 +74,9 @@ export const CreateNewActivityForm = () => {
             aspect: [3, 3],
             quality: 0.5
         });
+
         image = result
-        console.log(result);
+
         setImageUri(Platform.OS === "android" ? image.uri : image.uri.replace("file:///", ""))
 
         if (!result.cancelled) {
@@ -72,6 +84,8 @@ export const CreateNewActivityForm = () => {
         }
 
     };
+
+    //using side effect for getting all categories.
     useEffect(()=>{
         fetch(`${CATEGORY}`, {
             method: 'GET',
@@ -82,6 +96,15 @@ export const CreateNewActivityForm = () => {
         })
             .then((response) => response.json())
             .then((responseJson) => {
+
+                store.dispatch(startedLoadingCategories())
+
+                if(responseJson.data.data.length===0){
+                    store.dispatch(failedAtLoadingCategories())
+                }
+                else{
+                    store.dispatch(successfullyLoadedCategories())
+                }
                 setData(responseJson.data.data)
             })
             .catch((error) => {
@@ -90,6 +113,7 @@ export const CreateNewActivityForm = () => {
 
     }, [])
 
+    //filter function that returns all activities that contains search text (using in autocomplete input)
     const updateSearch = (searchText) => {
         setSearchText(searchText)
         fetch(`${SEARCH_ACTIVITIES_BY_TITLE}?searchKey=${searchText}`, {
@@ -101,6 +125,16 @@ export const CreateNewActivityForm = () => {
         })
             .then((response) => response.json())
             .then((responseJson) => {
+
+                store.dispatch(startedLoadingActivities())
+
+                if(responseJson.data.length===0){
+                    store.dispatch(failedAtLoadingActivities())
+                }
+                else{
+                    store.dispatch(successfullyLoadedActivities())
+                }
+
                 setActivitiesData(responseJson.data)
             })
             .catch((error) => {
@@ -108,18 +142,20 @@ export const CreateNewActivityForm = () => {
             });
     };
 
-
+    //function that use form data and attributes that represent single activity
     const postNewActivity = async () => {
 
-        console.log("OVO JE FAJL", image)
-
+        //getting current token from async storage and storing them in state
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
         setToken(token)
 
+        //creating body for single activity
         const activity = new FormData();
+
         activity.append('category_id',category_id);
         activity.append('title', title);
+        activity.append('description', description)
 
         if(image!==null){
             const imageType = image.type
@@ -130,8 +166,6 @@ export const CreateNewActivityForm = () => {
                 uri: imageUri
             });
         }
-
-        activity.append('description', description)
 
         fetch(`${ACTIVITY}`, {
             method: 'POST',
@@ -162,14 +196,16 @@ export const CreateNewActivityForm = () => {
             })
     }
 
-
+    //adding function to navigate to page that shows when user successfully add activity
     const switchSuccessfullyAddedCreateActivity = () => navigation.navigate("switchSuccessfullyAddedCreateActivity")
 
+    //setting category id
     const saveCategoryId = (i) =>{
         setCategoryId(i)
         console.log(i)
     }
 
+    //navigating to page that contains all categories
     const seeAllCategories = () => navigation.navigate("seeAllCategories")
 
     return (
@@ -222,24 +258,32 @@ export const CreateNewActivityForm = () => {
                         </ScrollView>
                     )}
                     <Text style={styles.title}>Title</Text>
-                    <View style={styles.autocompleteContainer}>
+                    <View style={styles.autocompleteInput}>
                         <AutocompleteInput placeholder={'Activity title'}
                                            autoCapitalize="none"
                                            autoCorrect={false}
+                                           containerStyle = {styles.autocompleteContainer}
+                                           listContainerStyle={{left:-10, width: 340}}
                                            onChangeText={(search) => updateSearch(search)}
                                            data={activitiesData}
                                            defaultValue = {title}
                                            hideResults={closeList}
-                                           containerStyle={styles.autocompleteContainer}
+                                           inputContainerStyle={{
+                                               backgroundColor: 'transparent',
+                                               borderBottomWidth: 1,
+                                               borderColor: 'transparent',
+                                               borderRadius: 25
+                                           }}
+                                           // containerStyle={styles.autocompleteContainer}
                                            flatListProps={{
                                                keyboardShouldPersistTaps: 'always',
                                                renderItem: (({item}) => (
-                                                   <TouchableOpacity onPress={()=>{setTitle(item); setCloseList(true)}}>
+                                                   <TouchableOpacity onPress={()=>{setTitle(item); setCloseList(true)}}
+                                                                     style={styles.autocompleteItem}>
                                                         <Text style={styles.autocompleteInputText}>{item}</Text>
                                                    </TouchableOpacity>
                                                ))
                                            }}/>
-
                     </View>
                     <View style={{flexDirection: 'row'}}>
                         <Text style={styles.comment}>Description</Text>
@@ -344,7 +388,7 @@ const styles = StyleSheet.create({
         opacity: 0.5,
         borderRadius: 26,
         marginRight:20,
-        height: 200,
+        height: 150,
         marginLeft: 20,
         marginTop: 10,
         padding: 10
@@ -430,9 +474,14 @@ const styles = StyleSheet.create({
         color: '#363559'
     },
     autocompleteContainer:{
-        zIndex: 3,
-        marginLeft: 10,
-        marginRight: 10,
-        backgroundColor: 'rgba(255, 255, 255, 0.2)'
+        zIndex: 5,
+        elevation: 5,
+        marginLeft: 20,
+        marginRight: 20
+    },
+    autocompleteItem:{
+        backgroundColor: 'rgba(147, 180, 229, 0.6)',
+        height: 40,
+        padding: 10
     }
 })
