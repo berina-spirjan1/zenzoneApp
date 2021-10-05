@@ -266,9 +266,21 @@ export default class SingleActivity extends Component{
                                     {renderIf(this.state.userInfo.photo_dir!==0 && this.state.token!==null,
                                         <Image source={{uri: `${BASE_URL}`+`${this.state.userInfo.photo_dir}`+`${this.state.userInfo.photo_name}`}}
                                                style={styles.likeImage}/>)}
-                                    {renderIf(this.state.userInfo.photo_dir===null || this.state.token===null,
-                                        <Image source={require('../assets/images/user_photo.png')}
-                                               style={styles.userWithoutImage}/>)}
+                                    {renderIf(isIphoneX(),
+                                            <>
+                                                {renderIf(this.state.userInfo.photo_dir===null || this.state.token===null,
+                                                    <Image source={require('../assets/images/user_photo.png')}
+                                                           style={styles.userWithoutImageIphone}/>)}
+                                            </>
+                                    )}
+                                    {renderIf(!isIphoneX(),
+                                        <>
+                                            {renderIf(this.state.userInfo.photo_dir===null || this.state.token===null,
+                                                <Image source={require('../assets/images/user_photo.png')}
+                                                       style={styles.userWithoutImage}/>)}
+                                        </>
+                                    )}
+
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.activityInfoWrapper}>
@@ -418,6 +430,12 @@ const styles = StyleSheet.create({
         height: 60,
         width: 60,
         borderRadius: 60
+    },
+    userWithoutImageIphone:{
+        height: 60,
+        width: 60,
+        borderRadius: 60,
+        marginTop: 0
     },
     userWithoutImage:{
         height: 60,
