@@ -16,19 +16,36 @@ render() {
                                             centerElement="Congratulations"/>)}
             {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                                              centerElement="Congratulations"/>)}
-            <View style={styles.container}>
-                <Text style={styles.title}>congratulations</Text>
-                <LottieView
-                    style={styles.lottie}
-                    source={require("../../assets/images/congratulationsStar.json")}
-                    autoPlay={true}
-                    loop={true}/>
-                <Text style={styles.informationBox}>Thank you for participating in the daily challenge. You will soon receive feedback from the administration and the possibility of winning a badge.</Text>
-                <TouchableOpacity style={styles.button}
-                                  onPress={()=>this.props.navigation.navigate("challengeDetails")}>
-                    <Text style={styles.buttonText}>GO BACK</Text>
-                </TouchableOpacity>
-            </View>
+            {renderIf(!isIphoneX(),
+                <View style={styles.container}>
+                    <Text style={styles.title}>congratulations</Text>
+                    <LottieView
+                        style={styles.lottie}
+                        source={require("../../assets/images/congratulationsStar.json")}
+                        autoPlay={true}
+                        loop={true}/>
+                    <Text style={styles.informationBox}>Thank you for participating in the daily challenge. You will soon receive feedback from the administration and the possibility of winning a badge.</Text>
+                    <TouchableOpacity style={styles.button}
+                                      onPress={()=>this.props.navigation.navigate("challengeDetails")}>
+                        <Text style={styles.buttonText}>GO BACK</Text>
+                    </TouchableOpacity>
+                </View>
+            )}
+            {renderIf(isIphoneX(),
+                <View style={styles.container}>
+                    <Text style={styles.titleIphone}>congratulations</Text>
+                    <LottieView
+                        style={styles.lottieIphone}
+                        source={require("../../assets/images/congratulationsStar.json")}
+                        autoPlay={true}
+                        loop={true}/>
+                    <Text style={styles.informationBoxIphone}>Thank you for participating in the daily challenge. You will soon receive feedback from the administration and the possibility of winning a badge.</Text>
+                    <TouchableOpacity style={styles.buttonIphone}
+                                      onPress={()=>this.props.navigation.navigate("challengeDetails")}>
+                        <Text style={styles.buttonTextIphone}>GO BACK</Text>
+                    </TouchableOpacity>
+                </View>
+            )}
         </>
 
     )
@@ -37,7 +54,7 @@ render() {
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: '#93B4E5',
+        backgroundColor: '#cbdbf2',
         flex: 1
     },
     informationBox:{
@@ -71,6 +88,40 @@ const styles = StyleSheet.create({
         padding:10
     },
     buttonText:{
+        textAlign: 'center',
+        fontWeight: 'bold'
+    },
+    informationBoxIphone:{
+        fontFamily: 'Roboto_700Bold',
+        fontSize: 20,
+        padding: 20,
+        marginTop: 330
+    },
+    lottieIphone:{
+        flex:1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft:0,
+        marginTop: -50
+    },
+    titleIphone:{
+        marginTop: 20,
+        fontSize: 30,
+        fontFamily: 'Roboto_700Bold',
+        color: '#5a28ff',
+        textTransform: 'uppercase',
+        textAlign: 'center',
+        marginBottom:40
+    },
+    buttonIphone:{
+        backgroundColor: '#5a28ff',
+        height: 40,
+        width: 100,
+        borderRadius: 25,
+        marginLeft: 220,
+        padding:10
+    },
+    buttonTextIphone:{
         textAlign: 'center',
         fontWeight: 'bold'
     }
