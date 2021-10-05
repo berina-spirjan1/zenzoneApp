@@ -1,7 +1,11 @@
 import React from 'react';
-import {Image, StyleSheet, View} from "react-native";
+import {
+    Image,
+    StyleSheet,
+    View
+} from "react-native";
 
-
+//design for followers card that are just mockups
 function FollowerCard(){
     return(
             <View style={styles.icon}>

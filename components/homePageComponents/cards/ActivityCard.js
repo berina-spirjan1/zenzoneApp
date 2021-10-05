@@ -1,10 +1,19 @@
 import React from "react";
-import {Card, CardAction} from 'react-native-card-view';
-
-import {Alert, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
-
+import {
+    Card,
+    CardAction
+} from 'react-native-card-view';
+import {
+    Alert,
+    Image,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
+} from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
+//design for activity that are just mockups
 function ActivityCard(){
     return(
             <Card style={styles.card}

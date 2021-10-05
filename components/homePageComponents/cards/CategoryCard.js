@@ -1,36 +1,24 @@
 import React, {Component} from "react";
-import {Card, CardAction, CardContent} from 'react-native-card-view';
+import {
+    Card,
+    CardAction,
+    CardContent
+} from 'react-native-card-view';
 
-import {StyleSheet, Text, View} from "react-native";
+import {
+    StyleSheet,
+    Text,
+    View
+} from "react-native";
 
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
+
+//design for categories that are just mockups
 export default class CategoryCard extends Component{
     state={
         data: ''
     }
-
-    // componentDidMount = () => {
-    //
-    //     fetch(`${CATEGORY}`, {
-    //         method: 'GET',
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //             "Accept": "application/json"
-    //         }
-    //     })
-    //         .then((response) => response.json())
-    //         .then((responseJson) => {
-    //             // console.log(responseJson);
-    //             this.setState({
-    //                 data: responseJson
-    //             })
-    //             console.log(this.state.data.data)
-    //         })
-    //         .catch((error) => {
-    //             console.error(error);
-    //         });
-    // }
 
     render() {
         return(
