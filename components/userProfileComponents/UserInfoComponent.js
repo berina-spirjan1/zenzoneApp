@@ -1,9 +1,19 @@
 import React, {Component} from "react";
-import {AsyncStorage, Image, StyleSheet, Text, View} from "react-native";
+import {
+    AsyncStorage,
+    Image,
+    StyleSheet,
+    Text,
+    View
+} from "react-native";
 import NextButton from "../buttons/NextButton";
-import {BASE_URL, USER} from "../../configuration/config";
-import {Actions} from "react-native-router-flux";
-import {renderIf} from "../../utilities/CommonMethods";
+import {
+    BASE_URL,
+    USER
+} from "../../configuration/config";
+import { renderIf } from "../../utilities/CommonMethods";
+import {failedGettingUserInfo, startedGettingUserInfo, successfullyGotUserInfo} from "../../redux/actions";
+import store from "../../redux/store";
 
 export default class UserInfoComponent extends Component{
     state = {
@@ -24,17 +34,24 @@ export default class UserInfoComponent extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
+                store.dispatch(startedGettingUserInfo())
                 console.log(responseJson);
                 this.setState({
                     data: responseJson
                 })
-                // console.log(this.state.data)
+                if(this.state.data.length!==0){
+                    store.dispatch(successfullyGotUserInfo())
+                }
+                else{
+                    store.dispatch(failedGettingUserInfo())
+                }
             })
             .catch((error) => {
                 console.error(error);
             });
     }
 
+    //navigating to page that contains information's about user
     profileInfo = () => this.props.navigation.navigate("profileInfo")
 
     render() {
