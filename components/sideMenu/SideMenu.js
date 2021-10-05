@@ -1,17 +1,19 @@
 import React from "react";
-import {NavigationContainer} from "@react-navigation/native";
-import {createDrawerNavigator} from "@react-navigation/drawer";
+import { NavigationContainer } from "@react-navigation/native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import Login from "../../screens/login/Login";
 import SignUp from "../../screens/signUp/SignUp";
 
-import {RouterHomePageStack} from "../../routes/RoutesHomePageStack";
-import {RoutesLoginSignUpStack} from "../../routes/RoutesLoginSignUpStack";
-import {RoutesForChallengeStack} from "../../routes/RoutesForChallengeStack";
+import { RouterHomePageStack } from "../../routes/RoutesHomePageStack";
+import { RoutesLoginSignUpStack } from "../../routes/RoutesLoginSignUpStack";
+import { RoutesForChallengeStack } from "../../routes/RoutesForChallengeStack";
 
+//creating common pattern in navigation which we use to drawer from left (sometimes right) side for navigating between screens.
 const Drawer = createDrawerNavigator();
 
+//adding navigation container that isn't independent from another containers and creating stack for side menu
 function SideMenu(){
     return (
         <NavigationContainer independent={true}>
