@@ -1,6 +1,7 @@
 import React from "react";
 import {Alert, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import RobotPictureDarkMode from "../../assets/icons/RobotPictureDarkMode";
+import {useNavigation} from "@react-navigation/native";
 
 
 function ErrorPage(){
@@ -12,8 +13,7 @@ function ErrorPage(){
             <Text style={stylesDarkMode.text}>Sorry, we can't find the page you're looking for.</Text>
                 <TouchableOpacity
                         style={stylesDarkMode.button}
-                        onPress={() => Alert.alert('Go back to home page')}
-                >
+                        onPress={() => navigation.navigate("homePageActivities")}>
                     <Text style={stylesDarkMode.buttonText}>GO BACK</Text>
                 </TouchableOpacity>
         </View>
