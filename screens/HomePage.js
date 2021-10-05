@@ -17,10 +17,25 @@ import {Toolbar} from "react-native-material-ui";
 import {ACTIVITY, BASE_URL, CATEGORY, DISLIKE, LIKE,} from "../configuration/config";
 import {Card, CardAction, CardContent} from "react-native-card-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import {renderIf} from "../utilities/CommonMethods";
+import { renderIf } from "../utilities/CommonMethods";
 import Loader from "../utilities/Loader";
 import store from "../redux/store";
-import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../redux/actions";
+import {
+    failedAtDislikingActivity,
+    failedAtLikingActivity,
+    failedAtLoadingActivities,
+    failedAtLoadingCategories, failedRemovingDislike, failedRemovingLike, startedDislikingActivity,
+    startedLikingActivity,
+    startedLoadingActivities,
+    startedLoadingCategories, startedRemovingDislike,
+    startedRemovingLike, successfullyDislikedActivity,
+    successfullyLikedActivity,
+    successfullyLoadedActivities,
+    successfullyLoadedCategories, successfullyRemovedDislike, successfullyRemovedLike,
+    userRegistrationFailed,
+    userRegistrationStarted,
+    userRegistrationSuccess
+} from "../redux/actions";
 import {isIphoneX} from "react-native-iphone-x-helper";
 
 export default class HomePage extends Component{
@@ -56,7 +71,6 @@ export default class HomePage extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
-
                 this.setState({
                     data: responseJson.data.data
                 })
@@ -77,12 +91,18 @@ export default class HomePage extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
-
+                store.dispatch(startedLoadingCategories())
                 this.setState({
                     categories: [...this.state.categories, ...responseJson.data.data],
                     isLoadingCategories: false,
                     refresh: false
                 })
+                if(this.state.categories.length!==0){
+                    store.dispatch(successfullyLoadedCategories())
+                }
+                else{
+                    store.dispatch(failedAtLoadingCategories())
+                }
                 if(responseJson.data.data.length!==0){
                     pageCategories++;
                     return this.componentWillMount(pageCategories)
@@ -111,11 +131,18 @@ export default class HomePage extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
+                store.dispatch(startedLoadingActivities())
                 this.setState({
                     data: [...this.state.data, ...responseJson.data.data],
                     isLoading: false,
                     refresh: false,
                 })
+                if(this.state.data.length!==0){
+                    store.dispatch(successfullyLoadedActivities())
+                }
+                else{
+                    store.dispatch(failedAtLoadingActivities())
+                }
                 if (responseJson.data.data.length !== 0) {
                     page++;
                     return this.componentDidMount(page)
@@ -147,20 +174,20 @@ export default class HomePage extends Component{
         })
             .then(async res => {
                 try {
-                    store.dispatch(userRegistrationStarted());
+                    store.dispatch(startedLikingActivity());
 
                     const jsonRes = await res.json();
 
                     console.log(jsonRes)
                     if (res.status !== 200) {
-                        store.dispatch(userRegistrationFailed());
+                        store.dispatch(failedAtLikingActivity());
                     }
                     if(res.status===401){
                         Alert.alert('Please login')
                     }
                     else {
-                        alert('Successfully liked')
-                        store.dispatch(userRegistrationSuccess());
+                        Alert.alert('Successfully liked activity.')
+                        store.dispatch(successfullyLikedActivity());
                     }
                 } catch (err) {
                     console.log(err);
@@ -190,20 +217,20 @@ export default class HomePage extends Component{
         })
             .then(async res => {
                 try {
-                    store.dispatch(userRegistrationStarted());
+                    store.dispatch(startedRemovingLike());
 
                     const jsonRes = await res.json();
 
                     console.log(jsonRes)
                     if (res.status !== 200) {
-                        store.dispatch(userRegistrationFailed());
+                        store.dispatch(failedRemovingLike());
                     }
                     if(res.status===401){
                         Alert.alert('Please login')
                     }
                     else {
-                        console.log('removed like')
-                        store.dispatch(userRegistrationSuccess());
+                        Alert.alert("Successfully removed like.")
+                        store.dispatch(successfullyRemovedLike());
                     }
                 } catch (err) {
                     console.log(err);
@@ -233,18 +260,19 @@ export default class HomePage extends Component{
         })
             .then(async res => {
                 try {
-                    store.dispatch(userRegistrationStarted());
+                    store.dispatch(startedDislikingActivity());
 
                     const jsonRes = await res.json();
 
                     if (res.status !== 200) {
-                        store.dispatch(userRegistrationFailed());
+                        store.dispatch(failedAtDislikingActivity());
                     }
                     if(res.status===401){
                         Alert.alert('Please login')
                     }
                     else {
-                        store.dispatch(userRegistrationSuccess());
+                        Alert.alert("Successfully disliked activity.")
+                        store.dispatch(successfullyDislikedActivity());
                     }
                 } catch (err) {
                     console.log(err);
@@ -273,20 +301,20 @@ export default class HomePage extends Component{
         })
             .then(async res => {
                 try {
-                    store.dispatch(userRegistrationStarted());
+                    store.dispatch(startedRemovingDislike());
 
                     const jsonRes = await res.json();
 
                     console.log(res.status)
                     if (res.status !== 200) {
-                        store.dispatch(userRegistrationFailed());
+                        store.dispatch(failedRemovingDislike());
                     }
                     if(res.status===401){
-                        Alert.alert('Please login')
+                        Alert.alert('Please login.')
                     }
                     else {
-                        console.log('dislike')
-                        store.dispatch(userRegistrationSuccess());
+                        Alert.alert("Successfully removed dislike.")
+                        store.dispatch(successfullyRemovedDislike());
                     }
                 } catch (err) {
                     console.log(err);
@@ -318,10 +346,17 @@ export default class HomePage extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
+                store.dispatch(startedLoadingActivities())
                 this.setState({
                     data: responseJson.data.data,
                     currentCategory: responseJson.data.data[0].category.title
                 })
+                if(this.state.data.length!==0){
+                    store.dispatch(successfullyLoadedActivities())
+                }
+                else{
+                    store.dispatch(failedAtLoadingActivities())
+                }
                 console.log(responseJson.data.data[0].category.title)
             })
             .catch((error) => {
@@ -380,7 +415,7 @@ export default class HomePage extends Component{
                                 <View style={{flexDirection: 'row'}}>
                                     {this.state.categories.map(function(obj,i) {
                                         return (
-                                            <>
+                                            <View key={i}>
                                                 <TouchableOpacity style={styleLightMode.categoryCard}
                                                                   onPress={() => this.filterActivitiesUsingCategory(obj.id)}>
                                                     <Card  styles={{ card: { backgroundColor: obj.color,
@@ -404,7 +439,7 @@ export default class HomePage extends Component{
                                                         </CardContent>
                                                     </Card>
                                                 </TouchableOpacity>
-                                            </>
+                                            </View>
                                         )
                                     },this)}
                                 </View>
@@ -418,7 +453,8 @@ export default class HomePage extends Component{
                                 <View>
                                     {this.state.data.map(function(obj,i) {
                                         return (
-                                            <View style={styleLightMode.activityCard}>
+                                            <View style={styleLightMode.activityCard}
+                                                  key={i}>
                                                 <Card style={styleLightMode.card}
                                                       styles={{
                                                           card: {
@@ -439,9 +475,9 @@ export default class HomePage extends Component{
                                                     <View style={styleLightMode.header}>
                                                         {renderIf(this.state.token!==null,
                                                             <>
-                                                                {renderIf(obj.user.photo_dir===null, <Image source={require('../assets/images/user_photo.png')}
+                                                                {renderIf(obj.user.photo_dir===null || this.state.token===null, <Image source={require('../assets/images/user_photo.png')}
                                                                                                             style={styleLightMode.profilePicture}/>)}
-                                                                {renderIf(obj.user.photo_dir!==null,<Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
+                                                                {renderIf(obj.user.photo_dir!==null && this.state.token!==null,<Image source={{uri: `${BASE_URL}`+`${obj.user.photo_dir}`+`${obj.user.photo_name}`}}
                                                                                                            style={styleLightMode.profilePicture}/>)}
                                                             </>
                                                         )}
