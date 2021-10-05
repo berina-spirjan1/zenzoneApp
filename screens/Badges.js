@@ -117,8 +117,7 @@ const styles = StyleSheet.create({
         height: 150,
         borderRadius: 200,
         top: -80,
-        left:110,
-        textAlign: 'center'
+        left: 110
     },
     username:{
         fontSize: 22,

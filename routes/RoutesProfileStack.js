@@ -17,7 +17,7 @@ const Stack = createNativeStackNavigator()
 
 export const RoutesProfileStack = () =>{
     return(
-            <Stack.Navigator>
+            <Stack.Navigator initialRouteName={"profile"}>
                 <Stack.Screen name={"profile"}
                               component={RoutesMyProfileStack}
                               options={{
