@@ -12,27 +12,37 @@ import {
     View
 } from "react-native";
 import BackgroundForLoginLocation from "../../components/backgrounds/BackgroundForLoginLocation";
-import React, {useState} from "react";
-import {LOGIN} from "../../configuration/config";
+import React, { useState } from "react";
+import { LOGIN } from "../../configuration/config";
 import store from "../../redux/store";
-import {authFailed, authStarted, authSuccess} from "../../redux/actions";
-import {Actions} from "react-native-router-flux";
-import {useNavigation} from "@react-navigation/native";
+import {
+    authFailed,
+    authStarted,
+    authSuccess
+} from "../../redux/actions";
+import { useNavigation } from "@react-navigation/native";
 
 
 export const LoginWithLocationForm = () =>{
 
+    //we are taking height of device dimensions and storing it to variable
     const screenHeight = Dimensions.get('window').height
+
+    //defining hook that allows us to access to navigation objects
     const navigation = useNavigation();
+
+    //allowing to state variables in this functional component
     const [email, setEmail] = useState('');
     const [password, setPassword] =  useState('');
 
+    //navigating to user page
     const goToUserInfo = () => navigation.navigate("switchLoginToUser")
 
+    //navigating to forgot password
     const forgotPassword = () => navigation.navigate("forgotPassword")
 
-    const signUpWithLocationForm = () => navigation.navigate("signUpWithLocationForm")
-
+    //function that calls when user press button login, which handle action that if username and password are correct it
+    //returns token that is active in app until user logout from app
     const onLoginHandler = () =>{
 
         const user = {
