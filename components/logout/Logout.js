@@ -1,8 +1,17 @@
-import {LOGOUT} from "../../configuration/config";
+import { LOGOUT } from "../../configuration/config";
 import store from "../../redux/store";
-import {userLogoutFailed, userLogoutStarted, userLogoutSuccess} from "../../redux/actions";
-import {Alert, AsyncStorage} from "react-native";
+import {
+    userLogoutFailed,
+    userLogoutStarted,
+    userLogoutSuccess
+} from "../../redux/actions";
+import {
+    Alert,
+    AsyncStorage
+} from "react-native";
 
+//function that calls when user wants to logout
+//we are sending only token and after logout is success all data from async storage will be cleared.
 export const onLogoutHandler = async () => {
 
     let token = await AsyncStorage.getItem('jwt')
