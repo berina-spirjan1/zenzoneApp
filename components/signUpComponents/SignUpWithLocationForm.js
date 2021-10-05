@@ -11,16 +11,23 @@ import {
     View
 } from "react-native";
 import BackgroundForLoginLocation from "../../components/backgrounds/BackgroundForLoginLocation";
-import React, {useState} from "react";
-import {Actions} from "react-native-router-flux";
-import {REGISTER} from "../../configuration/config";
+import React, { useState } from "react";
+import { REGISTER } from "../../configuration/config";
 import store from "../../redux/store";
-import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../../redux/actions";
-import {useNavigation} from "@react-navigation/native";
+import {
+    userRegistrationFailed,
+    userRegistrationStarted,
+    userRegistrationSuccess
+} from "../../redux/actions";
+import { useNavigation } from "@react-navigation/native";
 
 
 export const SignUpWithLocationForm = () =>{
+
+    //defining hook that allows us to access to navigation objects
     const navigation = useNavigation();
+
+    //allowing to state variables in this functional component
     const [name, setName] = useState('');
     const [first_name, setFirstName] =  useState('');
     const [last_name, setLastName] =  useState('');
@@ -30,11 +37,13 @@ export const SignUpWithLocationForm = () =>{
     const [password, setPassword] =  useState('');
     const [confirm_password, setConfirmPassword] =  useState('');
 
+    //we are taking screen height and storing at to variable which we use for scroll view
     const screenHeight = Dimensions.get('window').height
 
+    //navigating to login page
     const loginWithLocationForm = () => navigation.navigate("loginWithLocationForm")
 
-
+    //validating input for email address
     const validate = (text) => {
         console.log(text);
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/.com;
@@ -48,6 +57,8 @@ export const SignUpWithLocationForm = () =>{
         }
     }
 
+    //function that is activating when user press button for sign up into our application
+    //we are sending all information's about user to api and api approves it or rejected.
     const onSubmitHandler = () =>{
 
         const user = {

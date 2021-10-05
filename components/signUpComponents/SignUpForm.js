@@ -59,6 +59,7 @@ export const SignUpForm = () =>{
     }
 
     //function that is activating when user press button for sign up into our application
+    //we are sending all information's about user to api and api approves it or rejected.
     const onSubmitHandler = () =>{
 
         const user = {
