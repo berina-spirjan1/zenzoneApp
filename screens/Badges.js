@@ -57,7 +57,7 @@ export default class Badges extends Component{
 
         return(
             <View style={styles.container}>
-                {renderIf(isIphoneX(),  <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                {renderIf(isIphoneX(),  <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
                                                  leftElement="arrow-back"
                                                  centerElement="Badges"
                                                  onLeftElementPress={this.profile}/>)}
