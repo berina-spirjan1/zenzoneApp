@@ -1,20 +1,37 @@
-import {AsyncStorage, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {
+    AsyncStorage,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from "react-native";
 import ChangePasswordLightIcon from "../../assets/icons/ChangePasswordLightIcon";
-import React, {useState} from "react";
-import {CHANGE_PASSWORD} from "../../configuration/config";
+import React, { useState } from "react";
+import { CHANGE_PASSWORD } from "../../configuration/config";
 import store from "../../redux/store";
-import {changePasswordFailed, changePasswordStarted, changePasswordSuccess,} from "../../redux/actions";
-import {useNavigation} from "@react-navigation/native";
+import {
+    changePasswordFailed,
+    changePasswordStarted,
+    changePasswordSuccess
+} from "../../redux/actions";
+import { useNavigation } from "@react-navigation/native";
 
 
 export const ChangePasswordForm = () =>{
+
+    //defining hook that allows us to access to navigation objects
     const navigation = useNavigation();
+
+    //allowing to state variables in this functional component
     const [current_password, setCurrentPassword] = useState('')
     const [new_password, setNewPassword] = useState('')
     const [confirm_new_password, setConfirmNewPassword] = useState('')
 
+    //adding function to navigate to login page
     const login = () => navigation.navigate("login")
 
+    //function for sending request to api for changing password
     const onChangePasswordHandler = async () => {
 
         let token = await AsyncStorage.getItem('jwt')
