@@ -1,9 +1,15 @@
 import React, {Component} from "react";
-import {StatusBar, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {
+    StatusBar,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
+} from "react-native";
 import LottieView from 'lottie-react-native';
-import {Toolbar} from "react-native-material-ui";
-import {renderIf} from "../../utilities/CommonMethods";
-import {isIphoneX} from "react-native-iphone-x-helper";
+import { Toolbar } from "react-native-material-ui";
+import { renderIf } from "../../utilities/CommonMethods";
+import { isIphoneX } from "react-native-iphone-x-helper";
 
 export default class Congratulations extends Component{
 render() {
