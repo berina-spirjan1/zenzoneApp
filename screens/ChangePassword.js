@@ -9,16 +9,20 @@ export default class ChangePassword extends Component{
     constructor(props) {
         super();
     }
-
+    switchToMyProfileInfo = () => this.props.navigation.navigate("switchToMyProfileInfo")
     render() {
         return (
             <>
                 <StatusBar animated={true}
                            backgroundColor="#6285B3"/>
                 {renderIf(isIphoneX(), <Toolbar style={{ container: {backgroundColor: '#93B4E5', marginTop: 50}}}
-                                               centerElement="Change password"/> )}
+                                                leftElement="arrow-back"
+                                                centerElement="Change password"
+                                                onLeftElementPress={this.switchToMyProfileInfo}/> )}
                 {renderIf(!isIphoneX(), <Toolbar style={{ container: {backgroundColor: '#93B4E5'}}}
-                                                  centerElement="Change password"/>)}
+                                                 leftElement="arrow-back"
+                                                 centerElement="Change password"
+                                                 onLeftElementPress={this.switchToMyProfileInfo}/>)}
                 <ChangePasswordForm/>
             </>
 
