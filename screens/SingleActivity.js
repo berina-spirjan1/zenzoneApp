@@ -20,10 +20,22 @@ import {Toolbar} from "react-native-material-ui";
 import {BASE_URL, COMMENT, SINGLE_ACTIVITY, USER} from "../configuration/config";
 import {isIphoneX} from "react-native-iphone-x-helper";
 import {renderIf} from "../utilities/CommonMethods";
-import {Actions} from "react-native-router-flux";
 import {FontAwesome5} from "@expo/vector-icons";
 import store from "../redux/store";
-import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../redux/actions";
+import {
+    failedAtGettingActivityInfo,
+    failedDeletingComment,
+    failedGettingUserInfo,
+    failedPostingComment,
+    startedDeletingComment,
+    startedGettingActivityInfo,
+    startedGettingUserInfo,
+    startedPostingComment,
+    successfullyDeletedComment,
+    successfullyGettingActivityInfo,
+    successfullyGotUserInfo,
+    successfullyPostedComment,
+} from "../redux/actions";
 import * as ImagePicker from "expo-image-picker";
 import ConvertDate from "../utilities/ConvertDate";
 
@@ -99,14 +111,19 @@ export default class SingleActivity extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log(responseJson);
+                store.dispatch(startedGettingActivityInfo())
                 this.setState({
                     data: responseJson.data[0],
                     userInfo: responseJson.data[0].user,
                     commentArray: responseJson.data[0].comments,
                     refresh: false
                 })
-                console.log(this.state.commentArray)
+                if(this.state.data.length!==0){
+                    store.dispatch(successfullyGettingActivityInfo())
+                }
+                else{
+                    store.dispatch(failedAtGettingActivityInfo())
+                }
             })
             .catch((error) => {
                 console.error(error);
@@ -122,10 +139,17 @@ export default class SingleActivity extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
+                store.dispatch(startedGettingUserInfo())
                 this.setState({
                     userData: responseJson,
                     refresh: false
                 })
+                if(this.state.userData.length===0){
+                    store.dispatch(successfullyGotUserInfo())
+                }
+                else{
+                    store.dispatch(failedGettingUserInfo())
+                }
             })
             .catch((error) => {
                 console.error(error);
@@ -166,16 +190,16 @@ export default class SingleActivity extends Component{
         })
             .then(async res => {
                 try {
-                    store.dispatch(userRegistrationStarted());
+                    store.dispatch(startedPostingComment());
 
                     const jsonRes = await res.json();
 
                     console.log(jsonRes)
                     if (res.status !== 200) {
-                        store.dispatch(userRegistrationFailed());
+                        store.dispatch(failedPostingComment());
                     } else {
                         this.singleActivity()
-                        store.dispatch(userRegistrationSuccess());
+                        store.dispatch(successfullyPostedComment());
                     }
                 } catch (err) {
                     console.log(err);
@@ -210,16 +234,16 @@ export default class SingleActivity extends Component{
          })
              .then(async res => {
                  try {
-                     store.dispatch(userRegistrationStarted());
+                     store.dispatch(startedDeletingComment());
 
                      const jsonRes = await res.json();
 
                      console.log(jsonRes)
                      if (res.status !== 200) {
-                         store.dispatch(userRegistrationFailed());
+                         store.dispatch(failedDeletingComment());
                      } else {
                          Alert.alert('Successfully deleted comment')
-                         store.dispatch(userRegistrationSuccess());
+                         store.dispatch(successfullyDeletedComment());
                      }
                  } catch (err) {
                      console.log(err);
