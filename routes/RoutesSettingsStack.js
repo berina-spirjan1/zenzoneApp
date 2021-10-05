@@ -6,6 +6,7 @@ import Language from "../screens/Language";
 import UserHelp from "../screens/userProfile/UserHelp";
 import MyProfileInfo from "../screens/userProfile/MyProfileInfo";
 import UserProfile from "../screens/userProfile/UserProfile";
+import {RoutesProfileStack} from "./RoutesProfileStack";
 
 const Stack = createNativeStackNavigator()
 
@@ -33,7 +34,7 @@ export const RoutesSettingsStack = () =>{
                                   headerShown: false
                               }}/>
                 <Stack.Screen name={"toInfoMain"}
-                              component={UserProfile}
+                              component={RoutesProfileStack}
                               options={{
                                   headerShown: false
                               }}/>
