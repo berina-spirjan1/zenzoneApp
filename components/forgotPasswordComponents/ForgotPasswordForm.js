@@ -1,7 +1,15 @@
-import {Alert, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {
+    Alert,
+    StatusBar,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from "react-native";
 import ForgotPasswordFormIcon from "../../assets/icons/ForgotPasswordFormIcon";
 import ForgotPasswordWomenIcon from "../../assets/icons/ForgotPasswordWomenIcon";
-import React, {useState} from "react";
+import React, { useState } from "react";
 import {FORGOT_PASSWORD} from "../../configuration/config";
 import store from "../../redux/store";
 import {
@@ -9,16 +17,22 @@ import {
     forgotPasswordChangingFailed,
     forgotPasswordChangingStarted,
 } from "../../redux/actions";
-import {Actions} from "react-native-router-flux";
-import {useNavigation} from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 
 
 export const ForgotPasswordForm = () =>{
+
+    //defining hook that allows us to access to navigation objects
     const navigation = useNavigation();
+
+    //allowing to state variable in this functional component
     const [email, setEmail] = useState('');
 
+    //adding function to navigate to check email page
     const checkEmail = () => navigation.navigate("checkEmail")
 
+
+    //function that use taken email address and sends it to api that requires to send user new accessing link
     const onResetHandler = () =>{
 
         const user = {
@@ -65,9 +79,6 @@ export const ForgotPasswordForm = () =>{
                 backgroundColor="#6285B3"/>
             <TextInput style={ styles.inputEmail }
                        onChangeText={setEmail}>
-                {/*<FontAwesome5 name={'envelope'}*/}
-                {/*              size={18}*/}
-                {/*              color={'#000000'}/>*/}
             </TextInput>
             <TouchableOpacity style={ styles.button }
                               onPress={onResetHandler}>
