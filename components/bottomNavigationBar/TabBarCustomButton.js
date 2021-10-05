@@ -9,6 +9,7 @@ import Svg, { Path } from "react-native-svg";
 
 //button that will show on active tab in bottom navigation bar
 function TabBarCustomButton({accessibilityState, children, onPress}){
+
     let isSelected = accessibilityState.selected;
 
     if (isSelected){
