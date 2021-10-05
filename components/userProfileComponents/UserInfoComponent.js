@@ -12,7 +12,11 @@ import {
     USER
 } from "../../configuration/config";
 import { renderIf } from "../../utilities/CommonMethods";
-import {failedGettingUserInfo, startedGettingUserInfo, successfullyGotUserInfo} from "../../redux/actions";
+import {
+    failedGettingUserInfo,
+    startedGettingUserInfo,
+    successfullyGotUserInfo
+} from "../../redux/actions";
 import store from "../../redux/store";
 
 export default class UserInfoComponent extends Component{
