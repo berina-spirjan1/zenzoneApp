@@ -1,28 +1,48 @@
-import {AsyncStorage, SafeAreaView, StatusBar, StyleSheet, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {
+    AsyncStorage,
+    SafeAreaView,
+    StatusBar,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from "react-native";
 import LottieView from "lottie-react-native";
-import {FontAwesome5} from "@expo/vector-icons";
+import { FontAwesome5 } from "@expo/vector-icons";
 import Icon from "../../assets/icons/Icon";
-import React, {useState} from "react";
-import {LOGIN} from "../../configuration/config";
+import React, { useState } from "react";
+import { LOGIN } from "../../configuration/config";
 import store from "../../redux/store";
-import {authFailed, authStarted, authSuccess,} from "../../redux/actions";
-import {Actions} from "react-native-router-flux";
-import {useNavigation} from "@react-navigation/native";
+import {
+    authFailed,
+    authStarted,
+    authSuccess
+} from "../../redux/actions";
+
+import { useNavigation } from "@react-navigation/native";
 
 export const LoginForm = () =>{
+
+    //defining hook that allows us to access to navigation objects
     const navigation = useNavigation();
+
+    //allowing to state variables in this functional component
     const [email, setEmail] = useState('');
     const [password, setPassword] =  useState('');
-    let [token, setToken] = useState('')
 
 
-    //redirection from login page to user profile
+    //redirection to user profile
     const goToUserInfo = () => navigation.navigate("switchLoginToUser")
 
+    //navigating to forgot password page
     const forgotPassword = () => navigation.navigate("forgotPassword")
 
+    //navigating to signup page
     const signup = () => navigation.navigate("signup")
 
+    //function that calls when user press button login, which handle action that if username and password are correct it
+    //returns token that is active in app until user logout from app
     const onLoginHandler = () =>{
 
         const user = {
