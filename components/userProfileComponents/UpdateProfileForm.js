@@ -15,18 +15,26 @@ import {
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import * as ImagePicker from "expo-image-picker";
-import {BASE_URL, USER, USER_UPDATE} from "../../configuration/config";
+import {
+    BASE_URL,
+    USER,
+    USER_UPDATE
+} from "../../configuration/config";
 import store from "../../redux/store";
-import {failedAddingActivity, startedAddingActivity, successfullyAddedActivity} from "../../redux/actions";
-import {Actions} from "react-native-router-flux";
-import {renderIf} from "../../utilities/CommonMethods";
-import {useNavigation} from "@react-navigation/native";
+import {
+    failedAddingActivity, failedUpdatingUserInfo,
+    startedAddingActivity, startedUpdatingUserInfo,
+    successfullyAddedActivity, successfullyUpdatedUserInfo
+} from "../../redux/actions";
+import { renderIf } from "../../utilities/CommonMethods";
 
 
 export const UpdateProfileForm = () =>{
 
-    const navigation = useNavigation();
+    //we are taking screen height and storing at to variable which we use for scroll view
     const screenHeight = Dimensions.get('window').height
+
+    //allowing to state variables in this functional component
     let [image, setImage] = useState(null)
     const [first_name, setFirstName] = useState('')
     const [last_name, setLastName] = useState('')
@@ -46,6 +54,7 @@ export const UpdateProfileForm = () =>{
     const [photoDirInitial, setPhotoDirInitial] = useState('');
     const [photoNameInitial, setPhotoNameInitial] = useState('');
 
+    //hook for adding side effect for allowing access to gallery
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
@@ -57,6 +66,7 @@ export const UpdateProfileForm = () =>{
         })();
     }, []);
 
+    //we are taking image from gallery and cropping it
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -74,14 +84,12 @@ export const UpdateProfileForm = () =>{
 
     };
 
+
     const updateProfile = async () => {
-
-        console.log("OVO JE FAJL", image)
-        console.log('ovo je office location', office_location)
-
 
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
+
         const imageType = image.type
         setExtension(imageUri.split('.').pop())
         const user = new FormData();
@@ -106,16 +114,16 @@ export const UpdateProfileForm = () =>{
         })
             .then(async res => {
                 try {
-                    store.dispatch(startedAddingActivity());
+                    store.dispatch(startedUpdatingUserInfo());
 
                     const jsonRes = await res.json();
 
                     console.log(jsonRes)
                     if (res.status !== 200) {
                         console.log(res.status)
-                        store.dispatch(failedAddingActivity());
+                        store.dispatch(failedUpdatingUserInfo());
                     } else {
-                        store.dispatch(successfullyAddedActivity());
+                        store.dispatch(successfullyUpdatedUserInfo());
                         switchToMyProfileInfo()
                     }
                 } catch (err) {
@@ -158,6 +166,7 @@ export const UpdateProfileForm = () =>{
         })();
     }, []);
 
+    //navigation back to profile information's
     const switchToMyProfileInfo = () => this.props.navigation.navigate("switchToMyProfileInfo")
 
 

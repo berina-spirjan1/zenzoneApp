@@ -66,7 +66,7 @@ export const CreateNewActivityForm = () => {
     }, []);
 
 
-    //taking image from gallery and cropping it
+    //we are taking image from gallery and cropping it
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
