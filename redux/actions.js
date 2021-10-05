@@ -184,7 +184,7 @@ export function failedAtLikingActivity(){
     }
 }
 
-//action for successfully liked acitivity
+//action for successfully liked activity
 export function successfullyLikedActivity(){
     return{
         type: actions.SUCCESSFULLY_LIKED_ACTIVITY
