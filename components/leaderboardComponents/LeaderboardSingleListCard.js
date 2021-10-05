@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {Image, StyleSheet, Text, TouchableOpacity} from "react-native";
 
+//class that will be used like single card in leaderboard page
 export default class LeaderboardSingleListCard extends Component{
     constructor(props) {
         super()
