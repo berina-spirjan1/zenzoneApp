@@ -8,6 +8,7 @@ import Leaderboard from "../screens/Leaderboard";
 import Settings from "../screens/userProfile/Settings";
 import HomePage from "../screens/HomePage";
 import SideMenu from "../components/sideMenu/SideMenu";
+import ErrorPage from "../screens/errorPages/ErrorPage";
 
 
 const Stack = createNativeStackNavigator()
@@ -15,6 +16,11 @@ const Stack = createNativeStackNavigator()
 export const RouterHomePageStack = () =>{
     return(
             <Stack.Navigator initialRouteName={"homePageActivities"}>
+                <Stack.Screen name={"toErrorPage"}
+                              component={ErrorPage}
+                              options={{
+                                  headerShown: false
+                              }}/>
                 <Stack.Screen name={"seeAll"}
                               component={AllCategories}
                               options={{
