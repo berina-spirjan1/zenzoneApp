@@ -1,8 +1,19 @@
 import React from "react";
-import {Card, CardAction} from "react-native-card-view";
-import {Alert, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {
+    Card,
+    CardAction
+} from "react-native-card-view";
+import {
+    Alert,
+    Image,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
+} from "react-native";
 
 
+//mockup for activity card that we are using to show all activities from one user
 function MyActivityCard(){
     return(
         <Card style={styles.card}
