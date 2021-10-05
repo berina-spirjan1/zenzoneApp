@@ -1,18 +1,29 @@
-import React, {Component} from "react";
-import {AsyncStorage, StatusBar, StyleSheet, Text, View} from "react-native";
-import {Toolbar} from "react-native-material-ui";
-
+import React, { Component } from "react";
+import {
+    AsyncStorage,
+    StatusBar,
+    StyleSheet,
+    Text,
+    View
+} from "react-native";
+import { Toolbar } from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import ToggleSwitch from "toggle-switch-react-native";
 import UserInfoComponent from "../../components/userProfileComponents/UserInfoComponent";
 import BackgroundForIconsUserProfile from "../../components/backgrounds/BackgroundForIconsUserProfile";
 import NextButton from "../../components/buttons/NextButton";
-import {Actions} from "react-native-router-flux";
-import {USER, USER_UPDATE} from "../../configuration/config";
-import {renderIf} from "../../utilities/CommonMethods";
-import {isIphoneX} from "react-native-iphone-x-helper";
+import {
+    USER,
+    USER_UPDATE
+} from "../../configuration/config";
+import { renderIf } from "../../utilities/CommonMethods";
+import { isIphoneX } from "react-native-iphone-x-helper";
 import store from "../../redux/store";
-import {failedAddingActivity, startedAddingActivity, successfullyAddedActivity} from "../../redux/actions";
+import {
+    failedAddingActivity, failedGettingUserInfo, failedUpdatingUserInfo,
+    startedAddingActivity, startedGettingUserInfo, startedUpdatingUserInfo,
+    successfullyAddedActivity, successfullyGotUserInfo, successfullyUpdatedUserInfo
+} from "../../redux/actions";
 
 
 export default class Settings extends Component{
@@ -26,13 +37,14 @@ export default class Settings extends Component{
         lightThemeIsOn: true
     }
 
+    //navigating to page for changing languages
     toLanguage = () => this.props.navigation.navigate("toLanguage")
 
+    //navigating to page that helps user with using our app
     toHelp = () => this.props.navigation.navigate("toHelp")
 
+    //navigating to page that contains information's about user
     toInfoMain = () => this.props.navigation.navigate("toInfoMain")
-
-
 
     componentDidMount = async () => {
 
@@ -49,11 +61,17 @@ export default class Settings extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log(responseJson);
+                store.dispatch(startedGettingUserInfo())
                 this.setState({
                     data: responseJson,
                     theme: responseJson.theme
                 })
+                if(responseJson.length!==0){
+                    store.dispatch(successfullyGotUserInfo())
+                }
+                else{
+                    store.dispatch(failedGettingUserInfo())
+                }
 
             })
             .catch((error) => {
@@ -62,7 +80,6 @@ export default class Settings extends Component{
         if(this.state.theme==='dark'){
             this.setState({lightThemeIsOn: false})
         }
-        console.log(this.state.theme)
     }
 
     checkIsOn(change_theme){
@@ -81,8 +98,6 @@ export default class Settings extends Component{
                 lightThemeIsOn: true
             })
         }
-        console.log("ovo -------------", this.state.theme)
-        console.log("ovo -------------", this.state.lightThemeIsOn)
 
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
@@ -101,16 +116,16 @@ export default class Settings extends Component{
         })
             .then(async res => {
                 try {
-                    store.dispatch(startedAddingActivity());
+                    store.dispatch(startedUpdatingUserInfo());
 
                     const jsonRes = await res.json();
 
                     console.log(jsonRes)
                     if (res.status !== 200) {
                         console.log(res.status)
-                        store.dispatch(failedAddingActivity());
+                        store.dispatch(failedUpdatingUserInfo());
                     } else {
-                        store.dispatch(successfullyAddedActivity());
+                        store.dispatch(successfullyUpdatedUserInfo());
                     }
                 } catch (err) {
                     console.log(err);
