@@ -1,4 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, {
+    useEffect,
+    useState
+} from "react";
 import {
     AsyncStorage,
     Platform,
@@ -13,7 +16,11 @@ import {
 
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-import {ACTIVITY, CATEGORY} from "../../configuration/config";
+import {
+    ACTIVITY,
+    CATEGORY,
+    SEARCH_ACTIVITIES_BY_TITLE
+} from "../../configuration/config";
 import store from "../../redux/store";
 import {failedAddingActivity, startedAddingActivity, successfullyAddedActivity} from "../../redux/actions";
 import * as ImagePicker from "expo-image-picker";
@@ -21,6 +28,7 @@ import {renderIf} from "../../utilities/CommonMethods";
 import {Card, CardAction, CardContent} from "react-native-card-view";
 
 import {useNavigation} from '@react-navigation/native';
+import AutocompleteInput from "react-native-autocomplete-input";
 
 export const CreateNewActivityForm = () => {
     const navigation = useNavigation();
@@ -35,6 +43,7 @@ export const CreateNewActivityForm = () => {
     const [searchCategory, setSearchCategory] = useState('')
     const [activitiesData, setActivitiesData] = useState([])
     const [token, setToken] = useState(null)
+    const [closeList, setCloseList] = useState(false)
 
     useEffect(() => {
         (async () => {
@@ -81,10 +90,9 @@ export const CreateNewActivityForm = () => {
 
     }, [])
 
-    //todo popraviti sutra kada se napravi endpoint
     const updateSearch = (searchText) => {
         setSearchText(searchText)
-        fetch(`${ACTIVITY}?searchKey=${searchText}`, {
+        fetch(`${SEARCH_ACTIVITIES_BY_TITLE}?searchKey=${searchText}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -93,8 +101,7 @@ export const CreateNewActivityForm = () => {
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                setActivitiesData(responseJson.data.data)
-                console.log("TUUUUU",responseJson.data.data)
+                setActivitiesData(responseJson.data)
             })
             .catch((error) => {
                 console.error(error);
@@ -156,8 +163,6 @@ export const CreateNewActivityForm = () => {
     }
 
 
-
-
     const switchSuccessfullyAddedCreateActivity = () => navigation.navigate("switchSuccessfullyAddedCreateActivity")
 
     const saveCategoryId = (i) =>{
@@ -217,17 +222,25 @@ export const CreateNewActivityForm = () => {
                         </ScrollView>
                     )}
                     <Text style={styles.title}>Title</Text>
-                    {/*<View style={styles.titleInput}>*/}
-                        {/*<AutocompleteInput placeholder={'Activity title'}*/}
-                        {/*                   autoCapitalize="none"*/}
-                        {/*                   autoCorrect={false}*/}
-                        {/*                   onChangeText={(search) => updateSearch(search)}*/}
-                        {/*                   data={activitiesData}*/}
-                        {/*                   renderItem={(item) => (<Text>{item}</Text>)}/>*/}
-                        <TextInput placeholder={'Activity title'}
-                                   style={styles.titleInput}
-                                   onChangeText={setTitle}/>
-                    {/*</View>*/}
+                    <View style={styles.autocompleteContainer}>
+                        <AutocompleteInput placeholder={'Activity title'}
+                                           autoCapitalize="none"
+                                           autoCorrect={false}
+                                           onChangeText={(search) => updateSearch(search)}
+                                           data={activitiesData}
+                                           defaultValue = {title}
+                                           hideResults={closeList}
+                                           containerStyle={styles.autocompleteContainer}
+                                           flatListProps={{
+                                               keyboardShouldPersistTaps: 'always',
+                                               renderItem: (({item}) => (
+                                                   <TouchableOpacity onPress={()=>{setTitle(item); setCloseList(true)}}>
+                                                        <Text style={styles.autocompleteInputText}>{item}</Text>
+                                                   </TouchableOpacity>
+                                               ))
+                                           }}/>
+
+                    </View>
                     <View style={{flexDirection: 'row'}}>
                         <Text style={styles.comment}>Description</Text>
                     </View>
@@ -256,7 +269,6 @@ export const CreateNewActivityForm = () => {
                                                   style={styles.cameraIcon}/>
                                     <Text style={styles.add}>Add</Text>
                                 </TouchableOpacity>
-                                {/*{image && <Image source={{ uri: image }} style={{ width: 223.06, height: 223.06 }} />}*/}
                             </View>
                         </ScrollView>
                     </SafeAreaView>
@@ -412,5 +424,15 @@ const styles = StyleSheet.create({
     icon2:{
         justifyContent:'center',
         marginTop:20
+    },
+    autocompleteInputText:{
+        fontSize: 18,
+        color: '#363559'
+    },
+    autocompleteContainer:{
+        zIndex: 3,
+        marginLeft: 10,
+        marginRight: 10,
+        backgroundColor: 'rgba(255, 255, 255, 0.2)'
     }
 })
