@@ -24,17 +24,21 @@ import {
     failedAtDislikingActivity,
     failedAtLikingActivity,
     failedAtLoadingActivities,
-    failedAtLoadingCategories, failedRemovingDislike, failedRemovingLike, startedDislikingActivity,
+    failedAtLoadingCategories,
+    failedRemovingDislike,
+    failedRemovingLike,
+    startedDislikingActivity,
     startedLikingActivity,
     startedLoadingActivities,
-    startedLoadingCategories, startedRemovingDislike,
-    startedRemovingLike, successfullyDislikedActivity,
+    startedLoadingCategories,
+    startedRemovingDislike,
+    startedRemovingLike,
+    successfullyDislikedActivity,
     successfullyLikedActivity,
     successfullyLoadedActivities,
-    successfullyLoadedCategories, successfullyRemovedDislike, successfullyRemovedLike,
-    userRegistrationFailed,
-    userRegistrationStarted,
-    userRegistrationSuccess
+    successfullyLoadedCategories,
+    successfullyRemovedDislike,
+    successfullyRemovedLike,
 } from "../redux/actions";
 import {isIphoneX} from "react-native-iphone-x-helper";
 
