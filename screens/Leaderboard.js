@@ -12,18 +12,29 @@ import {
 } from "react-native";
 import LeaderboardSingleListCard from "../components/leaderboardComponents/LeaderboardSingleListCard";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import {renderIf} from "../utilities/CommonMethods";
+import {isIphoneX} from "react-native-iphone-x-helper";
+import {Toolbar} from "react-native-material-ui";
 
 export default class Leaderboard extends Component{
     constructor(props) {
         super();
     }
-
+    profile = () => this.props.navigation.navigate("profile")
     render() {
 
         const screenHeight = Dimensions.get('window').height
 
         return (
           <View style={styles.container}>
+              {renderIf(isIphoneX(),  <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
+                                               leftElement="arrow-back"
+                                               centerElement="Leaderboard"
+                                               onLeftElementPress={this.profile}/>)}
+              {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                               leftElement="arrow-back"
+                                               centerElement="Leaderboard"
+                                               onLeftElementPress={this.profile}/> )}
               <ImageBackground source={require('../assets/images/backgroundLeaderboardLightMode.png')}
                                style={styles.imageBackground}/>
               <FontAwesome5 name={'crown'}
