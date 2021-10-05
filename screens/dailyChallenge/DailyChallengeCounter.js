@@ -53,7 +53,7 @@ export default class DailyChallengeCounter extends Component{
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: '#93B4E5',
+        backgroundColor: '#cbdbf2',
         flex: 1
     },
     countdown:{

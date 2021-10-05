@@ -378,7 +378,7 @@ export default class DailyChallengeDetails extends Component{
 
 const styles = StyleSheet.create({
     container:{
-        backgroundColor: '#CBDBF2',
+        backgroundColor: '#cbdbf2',
         flex: 1
     },
     activityImage:{
