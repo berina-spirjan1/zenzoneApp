@@ -1,6 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import store from "../../redux/store";
-import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../../redux/actions";
+import {
+    userRegistrationFailed,
+    userRegistrationStarted,
+    userRegistrationSuccess
+} from "../../redux/actions";
 import {
     Dimensions,
     SafeAreaView,
@@ -14,11 +18,17 @@ import {
 } from "react-native";
 import Cload from "../../assets/icons/Cload";
 import Icon from "../../assets/icons/Icon";
-import {Actions} from "react-native-router-flux";
-import {REGISTER} from "../../configuration/config";
+import { Actions } from "react-native-router-flux";
+import { REGISTER } from "../../configuration/config";
+import {useNavigation} from "@react-navigation/native";
 
 
 export const SignUpForm = () =>{
+
+    //defining hook that allows us to access to navigation objects
+    const navigation = useNavigation();
+
+    //allowing to state variables in this functional component
     const [name, setName] = useState('');
     const [first_name, setFirstName] =  useState('');
     const [last_name, setLastName] =  useState('');
@@ -28,13 +38,13 @@ export const SignUpForm = () =>{
     const [password, setPassword] =  useState('');
     const [confirm_password, setConfirmPassword] =  useState('');
 
+    //we are taking screen height and storing at to variable which we use for scroll view
     const screenHeight = Dimensions.get('window').height
 
-    const login = () =>{
-        Actions.login()
-    }
+    //navigating to login page
+    const login = () => navigation.navigate("login")
 
-
+    //validating input for email address
     const validate = (text) => {
         console.log(text);
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/.com;
@@ -48,10 +58,7 @@ export const SignUpForm = () =>{
         }
     }
 
-    // const redirectToLogin = () =>{
-    //     Actions.login()
-    // }
-
+    //function that is activating when user press button for sign up into our application
     const onSubmitHandler = () =>{
 
         const user = {
@@ -83,8 +90,15 @@ export const SignUpForm = () =>{
                     if(res.status!==200){
                         store.dispatch(userRegistrationFailed());
                     }
-                    else{
+                    if(res.status===200){
+                        login();
                         store.dispatch(userRegistrationSuccess());
+                    }
+                    if(res.status===401){
+                        Alert.alert("Please check your information's and input it correctly.")
+                    }
+                    else{
+                        store.dispatch(userRegistrationFailed());
                     }
                 }
                 catch (err){
@@ -119,7 +133,6 @@ export const SignUpForm = () =>{
                     <Text style={stylesLightMode.formValidation}>The last name field is required.</Text>
                     <Text style={stylesLightMode.hintText}>E-mail</Text>
                     <TextInput style={stylesLightMode.inputLabel}
-                        // onChangeText={(text) => this.validate(text)}
                                onChangeText={setEmail}>
                     </TextInput>
                     <Text style={stylesLightMode.formValidation}>The email has already been taken.</Text>
