@@ -2,6 +2,7 @@ import React from "react";
 import {Image, StyleSheet, Text, TouchableOpacity} from "react-native";
 
 
+//card that will be used for information about people who are following you
 function FamilyCard(){
     return(
         <TouchableOpacity style={styles.container}>
