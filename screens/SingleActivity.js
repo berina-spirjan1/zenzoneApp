@@ -441,7 +441,7 @@ const styles = StyleSheet.create({
         height: 60,
         width: 60,
         borderRadius: 60,
-        marginTop: -60
+        marginTop: 0
     },
     likeWrapper:{
         position: 'absolute',
