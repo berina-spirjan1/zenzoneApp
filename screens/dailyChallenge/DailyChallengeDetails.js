@@ -15,15 +15,33 @@ import {
     TouchableOpacity,
     View
 } from "react-native";
-import {SafeAreaView} from "react-navigation";
+import { SafeAreaView } from "react-navigation";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import {BASE_URL, COMMENT, DAILY_CHALLENGE, SINGLE_ACTIVITY, USER} from "../../configuration/config";
-import {renderIf} from "../../utilities/CommonMethods";
-import {isIphoneX} from "react-native-iphone-x-helper";
-import {Toolbar} from "react-native-material-ui";
+import {
+    BASE_URL,
+    COMMENT,
+    DAILY_CHALLENGE,
+    SINGLE_ACTIVITY,
+    USER
+} from "../../configuration/config";
+import { renderIf } from "../../utilities/CommonMethods";
+import { isIphoneX } from "react-native-iphone-x-helper";
+import { Toolbar } from "react-native-material-ui";
 import ConvertDate from "../../utilities/ConvertDate";
 import store from "../../redux/store";
-import {userRegistrationFailed, userRegistrationStarted, userRegistrationSuccess} from "../../redux/actions";
+import {
+    failedAtGettingActivityInfo,
+    failedAtGettingDailyInfo, failedDeletingComment, failedPostingComment, failedUpdatingUserInfo,
+    staredGettingDailyInfo, startedDeletingComment,
+    startedGettingActivityInfo, startedPostingComment,
+    startedUpdatingUserInfo, successfullyDeletedComment,
+    successfullyGettingActivityInfo,
+    successfullyGotDailyInfo, successfullyUpdatedUserInfo,
+    userRegistrationFailed,
+    userRegistrationStarted,
+    userRegistrationSuccess
+
+} from "../../redux/actions";
 import DailyChallengeCounter from "./DailyChallengeCounter";
 import * as ImagePicker from "expo-image-picker";
 
@@ -63,11 +81,19 @@ export default class DailyChallengeDetails extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log(responseJson);
+                store.dispatch(staredGettingDailyInfo())
                 this.setState({
                     data: responseJson.data[0],
                     id: responseJson.data[0].id
                 })
+                if(responseJson.data[0].length!==0){
+                    store.dispatch(successfullyGotDailyInfo())
+                }
+                else{
+                    store.dispatch(failedAtGettingDailyInfo())
+                }
+
+
                 fetch(`${SINGLE_ACTIVITY}/${this.state.id}`, {
                     method: 'GET',
                     headers: {
@@ -77,11 +103,16 @@ export default class DailyChallengeDetails extends Component{
                 })
                     .then((response) => response.json())
                     .then((responseJson) => {
-                        console.log(responseJson);
+                        store.dispatch(startedGettingActivityInfo())
                         this.setState({
                             commentArray: responseJson.data[0].comments
                         })
-                        console.log(this.state.commentArray)
+                        if(responseJson.data[0].comments.length!==0){
+                            store.dispatch(successfullyGettingActivityInfo())
+                        }
+                        else{
+                            store.dispatch(failedAtGettingActivityInfo())
+                        }
                     })
                     .catch((error) => {
                         console.error(error);
@@ -102,10 +133,17 @@ export default class DailyChallengeDetails extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
+                store.dispatch(startedUpdatingUserInfo())
                 this.setState({
                     userData: responseJson,
                     refresh: false
                 })
+                if(responseJson.length!==0){
+                    store.dispatch(successfullyUpdatedUserInfo())
+                }
+                else{
+                    store.dispatch(failedUpdatingUserInfo())
+                }
             })
             .catch((error) => {
                 console.error(error);
@@ -168,20 +206,20 @@ export default class DailyChallengeDetails extends Component{
         })
             .then(async res => {
                 try {
-                    store.dispatch(userRegistrationStarted());
+                    store.dispatch(startedPostingComment());
 
                     const jsonRes = await res.json();
 
                     console.log(jsonRes)
                     if (res.status !== 200) {
-                        store.dispatch(userRegistrationFailed());
+                        store.dispatch(failedPostingComment());
                     }
                     if(res.status===401){
                         Alert.alert("Please login to add comment.")
                     }
                     else {
                         this.congratulations();
-                        store.dispatch(userRegistrationSuccess());
+                        store.dispatch(successfullyPostedComment());
                     }
                 } catch (err) {
                     console.log(err);
@@ -210,16 +248,20 @@ export default class DailyChallengeDetails extends Component{
         })
             .then(async res => {
                 try {
-                    store.dispatch(userRegistrationStarted());
+                    store.dispatch(startedDeletingComment());
 
                     const jsonRes = await res.json();
 
                     console.log(jsonRes)
                     if (res.status !== 200) {
-                        store.dispatch(userRegistrationFailed());
+                        store.dispatch(failedDeletingComment());
 
-                    } else {
-                        store.dispatch(userRegistrationSuccess());
+                    }
+                    if(res.status===401){
+                        Alert.alert("Something went wrong, please try again.")
+                    }
+                    else {
+                        store.dispatch(successfullyDeletedComment());
                     }
                 } catch (err) {
                     console.log(err);
