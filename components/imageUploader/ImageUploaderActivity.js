@@ -1,8 +1,20 @@
-import React, {useEffect, useState} from 'react';
-import {Image, Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {
+    useEffect,
+    useState
+} from 'react';
+import {
+    Image,
+    Platform,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
+} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
+
+//function that is used for upload image for activities
 export default function ImageUploaderActivity() {
     const [image, setImage] = useState(null);
 
