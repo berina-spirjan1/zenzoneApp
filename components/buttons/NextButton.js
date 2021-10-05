@@ -1,8 +1,12 @@
 import React from "react";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import {StyleSheet, TouchableOpacity} from "react-native";
+import {
+    StyleSheet,
+    TouchableOpacity
+} from "react-native";
 
 
+// button that is used in user section for navigating to user profile
 function NextButton({onPress}){
     return(
         <TouchableOpacity style={styles.nextButton}
