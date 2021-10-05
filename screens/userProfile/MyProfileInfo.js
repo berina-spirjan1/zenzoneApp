@@ -12,14 +12,19 @@ import {
     TouchableOpacity,
     View
 } from "react-native";
-import {Toolbar} from "react-native-material-ui";
+import { Toolbar } from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-import {onLogoutHandler} from "../../components/logout/Logout";
-import {BASE_URL, USER} from "../../configuration/config";
-import {Actions} from "react-native-router-flux";
-import {renderIf} from "../../utilities/CommonMethods";
-import {isIphoneX} from "react-native-iphone-x-helper";
+import { onLogoutHandler } from "../../components/logout/Logout";
+import {
+    BASE_URL,
+    USER
+} from "../../configuration/config";
+
+import { renderIf } from "../../utilities/CommonMethods";
+import { isIphoneX } from "react-native-iphone-x-helper";
+import store from "../../redux/store";
+import {failedUpdatingUserInfo, startedUpdatingUserInfo, successfullyUpdatedUserInfo} from "../../redux/actions";
 
 export default class MyProfileInfo extends Component{
     constructor(props) {
@@ -45,11 +50,16 @@ export default class MyProfileInfo extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log(responseJson);
+                store.dispatch(startedUpdatingUserInfo())
                 this.setState({
                     data: responseJson
                 })
-                // console.log(this.state.data)
+                if(responseJson.length!==0){
+                    store.dispatch(successfullyUpdatedUserInfo())
+                }
+                else{
+                    store.dispatch(failedUpdatingUserInfo())
+                }
             })
             .catch((error) => {
                 console.error(error);
@@ -57,14 +67,19 @@ export default class MyProfileInfo extends Component{
         await AsyncStorage.setItem('theme',JSON.stringify(this.state.data.theme));
     }
 
+    //navigation to change password page
     switchToChangePassword = () => this.props.navigation.navigate("switchToChangePassword")
 
+    //navigation for back to page that is main in user profile
     backToProfile = () => this.props.navigation.navigate("backToProfile")
 
+    //navigation to page that contains daily challenge
     goToDailyChallenge = () => this.props.navigation.navigate("goToDailyChallenge")
 
+    //navigation to leaderboard page
     goToLeaderboard = () => this.props.navigation.navigate("goToLeaderboard")
 
+    //navigation to update profile
     updateProfile = () => this.props.navigation.navigate("updateProfile")
 
     onMenuItemClick(label){
@@ -218,8 +233,7 @@ const styles = StyleSheet.create({
         height: 100,
         borderRadius: 200,
         top: -100,
-        left:130,
-        textAlign: 'center'
+        left:130
     },
     username:{
         fontSize: 22,
