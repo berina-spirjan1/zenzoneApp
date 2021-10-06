@@ -11,19 +11,23 @@ export default class CreateNewActivity extends Component{
     constructor(props) {
         super();
     }
+    state = {
+        token: null
+    }
 
     //function that returns token that is given from async storage.
-    getToken = async ()=>{
+    async componentDidMount() {
         let tokenHelper = await AsyncStorage.getItem('jwt')
         tokenHelper = JSON.parse(tokenHelper)
 
-        return tokenHelper
+        this.setState({token: tokenHelper})
     }
+
 
     render() {
         return(
             <>
-                {renderIf(this.getToken!==null,
+                {renderIf(this.state.token!==null,
                     <View style={styles.container}>
                         <StatusBar
                             animated={true}
@@ -36,7 +40,7 @@ export default class CreateNewActivity extends Component{
 
                     </View>
                 )}
-                {renderIf(this.getToken===null,
+                {renderIf(this.state.token===null,
                     <WaitingToPostActivity/>
                 )}
             </>
