@@ -36,7 +36,7 @@ import {
     startedGettingActivityInfo, startedPostingComment,
     startedUpdatingUserInfo, successfullyDeletedComment,
     successfullyGettingActivityInfo,
-    successfullyGotDailyInfo, successfullyUpdatedUserInfo,
+    successfullyGotDailyInfo, successfullyPostedComment, successfullyUpdatedUserInfo,
     userRegistrationFailed,
     userRegistrationStarted,
     userRegistrationSuccess
@@ -275,7 +275,6 @@ export default class DailyChallengeDetails extends Component{
             <>
                 {renderIf(this.state.data.length!==0,
                     <View style={styles.container}>
-
                                 <StatusBar
                                     animated={true}
                                     backgroundColor="#6285B3"/>
@@ -307,8 +306,11 @@ export default class DailyChallengeDetails extends Component{
                                                 <Text style={styles.createdDate}>Start date: {ConvertDate(this.state.data.start_date)}</Text>
                                                 <Text style={styles.createdDate}>End date: {ConvertDate(this.state.data.end_date)}</Text>
                                             </View>
+                                            <>
+                                                {renderIf(this.state.token!==null,
+                                                    <View style={styles.userWrapper}>
 
-                                            <View style={styles.userWrapper}>
+
                                                 {renderIf(this.state.userData.photo_dir!==null,
                                                     <Image source={{uri: `${BASE_URL}`+`${this.state.userData.photo_dir}`+`${this.state.userData.photo_name}`}}
                                                            style={styles.userProfilePicture}/>
@@ -527,7 +529,7 @@ export default class DailyChallengeDetails extends Component{
                                                             }, this)}
                                                         </>)}
                                                 </View>
-                                            </View>
+                                            </View>)}</>
                                         </View>
                                     </ScrollView>
                                 </SafeAreaView>
