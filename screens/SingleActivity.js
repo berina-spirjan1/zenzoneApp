@@ -74,7 +74,6 @@ export default class SingleActivity extends Component{
             quality: 0.5
         });
 
-
         this.setState({ image: result})
 
         this.setState({ imageUri: Platform.OS === "android" ? this.state.image.uri : this.state.image.uri.replace("file:///", "")})
