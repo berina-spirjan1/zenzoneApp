@@ -20,7 +20,10 @@ export default class Leaderboard extends Component{
     constructor(props) {
         super();
     }
+
+    //navigating back to user profile
     profile = () => this.props.navigation.navigate("profile")
+
     render() {
 
         const screenHeight = Dimensions.get('window').height
