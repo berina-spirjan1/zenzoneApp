@@ -16,11 +16,16 @@ import {
     TouchableOpacity,
     View
 } from "react-native";
-import {Toolbar} from "react-native-material-ui";
-import {BASE_URL, COMMENT, SINGLE_ACTIVITY, USER} from "../configuration/config";
-import {isIphoneX} from "react-native-iphone-x-helper";
-import {renderIf} from "../utilities/CommonMethods";
-import {FontAwesome5} from "@expo/vector-icons";
+import { Toolbar } from "react-native-material-ui";
+import {
+    BASE_URL,
+    COMMENT,
+    SINGLE_ACTIVITY,
+    USER
+} from "../configuration/config";
+import { isIphoneX } from "react-native-iphone-x-helper";
+import { renderIf } from "../utilities/CommonMethods";
+import { FontAwesome5 } from "@expo/vector-icons";
 import store from "../redux/store";
 import {
     failedAtGettingActivityInfo,
@@ -60,7 +65,7 @@ export default class SingleActivity extends Component{
         token: null
     }
 
-
+    //we are taking image from gallery and cropping it
      pickImage = async() =>{
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -81,8 +86,10 @@ export default class SingleActivity extends Component{
 
     };
 
+    //navigation to page that contains information's about user who created current activity
     goToAboutUserWhoCreatedActivity = () => this.props.navigation.navigate("goToAboutUserWhoCreatedActivity")
 
+    //at this function we are storing user id which we use to get information's about user
     async showUser(user_id){
         await AsyncStorage.setItem('user_id',JSON.stringify(user_id))
         if(this.state.token!==null){
@@ -94,6 +101,7 @@ export default class SingleActivity extends Component{
 
         this.setState({refresh: true})
 
+        //we are taking activity id and token from async storage
         let id = await AsyncStorage.getItem("id")
         id = JSON.parse(id)
 
@@ -102,6 +110,7 @@ export default class SingleActivity extends Component{
 
         this.setState({token: token})
 
+        //at fetch method we are getting information's about single activity that is selected
         fetch(`${SINGLE_ACTIVITY}/${id}`, {
             method: 'GET',
             headers: {
@@ -129,6 +138,7 @@ export default class SingleActivity extends Component{
                 console.error(error);
             });
 
+        //we are fetching information's about user
         fetch(`${USER}`, {
             method: 'GET',
             headers: {
@@ -156,13 +166,16 @@ export default class SingleActivity extends Component{
             });
     }
 
+    //navigation to same page to refresh it
     singleActivity = () => this.props.navigation.navigate("singleActivity")
 
+    //at this function we are are taking one argument that is activity id and posting new comment for that activity
     async postComment(activity_id){
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
         console.log(token)
 
+        //we are creating body for comment
         const comment = new FormData();
         comment.append('activity_id', activity_id);
         comment.append('description', this.state.descriptionForComment);
@@ -206,12 +219,15 @@ export default class SingleActivity extends Component{
                 }
             })
     }
+
+    //function that calls method at which we are fetching data to delete comment.
     deleteFunction(comment_id){
         (async () => {
             await this.deleteComment(comment_id)
         })();
     }
 
+    //function for deleting single comment at activity, only for users that are logged and they created current comment
     async deleteComment(comment_id){
 
         const commentObject = {
