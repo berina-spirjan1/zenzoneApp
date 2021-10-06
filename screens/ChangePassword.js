@@ -9,7 +9,10 @@ export default class ChangePassword extends Component{
     constructor(props) {
         super();
     }
+
+    //navigating to page that contains information's about logged user
     switchToMyProfileInfo = () => this.props.navigation.navigate("switchToMyProfileInfo")
+
     render() {
         return (
             <>
