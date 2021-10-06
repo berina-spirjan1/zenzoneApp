@@ -1,4 +1,5 @@
 import {
+    Alert,
     AsyncStorage,
     Dimensions,
     Image,
@@ -66,15 +67,19 @@ export const LoginWithLocationForm = () =>{
 
                     console.log(jsonRes)
                     console.log(jsonRes.data.token)
-                    if(res.status!==200){
+                    if(res.status!==200 && res.status!==401){
                         store.dispatch(authFailed());
+                        Alert.alert("Something went wrong. Try again.")
                     }
-                    else{
-                        if(jsonRes.data.token){
+                    if(res.status===401){
+                        Alert.alert("Please check your information's.")
+                    }
+                    if(res.status===200){
+                        if(jsonRes.data.token!==null){
                             await AsyncStorage.setItem('jwt', JSON.stringify(jsonRes.data.token))
+                            goToUserInfo();
+                            store.dispatch(authSuccess());
                         }
-                        goToUserInfo();
-                        store.dispatch(authSuccess());
                     }
                 }
                 catch (err){
