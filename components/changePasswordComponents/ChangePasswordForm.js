@@ -1,4 +1,5 @@
 import {
+    Alert,
     AsyncStorage,
     StyleSheet,
     Text,
@@ -61,9 +62,13 @@ export const ChangePasswordForm = () =>{
                     console.log(jsonRes.message)
                     if (res.status !== 200) {
                         store.dispatch(changePasswordFailed());
-                    } else {
+                    }
+                    if(res.status===200){
                         login();
                         store.dispatch(changePasswordSuccess());
+                    }
+                    else {
+                        Alert.alert("Something went wrong. Please try again.")
                     }
                 } catch (err) {
                     console.log(err);
