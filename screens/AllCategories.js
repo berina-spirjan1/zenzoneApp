@@ -7,6 +7,8 @@ import {CATEGORY} from "../configuration/config";
 import {Toolbar} from "react-native-material-ui";
 import {Actions} from "react-native-router-flux";
 import {isIphoneX} from "react-native-iphone-x-helper";
+import store from "../redux/store";
+import {failedAtLoadingCategories, startedLoadingCategories, successfullyLoadedCategories} from "../redux/actions";
 
 
 export default class AllCategories extends Component{
@@ -15,6 +17,7 @@ export default class AllCategories extends Component{
         categories: []
     }
 
+    //we are using pagination to get all activities that will be shown at home page.
     componentDidMount(page=1) {
         fetch(`${CATEGORY}?page=${page}`, {
             method: 'GET',
@@ -25,9 +28,18 @@ export default class AllCategories extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
+                store.dispatch(startedLoadingCategories())
                 this.setState({
                     categories: [...this.state.categories, ...responseJson.data.data]
                 })
+                if(this.state.categories.length!==0){
+                    store.dispatch(successfullyLoadedCategories())
+                }
+                else{
+                    store.dispatch(failedAtLoadingCategories())
+                }
+
+                //if we have more data that we aren't taking, we are incrementing page for one
                 if(responseJson.data.data.length!==0){
                     page++;
                     return this.componentDidMount(page)
@@ -39,6 +51,7 @@ export default class AllCategories extends Component{
             });
     }
 
+    //navigation back to home page
     homePageActivities = () => this.props.navigation.navigate("homePageActivities")
 
 
