@@ -3,6 +3,9 @@ import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import LottieView from "lottie-react-native";
 
 import {useNavigation} from "@react-navigation/native";
+import {renderIf} from "../utilities/CommonMethods";
+import {isIphoneX} from "react-native-iphone-x-helper";
+import {Toolbar} from "react-native-material-ui";
 
 function CheckEmail (){
 
@@ -14,6 +17,10 @@ function CheckEmail (){
 
     return(
         <View style={styles.container}>
+            {renderIf(isIphoneX(),<Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 } }}
+                                           centerElement="Reset password"/> )}
+            {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
+                                             centerElement="Reset password"/>)}
             <LottieView
                 style={styles.lottie}
                 source={require("../assets/images/checkEmail.json")}
