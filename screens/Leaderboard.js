@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import {
     Dimensions,
     Image,
@@ -12,16 +12,18 @@ import {
 } from "react-native";
 
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import {renderIf} from "../utilities/CommonMethods";
-import {isIphoneX} from "react-native-iphone-x-helper";
-import {Toolbar} from "react-native-material-ui";
-import {BASE_URL, TOP_USERS} from "../configuration/config";
+import { renderIf } from "../utilities/CommonMethods";
+import { isIphoneX } from "react-native-iphone-x-helper";
+import { Toolbar } from "react-native-material-ui";
+import {
+    BASE_URL,
+    TOP_USERS
+} from "../configuration/config";
 import store from "../redux/store";
 import {
-    failedAtLoadingCategories, failedGettingUserInfo, startedGettingUserInfo, startedLoadingActivities,
-    startedLoadingCategories, successfullyGotUserInfo,
-    successfullyLoadedActivities,
-    successfullyLoadedCategories
+    failedGettingUserInfo,
+    startedGettingUserInfo,
+    successfullyGotUserInfo,
 } from "../redux/actions";
 
 export default class Leaderboard extends Component{
