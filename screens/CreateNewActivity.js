@@ -12,6 +12,7 @@ export default class CreateNewActivity extends Component{
         super();
     }
 
+    //function that returns token that is given from async storage.
     getToken = async ()=>{
         let tokenHelper = await AsyncStorage.getItem('jwt')
         tokenHelper = JSON.parse(tokenHelper)
