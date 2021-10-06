@@ -34,6 +34,8 @@ export const DAILY_CHALLENGE = `${API_URL}/dailychallenge`;
 export const CHANGE_PASSWORD = `${API_URL}/change-password`;
 export const FORGOT_PASSWORD = `${API_URL}/forget-password`;
 
+//top users
+export const TOP_USERS = `${DAILY_CHALLENGE}/topusers`
 
 
 
