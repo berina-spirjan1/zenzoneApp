@@ -11,11 +11,15 @@ import {
     View
 } from "react-native";
 import BadgeCard from "../components/badgesComponents/cards/BadgeCard";
-import {BASE_URL, USER} from "../configuration/config";
-import {Toolbar} from "react-native-material-ui";
-import {Actions} from "react-native-router-flux";
-import {renderIf} from "../utilities/CommonMethods";
-import {isIphoneX} from "react-native-iphone-x-helper";
+import {
+    BASE_URL,
+    USER
+} from "../configuration/config";
+import { Toolbar } from "react-native-material-ui";
+import { renderIf } from "../utilities/CommonMethods";
+import { isIphoneX } from "react-native-iphone-x-helper";
+import store from "../redux/store";
+import {failedGettingUserInfo, startedGettingUserInfo, successfullyGotUserInfo} from "../redux/actions";
 
 
 export default class Badges extends Component{
@@ -26,9 +30,11 @@ export default class Badges extends Component{
 
     componentDidMount = async () => {
 
+        //we are taking token from async storage
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
 
+        //we are sending request to api to get all information's about user
         fetch(`${USER}`, {
             method: 'GET',
             headers: {
@@ -39,16 +45,23 @@ export default class Badges extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log(responseJson);
+                store.dispatch(startedGettingUserInfo())
                 this.setState({
                     data: responseJson
                 })
+                if(this.state.data.length!==0){
+                    store.dispatch(failedGettingUserInfo())
+                }
+                else{
+                    store.dispatch(successfullyGotUserInfo())
+                }
             })
             .catch((error) => {
                 console.error(error);
             });
     }
 
+    //navigating to profile page
     profile = () => this.props.navigation.navigate("profile")
 
     render() {
