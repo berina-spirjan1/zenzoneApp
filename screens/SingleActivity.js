@@ -230,11 +230,10 @@ export default class SingleActivity extends Component{
 
     //function for deleting single comment at activity, only for users that are logged and they created current comment
     async deleteComment(comment_id){
-
         const commentObject = {
             id: comment_id
         }
-        console.log(commentObject)
+
          let token = await AsyncStorage.getItem('jwt')
          token = JSON.parse(token)
 
@@ -394,11 +393,10 @@ export default class SingleActivity extends Component{
                                                                 </View>
                                                                 {renderIf(this.state.userData.id===obj.user.id,
                                                                     <TouchableOpacity style={styles.deleteButtonInSingle}
-                                                                                      >
+                                                                                      onPress={async () => {await this.deleteComment(obj.id)}}>
                                                                         <FontAwesome5 name={'trash-alt'}
                                                                                       color={'#616C75'}
                                                                                       size={15}
-                                                                                      onPress={async () => {await this.deleteComment(obj.id)}}
                                                                                       style={styles.iconDelete}/>
                                                                     </TouchableOpacity>
                                                                 )}
