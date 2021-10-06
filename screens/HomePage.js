@@ -117,6 +117,42 @@ export default class HomePage extends Component{
             });
     }
 
+    async loadAllActivities(page = 1) {
+        let tokenHelper = await AsyncStorage.getItem('jwt')
+        tokenHelper = JSON.parse(tokenHelper)
+
+        this.setState({token: tokenHelper})
+
+        fetch(`${ACTIVITY}?page=${page}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + tokenHelper
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                store.dispatch(startedLoadingActivities())
+                this.setState({
+                    data: [...this.state.data, ...responseJson.data.data],
+                    isLoading: false,
+                    refresh: false,
+                })
+                if (this.state.data.length !== 0) {
+                    store.dispatch(successfullyLoadedActivities())
+                } else {
+                    store.dispatch(failedAtLoadingActivities())
+                }
+                if (responseJson.data.data.length !== 0) {
+                    page++;
+                    return this.componentDidMount(page)
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
 
     async componentDidMount(page = 1) {
 
@@ -405,7 +441,7 @@ export default class HomePage extends Component{
                                 refreshControl={
                                     <RefreshControl
                                         refreshing={this.state.refresh}
-                                        onRefresh={this.componentDidMount}
+                                        onRefresh={async () => {await this.loadAllActivities}}
                                     />}>
                         <View style={{flexDirection: 'row'}}>
                             <Text style={styleLightMode.titleCategories}>Categories</Text>
