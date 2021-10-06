@@ -166,15 +166,14 @@ export default class HomePage extends Component{
             activity_id: id
         }
 
-        console.log(likeObject.token)
-
         fetch(`${LIKE}`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
                 'Authorization': 'Bearer ' + tokenHelper
-            }
+            },
+            body: JSON.stringify(likeObject)
         })
             .then(async res => {
                 try {
@@ -182,14 +181,13 @@ export default class HomePage extends Component{
 
                     const jsonRes = await res.json();
 
-                    console.log(jsonRes)
-                    if (res.status !== 200) {
+                    if (res.status !== 200 && res.status!==401) {
                         store.dispatch(failedAtLikingActivity());
                     }
                     if(res.status===401){
                         Alert.alert('Please login')
                     }
-                    else {
+                    if(res.status===200) {
                         Alert.alert('Successfully liked activity.')
                         store.dispatch(successfullyLikedActivity());
                     }
@@ -203,6 +201,7 @@ export default class HomePage extends Component{
 
         let tokenHelper = await AsyncStorage.getItem('jwt')
         tokenHelper = JSON.parse(tokenHelper)
+        console.log(tokenHelper)
 
         const likeObject = {
             activity_id: id
@@ -226,13 +225,14 @@ export default class HomePage extends Component{
                     const jsonRes = await res.json();
 
                     console.log(jsonRes)
-                    if (res.status !== 200) {
+                    console.log(res.status)
+                    if (res.status !== 200 && res.status!==401) {
                         store.dispatch(failedRemovingLike());
                     }
                     if(res.status===401){
                         Alert.alert('Please login')
                     }
-                    else {
+                    if(res.status===200) {
                         Alert.alert("Successfully removed like.")
                         store.dispatch(successfullyRemovedLike());
                     }
@@ -268,13 +268,13 @@ export default class HomePage extends Component{
 
                     const jsonRes = await res.json();
 
-                    if (res.status !== 200) {
+                    if (res.status !== 200 && res.status!==401) {
                         store.dispatch(failedAtDislikingActivity());
                     }
                     if(res.status===401){
                         Alert.alert('Please login')
                     }
-                    else {
+                    if(res.status===200) {
                         Alert.alert("Successfully disliked activity.")
                         store.dispatch(successfullyDislikedActivity());
                     }
@@ -310,13 +310,13 @@ export default class HomePage extends Component{
                     const jsonRes = await res.json();
 
                     console.log(res.status)
-                    if (res.status !== 200) {
+                    if (res.status !== 200 && res.status!==401) {
                         store.dispatch(failedRemovingDislike());
                     }
                     if(res.status===401){
                         Alert.alert('Please login.')
                     }
-                    else {
+                    if(res.status===200){
                         Alert.alert("Successfully removed dislike.")
                         store.dispatch(successfullyRemovedDislike());
                     }
