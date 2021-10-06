@@ -208,11 +208,16 @@ export default class SingleActivity extends Component{
                     const jsonRes = await res.json();
 
                     console.log(jsonRes)
-                    if (res.status !== 200) {
+                    if (res.status !== 200 && res.status!==401) {
                         store.dispatch(failedPostingComment());
-                    } else {
+                        Alert.alert("Something went wrong. Try again.")
+                    }
+                    if(res.status===200){
                         this.singleActivity()
                         store.dispatch(successfullyPostedComment());
+                    }
+                    if(res.status===401){
+                        Alert.alert("Something went wrong. Try again.")
                     }
                 } catch (err) {
                     console.log(err);
@@ -237,8 +242,6 @@ export default class SingleActivity extends Component{
          let token = await AsyncStorage.getItem('jwt')
          token = JSON.parse(token)
 
-         console.log("USAO U FUNKCIJU")
-
          fetch(`${COMMENT}/${comment_id}`, {
              method: 'DELETE',
              headers: {
@@ -255,11 +258,16 @@ export default class SingleActivity extends Component{
                      const jsonRes = await res.json();
 
                      console.log(jsonRes)
-                     if (res.status !== 200) {
+                     if (res.status !== 200 && res.status!==400) {
                          store.dispatch(failedDeletingComment());
-                     } else {
+                         Alert.alert("Something went wrong. Try again.")
+                     }
+                     if(res.status===200){
                          Alert.alert('Successfully deleted comment')
                          store.dispatch(successfullyDeletedComment());
+                     }
+                     if(res.status===401){
+                         Alert.alert("Something went wrong. Try again.")
                      }
                  } catch (err) {
                      console.log(err);
