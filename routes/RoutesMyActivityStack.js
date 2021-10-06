@@ -5,12 +5,13 @@ import MyActivities from "../screens/MyActivities";
 import UserProfile from "../screens/userProfile/UserProfile";
 import {RoutesProfileStack} from "./RoutesProfileStack";
 import SingleActivity from "../screens/SingleActivity";
+import MyPopularActivities from "../screens/MyPopularActivities";
 
 const Stack = createNativeStackNavigator()
 
 export const RoutesMyActivityStack = () =>{
     return(
-            <Stack.Navigator>
+            <Stack.Navigator initialRouteName={"myActivities"}>
                 <Stack.Screen name={"myActivities"}
                               component={MyActivities}
                               options={{
@@ -23,6 +24,11 @@ export const RoutesMyActivityStack = () =>{
                               }}/>
                 <Stack.Screen name={"myProfileInfoBack"}
                               component={RoutesProfileStack}
+                              options={{
+                                  headerShown: false
+                              }}/>
+                <Stack.Screen name={"myPopularActivities"}
+                              component={MyPopularActivities}
                               options={{
                                   headerShown: false
                               }}/>
