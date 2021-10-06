@@ -35,6 +35,7 @@ import {Card, CardAction, CardContent} from "react-native-card-view";
 
 import {useNavigation} from '@react-navigation/native';
 import AutocompleteInput from "react-native-autocomplete-input";
+import {isIphoneX} from "react-native-iphone-x-helper";
 
 export const CreateNewActivityForm = () => {
 
@@ -260,33 +261,61 @@ export const CreateNewActivityForm = () => {
                         </ScrollView>
                     )}
                     <Text style={styles.title}>Title</Text>
-                    <View style={styles.autocompleteInput}>
-                        <AutocompleteInput placeholder={'Activity title'}
-                                           autoCapitalize="none"
-                                           autoCorrect={false}
-                                           containerStyle = {styles.autocompleteContainer}
-                                           listContainerStyle={{left:-10, width: 340}}
-                                           onChangeText={(search) => updateSearch(search)}
-                                           data={activitiesData}
-                                           defaultValue = {title}
-                                           hideResults={closeList}
-                                           inputContainerStyle={{
-                                               backgroundColor: 'transparent',
-                                               borderBottomWidth: 1,
-                                               borderColor: 'transparent',
-                                               borderRadius: 25
-                                           }}
-                                           // containerStyle={styles.autocompleteContainer}
-                                           flatListProps={{
-                                               keyboardShouldPersistTaps: 'always',
-                                               renderItem: (({item}) => (
-                                                   <TouchableOpacity onPress={()=>{setTitle(item); setCloseList(true)}}
-                                                                     style={styles.autocompleteItem}>
-                                                        <Text style={styles.autocompleteInputText}>{item}</Text>
-                                                   </TouchableOpacity>
-                                               ))
-                                           }}/>
-                    </View>
+                    {renderIf(!isIphoneX(),
+                        <View style={styles.autocompleteInput}>
+                            <AutocompleteInput placeholder={'Activity title'}
+                                               autoCapitalize="none"
+                                               autoCorrect={false}
+                                               containerStyle = {styles.autocompleteContainer}
+                                               listContainerStyle={{left:-10, width: 340}}
+                                               onChangeText={(search) => updateSearch(search)}
+                                               data={activitiesData}
+                                               defaultValue = {title}
+                                               hideResults={closeList}
+                                               inputContainerStyle={{
+                                                   backgroundColor: 'transparent',
+                                                   borderBottomWidth: 1,
+                                                   borderColor: 'transparent',
+                                                   borderRadius: 25
+                                               }}
+                                               flatListProps={{
+                                                   keyboardShouldPersistTaps: 'always',
+                                                   renderItem: (({item}) => (
+                                                       <TouchableOpacity onPress={()=>{setTitle(item); setCloseList(true)}}
+                                                                         style={styles.autocompleteItem}>
+                                                           <Text style={styles.autocompleteInputText}>{item}</Text>
+                                                       </TouchableOpacity>
+                                                   ))
+                                               }}/>
+                        </View>
+                    )}
+                    {renderIf(isIphoneX(),
+                            <AutocompleteInput placeholder={'Activity title'}
+                                               autoCapitalize="none"
+                                               autoCorrect={false}
+                                               containerStyle = {styles.autocompleteContainerIphone}
+                                               listContainerStyle={{left:0, width: 335}}
+                                               onChangeText={(search) => updateSearch(search)}
+                                               data={activitiesData}
+                                               defaultValue = {title}
+                                               hideResults={closeList}
+                                               inputContainerStyle={{
+                                                   backgroundColor: 'transparent',
+                                                   borderBottomWidth: 1,
+                                                   borderColor: 'transparent',
+                                                   borderRadius: 25
+                                               }}
+                                               flatListProps={{
+                                                   keyboardShouldPersistTaps: 'always',
+                                                   renderItem: (({item}) => (
+                                                       <TouchableOpacity onPress={()=>{setTitle(item); setCloseList(true)}}
+                                                                         style={styles.autocompleteItemIphone}>
+                                                           <Text style={styles.autocompleteInputText}>{item}</Text>
+                                                       </TouchableOpacity>
+                                                   ))
+                                               }}/>
+                    )}
+
                     <View style={{flexDirection: 'row'}}>
                         <Text style={styles.comment}>Description</Text>
                     </View>
@@ -483,6 +512,21 @@ const styles = StyleSheet.create({
     },
     autocompleteItem:{
         backgroundColor: 'rgba(147, 180, 229, 0.6)',
+        height: 40,
+        padding: 10
+    },
+    autocompleteInputTextIphone:{
+        fontSize: 18,
+        color: '#363559'
+    },
+    autocompleteContainerIphone:{
+        zIndex: 1,
+        elevation: 1,
+        marginLeft: 20,
+        marginRight: 20
+    },
+    autocompleteItemIphone:{
+        backgroundColor: 'rgba(147, 180, 229, 0.8)',
         height: 40,
         padding: 10
     }
