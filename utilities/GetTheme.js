@@ -21,7 +21,6 @@ export async function getTheme (){
             .then((response) => response.json())
             .then((responseJson) => {
                 theme = responseJson.theme
-                console.log("HERE",JSON.stringify(theme))
                 theme = JSON.stringify(theme)
                 return theme
             })
