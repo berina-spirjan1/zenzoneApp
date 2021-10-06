@@ -374,13 +374,13 @@ export default class SingleActivity extends Component{
                                 )}
                                 <View style={styles.listOfComments}>
                                     <Text style={styles.allComments}>ALL COMMENTS</Text>
-                                    {renderIf(this.state.commentArray.length!==0,
+                                    {renderIf(this.state.commentArray.length!==0 && this.state.token!==null,
                                         <>
                                             {this.state.commentArray.map(function(obj,i) {
                                                 return (
                                                     <>
                                                         {renderIf(obj.photo_dir===null,
-                                                            <TouchableOpacity style={styles.singleCommentContainer}>
+                                                            <View style={styles.singleCommentContainer}>
                                                                 <View style={styles.singleComment}>
                                                                     {renderIf(obj.user.photo===null || this.state.token===null,
                                                                         <Image source={require('../assets/images/user_photo.png')}
@@ -403,7 +403,7 @@ export default class SingleActivity extends Component{
                                                                     </TouchableOpacity>
                                                                 )}
 
-                                                            </TouchableOpacity>
+                                                            </View>
                                                         )}
                                                         {renderIf(obj.photo_dir!==null,
                                                             <View style={styles.commentWithImage}>
