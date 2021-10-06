@@ -340,14 +340,19 @@ export default class SingleActivity extends Component{
                             </View>
 
                             <View style={styles.userWrapper}>
-                                {renderIf(this.state.userData.photo_dir!==null,
-                                    <Image source={{uri: `${BASE_URL}`+`${this.state.userData.photo_dir}`+`${this.state.userData.photo_name}`}}
-                                           style={styles.userProfilePicture}/>
+                                {renderIf(this.state.token!==null,
+                                <>
+                                    {renderIf(this.state.userData.photo_dir!==null,
+                                        <Image source={{uri: `${BASE_URL}`+`${this.state.userData.photo_dir}`+`${this.state.userData.photo_name}`}}
+                                               style={styles.userProfilePicture}/>
+                                    )}
+                                    {renderIf(this.state.userData.photo_dir===null,
+                                        <Image source={require('../assets/images/user_photo.png')}
+                                               style={styles.userProfilePicture}/>
+                                    )}
+                                </>
                                 )}
-                                {renderIf(this.state.userData.photo_dir===null,
-                                    <Image source={require('../assets/images/user_photo.png')}
-                                           style={styles.userProfilePicture}/>
-                                )}
+
                                 {renderIf(this.state.token!==null,
                                     <>
                                         <TextInput placeholder={'Create new comment'}
