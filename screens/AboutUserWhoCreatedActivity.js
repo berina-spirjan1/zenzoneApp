@@ -12,11 +12,16 @@ import {
     TouchableOpacity,
     View
 } from "react-native";
-import {renderIf} from "../utilities/CommonMethods";
-import {isIphoneX} from "react-native-iphone-x-helper";
-import {Toolbar} from "react-native-material-ui";
-import {BASE_URL, USER} from "../configuration/config";
+import { renderIf } from "../utilities/CommonMethods";
+import { isIphoneX } from "react-native-iphone-x-helper";
+import { Toolbar } from "react-native-material-ui";
+import {
+    BASE_URL,
+    USER
+} from "../configuration/config";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import store from "../redux/store";
+import {failedGettingUserInfo, startedGettingUserInfo, successfullyGotUserInfo} from "../redux/actions";
 
 export default class AboutUserWhoCreatedActivity extends Component{
 
@@ -26,9 +31,11 @@ export default class AboutUserWhoCreatedActivity extends Component{
 
     async componentDidMount() {
 
+        //we are taking stored user id to get information's about user that created acitivity
         let user_id = await AsyncStorage.getItem("user_id")
         user_id = JSON.parse(user_id)
 
+        //we are fetching data from api
         fetch(`${USER}/${user_id}`, {
             method: 'GET',
             headers: {
@@ -38,11 +45,16 @@ export default class AboutUserWhoCreatedActivity extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log(responseJson);
+                store.dispatch(startedGettingUserInfo())
                 this.setState({
                     data: responseJson.data
                 })
-                console.log(this.state.commentArray)
+                if(responseJson.data.length!==0){
+                    store.dispatch(successfullyGotUserInfo())
+                }
+                else{
+                    store.dispatch(failedGettingUserInfo())
+                }
             })
             .catch((error) => {
                 console.error(error);
@@ -50,10 +62,12 @@ export default class AboutUserWhoCreatedActivity extends Component{
 
     }
 
+    //navigating back to single activity page
     singleActivity = () => this.props.navigation.navigate("singleActivity")
 
     render() {
 
+        //we are storing device height to variable that we will use in scroll view
         const screenHeight = Dimensions.get('window').height
 
         return(
