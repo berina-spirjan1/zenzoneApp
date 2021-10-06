@@ -14,7 +14,7 @@ import {
     View
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
-import {ACTIVITY, BASE_URL, CATEGORY, DISLIKE, LIKE,} from "../configuration/config";
+import {ACTIVITY, BASE_URL, CATEGORY, DISLIKE, LIKE, POPULAR_CHALLENGES,} from "../configuration/config";
 import {Card, CardAction, CardContent} from "react-native-card-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { renderIf } from "../utilities/CommonMethods";
@@ -121,9 +121,86 @@ export default class HomePage extends Component{
         let tokenHelper = await AsyncStorage.getItem('jwt')
         tokenHelper = JSON.parse(tokenHelper)
 
+        this.setState({data: []})
         this.setState({token: tokenHelper})
 
         fetch(`${ACTIVITY}?page=${page}`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + tokenHelper
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                store.dispatch(startedLoadingActivities())
+                this.setState({
+                    data: [...this.state.data, ...responseJson.data.data],
+                    isLoading: false,
+                    refresh: false,
+                })
+                if (this.state.data.length !== 0) {
+                    store.dispatch(successfullyLoadedActivities())
+                } else {
+                    store.dispatch(failedAtLoadingActivities())
+                }
+                if (responseJson.data.data.length !== 0) {
+                    page++;
+                    return this.componentDidMount(page)
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    async loadPopularChallenges(page = 1) {
+        let tokenHelper = await AsyncStorage.getItem('jwt')
+        tokenHelper = JSON.parse(tokenHelper)
+
+        this.setState({data: []})
+        this.setState({token: tokenHelper})
+
+        fetch(`${POPULAR_CHALLENGES}?page=${page}&&popular=1`, {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                'Authorization': 'Bearer ' + tokenHelper
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log("----------",responseJson)
+                store.dispatch(startedLoadingActivities())
+                this.setState({
+                    data: [...this.state.data, ...responseJson.data.data],
+                    isLoading: false,
+                    refresh: false,
+                })
+                if (this.state.data.length !== 0) {
+                    store.dispatch(successfullyLoadedActivities())
+                } else {
+                    store.dispatch(failedAtLoadingActivities())
+                }
+                if (responseJson.data.data.length !== 0) {
+                    page++;
+                    return this.componentDidMount(page)
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    async loadAllPopularActivities(page = 1) {
+        let tokenHelper = await AsyncStorage.getItem('jwt')
+        tokenHelper = JSON.parse(tokenHelper)
+        this.setState({data: []})
+        this.setState({token: tokenHelper})
+
+        fetch(`${ACTIVITY}?page=${page}?popular=1`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -472,7 +549,54 @@ export default class HomePage extends Component{
                                                               color={'#000000'}/>
                                             </View>
                                             <CardContent>
-                                                <Text style={styleLightMode.categoryName}>ALL</Text>
+                                                <Text style={styleLightMode.categoryName}>SEE ALL</Text>
+                                            </CardContent>
+                                        </Card>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styleLightMode.categoryCard}
+                                                      onPress={() => this.loadAllPopularActivities(1)}>
+                                        <Card  styles={{ card: { backgroundColor: 'rgb(89,116,159)',
+                                                borderRadius:30,
+                                                shadowColor: "#000000",
+                                                shadowOffset: {
+                                                    width: 0,
+                                                    height: 2,
+                                                },
+                                                shadowOpacity: 0.44,
+                                                shadowRadius: 3,
+                                                elevation: 5
+                                            }}}>
+                                            <View style={styleLightMode.icon2}>
+                                                <FontAwesome5 name={'fire'}
+                                                              size={35}
+                                                              color={'#000000'}/>
+                                            </View>
+                                            <CardContent>
+                                                <Text style={styleLightMode.categoryNamePopular}>MOST POPULAR</Text>
+                                            </CardContent>
+                                        </Card>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styleLightMode.challengeCard}
+                                                      onPress={() => this.loadPopularChallenges(1)}>
+                                        <Card  styles={{ card: { backgroundColor: '#82b2d9',
+                                                borderRadius:30,
+                                                shadowColor: "#000000",
+                                                shadowOffset: {
+                                                    width: 0,
+                                                    height: 2,
+                                                },
+                                                shadowOpacity: 0.44,
+                                                shadowRadius: 3,
+                                                elevation: 5
+                                            }}}>
+                                            <View style={styleLightMode.icon2}>
+                                                <FontAwesome5 name={'medal'}
+                                                              size={35}
+                                                              color={'#000000'}/>
+                                            </View>
+                                            <CardContent>
+                                                <Text style={styleLightMode.challengeName}
+                                                      numberOfLines={2}>BEST{"\n"}CHALLENGE</Text>
                                             </CardContent>
                                         </Card>
                                     </TouchableOpacity>
@@ -666,6 +790,13 @@ const styleLightMode = StyleSheet.create({
         marginLeft: 17,
         borderRadius: 50
     },
+    challengeCard:{
+        height: 115,
+        width: 105,
+        marginTop: 10,
+        marginLeft: 17,
+        borderRadius: 50
+    },
     singleCategoryName:{
         fontSize: 14,
         marginLeft: 20,
@@ -809,6 +940,23 @@ const styleLightMode = StyleSheet.create({
         color: '#000000',
         paddingBottom:10,
         fontSize: 11
+    },
+    categoryNamePopular:{
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: '#000000',
+        paddingBottom:10,
+        fontSize: 11
+    },
+    challengeName:{
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+        color: '#000000',
+        paddingBottom:10,
+        fontSize: 11,
+        marginTop: -5,
+        textAlign: 'center'
     },
     icon2:{
         justifyContent:'center',
