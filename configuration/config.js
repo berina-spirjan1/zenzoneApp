@@ -30,6 +30,7 @@ export const MY_ACTIVITIES = `${API_URL}/myactivities`;
 
 //daily challenge
 export const DAILY_CHALLENGE = `${API_URL}/dailychallenge`;
+export const POPULAR_CHALLENGES = `${API_URL}/challenge`;
 
 export const CHANGE_PASSWORD = `${API_URL}/change-password`;
 export const FORGOT_PASSWORD = `${API_URL}/forget-password`;
