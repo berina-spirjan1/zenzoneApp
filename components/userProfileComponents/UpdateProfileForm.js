@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {
+    Alert,
     AsyncStorage,
     Dimensions,
     Image,
@@ -120,9 +121,10 @@ export const UpdateProfileForm = () =>{
 
                     console.log(jsonRes)
                     if (res.status !== 200) {
-                        console.log(res.status)
+                        Alert.alert("Something went wrong. Please try again.")
                         store.dispatch(failedUpdatingUserInfo());
-                    } else {
+                    }
+                    if(res.status===200) {
                         store.dispatch(successfullyUpdatedUserInfo());
                         switchToMyProfileInfo()
                     }
