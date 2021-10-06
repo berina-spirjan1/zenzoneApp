@@ -56,9 +56,7 @@ export const ForgotPasswordForm = () =>{
                     console.log(jsonRes.message)
                     if(res.status!==200){
                         store.dispatch(forgotPasswordChangingFailed());
-                    }
-                    if(res.status===401){
-                        Alert.alert("Incorrect email address.")
+                        Alert.alert("Something went wrong. Please try again.")
                     }
                     if(res.status===200){
                         store.dispatch(forgotPasswordChangedSuccess());

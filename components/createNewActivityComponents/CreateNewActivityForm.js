@@ -3,6 +3,7 @@ import React, {
     useState
 } from "react";
 import {
+    Alert,
     AsyncStorage,
     Platform,
     SafeAreaView,
@@ -184,9 +185,10 @@ export const CreateNewActivityForm = () => {
 
                     console.log(jsonRes)
                     if (res.status !== 200) {
-                        console.log(res.status)
+                        Alert.alert("Something went wrong. Please try again.")
                         store.dispatch(failedAddingActivity());
-                    } else {
+                    }
+                    if(res.status===200){
                         store.dispatch(successfullyAddedActivity());
                         switchSuccessfullyAddedCreateActivity()
                     }
