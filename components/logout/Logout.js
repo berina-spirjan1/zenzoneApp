@@ -37,8 +37,9 @@ export const onLogoutHandler = async () => {
                 console.log(jsonRes)
                 if (res.status !== 200) {
                     store.dispatch(userLogoutFailed());
-                    console.log("greska", res.status)
-                } else {
+                    Alert.alert('Something went wrong. Try again.')
+                }
+                if(res.status===200){
                     await AsyncStorage.clear()
                     console.log("Successfully logout")
                     Alert.alert('You have been successfully logged out.')
