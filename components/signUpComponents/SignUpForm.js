@@ -120,44 +120,36 @@ export const SignUpForm = () =>{
                     <TextInput style={stylesLightMode.inputLabel}
                                onChangeText={setName}>
                     </TextInput>
-                    <Text style={stylesLightMode.formValidation}>The name field is required.</Text>
                     <Text style={stylesLightMode.hintText}>First name</Text>
                     <TextInput style={stylesLightMode.inputLabel}
                                onChangeText={setFirstName}>
                     </TextInput>
-                    <Text style={stylesLightMode.formValidation}>The first name field is required.</Text>
                     <Text style={stylesLightMode.hintText}>Last name</Text>
                     <TextInput style={stylesLightMode.inputLabel}
                                onChangeText={setLastName}>
                     </TextInput>
-                    <Text style={stylesLightMode.formValidation}>The last name field is required.</Text>
                     <Text style={stylesLightMode.hintText}>E-mail</Text>
                     <TextInput style={stylesLightMode.inputLabel}
                                onChangeText={setEmail}>
                     </TextInput>
-                    <Text style={stylesLightMode.formValidation}>The email has already been taken.</Text>
                     <Text style={stylesLightMode.hintText}>Office location</Text>
                     <TextInput style={stylesLightMode.inputLabel}
                                onChangeText={setOfficeLocation}>
                     </TextInput>
-                    <Text style={stylesLightMode.formValidation}>The office location field is required.</Text>
                     <Text style={stylesLightMode.hintText}>Work position</Text>
                     <TextInput style={stylesLightMode.inputLabel}
                                onChangeText={setWorkPosition}>
                     </TextInput>
-                    <Text style={stylesLightMode.formValidation}>The work position field is required.</Text>
                     <Text style={stylesLightMode.hintText}>Password</Text>
                     <TextInput style={stylesLightMode.inputLabel}
                                secureTextEntry={true}
                                onChangeText={setPassword}>
                     </TextInput>
-                    <Text style={stylesLightMode.formValidation}>The password field is required.</Text>
                     <Text style={stylesLightMode.hintText}>Confirm password</Text>
                     <TextInput style={stylesLightMode.inputLabel}
                                secureTextEntry={true}
                                onChangeText={setConfirmPassword}>
                     </TextInput>
-                    <Text style={stylesLightMode.formValidation}>The confirm password field is required.</Text>
                     <Text style={stylesLightMode.loginHelp}>Already have your ZenZone account?
                         <Text style={{color: "#334A6D", fontWeight: 'bold'}}
                               onPress={login}
