@@ -13,19 +13,30 @@ import {
     View
 } from "react-native";
 
-import {Toolbar} from "react-native-material-ui";
-import {Actions} from "react-native-router-flux";
-import {BASE_URL, MY_ACTIVITIES, USER} from "../configuration/config";
-import {isIphoneX} from "react-native-iphone-x-helper";
-import {renderIf} from "../utilities/CommonMethods";
+import { Toolbar } from "react-native-material-ui";
+import {
+    BASE_URL,
+    MY_ACTIVITIES,
+    USER
+} from "../configuration/config";
+import { isIphoneX } from "react-native-iphone-x-helper";
+import { renderIf } from "../utilities/CommonMethods";
 import Loader from "../utilities/Loader";
-import {Card} from "react-native-card-view";
+import { Card } from "react-native-card-view";
+import store from "../redux/store";
+import {
+    failedAtLoadingActivities, failedGettingUserInfo,
+    startedGettingUserInfo,
+    startedLoadingActivities, successfullyGotUserInfo,
+    successfullyLoadedActivities
+} from "../redux/actions";
 
 export default class MyActivities extends Component{
     constructor(props) {
         super();
     }
 
+    //navigating back to profile page
     myProfileInfoBack = () => this.props.navigation.navigate("myProfileInfoBack")
 
     state = {
@@ -37,9 +48,11 @@ export default class MyActivities extends Component{
 
     componentDidMount = async (page=1) => {
 
+        //we are getting current token that is saved in async storage
         let tokenHelper = await AsyncStorage.getItem('jwt')
         tokenHelper = JSON.parse(tokenHelper)
 
+        //with pagination we are getting all user activities that he created.
         fetch(`${MY_ACTIVITIES}?page=${page}`, {
             method: 'GET',
             headers: {
@@ -50,11 +63,18 @@ export default class MyActivities extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
+                store.dispatch(startedLoadingActivities())
                 this.setState({
                     data: [...this.state.data, ...responseJson.data.data],
                     isLoading: false,
                     refresh: false,
                 })
+                if(this.state.data.length!==0){
+                    store.dispatch(successfullyLoadedActivities())
+                }
+                else{
+                    store.dispatch(failedAtLoadingActivities())
+                }
                 if(responseJson.data.data.length!==0){
                     page++;
                     return this.componentDidMount(page)
@@ -71,6 +91,7 @@ export default class MyActivities extends Component{
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
 
+        //we are sending token to api and getting information's about user
         fetch(`${USER}`, {
             method: 'GET',
             headers: {
@@ -81,10 +102,17 @@ export default class MyActivities extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
+                store.dispatch(startedGettingUserInfo())
                 this.setState({
                     userData: responseJson,
                     refresh: false
                 })
+                if(this.state.userData.length!==0){
+                    store.dispatch(successfullyGotUserInfo())
+                }
+                else{
+                    store.dispatch(failedGettingUserInfo())
+                }
             })
             .catch((error) => {
                 console.error(error);
@@ -92,9 +120,10 @@ export default class MyActivities extends Component{
 
     }
 
+    //navigating to single activity page
     goToSingleActivity = () => this.props.navigation.navigate("goToSingleActivity")
 
-
+    //we are storing activity id at async storage that we will use to get information's about clicked activity
     async showMore(id) {
         await AsyncStorage.setItem('id', JSON.stringify(id))
         this. goToSingleActivity()
