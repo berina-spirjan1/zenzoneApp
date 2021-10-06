@@ -14,7 +14,7 @@ import { isIphoneX } from "react-native-iphone-x-helper";
 export default class SuccessfullyAddedActivity extends Component{
 
     //navigating to successfully added activity page
-    switchCreateActivitySuccessfullyAdded = () => this.props.navigation.navigate("fromForm")
+    switchCreateActivitySuccessfullyAdded = () => this.props.navigation.navigate("createActivity")
 
     render() {
         return(

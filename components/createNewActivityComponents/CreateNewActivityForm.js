@@ -117,6 +117,7 @@ export const CreateNewActivityForm = () => {
 
     //filter function that returns all activities that contains search text (using in autocomplete input)
     const updateSearch = (searchText) => {
+        setTitle(searchText)
         setSearchText(searchText)
         fetch(`${SEARCH_ACTIVITIES_BY_TITLE}?searchKey=${searchText}`, {
             method: 'GET',
@@ -315,7 +316,7 @@ export const CreateNewActivityForm = () => {
                                                    ))
                                                }}/>
                     )}
-
+                    {console.log("----------",title)}
                     <View style={{flexDirection: 'row'}}>
                         <Text style={styles.comment}>Description</Text>
                     </View>
