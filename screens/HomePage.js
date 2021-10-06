@@ -86,6 +86,7 @@ export default class HomePage extends Component{
 
 
     componentWillMount(pageCategories=1) {
+
         fetch(`${CATEGORY}?page=${pageCategories}`, {
             method: 'GET',
             headers: {
@@ -232,7 +233,6 @@ export default class HomePage extends Component{
     }
 
     async componentDidMount(page = 1) {
-
         let tokenHelper = await AsyncStorage.getItem('jwt')
         tokenHelper = JSON.parse(tokenHelper)
 
@@ -454,6 +454,7 @@ export default class HomePage extends Component{
     }
 
     filterActivitiesUsingCategory(category_id){
+        this.setState({data: []})
         fetch(`${ACTIVITY}?category=${category_id}`, {
             method: 'GET',
             headers: {
