@@ -140,11 +140,24 @@ export default class MyActivities extends Component{
                 {renderIf(isIphoneX(),  <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50} }}
                                                  leftElement="arrow-back"
                                                  centerElement="My activities"
-                                                 onLeftElementPress={this.myProfileInfoBack}/>)}
+                                                 onLeftElementPress={this.myProfileInfoBack}
+                                                 rightElement={{
+                                                     menu: {
+                                                         icon: "more-vert",
+                                                         labels: ["Popular activities"],
+                                                     }
+                                                 }}
+                                                 onRightElementPress={() => {this.props.navigation.navigate("myPopularActivities")}}/>)}
                 {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
-                                                        leftElement="arrow-back"
+                                                        leftElement="arrow-back"A
                                                         centerElement="My activities"
-                                                        onLeftElementPress={this.myProfileInfoBack}/>)}
+                                                 rightElement={{
+                                                     menu: {
+                                                         icon: "more-vert",
+                                                         labels: ["Popular activities"],
+                                                     }
+                                                 }}
+                                                 onRightElementPress={() => {this.props.navigation.navigate("myPopularActivities")}}/>)}
                 <ImageBackground source={require('../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
                 {renderIf(this.state.userData.photo_dir===null, <Image source={require('../assets/images/user_photo.png')}
