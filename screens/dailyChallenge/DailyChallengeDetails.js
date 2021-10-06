@@ -211,13 +211,13 @@ export default class DailyChallengeDetails extends Component{
                     const jsonRes = await res.json();
 
                     console.log(jsonRes)
-                    if (res.status !== 200) {
+                    if (res.status !== 200 && res.status!==400) {
                         store.dispatch(failedPostingComment());
                     }
                     if(res.status===401){
                         Alert.alert("Please login to add comment.")
                     }
-                    else {
+                    if(res.status===200) {
                         this.congratulations();
                         store.dispatch(successfullyPostedComment());
                     }
@@ -229,7 +229,6 @@ export default class DailyChallengeDetails extends Component{
 
     async deleteComment(comment_id){
 
-        console.log("HERE I AM")
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
 
@@ -255,12 +254,11 @@ export default class DailyChallengeDetails extends Component{
                     console.log(jsonRes)
                     if (res.status !== 200) {
                         store.dispatch(failedDeletingComment());
+                        Alert.alert("Something went wrong, please try again.")
 
                     }
-                    if(res.status===401){
-                        Alert.alert("Something went wrong, please try again.")
-                    }
-                    else {
+                    if(res.status===200) {
+                        Alert.alert("Successfully deleted comment.")
                         store.dispatch(successfullyDeletedComment());
                     }
                 } catch (err) {
