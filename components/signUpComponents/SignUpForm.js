@@ -6,6 +6,7 @@ import {
     userRegistrationSuccess
 } from "../../redux/actions";
 import {
+    Alert,
     Dimensions,
     SafeAreaView,
     ScrollView,
@@ -88,8 +89,9 @@ export const SignUpForm = () =>{
                     const jsonRes = await res.json();
 
                     console.log(jsonRes.message)
-                    if(res.status!==200){
+                    if(res.status!==200 && res.status!==401){
                         store.dispatch(userRegistrationFailed());
+                        Alert.alert("Something went wrong. Try again");
                     }
                     if(res.status===200){
                         login();
@@ -97,9 +99,6 @@ export const SignUpForm = () =>{
                     }
                     if(res.status===401){
                         Alert.alert("Please check your information's and input it correctly.")
-                    }
-                    else{
-                        store.dispatch(userRegistrationFailed());
                     }
                 }
                 catch (err){

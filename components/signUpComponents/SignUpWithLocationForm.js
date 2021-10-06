@@ -1,4 +1,5 @@
 import {
+    Alert,
     Dimensions,
     Image,
     SafeAreaView,
@@ -87,11 +88,16 @@ export const SignUpWithLocationForm = () =>{
                     const jsonRes = await res.json();
 
                     console.log(jsonRes.message)
-                    if(res.status!==200){
+                    if(res.status!==200 && res.status!==401){
                         store.dispatch(userRegistrationFailed());
+                        Alert.alert("Something went wrong. Try again");
                     }
-                    else{
+                    if(res.status===200){
+                        loginWithLocationForm();
                         store.dispatch(userRegistrationSuccess());
+                    }
+                    if(res.status===401){
+                        Alert.alert("Please check your information's and input it correctly.")
                     }
                 }
                 catch (err){
