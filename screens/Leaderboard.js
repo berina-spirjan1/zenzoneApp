@@ -10,14 +10,19 @@ import {
     Text, TouchableOpacity,
     View
 } from "react-native";
-import LeaderboardSingleListCard from "../components/leaderboardComponents/LeaderboardSingleListCard";
+
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {renderIf} from "../utilities/CommonMethods";
 import {isIphoneX} from "react-native-iphone-x-helper";
 import {Toolbar} from "react-native-material-ui";
 import {BASE_URL, TOP_USERS} from "../configuration/config";
 import store from "../redux/store";
-import {failedAtLoadingCategories, startedLoadingCategories, successfullyLoadedCategories} from "../redux/actions";
+import {
+    failedAtLoadingCategories, failedGettingUserInfo, startedGettingUserInfo, startedLoadingActivities,
+    startedLoadingCategories, successfullyGotUserInfo,
+    successfullyLoadedActivities,
+    successfullyLoadedCategories
+} from "../redux/actions";
 
 export default class Leaderboard extends Component{
     constructor(props) {
@@ -43,7 +48,7 @@ export default class Leaderboard extends Component{
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                store.dispatch(startedLoadingCategories())
+                store.dispatch(startedGettingUserInfo())
                 this.setState({
                     data: responseJson,
                     firstPlace: responseJson.data[0],
@@ -52,9 +57,12 @@ export default class Leaderboard extends Component{
                     fourPlace: responseJson.data[3],
                     fivePlace: responseJson.data[4]
                 })
-                console.log(this.state.firstPlace)
-                console.log("--------------",this.state.secondPlace)
-                console.log(this.state.thirdPlace)
+                if(responseJson.data.length!==0){
+                    store.dispatch(successfullyGotUserInfo())
+                }
+                else{
+                    store.dispatch(failedGettingUserInfo())
+                }
             })
             .catch((error) => {
                 console.error(error);
