@@ -9,6 +9,7 @@ import {RouterHomePageStack} from "./RoutesHomePageStack";
 import {RoutesCreateActivityStack} from "./RoutesCreateActivityStack";
 import {RoutesForChallengeStack} from "./RoutesForChallengeStack";
 import {RoutesLoginSignUpStack} from "./RoutesLoginSignUpStack";
+import Leaderboard from "../screens/Leaderboard";
 
 
 const Tab = createBottomTabNavigator();
@@ -71,7 +72,7 @@ function BottomNavigationBar(){
                                 )
                             }}/>
                 <Tab.Screen name={'Ranking'}
-                            component={LogoutSplashScreen}
+                            component={Leaderboard}
                             options={{
                                 headerShown: false,
                                 tabBarIcon: ({focused}) => (
