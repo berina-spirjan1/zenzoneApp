@@ -453,6 +453,29 @@ export default class HomePage extends Component{
                             <ScrollView horizontal={true}
                                         showsHorizontalScrollIndicator={false}>
                                 <View style={{flexDirection: 'row'}}>
+                                    <TouchableOpacity style={styleLightMode.categoryCard}
+                                                      onPress={() => this.loadAllActivities(1)}>
+                                        <Card  styles={{ card: { backgroundColor: 'rgba(147,180,229,1)',
+                                                borderRadius:30,
+                                                shadowColor: "#000000",
+                                                shadowOffset: {
+                                                    width: 0,
+                                                    height: 2,
+                                                },
+                                                shadowOpacity: 0.44,
+                                                shadowRadius: 3,
+                                                elevation: 5
+                                            }}}>
+                                            <View style={styleLightMode.icon2}>
+                                                <FontAwesome5 name={'smile-beam'}
+                                                              size={35}
+                                                              color={'#000000'}/>
+                                            </View>
+                                            <CardContent>
+                                                <Text style={styleLightMode.categoryName}>ALL</Text>
+                                            </CardContent>
+                                        </Card>
+                                    </TouchableOpacity>
                                     {this.state.categories.map(function(obj,i) {
                                         return (
                                             <View key={i}>
@@ -485,7 +508,6 @@ export default class HomePage extends Component{
                                 </View>
                             </ScrollView>
                         )}
-
                         <Text style={styleLightMode.singleCategoryName}>{this.state.currentCategory}</Text>
                         {renderIf(this.state.noData, <Text style={{textAlign: 'center'}}>No data found.</Text>)}
                         {renderIf(this.state.data.length,
@@ -539,7 +561,7 @@ export default class HomePage extends Component{
                                                           numberOfLines={3}>{"\n"}{obj.title}</Text>
                                                     <View>
                                                         {renderIf(obj.photo_dir===null, <Image source={require('../assets/images/photoForPosts.png')} style={styleLightMode.activityImage}/>)}
-                                                        {renderIf(obj.photo_dir!==null,<Image source={{uri: `${BASE_URL}`+`${obj.photo_dir}`+`${obj.photo_name}`}}
+                                                        {renderIf(obj.photo_dir!==null, <Image source={{uri: `${BASE_URL}`+`${obj.photo_dir}`+`${obj.photo_name}`}}
                                                                                               style={styleLightMode.activityImage}/>)}
 
                                                     </View>
