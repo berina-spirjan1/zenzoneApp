@@ -183,13 +183,14 @@ export default class HomePage extends Component{
 
                     if (res.status !== 200 && res.status!==401) {
                         store.dispatch(failedAtLikingActivity());
+                        Alert.alert("Something went wrong. Try again.")
+                    }
+                    if(res.status===200){
+                        Alert.alert('Successfully liked activity.')
+                        store.dispatch(successfullyLikedActivity());
                     }
                     if(res.status===401){
                         Alert.alert('Please login')
-                    }
-                    if(res.status===200) {
-                        Alert.alert('Successfully liked activity.')
-                        store.dispatch(successfullyLikedActivity());
                     }
                 } catch (err) {
                     console.log(err);
@@ -216,7 +217,7 @@ export default class HomePage extends Component{
                 "Accept": "application/json",
                 'Authorization': 'Bearer ' + tokenHelper
             },
-            body: JSON.stringify(likeObject)
+            body:  JSON.stringify(likeObject)
         })
             .then(async res => {
                 try {
@@ -228,13 +229,14 @@ export default class HomePage extends Component{
                     console.log(res.status)
                     if (res.status !== 200 && res.status!==401) {
                         store.dispatch(failedRemovingLike());
+                        Alert.alert("Something went wrong. Try again.")
+                    }
+                    if(res.status===200){
+                        Alert.alert("Successfully removed like.")
+                        store.dispatch(successfullyRemovedLike());
                     }
                     if(res.status===401){
                         Alert.alert('Please login')
-                    }
-                    if(res.status===200) {
-                        Alert.alert("Successfully removed like.")
-                        store.dispatch(successfullyRemovedLike());
                     }
                 } catch (err) {
                     console.log(err);
@@ -260,7 +262,7 @@ export default class HomePage extends Component{
                 "Accept": "application/json",
                 'Authorization': 'Bearer ' + tokenHelper
             },
-            body: JSON.stringify(likeObject)
+            body:  JSON.stringify(likeObject)
         })
             .then(async res => {
                 try {
@@ -292,8 +294,6 @@ export default class HomePage extends Component{
             activity_id: id
         }
 
-        console.log(likeObject.token)
-
         fetch(`${DISLIKE}`, {
             method: 'DELETE',
             headers: {
@@ -301,7 +301,7 @@ export default class HomePage extends Component{
                 "Accept": "application/json",
                 'Authorization': 'Bearer ' + tokenHelper
             },
-            body: JSON.stringify(likeObject)
+            body:  JSON.stringify(likeObject)
         })
             .then(async res => {
                 try {
@@ -514,12 +514,12 @@ export default class HomePage extends Component{
                                                                                   size={25}
                                                                                   color={'green'}
                                                                                   style={styleLightMode.likeIcon}
-                                                                                  onPress={async () => {await this.handleRemoveLike(obj.id)}}/>
+                                                                                  onPress={async () => {await this.handleLike(obj.id)}}/>
                                                                     <FontAwesome5 name={'thumbs-down'}
                                                                                   size={25}
                                                                                   color={'red'}
                                                                                   style={styleLightMode.dislikeIcon}
-                                                                                  onPress={async () => {await this.handleRemoveDislike(obj.id)}}/>
+                                                                                  onPress={async () => {await this.handleDislike(obj.id)}}/>
                                                             </>
                                                         )}
                                                         {renderIf(obj.liked===1,
@@ -532,8 +532,7 @@ export default class HomePage extends Component{
                                                                     <FontAwesome5 name={'thumbs-down'}
                                                                                   size={25}
                                                                                   color={'black'}
-                                                                                  style={styleLightMode.dislikeIcon}
-                                                                                  onPress={async () => {await this.handleDislike(obj.id)}}/>
+                                                                                  style={styleLightMode.dislikeIcon}/>
                                                             </>
                                                         )}
                                                         {renderIf(obj.liked===0,
@@ -541,8 +540,7 @@ export default class HomePage extends Component{
                                                                     <FontAwesome5 name={'thumbs-up'}
                                                                                   size={25}
                                                                                   color={'black'}
-                                                                                  style={styleLightMode.likeIcon}
-                                                                                  onPress={async () => {await this.handleLike(obj.id)}}/>
+                                                                                  style={styleLightMode.likeIcon}/>
                                                                     <FontAwesome5 name={'thumbs-down'}
                                                                                   size={25}
                                                                                   color={'red'}

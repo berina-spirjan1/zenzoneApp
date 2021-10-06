@@ -211,12 +211,9 @@ export default class SingleActivity extends Component{
                         store.dispatch(failedPostingComment());
                         Alert.alert("Something went wrong. Try again.")
                     }
-                    if(res.status===200){
+                    else{
                         this.singleActivity()
                         store.dispatch(successfullyPostedComment());
-                    }
-                    if(res.status===401){
-                        Alert.alert("Something went wrong. Try again.")
                     }
                 } catch (err) {
                     console.log(err);
@@ -261,12 +258,9 @@ export default class SingleActivity extends Component{
                          store.dispatch(failedDeletingComment());
                          Alert.alert("Something went wrong. Try again.")
                      }
-                     if(res.status===200){
+                     else{
                          Alert.alert('Successfully deleted comment')
                          store.dispatch(successfullyDeletedComment());
-                     }
-                     if(res.status===401){
-                         Alert.alert("Something went wrong. Try again.")
                      }
                  } catch (err) {
                      console.log(err);
