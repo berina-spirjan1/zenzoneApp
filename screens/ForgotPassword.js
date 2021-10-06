@@ -13,15 +13,21 @@ export default class ForgotPassword extends Component{
         super();
     }
 
+    login = () => this.props.navigation.navigate("login");
+
     render() {
         return(
-            <Provider store={store}>
-                {renderIf(isIphoneX(),  <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 }}}
-                                                 centerElement=" Forgot password"/>)}
-                {renderIf(!isIphoneX(),  <Toolbar style={{ container: { backgroundColor: '#93B4E5' }}}
-                                                         centerElement=" Forgot password"/>)}
-                <ForgotPasswordForm/>
-            </Provider>
-        )
-                }
+                <Provider store={store}>
+                    {renderIf(isIphoneX(),  <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50 }}}
+                                                     leftElement="arrow-back"
+                                                     centerElement=" Forgot password"
+                                                     onLeftElementPress={this.login}/>)}
+                    {renderIf(!isIphoneX(),  <Toolbar style={{ container: { backgroundColor: '#93B4E5' }}}
+                                                      leftElement="arrow-back"
+                                                      centerElement=" Forgot password"
+                                                      onLeftElementPress={this.login}/>)}
+                    <ForgotPasswordForm/>
+                </Provider>
+                )
+    }
 }
