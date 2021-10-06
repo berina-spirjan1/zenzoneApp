@@ -14,7 +14,6 @@ import {
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import {Actions} from "react-native-router-flux";
 import {BASE_URL, LOGOUT, USER} from "../../configuration/config";
 import {renderIf} from "../../utilities/CommonMethods";
 import {isIphoneX} from "react-native-iphone-x-helper";
@@ -26,14 +25,19 @@ export default class UserProfile extends Component{
         super();
     }
 
+    //navigating to page that contains information's about user
     myProfile = () => this.props.navigation.navigate("myProfile")
 
+    //navigation to page that show all badges for logged user
     badges = () => this.props.navigation.navigate("badges")
 
+    //navigation to leaderboard to see ranking's for daily challenge
     leaderboard = () => this.props.navigation.navigate("leaderboard")
 
+    //navigating to page that contains all activities for one user
     activities = () => this.props.navigation.navigate("activities")
 
+    //navigating to settings spage
     settings = () => this.props.navigation.navigate("settings")
 
 
@@ -43,9 +47,11 @@ export default class UserProfile extends Component{
 
     componentDidMount = async () => {
 
+        //we are taking token from async storage
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
 
+        //we are collecting all information's about logged user
         fetch(`${USER}`, {
             method: 'GET',
             headers: {
@@ -68,9 +74,12 @@ export default class UserProfile extends Component{
 
     }
 
+    //navigating to logout page
     switchToLogoutPage = () => this.props.navigation.navigate("switchToLogoutPage")
 
 
+    //function that handle when user press logout
+    //we are sending token and async storage will be cleaned
     onLogoutHandler = async () => {
 
         let token = await AsyncStorage.getItem('jwt')
