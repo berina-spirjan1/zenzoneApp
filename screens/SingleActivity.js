@@ -334,6 +334,9 @@ export default class SingleActivity extends Component{
                                     <Text style={styles.username}>{this.state.userInfo.first_name}</Text>
                                 )}
                                 <Text style={styles.createdDate}>{ConvertDate(this.state.data.created_at)}</Text>
+                                <View style={{marginTop: 20}}/>
+                                <Text style={styles.createdDate}>Number of likes: {this.state.data.like_counter}</Text>
+                                <Text style={styles.createdDate}>Number of dislikes: {this.state.data.dislike_counter}</Text>
                             </View>
 
                             <View style={styles.userWrapper}>
@@ -539,7 +542,7 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         fontStyle: 'italic',
         color: '#616C75',
-        marginBottom: 20
+        // marginBottom: 20
     },
     createNewComment:{
         marginLeft: 20,
