@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {
+    AsyncStorage,
     Dimensions,
     Image,
     ImageBackground,
@@ -37,10 +38,19 @@ export default class Leaderboard extends Component{
         thirdPlace: [],
         fourPlace: [],
         fivePlace: [],
-        data: []
+        data: [],
+        token: null
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+
+        let token = await AsyncStorage.getItem('jwt')
+        token = JSON.parse(token)
+
+        this.setState({token: token})
+        console.log(this.state.token)
+
+
         fetch(`${TOP_USERS}?per_page=5`, {
             method: 'GET',
             headers: {
@@ -59,10 +69,9 @@ export default class Leaderboard extends Component{
                     fourPlace: responseJson.data[3],
                     fivePlace: responseJson.data[4]
                 })
-                if(responseJson.data.length!==0){
+                if (responseJson.data.length !== 0) {
                     store.dispatch(successfullyGotUserInfo())
-                }
-                else{
+                } else {
                     store.dispatch(failedGettingUserInfo())
                 }
             })
@@ -98,41 +107,60 @@ export default class Leaderboard extends Component{
                             style={styles.crownIcon}/>
               <View style={styles.rankings}>
                       <View style={styles.firstPlace}>
-                          {renderIf(this.state.firstPlace.photo_dir===null,
+                          {renderIf(this.state.firstPlace.photo_dir===null || this.state.token===null,
                               <Image source={require('../assets/images/user_photo.png')}
                                      style={styles.userImageRankings}/>
                           )}
-                          {renderIf(this.state.firstPlace.photo_dir===null,
+                          {renderIf(this.state.firstPlace.photo_dir!==null && this.state.token!==null,
                               <Image source={{uri: `${BASE_URL}`+`${this.state.firstPlace.photo_dir}`+`${this.state.firstPlace.photo_name}`}}/>
                           )}
-                          <Text style={styles.usernameFirstPlace}
-                                numberOfLines={2}>1. {this.state.firstPlace.first_name}</Text>
+                          {renderIf(this.state.token===null,
+                              <Text style={styles.usernameFirstPlace}
+                                    numberOfLines={2}>1. {this.state.firstPlace.name}</Text>
+                          )}
+                          {renderIf(this.state.token!==null,
+                              <Text style={styles.usernameFirstPlace}
+                                    numberOfLines={2}>1. {this.state.firstPlace.first_name}</Text>
+                          )}
                           <Text style={styles.badgesCounterFirstPlace}>{this.state.firstPlace.challenge_counter}</Text>
                       </View>
                       <View style={styles.secondPlace}>
-                          {renderIf(this.state.secondPlace.photo_dir===null,
+                          {renderIf(this.state.secondPlace.photo_dir===null || this.state.token===null,
                               <Image source={require('../assets/images/user_photo.png')}
                                      style={styles.userImageRankings}/>
                           )}
-                          {renderIf(this.state.secondPlace.photo_dir!==null,
+                          {renderIf(this.state.secondPlace.photo_dir!==null && this.state.token!==null,
                               <Image source={{uri: `${BASE_URL}`+`${this.state.secondPlace.photo_dir}`+`${this.state.secondPlace.photo_name}`}}
                                      style={styles.userImageRankings}/>
                           )}
-                          <Text style={styles.usernameSecondPlace}
-                                numberOfLines={2}>2. {this.state.secondPlace.first_name}</Text>
+                          {renderIf(this.state.token===null,
+                              <Text style={styles.usernameSecondPlace}
+                                    numberOfLines={2}>2. {this.state.secondPlace.name}</Text>
+                          )}
+                          {renderIf(this.state.token!==null,
+                              <Text style={styles.usernameSecondPlace}
+                                    numberOfLines={2}>2. {this.state.secondPlace.first_name}</Text>
+                          )}
                           <Text style={styles.badgesCounterSecondPlace}>{this.state.secondPlace.challenge_counter}</Text>
                       </View>
                       <View style={styles.thirdPlace}>
-                          {renderIf(this.state.thirdPlace.photo_dir===null,
+                          {renderIf(this.state.thirdPlace.photo_dir===null || this.state.token===null,
                             <Image source={require('../assets/images/user_photo.png')}
                                    style={styles.userImageRankings}/>
                           )}
-                          {renderIf(this.state.thirdPlace.photo_dir!==null,
+                          {renderIf(this.state.thirdPlace.photo_dir!==null && this.state.token!==null,
                               <Image source={{uri: `${BASE_URL}`+`${this.state.thirdPlace.photo_dir}`+`${this.state.thirdPlace.photo_name}`}}
                                      style={styles.userImageRankings}/>
                           )}
-                          <Text style={styles.usernameThirdPlace}
-                                numberOfLines={2}>3. {this.state.thirdPlace.first_name}</Text>
+                          {renderIf(this.state.token===null,
+                              <Text style={styles.usernameThirdPlace}
+                                    numberOfLines={2}>3. {this.state.thirdPlace.name}</Text>
+                          )}
+                          {renderIf(this.state.token!==null,
+                              <Text style={styles.usernameThirdPlace}
+                                    numberOfLines={2}>3. {this.state.thirdPlace.first_name}</Text>
+                          )}
+
                           <Text style={styles.badgesCounterThirdPlace}>{this.state.thirdPlace.challenge_counter}</Text>
                       </View>
               </View>
@@ -142,29 +170,40 @@ export default class Leaderboard extends Component{
                               style={styles.scrollView}>
                       <View style={styles.leaderboardCard}>
                           <TouchableOpacity style={styles.container2}>
-                              {renderIf(this.state.fourPlace.photo_dir===null,
+                              {renderIf(this.state.fourPlace.photo_dir===null || this.state.token===null,
                                   <Image source={require('../assets/images/user_photo.png')}
                                          style={styles.userImage}/>
                               )}
-                              {renderIf(this.state.fourPlace.photo_dir===null,
+                              {renderIf(this.state.fourPlace.photo_dir!==null && this.state.token!==null,
                                   <Image source={{uri: `${BASE_URL}`+`${this.state.fourPlace.photo_dir}`+`${this.state.fourPlace.photo_name}`}}
                                          style={styles.userImage}/>
                               )}
-                              <Text style={styles.username}>{this.state.fourPlace.first_name}</Text>
+                              {renderIf(this.state.token!==null,
+                                  <Text style={styles.username}>{this.state.fourPlace.first_name}</Text>
+                              )}
+                              {renderIf(this.state.token===null,
+                                  <Text style={styles.username}>{this.state.fourPlace.name}</Text>
+                              )}
                               <Text style={styles.badgesCounter}>{this.state.fourPlace.challenge_counter}</Text>
                           </TouchableOpacity>
                       </View>
                       <View style={styles.leaderboardCard}>
                           <TouchableOpacity style={styles.container2}>
-                              {renderIf(this.state.fivePlace.photo_dir===null,
+                              {renderIf(this.state.fivePlace.photo_dir===null || this.state.token===null,
                                   <Image source={require('../assets/images/user_photo.png')}
                                          style={styles.userImage}/>
                               )}
-                              {renderIf(this.state.fivePlace.photo_dir===null,
+                              {renderIf(this.state.fivePlace.photo_dir!==null && this.state.token!==null,
                                   <Image source={{uri: `${BASE_URL}`+`${this.state.fivePlace.photo_dir}`+`${this.state.fivePlace.photo_name}`}}
                                          style={styles.userImage}/>
                               )}
-                              <Text style={styles.username}>{this.state.fivePlace.first_name}</Text>
+                              {renderIf(this.state.token===null,
+                                  <Text style={styles.username}>{this.state.fivePlace.name}</Text>
+                              )}
+                              {renderIf(this.state.token!==null,
+                                  <Text style={styles.username}>{this.state.fivePlace.first_name}</Text>
+                              )}
+
                               <Text style={styles.badgesCounter}>{this.state.fivePlace.challenge_counter}</Text>
                           </TouchableOpacity>
                       </View>
@@ -192,6 +231,7 @@ const styles = StyleSheet.create({
     },
     scrollView:{
         alignSelf: 'stretch',
+        marginTop: -80
     },
     imageBackground:{
         height: 520,
