@@ -5,7 +5,11 @@ import LottieView from "lottie-react-native";
 import {useNavigation} from "@react-navigation/native";
 
 function CheckEmail (){
+
+    //defining hook that allows us to access to navigation objects
     const navigation = useNavigation();
+
+    //navigation to login page
     const login = () => navigation.navigate("login")
 
     return(
