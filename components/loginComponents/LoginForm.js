@@ -466,7 +466,7 @@ const stylesDarkMode = StyleSheet.create({
     },
     errorMsg:{
         fontSize: 12,
-        color: 'red',
+        color: '#6594DA',
         marginLeft: 20
     }
 });
