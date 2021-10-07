@@ -129,7 +129,7 @@ export default class HomePage extends Component{
         let tokenHelper = await AsyncStorage.getItem('jwt')
         tokenHelper = JSON.parse(tokenHelper)
 
-        this.setState({data: []})
+        // this.setState({data: []})
         this.setState({token: tokenHelper})
 
         fetch(`${ACTIVITY}?page=${page}`, {
@@ -167,7 +167,7 @@ export default class HomePage extends Component{
         let tokenHelper = await AsyncStorage.getItem('jwt')
         tokenHelper = JSON.parse(tokenHelper)
 
-        this.setState({data: []})
+        // this.setState({data: []})
         this.setState({token: tokenHelper})
 
         fetch(`${POPULAR_CHALLENGES}?page=1&&popular=1`, {
@@ -201,7 +201,7 @@ export default class HomePage extends Component{
     async loadAllPopularActivities(page = 1) {
         let tokenHelper = await AsyncStorage.getItem('jwt')
         tokenHelper = JSON.parse(tokenHelper)
-        this.setState({data: []})
+        // this.setState({data: []})
         this.setState({token: tokenHelper})
 
         fetch(`${ACTIVITY}?page=1?popular=1`, {
