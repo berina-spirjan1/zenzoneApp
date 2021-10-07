@@ -362,11 +362,11 @@ export default class SingleActivity extends Component{
                                                    style={styles.createNewComment}
                                                    onChangeText={text => this.setState({descriptionForComment: text })}/>
                                         <View style={{flexDirection: 'row'}}>
-                                            <TouchableOpacity style={styles.postButton}
+                                            <TouchableOpacity containerStyle={styles.postButton}
                                                               onPress={async()=>{await this.postComment(this.state.data.id)}}>
                                                 <Text style={styles.postButtonText}>POST</Text>
                                             </TouchableOpacity>
-                                            <TouchableOpacity style={styles.cameraButton}
+                                            <TouchableOpacity containerStyle={styles.cameraButton}
                                                               onPress={this.pickImage}>
                                                 <FontAwesome5 name={'camera'}
                                                               color={'#616C75'}
@@ -396,7 +396,7 @@ export default class SingleActivity extends Component{
                                                                     <Text style={styles.commentDescription}>{obj.description}</Text>
                                                                 </View>
                                                                 {renderIf(this.state.userData.id===obj.user.id,
-                                                                    <TouchableOpacity style={styles.deleteButtonInSingle}
+                                                                    <TouchableOpacity containerStyle={styles.deleteButtonInSingle}
                                                                                       onPress={async () => {await this.deleteComment(obj.id)}}>
                                                                         <FontAwesome5 name={'trash-alt'}
                                                                                       color={'#616C75'}
@@ -421,7 +421,7 @@ export default class SingleActivity extends Component{
                                                                     )}
                                                                     <Text style={styles.commentDescription}>{obj.description}</Text>
                                                                     {renderIf(this.state.userData.id===obj.user.id,
-                                                                        <TouchableOpacity style={styles.deleteButton}
+                                                                        <TouchableOpacity containerStyle={styles.deleteButton}
                                                                                           onPress={async () => {await this.deleteComment(obj.id)}}>
                                                                             <FontAwesome5 name={'trash-alt'}
                                                                                           color={'#616C75'}
@@ -432,7 +432,7 @@ export default class SingleActivity extends Component{
                                                                 <Image source={{uri: `${BASE_URL}`+`${obj.photo_dir}`+`${obj.photo_name}`}}
                                                                        style={styles.commentImage}/>
                                                                 {renderIf(this.state.userData.id===obj.user.id,
-                                                                    <TouchableOpacity style={styles.deleteButton}
+                                                                    <TouchableOpacity containerStyle={styles.deleteButton}
                                                                                       onPress={async () => {await this.deleteComment(obj.id)}}>
                                                                         <FontAwesome5 name={'trash-alt'}
                                                                                       color={'#616C75'}
