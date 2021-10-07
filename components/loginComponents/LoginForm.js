@@ -110,7 +110,6 @@ export const LoginForm = () =>{
             email: data.email,
             password: data.password,
         };
-        console.log("--------------",user)
 
         fetch(`${LOGIN}`,{
             method: 'POST',
