@@ -294,13 +294,13 @@ export const SignUpForm = () =>{
 
     return(
         <View style={stylesLightMode.backgroundStyle}>
-            <Cload style={stylesLightMode.cloads}/>
-            <Text style={stylesLightMode.welcomeTitle}>WELCOME TO </Text>
-            <Text style={stylesLightMode.zenzoneTitle}>ZENZONE</Text>
             <SafeAreaView style={stylesLightMode.container}
                           style={{height: screenHeight}}>
                 <ScrollView vertical={true}
                             style={stylesLightMode.scrollView}>
+                    <Cload style={stylesLightMode.cloads}/>
+                    <Text style={stylesLightMode.welcomeTitle}>WELCOME TO </Text>
+                    <Text style={stylesLightMode.zenzoneTitle}>ZENZONE</Text>
                     <Text style={stylesLightMode.hintText}>Username</Text>
                     <TextInput style={stylesLightMode.inputLabel}
                                onChangeText={(val) => nameInputChange(val)}
@@ -388,7 +388,7 @@ const stylesLightMode = StyleSheet.create({
         backgroundColor: "#93B4E5"
     },
     cloads:{
-        top:50,
+        top:90,
         left:0
     },
     welcomeTitle: {
@@ -397,7 +397,7 @@ const stylesLightMode = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         justifyContent: 'center',
-        top:-100
+        top:-50
     },
     zenzoneTitle: {
         fontSize: 28,
@@ -405,7 +405,7 @@ const stylesLightMode = StyleSheet.create({
         fontWeight: 'bold',
         textAlign: 'center',
         justifyContent: 'center',
-        top: -100
+        top: -50
     },
     container: {
         flex:1,
@@ -476,7 +476,7 @@ const stylesLightMode = StyleSheet.create({
     icon: {
         flex: 1,
         marginTop: 0,
-        marginBottom: 200,
+        marginBottom: 0,
         justifyContent: 'center'
     },
     formValidation:{
