@@ -85,16 +85,17 @@ export default class DailyChallengeDetails extends Component{
             .then((response) => response.json())
             .then((responseJson) => {
                 store.dispatch(staredGettingDailyInfo())
+                console.log(responseJson)
                 this.setState({
                     data: responseJson.data[0],
                     id: responseJson.data[0].id
                 })
-                if(responseJson.data[0].length!==0){
-                    store.dispatch(successfullyGotDailyInfo())
-                }
-                else{
-                    store.dispatch(failedAtGettingDailyInfo())
-                }
+                // if(responseJson.data[0].length!==0){
+                //     store.dispatch(successfullyGotDailyInfo())
+                // }
+                // else{
+                //     store.dispatch(failedAtGettingDailyInfo())
+                // }
 
 
                 fetch(`${SINGLE_ACTIVITY}/${this.state.id}`, {
@@ -110,12 +111,12 @@ export default class DailyChallengeDetails extends Component{
                         this.setState({
                             commentArray: responseJson.data[0].comments
                         })
-                        if(responseJson.data[0].comments.length!==0){
-                            store.dispatch(successfullyGettingActivityInfo())
-                        }
-                        else{
-                            store.dispatch(failedAtGettingActivityInfo())
-                        }
+                        // if(responseJson.data[0].comments.length!==0){
+                        //     store.dispatch(successfullyGettingActivityInfo())
+                        // }
+                        // else{
+                        //     store.dispatch(failedAtGettingActivityInfo())
+                        // }
                     })
                     .catch((error) => {
                         console.error(error);
@@ -141,12 +142,12 @@ export default class DailyChallengeDetails extends Component{
                     userData: responseJson,
                     refresh: false
                 })
-                if(responseJson.length!==0){
-                    store.dispatch(successfullyUpdatedUserInfo())
-                }
-                else{
-                    store.dispatch(failedUpdatingUserInfo())
-                }
+                // if(responseJson.length!==0){
+                //     store.dispatch(successfullyUpdatedUserInfo())
+                // }
+                // else{
+                //     store.dispatch(failedUpdatingUserInfo())
+                // }
             })
             .catch((error) => {
                 console.error(error);
