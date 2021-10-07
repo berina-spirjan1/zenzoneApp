@@ -59,7 +59,7 @@ export const SignUpForm = () =>{
     }
 
     const nameInputChange = (val) => {
-        if (val.trim().length >= 4) {
+        if (val.trim().length >= 2) {
             setData({
                 ...data,
                 name: val,
@@ -307,7 +307,7 @@ export const SignUpForm = () =>{
                                onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}>
                     </TextInput>
                     {data.isValidName ? null : (
-                        <Text style={stylesDarkMode.errorMsg}>Username must be 4 characters long.</Text>
+                        <Text style={stylesDarkMode.errorMsg}>Username must be 2 characters long.</Text>
                     )}
                     <Text style={stylesLightMode.hintText}>First name</Text>
                     <TextInput style={stylesLightMode.inputLabel}
