@@ -107,9 +107,10 @@ export const LoginForm = () =>{
     const onLoginHandler = () =>{
 
         const user = {
-            username: data.email,
+            email: data.email,
             password: data.password,
         };
+        console.log("--------------",user)
 
         fetch(`${LOGIN}`,{
             method: 'POST',
