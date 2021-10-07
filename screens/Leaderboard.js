@@ -112,7 +112,8 @@ export default class Leaderboard extends Component{
                                      style={styles.userImageRankings}/>
                           )}
                           {renderIf(this.state.firstPlace.photo_dir!==null && this.state.token!==null,
-                              <Image source={{uri: `${BASE_URL}`+`${this.state.firstPlace.photo_dir}`+`${this.state.firstPlace.photo_name}`}}/>
+                              <Image source={{uri: `${BASE_URL}`+`${this.state.firstPlace.photo_dir}`+`${this.state.firstPlace.photo_name}`}}
+                                     style={styles.userImageRankings}/>
                           )}
                           {renderIf(this.state.token===null,
                               <Text style={styles.usernameFirstPlace}
