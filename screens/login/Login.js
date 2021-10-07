@@ -19,6 +19,7 @@ export default class Login extends Component {
     async componentDidMount() {
         let tokenHelper = await AsyncStorage.getItem('jwt')
         tokenHelper = JSON.parse(tokenHelper)
+
         this.setState({token: tokenHelper})
     }
 
@@ -26,7 +27,6 @@ export default class Login extends Component {
 
         return (
             <Provider store={store}>
-                {console.log("----------",this.state.token)}
                 {renderIf(this.state.token===null,
                     <LoginForm/>
                 )}
