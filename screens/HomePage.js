@@ -14,7 +14,14 @@ import {
     View
 } from "react-native";
 import {Toolbar} from "react-native-material-ui";
-import {ACTIVITY, BASE_URL, CATEGORY, DISLIKE, LIKE, POPULAR_CHALLENGES,} from "../configuration/config";
+import {
+    ACTIVITY,
+    BASE_URL,
+    CATEGORY,
+    DISLIKE,
+    LIKE,
+    POPULAR_CHALLENGES
+} from "../configuration/config";
 import {Card, CardAction, CardContent} from "react-native-card-view";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { renderIf } from "../utilities/CommonMethods";
