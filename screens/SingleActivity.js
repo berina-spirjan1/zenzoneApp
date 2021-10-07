@@ -13,7 +13,6 @@ import {
     StyleSheet,
     Text,
     TextInput,
-    TouchableOpacity,
     View
 } from "react-native";
 import { Toolbar } from "react-native-material-ui";
@@ -43,6 +42,7 @@ import {
 } from "../redux/actions";
 import * as ImagePicker from "expo-image-picker";
 import ConvertDate from "../utilities/ConvertDate";
+import {TouchableOpacity} from "react-native-gesture-handler";
 
 export default class SingleActivity extends Component{
     constructor(props) {
@@ -261,6 +261,7 @@ export default class SingleActivity extends Component{
                          Alert.alert("Something went wrong. Try again.")
                      }
                      else{
+                         this.componentDidMount()
                          Alert.alert('Successfully deleted comment')
                          store.dispatch(successfullyDeletedComment());
                      }
@@ -422,6 +423,7 @@ export default class SingleActivity extends Component{
                                                                     {renderIf(this.state.userData.id===obj.user.id,
                                                                         <TouchableOpacity style={styles.deleteButton}
                                                                                           onPress={async () => {await this.deleteComment(obj.id)}}>
+                                                                            {console.log("OVO JE ID KOMENTARA",obj)}
                                                                             <FontAwesome5 name={'trash-alt'}
                                                                                           color={'#616C75'}
                                                                                           size={15}/>
@@ -633,13 +635,15 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         marginTop: 20,
         marginLeft: 20,
-        marginRight: 20
+        marginRight: 20,
+        zIndex: 1
     },
     singleCommentWithImage:{
         flexDirection: 'row',
         marginTop: 20,
         padding:10,
         paddingTop: 20,
+        zIndex : 1
     },
     deleteButton:{
         backgroundColor:  'rgba(98, 133, 179, 0.5)',
