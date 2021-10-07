@@ -423,7 +423,6 @@ export default class SingleActivity extends Component{
                                                                     {renderIf(this.state.userData.id===obj.user.id,
                                                                         <TouchableOpacity style={styles.deleteButton}
                                                                                           onPress={async () => {await this.deleteComment(obj.id)}}>
-                                                                            {console.log("OVO JE ID KOMENTARA",obj)}
                                                                             <FontAwesome5 name={'trash-alt'}
                                                                                           color={'#616C75'}
                                                                                           size={15}/>

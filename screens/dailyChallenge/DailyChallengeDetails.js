@@ -12,7 +12,6 @@ import {
     StyleSheet,
     Text,
     TextInput,
-    TouchableOpacity,
     View
 } from "react-native";
 import { SafeAreaView } from "react-navigation";
@@ -31,19 +30,23 @@ import ConvertDate from "../../utilities/ConvertDate";
 import store from "../../redux/store";
 import {
     failedAtGettingActivityInfo,
-    failedAtGettingDailyInfo, failedDeletingComment, failedPostingComment, failedUpdatingUserInfo,
-    staredGettingDailyInfo, startedDeletingComment,
-    startedGettingActivityInfo, startedPostingComment,
+    failedAtGettingDailyInfo,
+    failedDeletingComment,
+    failedPostingComment,
+    failedUpdatingUserInfo,
+    staredGettingDailyInfo,
+    startedDeletingComment,
+    startedGettingActivityInfo,
+    startedPostingComment,
     startedUpdatingUserInfo, successfullyDeletedComment,
     successfullyGettingActivityInfo,
-    successfullyGotDailyInfo, successfullyPostedComment, successfullyUpdatedUserInfo,
-    userRegistrationFailed,
-    userRegistrationStarted,
-    userRegistrationSuccess
-
+    successfullyGotDailyInfo,
+    successfullyPostedComment,
+    successfullyUpdatedUserInfo,
 } from "../../redux/actions";
 import DailyChallengeCounter from "./DailyChallengeCounter";
 import * as ImagePicker from "expo-image-picker";
+import {TouchableOpacity} from "react-native-gesture-handler";
 
 
 export default class DailyChallengeDetails extends Component{

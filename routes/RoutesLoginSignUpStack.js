@@ -15,7 +15,7 @@ const Stack = createNativeStackNavigator()
 
 export const RoutesLoginSignUpStack = () =>{
     return(
-            <Stack.Navigator initialRouteName={"loginForm"}>
+            <Stack.Navigator initialRouteName={"login"}>
                 <Stack.Screen name={"switchLoginToUser"}
                               component={RoutesProfileStack}
                               options={{

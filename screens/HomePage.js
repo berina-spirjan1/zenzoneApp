@@ -145,7 +145,7 @@ export default class HomePage extends Component{
             .then((responseJson) => {
                 store.dispatch(startedLoadingActivities())
                 this.setState({
-                    data: [...this.state.data, ...responseJson.data.data],
+                    data: [...responseJson.data.data, ...this.state.data],
                     isLoading: false,
                     refresh: false,
                 })
@@ -184,7 +184,7 @@ export default class HomePage extends Component{
                 console.log("----------",responseJson)
                 store.dispatch(startedLoadingActivities())
                 this.setState({
-                    data: [...this.state.data, ...responseJson.data.data],
+                    data: [...responseJson.data.data, ...this.state.data],
                     isLoading: false,
                     refresh: false,
                 })
@@ -217,7 +217,7 @@ export default class HomePage extends Component{
             .then((responseJson) => {
                 store.dispatch(startedLoadingActivities())
                 this.setState({
-                    data: [...this.state.data, ...responseJson.data.data],
+                    data: [...responseJson.data.data, ...this.state.data],
                     isLoading: false,
                     refresh: false,
                 })
