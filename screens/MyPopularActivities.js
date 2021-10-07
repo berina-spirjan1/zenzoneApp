@@ -139,11 +139,11 @@ export default class MyPopularActivities extends Component{
                 {console.log(this.state.data)}
                 {renderIf(isIphoneX(),  <Toolbar style={{ container: { backgroundColor: '#93B4E5', marginTop: 50} }}
                                                  leftElement="arrow-back"
-                                                 centerElement="My activities"
+                                                 centerElement="My popular activities"
                                                  onLeftElementPress={this.myProfileInfoBack}/>)}
                 {renderIf(!isIphoneX(), <Toolbar style={{ container: { backgroundColor: '#93B4E5' } }}
                                                  leftElement="arrow-back"
-                                                 centerElement="My activities"
+                                                 centerElement="My popular activities"
                                                  onLeftElementPress={this.myProfileInfoBack}/>)}
                 <ImageBackground source={require('../assets/images/backgroundLeaderboardLightMode.png')}
                                  style={styles.imageBackground}/>
