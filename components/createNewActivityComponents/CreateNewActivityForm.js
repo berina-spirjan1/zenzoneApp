@@ -88,8 +88,8 @@ export const CreateNewActivityForm = () => {
     };
 
     //using side effect for getting all categories.
-    useEffect(()=>{
-        fetch(`${CATEGORY}`, {
+    useEffect((page=1)=>{
+        fetch(`${CATEGORY}?page=${page}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -316,7 +316,6 @@ export const CreateNewActivityForm = () => {
                                                    ))
                                                }}/>
                     )}
-                    {console.log("----------",title)}
                     <View style={{flexDirection: 'row'}}>
                         <Text style={styles.comment}>Description</Text>
                     </View>
