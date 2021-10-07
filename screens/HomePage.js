@@ -53,6 +53,7 @@ export default class HomePage extends Component{
     constructor(props) {
         super();
     }
+
     state = {
         data: [],
         searchText: '',
@@ -115,7 +116,7 @@ export default class HomePage extends Component{
                 else{
                     store.dispatch(failedAtLoadingCategories())
                 }
-                if(responseJson.data.data.length!==0){
+                if(responseJson.data.data.length!==0 && pageCategories<=2){
                     pageCategories++;
                     return this.componentWillMount(pageCategories)
                 }
@@ -153,7 +154,7 @@ export default class HomePage extends Component{
                 } else {
                     store.dispatch(failedAtLoadingActivities())
                 }
-                if (responseJson.data.data.length !== 0) {
+                if (responseJson.data.data.length !== 0 && page<=2) {
                     page++;
                     return this.componentDidMount(page)
                 }
@@ -259,7 +260,7 @@ export default class HomePage extends Component{
                 else{
                     store.dispatch(failedAtLoadingActivities())
                 }
-                if (responseJson.data.data.length !== 0) {
+                if (responseJson.data.data.length !== 0 && page<=2) {
                     page++;
                     return this.componentDidMount(page)
                 }
