@@ -119,7 +119,7 @@ export const SignUpForm = () =>{
     };
 
     const emailInputChange = (val) => {
-        if (val.trim().length >= 4 && validate(val)) {
+        if (val.trim().length >= 4 && validation(val)) {
             setData({
                 ...data,
                 email: val,
