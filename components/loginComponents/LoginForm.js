@@ -136,6 +136,7 @@ export const LoginForm = () =>{
                     if(res.status===200){
                         if(jsonRes.data.token!==null){
                             await AsyncStorage.setItem('jwt', JSON.stringify(jsonRes.data.token))
+                            await AsyncStorage.setItem('isLogged', true)
                             goToUserInfo();
                             store.dispatch(authSuccess());
                         }
