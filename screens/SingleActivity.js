@@ -212,7 +212,10 @@ export default class SingleActivity extends Component{
                         Alert.alert("Something went wrong. Try again.")
                     }
                     else{
+                        this.setState({descriptionForComment: '', image: null})
+                        this.componentDidMount()
                         this.singleActivity()
+
                         store.dispatch(successfullyPostedComment());
                     }
                 } catch (err) {
