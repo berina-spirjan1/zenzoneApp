@@ -29,8 +29,75 @@ export const LoginForm = () =>{
     const navigation = useNavigation();
 
     //allowing to state variables in this functional component
-    const [email, setEmail] = useState('');
-    const [password, setPassword] =  useState('');
+    const [data, setData] = useState({
+        email: '',
+        password: '',
+        check_textInputChange: false,
+        secureTextEntry: true,
+        isValidUser: true,
+        isValidPassword: true,
+    });
+
+    const validate = (email) => {
+        const expression = /(?!.*\.{2})^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([\t]*\r\n)?[\t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([\t]*\r\n)?[\t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+
+        return expression.test(String(email).toLowerCase())
+    }
+
+    const textInputChange = (val) => {
+        if (val.trim().length >= 4 && validate(val)) {
+            setData({
+                ...data,
+                email: val,
+                check_textInputChange: true,
+                isValidUser: true,
+            });
+        } else {
+            setData({
+                ...data,
+                email: val,
+                check_textInputChange: false,
+                isValidUser: false,
+            });
+        }
+    };
+
+    const handlePasswordChange = (val) => {
+        if (val.trim().length >= 8) {
+            setData({
+                ...data,
+                password: val,
+                isValidPassword: true,
+            });
+        } else {
+            setData({
+                ...data,
+                password: val,
+                isValidPassword: false,
+            });
+        }
+    };
+
+    const updateSecureTextEntry = () => {
+        setData({
+            ...data,
+            secureTextEntry: !data.secureTextEntry,
+        });
+    };
+
+    const handleValidUser = (val) => {
+        if (val.trim().length >= 4) {
+            setData({
+                ...data,
+                isValidUser: true,
+            });
+        } else {
+            setData({
+                ...data,
+                isValidUser: false,
+            });
+        }
+    };
 
 
     //redirection to user profile
@@ -47,8 +114,8 @@ export const LoginForm = () =>{
     const onLoginHandler = () =>{
 
         const user = {
-            email,
-            password,
+            username: data.email,
+            password: data.password,
         };
 
         fetch(`${LOGIN}`,{
@@ -69,7 +136,6 @@ export const LoginForm = () =>{
                     console.log(jsonRes.data.token)
                     if(res.status!==200 && res.status!==401){
                         store.dispatch(authFailed());
-                        Alert.alert("Something went wrong. Try again.")
                     }
                     if(res.status===401){
                         Alert.alert("Please check your information's.")
@@ -103,13 +169,20 @@ export const LoginForm = () =>{
                 <SafeAreaView>
                     <Text style={stylesDarkMode.username}>E-mail</Text>
                     <TextInput style={stylesDarkMode.inputUsername}
-                               onChangeText={setEmail}>
+                               onChangeText={(val) => textInputChange(val)}
+                               onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}>
                     </TextInput>
+                    {data.isValidUser ? null : (
+                        <Text style={stylesDarkMode.errorMsg}>Incorrect e-mail address.</Text>
+                    )}
                     <Text style={stylesDarkMode.password}>Password</Text>
                     <TextInput style={stylesDarkMode.inputPassword}
                                secureTextEntry={true}
-                               onChangeText={setPassword}>
+                               onChangeText={(val) => handlePasswordChange(val)}>
                     </TextInput>
+                    {data.isValidPassword ? null : (
+                        <Text style={stylesDarkMode.errorMsg}>Password must be 8 characters long.</Text>
+                    )}
                 </SafeAreaView>
                 <Text style={stylesDarkMode.forgotLoginDetails}>Forgot your login details?
                     <Text style={stylesDarkMode.helpLogin}
@@ -397,6 +470,11 @@ const stylesDarkMode = StyleSheet.create({
     ,
     nextIcon:{
         marginLeft:-80
+    },
+    errorMsg:{
+        fontSize: 12,
+        color: 'red',
+        marginLeft: 20
     }
 });
 
