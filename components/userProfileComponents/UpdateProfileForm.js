@@ -28,9 +28,13 @@ import {
     successfullyAddedActivity, successfullyUpdatedUserInfo
 } from "../../redux/actions";
 import { renderIf } from "../../utilities/CommonMethods";
+import {useNavigation} from "@react-navigation/native";
 
 
 export const UpdateProfileForm = () =>{
+
+    //defining hook that allows us to access to navigation objects
+    const navigation = useNavigation();
 
     //we are taking screen height and storing at to variable which we use for scroll view
     const screenHeight = Dimensions.get('window').height
@@ -85,6 +89,7 @@ export const UpdateProfileForm = () =>{
 
     };
 
+    const switchToMyProfileInfoFromUpdate = () => navigation.navigate("switchToMyProfileInfo")
 
     const updateProfile = async () => {
 
@@ -126,7 +131,7 @@ export const UpdateProfileForm = () =>{
                     }
                     if(res.status===200) {
                         store.dispatch(successfullyUpdatedUserInfo());
-                        switchToMyProfileInfo()
+                        switchToMyProfileInfoFromUpdate()
                     }
                 } catch (err) {
                     console.log(err);
