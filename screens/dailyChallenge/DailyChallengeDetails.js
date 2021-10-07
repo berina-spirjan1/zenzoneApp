@@ -29,20 +29,14 @@ import { Toolbar } from "react-native-material-ui";
 import ConvertDate from "../../utilities/ConvertDate";
 import store from "../../redux/store";
 import {
-    failedAtGettingActivityInfo,
-    failedAtGettingDailyInfo,
     failedDeletingComment,
     failedPostingComment,
-    failedUpdatingUserInfo,
     staredGettingDailyInfo,
     startedDeletingComment,
     startedGettingActivityInfo,
     startedPostingComment,
     startedUpdatingUserInfo, successfullyDeletedComment,
-    successfullyGettingActivityInfo,
-    successfullyGotDailyInfo,
     successfullyPostedComment,
-    successfullyUpdatedUserInfo,
 } from "../../redux/actions";
 import DailyChallengeCounter from "./DailyChallengeCounter";
 import * as ImagePicker from "expo-image-picker";
@@ -347,7 +341,7 @@ export default class DailyChallengeDetails extends Component{
                                                                     <View key={i}>
                                                                         {renderIf(obj.approved===-1,
                                                                             <>
-                                                                            <TouchableOpacity style={styles.singleCommentContainer}>
+                                                                            <View style={styles.singleCommentContainer}>
                                                                                 <View style={styles.singleComment}>
                                                                                     {renderIf(obj.user.photo===null || this.state.token===null,
                                                                                         <Image source={require('../../assets/images/user_photo.png')}
@@ -360,7 +354,7 @@ export default class DailyChallengeDetails extends Component{
                                                                                     <Text style={styles.commentDescription}>{obj.description}</Text>
                                                                                 </View>
                                                                                 {renderIf(this.state.userData.id===obj.user.id,
-                                                                                    <TouchableOpacity style={styles.deleteButtonInSingle}>
+                                                                                    <TouchableOpacity containerStyle={styles.deleteButtonInSingle}>
                                                                                         <FontAwesome5 name={'trash-alt'}
                                                                                                       color={'#616C75'}
                                                                                                       size={15}
@@ -369,7 +363,7 @@ export default class DailyChallengeDetails extends Component{
                                                                                     </TouchableOpacity>
                                                                                 )}
 
-                                                                            </TouchableOpacity>
+                                                                            </View>
                                                                                 {renderIf(obj.photo_dir!==null,
                                                                                     <View style={styles.commentWithImage}>
                                                                                         <View style={styles.singleCommentWithImage}>
@@ -383,7 +377,7 @@ export default class DailyChallengeDetails extends Component{
                                                                                             )}
                                                                                             <Text style={styles.commentDescription}>{obj.description}</Text>
                                                                                             {renderIf(this.state.userData.id===obj.user.id,
-                                                                                                <TouchableOpacity style={styles.deleteButton}
+                                                                                                <TouchableOpacity containerStyle={styles.deleteButton}
                                                                                                                   onPress={async () => {await this.deleteComment(obj.id)}}>
                                                                                                     <FontAwesome5 name={'trash-alt'}
                                                                                                                   color={'#616C75'}
@@ -394,7 +388,7 @@ export default class DailyChallengeDetails extends Component{
                                                                                         <Image source={{uri: `${BASE_URL}`+`${obj.photo_dir}`+`${obj.photo_name}`}}
                                                                                                style={styles.commentImage}/>
                                                                                         {renderIf(this.state.userData.id===obj.user.id,
-                                                                                            <TouchableOpacity style={styles.deleteButton}
+                                                                                            <TouchableOpacity containerStyle={styles.deleteButton}
                                                                                                               onPress={async () => {await this.deleteComment(obj.id)}}>
                                                                                                 <FontAwesome5 name={'trash-alt'}
                                                                                                               color={'#616C75'}
@@ -408,7 +402,7 @@ export default class DailyChallengeDetails extends Component{
                                                                         )}
                                                                         {renderIf(obj.approved===0,
                                                                             <>
-                                                                                <TouchableOpacity style={styles.singleCommentContainerRejected}>
+                                                                                <View style={styles.singleCommentContainerRejected}>
                                                                                     <View style={styles.singleComment}>
                                                                                         {renderIf(obj.user.photo===null || this.state.token===null,
                                                                                             <Image source={require('../../assets/images/user_photo.png')}
@@ -421,7 +415,7 @@ export default class DailyChallengeDetails extends Component{
                                                                                         <Text style={styles.commentDescription}>{obj.description}</Text>
                                                                                     </View>
                                                                                     {renderIf(this.state.userData.id===obj.user.id,
-                                                                                        <TouchableOpacity style={styles.deleteButtonInSingle}>
+                                                                                        <TouchableOpacity containerStyle={styles.deleteButtonInSingle}>
                                                                                             <FontAwesome5 name={'trash-alt'}
                                                                                                           color={'#616C75'}
                                                                                                           size={15}
@@ -430,7 +424,7 @@ export default class DailyChallengeDetails extends Component{
                                                                                         </TouchableOpacity>
                                                                                     )}
 
-                                                                                </TouchableOpacity>
+                                                                                </View>
                                                                                 {renderIf(obj.photo_dir!==null,
                                                                                     <View style={styles.commentWithImageRejected}>
                                                                                         <View style={styles.singleCommentWithImage}>
@@ -444,7 +438,7 @@ export default class DailyChallengeDetails extends Component{
                                                                                             )}
                                                                                             <Text style={styles.commentDescription}>{obj.description}</Text>
                                                                                             {renderIf(this.state.userData.id===obj.user.id,
-                                                                                                <TouchableOpacity style={styles.deleteButton}
+                                                                                                <TouchableOpacity containerStyle={styles.deleteButton}
                                                                                                                   onPress={async () => {await this.deleteComment(obj.id)}}>
                                                                                                     <FontAwesome5 name={'trash-alt'}
                                                                                                                   color={'#616C75'}
@@ -455,7 +449,7 @@ export default class DailyChallengeDetails extends Component{
                                                                                         <Image source={{uri: `${BASE_URL}`+`${obj.photo_dir}`+`${obj.photo_name}`}}
                                                                                                style={styles.commentImage}/>
                                                                                         {renderIf(this.state.userData.id===obj.user.id,
-                                                                                            <TouchableOpacity style={styles.deleteButton}
+                                                                                            <TouchableOpacity containerStyle={styles.deleteButton}
                                                                                                               onPress={async () => {await this.deleteComment(obj.id)}}>
                                                                                                 <FontAwesome5 name={'trash-alt'}
                                                                                                               color={'#616C75'}
@@ -469,7 +463,7 @@ export default class DailyChallengeDetails extends Component{
                                                                         )}
                                                                         {renderIf(obj.approved===1,
                                                                             <>
-                                                                                <TouchableOpacity style={styles.singleCommentContainerAccepted}>
+                                                                                <View containerStyle={styles.singleCommentContainerAccepted}>
                                                                                     <View style={styles.singleComment}>
                                                                                         {renderIf(obj.user.photo===null || this.state.token===null,
                                                                                             <Image source={require('../../assets/images/user_photo.png')}
@@ -482,7 +476,7 @@ export default class DailyChallengeDetails extends Component{
                                                                                         <Text style={styles.commentDescription}>{obj.description}</Text>
                                                                                     </View>
                                                                                     {renderIf(this.state.userData.id===obj.user.id,
-                                                                                        <TouchableOpacity style={styles.deleteButtonInSingle}>
+                                                                                        <TouchableOpacity containerStyle={styles.deleteButtonInSingle}>
                                                                                             <FontAwesome5 name={'trash-alt'}
                                                                                                           color={'#616C75'}
                                                                                                           size={15}
@@ -491,7 +485,7 @@ export default class DailyChallengeDetails extends Component{
                                                                                         </TouchableOpacity>
                                                                                     )}
 
-                                                                                </TouchableOpacity>
+                                                                                </View>
                                                                                 {renderIf(obj.photo_dir!==null,
                                                                                     <View style={styles.commentWithImageAccepted}>
                                                                                         <View style={styles.singleCommentWithImage}>
@@ -505,7 +499,7 @@ export default class DailyChallengeDetails extends Component{
                                                                                             )}
                                                                                             <Text style={styles.commentDescription}>{obj.description}</Text>
                                                                                             {renderIf(this.state.userData.id===obj.user.id,
-                                                                                                <TouchableOpacity style={styles.deleteButton}
+                                                                                                <TouchableOpacity containerStyle={styles.deleteButton}
                                                                                                                   onPress={async () => {await this.deleteComment(obj.id)}}>
                                                                                                     <FontAwesome5 name={'trash-alt'}
                                                                                                                   color={'#616C75'}
@@ -516,7 +510,7 @@ export default class DailyChallengeDetails extends Component{
                                                                                         <Image source={{uri: `${BASE_URL}`+`${obj.photo_dir}`+`${obj.photo_name}`}}
                                                                                                style={styles.commentImage}/>
                                                                                         {renderIf(this.state.userData.id===obj.user.id,
-                                                                                            <TouchableOpacity style={styles.deleteButton}
+                                                                                            <TouchableOpacity containerStyle={styles.deleteButton}
                                                                                                               onPress={async () => {await this.deleteComment(obj.id)}}>
                                                                                                 <FontAwesome5 name={'trash-alt'}
                                                                                                               color={'#616C75'}
