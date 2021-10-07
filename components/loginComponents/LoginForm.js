@@ -35,7 +35,7 @@ export const LoginForm = () =>{
         check_textInputChange: false,
         secureTextEntry: true,
         isValidUser: true,
-        isValidPassword: true,
+        isValidPassword: true
     });
 
     const validate = (email) => {
@@ -44,7 +44,7 @@ export const LoginForm = () =>{
         return expression.test(String(email).toLowerCase())
     }
 
-    const textInputChange = (val) => {
+    const emailInputChange = (val) => {
         if (val.trim().length >= 4 && validate(val)) {
             setData({
                 ...data,
@@ -76,13 +76,6 @@ export const LoginForm = () =>{
                 isValidPassword: false,
             });
         }
-    };
-
-    const updateSecureTextEntry = () => {
-        setData({
-            ...data,
-            secureTextEntry: !data.secureTextEntry,
-        });
     };
 
     const handleValidUser = (val) => {
@@ -169,7 +162,7 @@ export const LoginForm = () =>{
                 <SafeAreaView>
                     <Text style={stylesDarkMode.username}>E-mail</Text>
                     <TextInput style={stylesDarkMode.inputUsername}
-                               onChangeText={(val) => textInputChange(val)}
+                               onChangeText={(val) => emailInputChange(val)}
                                onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}>
                     </TextInput>
                     {data.isValidUser ? null : (
