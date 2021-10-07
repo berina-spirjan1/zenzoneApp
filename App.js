@@ -19,6 +19,7 @@ import {Provider} from "react-redux";
 
 
 export default function App() {
+
     let [fontsLoaded] = useFonts({
         Roboto_400Regular,
         Roboto_100Thin_Italic,

@@ -19,7 +19,6 @@ export default class Login extends Component {
     async componentDidMount() {
         let tokenHelper = await AsyncStorage.getItem('jwt')
         tokenHelper = JSON.parse(tokenHelper)
-
         this.setState({token: tokenHelper})
     }
 
