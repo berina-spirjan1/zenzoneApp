@@ -170,7 +170,7 @@ export default class HomePage extends Component{
         this.setState({data: []})
         this.setState({token: tokenHelper})
 
-        fetch(`${POPULAR_CHALLENGES}?page=${page}&&popular=1`, {
+        fetch(`${POPULAR_CHALLENGES}?page=1&&popular=1`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -192,10 +192,6 @@ export default class HomePage extends Component{
                 } else {
                     store.dispatch(failedAtLoadingActivities())
                 }
-                if (responseJson.data.data.length !== 0) {
-                    page++;
-                    return this.componentDidMount(page)
-                }
             })
             .catch((error) => {
                 console.error(error);
@@ -208,7 +204,7 @@ export default class HomePage extends Component{
         this.setState({data: []})
         this.setState({token: tokenHelper})
 
-        fetch(`${ACTIVITY}?page=${page}?popular=1`, {
+        fetch(`${ACTIVITY}?page=1?popular=1`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -228,10 +224,6 @@ export default class HomePage extends Component{
                     store.dispatch(successfullyLoadedActivities())
                 } else {
                     store.dispatch(failedAtLoadingActivities())
-                }
-                if (responseJson.data.data.length !== 0) {
-                    page++;
-                    return this.componentDidMount(page)
                 }
             })
             .catch((error) => {
