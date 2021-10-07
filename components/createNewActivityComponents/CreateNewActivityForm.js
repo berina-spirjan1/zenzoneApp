@@ -131,12 +131,12 @@ export const CreateNewActivityForm = () => {
 
                 store.dispatch(startedLoadingActivities())
 
-                if(responseJson.data.length===0){
-                    store.dispatch(failedAtLoadingActivities())
-                }
-                else{
-                    store.dispatch(successfullyLoadedActivities())
-                }
+                // if(responseJson.data.length===0){
+                //     store.dispatch(failedAtLoadingActivities())
+                // }
+                // else{
+                //     store.dispatch(successfullyLoadedActivities())
+                // }
 
                 setActivitiesData(responseJson.data)
             })
