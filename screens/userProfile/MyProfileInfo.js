@@ -17,19 +17,14 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 import { onLogoutHandler } from "../../components/logout/Logout";
 import {
-    BASE_URL, LOGOUT,
+    BASE_URL,
     USER
 } from "../../configuration/config";
 
 import { renderIf } from "../../utilities/CommonMethods";
 import { isIphoneX } from "react-native-iphone-x-helper";
 import store from "../../redux/store";
-import {
-    failedUpdatingUserInfo,
-    startedUpdatingUserInfo,
-    successfullyUpdatedUserInfo, userLogoutFailed,
-    userLogoutStarted, userLogoutSuccess
-} from "../../redux/actions";
+import {failedUpdatingUserInfo, startedUpdatingUserInfo, successfullyUpdatedUserInfo} from "../../redux/actions";
 
 export default class MyProfileInfo extends Component{
     constructor(props) {
@@ -87,55 +82,12 @@ export default class MyProfileInfo extends Component{
     //navigation to update profile
     updateProfile = () => this.props.navigation.navigate("updateProfile")
 
-    //navigating to logout page
-    switchToLogoutPage = () => this.props.navigation.navigate("switchToLogoutPage")
-
-
-    //function that handle when user press logout
-    //we are sending token and async storage will be cleaned
-    onLogoutHandler = async () => {
-
-        let token = await AsyncStorage.getItem('jwt')
-        token = JSON.parse(token)
-
-        fetch(`${LOGOUT}`, {
-            method: 'POST',
-            mode: 'no-cors',
-            cache: 'default',
-            credentials: 'same-origin',
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-                'Authorization': 'Bearer ' + token
-            },
-        })
-            .then(async res => {
-                try {
-                    store.dispatch(userLogoutStarted());
-
-                    const jsonRes = await res.json();
-
-                    console.log(jsonRes)
-                    if (res.status !== 200) {
-                        store.dispatch(userLogoutFailed());
-                    } else {
-                        await AsyncStorage.clear()
-                        this.switchToLogoutPage()
-                        store.dispatch(userLogoutSuccess());
-                    }
-                } catch (err) {
-                    console.log(err);
-                }
-            })
-    };
-
-
     onMenuItemClick(label){
         if(label.index===0){
             this.updateProfile()
         }
         else if(label.index===1){
-            this.onLogoutHandler()
+            onLogoutHandler().then(r => console.log(r))
         }
     }
 
