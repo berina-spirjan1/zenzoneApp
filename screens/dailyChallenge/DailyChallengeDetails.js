@@ -217,6 +217,7 @@ export default class DailyChallengeDetails extends Component{
                     }
                     if(res.status===200) {
                         this.congratulations();
+                        await this.componentDidMount()
                         store.dispatch(successfullyPostedComment());
                     }
                 } catch (err) {
@@ -226,22 +227,21 @@ export default class DailyChallengeDetails extends Component{
     }
 
     async deleteComment(comment_id){
-
-        let token = await AsyncStorage.getItem('jwt')
-        token = JSON.parse(token)
-
         const commentObject = {
             id: comment_id
         }
 
-        fetch(`${COMMENT}/${comment_id}`,{
+        let token = await AsyncStorage.getItem('jwt')
+        token = JSON.parse(token)
+
+        fetch(`${COMMENT}/${comment_id}`, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
                 'Authorization': 'Bearer ' + token
             },
-            body: commentObject
+            body: JSON.stringify(commentObject)
         })
             .then(async res => {
                 try {
@@ -250,13 +250,13 @@ export default class DailyChallengeDetails extends Component{
                     const jsonRes = await res.json();
 
                     console.log(jsonRes)
-                    if (res.status !== 200) {
+                    if (res.status !== 200 && res.status!==400) {
                         store.dispatch(failedDeletingComment());
-                        Alert.alert("Something went wrong, please try again.")
-
+                        Alert.alert("Something went wrong. Try again.")
                     }
-                    if(res.status===200) {
-                        Alert.alert("Successfully deleted comment.")
+                    else{
+                        await this.componentDidMount()
+                        Alert.alert('Successfully deleted comment')
                         store.dispatch(successfullyDeletedComment());
                     }
                 } catch (err) {
@@ -305,10 +305,7 @@ export default class DailyChallengeDetails extends Component{
                                                 <Text style={styles.createdDate}>End date: {ConvertDate(this.state.data.end_date)}</Text>
                                             </View>
                                             <>
-                                                {renderIf(this.state.token!==null,
                                                     <View style={styles.userWrapper}>
-
-
                                                 {renderIf(this.state.userData.photo_dir!==null,
                                                     <Image source={{uri: `${BASE_URL}`+`${this.state.userData.photo_dir}`+`${this.state.userData.photo_name}`}}
                                                            style={styles.userProfilePicture}/>
@@ -321,11 +318,11 @@ export default class DailyChallengeDetails extends Component{
                                                                    style={styles.createNewComment}
                                                                    onChangeText={text => this.setState({descriptionForComment: text })}/>
                                                         <View style={{flexDirection: 'row'}}>
-                                                            <TouchableOpacity style={styles.postButton}>
+                                                            <TouchableOpacity containerStyle={styles.postButton}>
                                                                 <Text style={styles.postButtonText}
                                                                       onPress={async()=>{await this.postComment(this.state.data.id)}}>POST</Text>
                                                             </TouchableOpacity>
-                                                            <TouchableOpacity style={styles.cameraButton}
+                                                            <TouchableOpacity containerStyle={styles.cameraButton}
                                                                               onPress={this.pickImage}>
                                                                 <FontAwesome5 name={'camera'}
                                                                               color={'#616C75'}
@@ -527,7 +524,7 @@ export default class DailyChallengeDetails extends Component{
                                                             }, this)}
                                                         </>)}
                                                 </View>
-                                            </View>)}</>
+                                            </View></>
                                         </View>
                                     </ScrollView>
                                 </SafeAreaView>
