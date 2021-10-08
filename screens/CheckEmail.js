@@ -13,7 +13,7 @@ function CheckEmail (){
     const navigation = useNavigation();
 
     //navigation to login page
-    const login = () => navigation.navigate("login")
+    const login = () => navigation.navigate("loginForm")
 
     return(
         <View style={styles.container}>
