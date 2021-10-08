@@ -354,11 +354,11 @@ export default class DailyChallengeDetails extends Component{
                                                                                     <Text style={styles.commentDescription}>{obj.description}</Text>
                                                                                 </View>
                                                                                 {renderIf(this.state.userData.id===obj.user.id,
-                                                                                    <TouchableOpacity containerStyle={styles.deleteButtonInSingle}>
+                                                                                    <TouchableOpacity containerStyle={styles.deleteButtonInSingle}
+                                                                                                      onPress={async () => {await this.deleteComment(obj.id)}}>
                                                                                         <FontAwesome5 name={'trash-alt'}
                                                                                                       color={'#616C75'}
                                                                                                       size={15}
-                                                                                                      onPress={async () => {await this.deleteComment(obj.id)}}
                                                                                                       style={styles.iconDelete}/>
                                                                                     </TouchableOpacity>
                                                                                 )}
@@ -415,11 +415,11 @@ export default class DailyChallengeDetails extends Component{
                                                                                         <Text style={styles.commentDescription}>{obj.description}</Text>
                                                                                     </View>
                                                                                     {renderIf(this.state.userData.id===obj.user.id,
-                                                                                        <TouchableOpacity containerStyle={styles.deleteButtonInSingle}>
+                                                                                        <TouchableOpacity containerStyle={styles.deleteButtonInSingle}
+                                                                                                          onPress={async () => {await this.deleteComment(obj.id)}}>
                                                                                             <FontAwesome5 name={'trash-alt'}
                                                                                                           color={'#616C75'}
                                                                                                           size={15}
-                                                                                                          onPress={async () => {await this.deleteComment(obj.id)}}
                                                                                                           style={styles.iconDelete}/>
                                                                                         </TouchableOpacity>
                                                                                     )}
@@ -476,11 +476,11 @@ export default class DailyChallengeDetails extends Component{
                                                                                         <Text style={styles.commentDescription}>{obj.description}</Text>
                                                                                     </View>
                                                                                     {renderIf(this.state.userData.id===obj.user.id,
-                                                                                        <TouchableOpacity containerStyle={styles.deleteButtonInSingle}>
+                                                                                        <TouchableOpacity containerStyle={styles.deleteButtonInSingle}
+                                                                                                          onPress={async () => {await this.deleteComment(obj.id)}}>
                                                                                             <FontAwesome5 name={'trash-alt'}
                                                                                                           color={'#616C75'}
                                                                                                           size={15}
-                                                                                                          onPress={async () => {await this.deleteComment(obj.id)}}
                                                                                                           style={styles.iconDelete}/>
                                                                                         </TouchableOpacity>
                                                                                     )}
