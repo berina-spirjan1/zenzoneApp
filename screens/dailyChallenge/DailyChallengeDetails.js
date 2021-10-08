@@ -217,7 +217,6 @@ export default class DailyChallengeDetails extends Component{
                     }
                     if(res.status===200) {
                         this.congratulations();
-                        await this.componentDidMount()
                         store.dispatch(successfullyPostedComment());
                     }
                 } catch (err) {
@@ -227,21 +226,22 @@ export default class DailyChallengeDetails extends Component{
     }
 
     async deleteComment(comment_id){
-        const commentObject = {
-            id: comment_id
-        }
 
         let token = await AsyncStorage.getItem('jwt')
         token = JSON.parse(token)
 
-        fetch(`${COMMENT}/${comment_id}`, {
+        const commentObject = {
+            id: comment_id
+        }
+
+        fetch(`${COMMENT}/${comment_id}`,{
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
                 'Authorization': 'Bearer ' + token
             },
-            body: JSON.stringify(commentObject)
+            body: commentObject
         })
             .then(async res => {
                 try {
@@ -250,13 +250,13 @@ export default class DailyChallengeDetails extends Component{
                     const jsonRes = await res.json();
 
                     console.log(jsonRes)
-                    if (res.status !== 200 && res.status!==400) {
+                    if (res.status !== 200) {
                         store.dispatch(failedDeletingComment());
-                        Alert.alert("Something went wrong. Try again.")
+                        Alert.alert("Something went wrong, please try again.")
+
                     }
-                    else{
-                        await this.componentDidMount()
-                        Alert.alert('Successfully deleted comment')
+                    if(res.status===200) {
+                        Alert.alert("Successfully deleted comment.")
                         store.dispatch(successfullyDeletedComment());
                     }
                 } catch (err) {
@@ -305,7 +305,10 @@ export default class DailyChallengeDetails extends Component{
                                                 <Text style={styles.createdDate}>End date: {ConvertDate(this.state.data.end_date)}</Text>
                                             </View>
                                             <>
+
                                                     <View style={styles.userWrapper}>
+
+
                                                 {renderIf(this.state.userData.photo_dir!==null,
                                                     <Image source={{uri: `${BASE_URL}`+`${this.state.userData.photo_dir}`+`${this.state.userData.photo_name}`}}
                                                            style={styles.userProfilePicture}/>
@@ -460,7 +463,7 @@ export default class DailyChallengeDetails extends Component{
                                                                         )}
                                                                         {renderIf(obj.approved===1,
                                                                             <>
-                                                                                <View containerStyle={styles.singleCommentContainerAccepted}>
+                                                                                <View style={styles.singleCommentContainerAccepted}>
                                                                                     <View style={styles.singleComment}>
                                                                                         {renderIf(obj.user.photo===null || this.state.token===null,
                                                                                             <Image source={require('../../assets/images/user_photo.png')}
